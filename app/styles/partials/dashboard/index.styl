@@ -1,0 +1,161 @@
+max_width = 100%
+
+.dashboard
+  background url('/img/dashboard/linen.jpg')
+
+  #left,
+  #right
+    span(4)
+    display none
+    color white-smoke
+    min-height 1035px
+
+  #left
+    .avatar
+      margin 0 auto 1em auto
+      background rgba(0, 0, 0, 0.15)
+      box-shadow 1px 2px rgba(255,255,255,0.05),
+        inset 0 2px rgba(1,0,0,0.05),
+        inset 0 0 5px rgba(0,0,0,0.1)
+
+    li
+      text-shadow 2px 2px 9px rgba(0, 0, 0, 0.35)
+
+  #main2
+    col(24)
+    box-shadow 0 0 50px #000
+    background-color white-smoke
+
+    header
+      clearfix()
+      margin-bottom 6em
+
+    .alert-box
+      col(8)
+
+      .symbol-container-container
+        col(8)
+
+      .details
+        col(16)
+
+    #add-client
+      col(8)
+
+      button
+        float right
+
+    #progress-container
+      col(24)
+      margin-bottom 7em
+
+      .progress
+        col(24)
+        background rgba(0, 0, 0, 0.1)
+
+    .person
+      //margin-top 4em
+
+    #questions
+      clearfix()
+      ol
+        margin 0
+
+    #new-clients
+      .avatar
+        margin 0 auto
+
+      .details
+        text-align center
+
+        h3
+          margin-top 1em
+
+bp(1024px, mf)
+.dashboard
+  #left
+    span(4)
+    display inline
+
+    ul
+      padding 0
+      margin 0
+      border-bottom 1px solid rgba(255, 255, 255, 0.1)
+
+    li
+      text-align center
+      padding 3em 0
+      border-bottom 1px solid rgba(0, 0, 0, 0.4)
+      border-top 1px solid rgba(255, 255, 255, 0.1)
+
+      &:first-child
+        border-top none
+
+    i
+      font-size 7em
+
+    a
+      color white
+
+  #main2
+    col(20)
+    padding 4em
+
+    .person
+      margin-top 0em
+endbp()
+
+bp(1220px, mf)
+.dashboard
+  #left,
+  #right
+    span(4)
+    color white-smoke
+
+  #main2
+    col(16)
+
+    h2
+      margin-bottom 1em
+
+    #questions
+      clearfix()
+
+      .person
+        col(12)
+
+        figure
+          col(10)
+
+        .details
+          col(14)
+
+          button
+            float right
+
+      #question-list
+        col(12)
+
+        ol
+          padding 0 20px 29px 20px
+
+        li
+          list-style-type decimal
+
+        button
+          float right
+
+
+    #new-clients
+      margin-top 3em
+
+      .person
+        col(6)
+
+
+  #for-later
+    col(24)
+
+  @import home
+  @import navigation
+endbp()

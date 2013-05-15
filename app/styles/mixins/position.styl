@@ -1,0 +1,15 @@
+dead-center(position, size = null)
+  if size is null and position is 'outer'
+    error('dead-center: You must specify a size')
+  else
+    if position is 'outer'
+      display table
+      width size
+      height size
+    else
+      display table-cell
+      vertical-align middle
+      text-align center
+
+clearfix()
+  cf()

@@ -1,0 +1,26 @@
+.symbol-container
+  size = 75px
+  circle(size)
+  dead-center(outer, size)
+
+  box-shadow 0 2px rgba(255,255,255,.51), inset 0 2px rgba(1,0,0,.05), inset 0 0 5px rgba(0,0,0,.1)
+
+  &:hover
+    box-shadow 0 4px rgba(255,255,255,.51), inset 0 4px rgba(1,0,0,.05), inset 0 0 10px rgba(0,0,0,.1)
+
+  .symbol
+    dead-center(inner)
+
+    text-shadow 1px 1px rgba(0,0,0,.25)
+    font-size 3em
+    color white-smoke
+
+    //&:hover
+
+  &.alert
+    background-color viking
+    background-image linear-gradient(bottom, rgba(26,26,26,.2), rgba(255,255,255,.2))
+
+  &.questions
+    background-color kelly-green
+    background-image linear-gradient(bottom, rgba(26,26,26,.22), rgba(255,255,255,.22))

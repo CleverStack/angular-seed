@@ -1,0 +1,13 @@
+circle(size = 50px)
+  width size
+  height size
+  border-radius (size / 2)
+
+inner-circle(original, new)
+  size = original * new
+  percentage-new = new * 100
+  from-side = ((original - size) / 2)px
+  position absolute
+  top from-side
+  left from-side
+  circle(size)
