@@ -13,7 +13,6 @@ A shortcut `npm start` is provided to start a development server on `localhost:9
 1. To build the documentation run `grunt dox`.
 2. To open the documentation you can use `grunt dox:server`
 
-
 #### Task Automation with [Grunt](http://http://gruntjs.com/):
 1. To start a local server do: `$ grunt server`
 4. To make a local build do: `$ grunt build`
