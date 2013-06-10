@@ -1,0 +1,84 @@
+/*****************************
+* Sliding Doors
+* by Simon W. Jackson
+* http://www.miniarray.com
+*****************************/
+
+nav[role="navigation"]
+  span(24)
+  text-align center
+  position relative
+  user-select none
+
+  // Visual enhancements
+  background-color #555
+  color white
+  height 3em
+  margin-bottom 2em
+  font-family helvetica
+  font-size 1em
+
+  // Vertical Centering
+  display table
+
+  > *
+   display table-cell
+   text-align center
+   vertical-align middle
+
+  .nav-button
+    height = 60%
+    content ''
+    position absolute
+    top ((100 - height) / 2)
+    height height
+
+    // Visual enhancements
+    cursor pointer
+    width 30px
+    border-radius 5px
+    box-shadow inset 2px 2px 5px rgba(255,255,255,0.05),
+      inset 1px 1px 0px rgba(255,255,255,.1),
+      1px 1px 0px rgba(255,255,255,.1)
+    background #555 url("http//stylyy.com/assets/icon-nav.png") no-repeat center center
+    background-size 20px 20px
+    display block
+    border 1px solid darken(#555, 20%)
+
+    transition all 300ms cubic-bezier(0.230, 1.000, 0.320, 1.000)
+
+    &:active,
+    &.active
+      box-shadow inset 3px 3px 10px rgba(0,0,0,.2),
+        1px 1px 0px rgba(255,255,255,.1)
+
+    // Font Awesome
+    font-family FontAwesome
+    font-weight normal
+    font-style normal
+    text-decoration inherit
+    line-height 1.9 /* TEMP FIX */
+
+    &.menu
+      left 1em
+
+    &.regimen-basket,
+    &.add-client
+      right 1em
+
+  h1,h2,h3
+    color white-smoke
+
+
+bp(500px, mf)
+#main
+  nav
+    .menu
+      display none
+endbp()
+
+bp(1280px, mf)
+#main
+  nav
+    display none
+endbp()

@@ -1,0 +1,19 @@
+for num in 1..columns
+  .col-{num}
+    col(num)
+  .col-offset-{num}
+    offset(num)
+
+  .span-{num}
+    span(num)
+  .span-offset-{num}
+    offset(num)
+
+@media stackem
+  for num in 1..columns
+    .col-{num}
+    .span-{num}
+      stack()
+
+.stack
+  stack()

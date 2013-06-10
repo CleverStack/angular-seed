@@ -3,6 +3,14 @@ var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
+var fallbackToIndex = function (connect, index) {
+  return connect().use(function (req, res, next) {
+    if(req.url === '/index.html') {
+      return next();
+    }
+    res.end( require('fs').readFileSync(index) );
+  });
+};
 
 module.exports = function (grunt) {
   // load all grunt tasks
@@ -15,38 +23,97 @@ module.exports = function (grunt) {
   };
 
   try {
-    yeomanConfig.app = require('./component.json').appPath || yeomanConfig.app;
+    yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
   } catch (e) {}
 
   grunt.initConfig({
     yeoman: yeomanConfig,
     dox: {
       options: {
-        title: "Appgular"
+        title: 'Angular Seed Docs'
       },
       files: {
         src: ['app/scripts'],
         dest: './docs'
       }
     },
+    karma: {
+      options: {
+        configFile: 'karma.conf.js',
+        browsers: ['PhantomJS'],
+
+      },
+      unit: {
+        reporters: ['dots'],
+        background: true,
+        runnerPort: 9100
+      },
+      e2e: {
+        configFile: 'karma.e2e.conf.js',
+        reporters: ['dots'],
+        background: true,
+        runnerPort: 9200
+      },
+      ci: {
+        unit: {
+          configFile: 'karma.conf.js',
+          reporters: ['junit', 'coverage'],
+          singleRun: true
+        },
+        e2e: {
+          configFile: 'karma.e2e.conf.js'
+        }
+      }
+    },
     deploy: {
       options: {
-        key: "key",
-        secret: "secret",
-        bucket: "bucket",
-        saveTo: "/"
+        key: '',
+        secret: '',
+        saveTo: '/'
       },
-      files: {
-        folder: "./dist/app.gzip"
+      prod: {
+        options: {
+          bucket: ''
+        },
+        files: {
+          folder: '<%= yeoman.dist %>/**/*'
+        }
+      },
+      dev: {
+        options: {
+          bucket: ''
+        },
+        files: {
+          folder: '<%= yeoman.dist %>/**/*'
+        }
+      },
+      stag: {
+        options: {
+          bucket: ''
+        },
+        files: {
+          folder: '<%= yeoman.dist %>/**/*'
+        }
       }
     },
     watch: {
+      unit: {
+        files: ['app/scripts/**/*.js', 'test/unit/**/*.js'],
+        tasks: ['karma:unit:run']
+      },
+      e2e: {
+        files: ['app/scripts/**/*.js', 'test/e2e/**/*.js'],
+        tasks: ['karma:e2e:run']
+      },
       jade: {
-        files: ['app/views/**/*.jade'],
+        files: [
+          'app/views/**/*.jade',
+          'app/views/**/partials/*.jade'
+        ],
         tasks: ['jade']
       },
       stylus: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.styl'],
+        files: ['<%= yeoman.app %>/styles/{,*/}*.styl', '<%= yeoman.app %>/styles/**/*.styl'],
         tasks: ['stylus']
       },
       livereload: {
@@ -64,7 +131,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost'
+        hostname: '0.0.0.0'
       },
       livereload: {
         options: {
@@ -72,7 +139,8 @@ module.exports = function (grunt) {
             return [
               lrSnippet,
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.app)
+              mountFolder(connect, yeomanConfig.app),
+              fallbackToIndex(connect, 'app/index.html')
             ];
           }
         }
@@ -82,7 +150,8 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test')
+              mountFolder(connect, 'test'),
+              fallbackToIndex(connect, '.tmp/index.html')
             ];
           }
         }
@@ -91,6 +160,9 @@ module.exports = function (grunt) {
     open: {
       server: {
         url: 'http://localhost:<%= connect.options.port %>'
+      },
+      docs: {
+        url: 'docs/index.html'
       }
     },
     clean: {
@@ -104,7 +176,15 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      app: {
+        files: [{
+          src: [
+            '<%= yeoman.app %>/views/**/*.html',
+            '<%= yeoman.app %>/views/**/*.css'
+          ]
+        }]
+      }
     },
     jshint: {
       options: {
@@ -115,29 +195,11 @@ module.exports = function (grunt) {
         '<%= yeoman.app %>/scripts/{,*/}*.js'
       ]
     },
-    karma: {
-      options: {
-        configFile: 'karma.conf.js',
-        browsers: ['PhantomJS'],
-        reporters: "dots"
-      },
-      once: {
-        singleRun: true,
-        reporters: "dots"
-      },
-      unit: {
-        autoWatch: true,
-        background: true
-      },
-      ci: {
-        singleRun: true,
-        reporters: "junit"
-      }
-    },
     jade: {
       html: {
         files: {
-          'app/views/': ['app/views/**/*.jade']
+          'app/views/': ['app/views/*.jade'],
+          'app/views/partials/': ['app/views/partials/*.jade']
         },
         options: {
           client: false
@@ -151,7 +213,7 @@ module.exports = function (grunt) {
           compress: true
         },
         files: {
-          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/*.styl'
+          '<%= yeoman.app %>/styles/screen.css': '<%= yeoman.app %>/styles/screen.styl'
         }
       },
       server: {
@@ -160,7 +222,7 @@ module.exports = function (grunt) {
           compress: true
         },
         files: {
-          '<%= yeoman.app %>/styles/main.css': ['<%= yeoman.app %>/styles/*.styl']
+          '<%= yeoman.app %>/styles/screen.css': ['<%= yeoman.app %>/styles/screen.styl']
         }
       }
     },
@@ -192,7 +254,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg}',
+          src: '**/*.{png,jpg,jpeg}',
           dest: '<%= yeoman.dist %>/images'
         }]
       }
@@ -200,7 +262,7 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/styles/main.css': [
+          '<%= yeoman.dist %>/styles/screen.css': [
             '.tmp/styles/{,*/}*.css',
             '<%= yeoman.app %>/styles/{,*/}*.css'
           ]
@@ -223,7 +285,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
-          src: ['*.html', 'views/*.html'],
+          src: ['*.html', 'views/**/*.html', 'views/**/partials/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -274,9 +336,12 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,txt}',
             '.htaccess',
-            'components/**/*',
-            'images/{,*/}*.{gif,webp}',
-            'styles/fonts/*'
+            'components/**/*.{js,css,eot,svg,ttf,woff,png,jpg,jpeg,gif,webp}',
+            'images/{,*/}*.{gif,webp, png}',
+            'images/**/*.{gif,webp, png}',
+            'styles/fonts/**/*',
+            'fonts/**/*',
+            'home/**/*'
           ]
         }]
       }
@@ -285,38 +350,47 @@ module.exports = function (grunt) {
 
   grunt.renameTask('regarde', 'watch');
 
+  grunt.registerTask('test', [
+    'karma:unit',
+    'watch:unit'
+  ]);
+
+  grunt.registerTask('test:unit', [
+    'test'
+  ]);
+
+  grunt.registerTask('test:ci', [
+    'karma:ci:unit',
+    'karma:ci:e2e'
+  ]);
+
+  grunt.registerTask('test:e2e', [
+    'karma:e2e',
+    'watch:e2e'
+  ]);
+
+  grunt.registerTask('dox:server', [
+    'dox',
+    'open:docs'
+  ]);
+
   grunt.registerTask('server', [
     'clean:server',
     'jade',
     'stylus:server',
     'livereload-start',
     'connect:livereload',
-    'open',
+    // 'open:server',
+    'karma:unit',
+    'karma:e2e',
     'watch'
-  ]);
-
-  grunt.registerTask('test', [
-    'clean:server',
-    'jade',
-    'stylus',
-    'connect:test',
-    'karma:unit'
-  ]);
-
-  grunt.registerTask('ci-report',[
-    'clean:server',
-    'jade',
-    'stylus',
-    'connect:test',
-    'karma:ci'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
-    'jshint',
-    'test',
+    // 'jshint',
     'jade',
-    'stylus:dist',
+    'stylus',
     'useminPrepare',
     'imagemin',
     'cssmin',

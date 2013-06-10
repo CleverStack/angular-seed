@@ -1,0 +1,22 @@
+/* Normal styles for the modal */
+.modal
+  modal-height = 80%
+  modal-width = 640px
+
+  height modal-height
+  width modal-width
+  position absolute
+  top ((100 - modal-height) / 2)
+  margin-left -(modal-width / 2)
+  left 50%
+  z-index 999
+  user-select none
+
+bp(640px)
+.modal
+  left 0%
+  top 0%
+  width 100% !important
+  height 100% !important
+  margin 0 !important
+endbp()

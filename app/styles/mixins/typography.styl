@@ -1,0 +1,27 @@
+legibility()
+  -webkit-font-smoothing antialiased
+  text-rendering optimizeLegibility
+
+hide-text()
+  color transparent
+  font 0/0 a
+  text-shadow none
+
+curly-quote-open = '\201C'
+curly-quote-close = '\201D'
+
+quoted()
+  font-style italic
+
+  // &:before
+  // &:after
+  //   display inline-block
+
+  // &:before
+  //   content curly-quote-open
+
+  // &:after
+  //   content curly-quote-close
+
+.quoted
+  quoted()

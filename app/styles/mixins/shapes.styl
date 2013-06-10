@@ -1,13 +1,23 @@
-circle(size = 50px)
-  width size
-  height size
-  border-radius (size / 2)
+circle-container()
+  overflow hidden
+  display inline
 
-inner-circle(original, new)
-  size = original * new
-  percentage-new = new * 100
-  from-side = ((original - size) / 2)px
+circle(circleWidth)
+  display block
+  float left
+  padding (circleWidth / 2)
+  width auto
+  height auto
+  border-radius 50%
+  position relative
+  margin-left (50% - circleWidth) !important
+
+inner-circle($padding)
+  border-radius 50%
+  background-size cover
+
   position absolute
-  top from-side
-  left from-side
-  circle(size)
+  width $padding
+  height $padding
+  left ((100 - $padding) / 2)
+  top ((100 - $padding) / 2)

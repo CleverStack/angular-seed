@@ -1,22 +1,38 @@
-
 {
-  "name": "appgular",
+  "name": "app",
   "author": {
     "name": "Leandro Ostera",
     "email": "leandro@clevertech.biz"
   },
+  "collaborators": [
+    {
+      "name": "Simon W. Jackson",
+      "email": "simon@clevertech.biz"
+    }
+  ],
   "version": "0.0.1",
   "dependencies": {
-    "angular": "~1.0.5",
-    "json3": "~3.2.4",
+    "angular": "~1.0.6",
+    "jquery": "*",
+    "jquery-ui": "*",
+    "font-awesome-more": "*",
+    "elusive-iconfont": "*",
+    "animate.css": "*",
+    "tag-it": "*",
     "es5-shim": "~2.0.8",
+    "angular-unstable": "*",
+    "angular-resource-unstable": "*",
     "angular-resource": "~1.0.5",
     "angular-cookies": "~1.0.5",
     "angular-sanitize": "~1.0.5",
-    "angular-modernizr": "*"
+    "angular-http-auth": "*",
+    "ngUpload": "*",
+    "underscore": "~1.4.4",
+    "async": "~0.2.5"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",
-    "angular-scenario": "~1.0.5"
+    "angular-scenario": "~1.0.5",
+    "async": "~0.2.5"
   }
 }

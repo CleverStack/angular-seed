@@ -1,0 +1,146 @@
+/*****************************
+* Sliding Doors
+* by Simon W. Jackson
+* http://www.miniarray.com
+*****************************/
+
+drawers-init(main-container, left-panel, right-panel)
+  html,
+  body,
+  {left-panel},
+  {main-container},
+  {right-panel}
+    height 100%
+    background-color white
+
+  html,
+  body
+    position relative
+    overflow hidden
+
+  {left-panel},
+  {right-panel}
+    top 0
+    background-color inherit
+    bottom 0
+
+  {left-panel},
+  {main-container},
+  {right-panel}
+    position absolute
+    overflow-x hidden
+    overflow-y scroll
+    z-index 0
+    -webkit-overflow-scrolling touch
+
+  {main-container}
+    z-index 3
+
+drawers(drawer-style, main-container, left-panel, right-panel)
+  left-panel-width = left-panel[1]
+  right-panel-width = right-panel[1]
+  main-container-width = main-container[1]
+
+  body
+    {main-container}
+      width main-container-width
+
+    {left-panel}
+      width left-panel-width
+
+    {right-panel}
+      width right-panel-width
+
+  if drawer-style is static
+    body
+      {right-panel}
+        left (main-container-width - right-panel-width)
+
+      &.left-active
+        {left-panel}
+          left 0%
+          z-index 2
+
+        {main-container}
+          left left-panel-width
+
+      &.right-active
+        {main-container}
+          left -(right-panel-width)
+
+        {right-panel}
+          z-index 2
+
+  else if drawer-style is slide
+    body
+      {left-panel}
+        left -(left-panel-width)
+
+      {right-panel}
+        left main-container-width
+
+      &.left-active
+        {left-panel}
+          left 0%
+
+        {main-container}
+          left left-panel-width
+
+      &.right-active
+        {right-panel}
+          left (main-container-width - right-panel-width)
+
+        {main-container}
+          left -(right-panel-width)
+
+
+  @media all and (min-width: 500px)
+    left-panel-width = 16.6666667%
+    main-container-width = 83.3333333%
+    right-panel-width = 50%
+
+    body
+      {left-panel}
+        width left-panel-width
+        left 0%
+
+      {main-container}
+        width main-container-width
+        left left-panel-width
+
+      {right-panel}
+        left (unit(main-container-width, '') + unit(left-panel-width, ''))%
+        width right-panel-width
+
+      &.right-active
+        {left-panel}
+          left (0 - unit(right-panel-width, ''))%
+
+        {main-container}
+          left (unit(left-panel-width, '') - unit(right-panel-width, ''))%
+
+        {right-panel}
+          left (unit(main-container-width, '') + unit(left-panel-width, '') -  unit(right-panel-width, ''))%
+
+
+  /*********************
+  * Desktop
+  *********************/
+
+  @media all and (min-width: 1280px)
+    left-panel-width = 12.5%
+    main-container-width = 62.5%
+    right-panel-width = 25%
+
+    body .regimen
+      {left-panel}
+        width left-panel-width
+        left 0%
+
+      {main-container}
+        width main-container-width
+        left left-panel-width
+
+      {right-panel}
+        left (unit(main-container-width, '') + unit(left-panel-width, ''))%
+        width right-panel-width
