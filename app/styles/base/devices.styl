@@ -1,0 +1,24 @@
+ipad = 'only screen and (max-width : 768px)'
+ipad-portrait = device-ipad + 'and (orientation : portrait)'
+ipad-landscape = device-ipad + 'and (orientation : landscape)'
+
+iphone = 'only screen and (max-device-width : 320px) and (max-device-width : 480px)'
+iphone-portrait = device-iphone + 'and (orientation : portrait)'
+iphone-landscape = device-iphone + 'and (orientation : landscape)'
+
+iphone5 = 'only screen and (max-device-height : 568px) and (max-device-width : 320px) and (-webkit-min-device-pixel-ratio: 2)'
+iphone5-portrait = device-iphone5 + 'and (orientation : portrait)'
+iphone5-landscape = device-iphone5 + 'and (orientation : landscape)'
+
+stackem = '(max-width: 767px)'
+
+.mobile-hidden
+  display inline !important
+.mobile-show
+  display none !important
+
+@media stackem
+  .mobile-show
+    display inline !important
+  .mobile-hidden
+    display none !important

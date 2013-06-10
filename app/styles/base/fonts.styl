@@ -1,7 +1,12 @@
 base-size = 4em
 
-h1,h2,h3,h4,h5,h6
-  font-family "bebas neue"
+h1, h2, h3, h4, h5, h6
+  font-family 'Anton', sans-serif
+  color #555
+  text-transform uppercase
+  font-weight 100
+  -webkit-font-smoothing antialiased
+  margin-bottom 1em
 
 h1
   font-size base-size
@@ -15,3 +20,19 @@ h5
   font-size ((((base-size / 1.6) / 1.6) / 1.6) / 1.6)
 h6
   font-size (((((base-size / 1.6) / 1.6) / 1.6) / 1.6) / 1.6)
+
+@font-face
+  font-family 'sintony'
+  src url('sintony-webfont.eot')
+  src url('sintony-webfont.eot?#iefix') format('embedded-opentype'),
+      url('sintony-webfont.woff') format('woff'),
+      url('sintony-webfont.ttf') format('truetype'),
+      url('sintony-webfont.svg#sintonyregular') format('svg')
+  font-weight normal
+  font-style normal
+
+@font-face
+  font-family 'Anton'
+  font-style normal
+  font-weight 400
+  src local('Anton'), url('http://themes.googleusercontent.com/static/fonts/anton/v3/4ccCHjovctZoFjdBOHBY_6CWcynf_cDxXwCLxiixG1c.woff') format('woff')

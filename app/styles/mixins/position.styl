@@ -1,11 +1,16 @@
-dead-center(position, size = null)
-  if size is null and position is 'outer'
+dead-center(positioning, width = null, height = null)
+  if width is null and positioning is 'outer'
     error('dead-center: You must specify a size')
+
+  if height is null
+    height = width
+
   else
-    if position is 'outer'
+    if positioning is 'outer'
       display table
-      width size
-      height size
+      width width
+      height height
+
     else
       display table-cell
       vertical-align middle

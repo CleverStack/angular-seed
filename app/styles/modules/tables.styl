@@ -1,0 +1,123 @@
+
+.ngTable
+  table_font_styles()
+    color #444
+    text-shadow 0 1px 0 #fff
+
+  header_text_color = #FDFDFD
+  alternate_row_background_color = #eee
+
+  table_width = 100%
+  table_body_height = 300px
+
+  width table_width
+  table-layout fixed
+  border-collapse collapse
+  height 300px
+  box-shadow 2px 2px 8px rgba(0,0,0,.15)
+  margin-bottom .5em
+
+  i
+    margin-right 1em
+
+  th
+  td
+    padding 5px
+    text-align left
+    transition all 250ms
+
+  td
+    table_font_styles()
+
+  th
+    background #333
+    color white-smoke
+    gradient light
+    text-shadow 2px 2px 0px lighten(black, 15%)
+
+  thead
+    background-color header_background_color
+    color header_text_color
+
+  tbody
+    overflow auto
+    width 100%
+    height table_body_height
+    border 1px solid #ccc
+    border-top none
+
+    tr:nth-child(even)
+      background-color alternate_row_background_color
+
+    td:first-child
+      color #aaa
+
+    &:hover
+      td
+        color #aaa
+        cursor pointer
+
+        i
+          top 0
+          position relative
+
+          &:hover
+            top -1px
+            transition all 150ms
+
+        .icon-error:hover
+          color red
+        .icon-check:hover
+        .icon-pencil:hover
+        .icon-eye-open:hover
+          color kelly-green
+
+      tr:hover td
+        table_font_styles()
+
+
+.old_ie_wrapper
+  height table_body_height
+  width table_width
+  overflow-x hidden
+  overflow-y auto
+
+  tbody
+    height auto
+
+.filter-list
+  width 100%
+  user-select none
+
+  td
+    border none !important
+    cursor pointer
+    text-shadow 0px 1px 0px white
+    padding .5em 0 !important
+    text-align center
+    min-width 20px
+
+    &:last-child
+      text-align right
+
+      input
+        width 80%
+        outline none
+        border @outline
+        box-shadow inset 2px 2px 5px rgba(0,0,0,.15)
+        height 2em
+        padding 0 1em
+
+    &:hover
+      a
+        top -2px
+
+    &:active
+      a
+        top 2px
+
+    a
+      font-weight bold
+      color #444 !important
+      position relative
+      transition all 50ms

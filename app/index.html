@@ -2,19 +2,27 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" ng-app="app"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
+    <title>Title</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+
+    <link rel="stylesheet" href="components/Font-Awesome-More/css/font-awesome.css">
+    <link rel="stylesheet" href="components/elusive-iconfont/css/elusive-webfont.css">
+    <link rel="stylesheet" href="components/animate.css/animate.css">
+    <link rel="stylesheet" href="styles/screen.css">
+
+    <!-- Themes -->
+    <link rel="stylesheet" type="text/css" href="components/jquery-ui/themes/flick/jquery-ui.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="appgular">
+  <body>
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -25,45 +33,43 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <nav>
-      <ul>
-        <li>
-          <a ng-href="/">Home</a>
-          <a ng-href="/admin">Admin</a>
-          <a ng-href="/client">Client</a>
-          <a ng-href="/trainer">Trainer</a>
-        </li>
-      </ul>
-
-    </nav>
     <div class="container" ng-view></div>
 
-    <script src="components/angular/angular.js"></script>
-    <script src="components/angular-resource/angular-resource.js"></script>
-    <!-- <script src="components/angular-cookies/angular-cookies.js"></script>
-    <script src="components/angular-sanitize/angular-sanitize.js"></script>
-    -->
+    <script src="components/jquery/jquery.js"></script>
+    <script src="components/jquery-ui/ui/jquery-ui.js"></script>
+
+    <script src="components/underscore/underscore.js"></script>
+    <script src="components/async/lib/async.js"></script>
+    <script src="components/angular-unstable/angular.js"></script>
+    <script src="components/angular-resource-unstable/angular-resource.js"></script>
+    <script src="components/angular-http-auth/src/http-auth-interceptor.js"></script>
 
     <!-- build:js scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/admin.js"></script>
-    <script src="scripts/controllers/trainer.js"></script>
-    <script src="scripts/controllers/client.js"></script>
+    <script src="scripts/init.js"></script>
+    <script src="scripts/routes.js"></script>
     <script src="scripts/controllers/home.js"></script>
-    <script src="scripts/controllers/session.js"></script>
     <script src="scripts/directives/string-to-number.js"></script>
     <script src="scripts/directives/button-link.js"></script>
-    <script src="scripts/directives/extended-anchor.js"></script>
     <script src="scripts/services/generic.js"></script>
+    <script src="scripts/services/file.js"></script>
     <script src="scripts/services/session.js"></script>
+    <script src="scripts/services/http-options.js"></script>
+    <script src="scripts/services/country-list.js"></script>
+    <script src="scripts/filters/starts-with.js"></script>
+
+    <script src="scripts/dom/browser-detect.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
+    <!-- // <script>
+    //   var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    //   (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    //   g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    //   s.parentNode.insertBefore(g,s)}(document,'script'));
+    // </script> -->
+    <!--
+    <div id="landscape-not-supported">
+      <p>Landscape mode is not supported on your device. Please switch your orientation to portrait mode</p>
+    </div>-->
   </body>
 </html>

@@ -1,0 +1,56 @@
+.supplement-container
+  border-top 1px solid #ccc
+
+.supplement
+  clearfix()
+  fromBottom = 3em
+  margin-bottom fromBottom
+
+  .supply
+  .money
+    margin-bottom .25em
+
+  .money
+    color kelly-green
+
+  .gender
+    margin-bottom 1em
+
+    &:before
+      content "For: "
+      padding-right
+
+  figure.circle
+    margin 0 auto
+    margin-top 1em
+    float none
+
+  @media stackem
+    figure.circle
+      display block
+      height 100px
+      width 100px
+
+    .supplement
+      .description-of-item
+        margin-bottom 1em
+
+  figure
+    circle-container()
+
+  .image-container,
+  .product-image
+    circle(80%)
+    inset()
+    position relative
+
+    .image,
+    .photograph
+      inner-circle(90%)
+      background-size cover
+      background-repeat no-repeat
+      background-position center
+
+
+  h2
+    border-bottom 7px solid #575656
