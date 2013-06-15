@@ -2,6 +2,11 @@
 
 var filters = angular.module('app.filters');
 
+/**
+ * Filter a collection by checking if a property starts with a
+ * symbol.
+ * @return {Collection} The filtered collection.
+ */
 filters.filter('startsWith', function() {
   return function(str, letter, prop){
     letter = letter || undefined;

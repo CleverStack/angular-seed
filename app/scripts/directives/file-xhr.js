@@ -1,7 +1,11 @@
 'use strict';
 
 var directives = angular.module('app.directives');
-
+/**
+ * File directive.
+ *
+ * Listens to the change event and triggers a function.
+ */
 directives.directive('file', function() {
     return {
         restrict: 'E',

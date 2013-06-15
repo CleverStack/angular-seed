@@ -2,6 +2,12 @@
 
 var directives = angular.module('app.directives');
 
+/**
+ * string2number directive
+ *
+ * Converts a string to a number. Useful in type="number" input
+ * elements that bind to a stringified number model.
+ */
 directives.directive('string2number', function() {
   return {
     restrict: 'A',

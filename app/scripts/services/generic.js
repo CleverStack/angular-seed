@@ -34,6 +34,7 @@ function GenericService ( resourceName ) {
 
 var services = angular.module('app.services');
 
+// Example of using GenericService
 services
   .factory('ResourceService', GenericService('resource'));
 

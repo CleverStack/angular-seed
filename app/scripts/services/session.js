@@ -2,6 +2,12 @@
 
 var services = angular.module('app.services');
 
+/**
+ * Session Service
+ *
+ * This service uses $http and httpOptions to access some default
+ * session handling routes.
+ */
 services
   .factory('SessionService', ['$http','httpOptions',function ($http, httpOptions) {
     var session = {};

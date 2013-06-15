@@ -2,6 +2,11 @@
 
 var services = angular.module('app.services');
 
+/**
+ * CountryList service
+ *
+ * Returns a list of countries.
+ */
 services
   .value('countryList', [
   'Afghanistan',
