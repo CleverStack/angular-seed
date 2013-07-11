@@ -3,8 +3,6 @@ dist
 .tmp
 .sass-cache
 app/components
-app/views/**/*.html
-app/styles/**/*.css
 test-results.xml
 .DS_Store
 docs/*

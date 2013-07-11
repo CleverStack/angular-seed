@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Generates a factory function that uses ngResource
  * to talk to a REST resource that can be directly used
@@ -7,6 +5,8 @@
  * @param {string} resourceName The resource name
  */
 function GenericService ( resourceName ) {
+  
+  'use strict';
   
   /**
    * Generic resource function

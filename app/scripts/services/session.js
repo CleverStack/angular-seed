@@ -1,5 +1,3 @@
-'use strict';
-
 var services = angular.module('app.services');
 
 /**
@@ -10,6 +8,9 @@ var services = angular.module('app.services');
  */
 services
   .factory('SessionService', ['$http','httpOptions',function ($http, httpOptions) {
+    
+    'use strict';
+
     var session = {};
 
     /**

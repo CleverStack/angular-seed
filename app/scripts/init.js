@@ -1,5 +1,3 @@
-'use strict';
-
 window.app = angular.module('app',
   [ 'app.directives',
     'app.services',

@@ -1,5 +1,3 @@
-'use strict';
-
 var filters = angular.module('app.filters');
 
 /**
@@ -8,6 +6,9 @@ var filters = angular.module('app.filters');
  * @return {Collection} The filtered collection.
  */
 filters.filter('startsWith', function() {
+  
+  'use strict';
+
   return function(str, letter, prop){
     letter = letter || undefined;
     if(!letter){

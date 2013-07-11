@@ -1,5 +1,3 @@
-'use strict';
-
 var directives = angular.module('app.directives');
 
 /**
@@ -9,6 +7,9 @@ var directives = angular.module('app.directives');
  * elements that bind to a stringified number model.
  */
 directives.directive('string2number', function() {
+  
+  'use strict';
+
   return {
     restrict: 'A',
     require: 'ngModel',

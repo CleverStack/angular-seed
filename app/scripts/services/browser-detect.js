@@ -1,5 +1,3 @@
-'use strict';
-
 var services = angular.module('app.services');
 
 /**
@@ -16,6 +14,8 @@ var services = angular.module('app.services');
  * @return {String} .OS for the OS in which the browser is running
  */
 services.factory('browserDetect', function () {
+
+  'use strict';
 
   var browserDetect = {
 

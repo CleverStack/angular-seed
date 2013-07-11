@@ -10,17 +10,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css styles/main.css -->
 
-    <link rel="stylesheet" href="components/Font-Awesome-More/css/font-awesome.css">
-    <link rel="stylesheet" href="components/elusive-iconfont/css/elusive-webfont.css">
-    <link rel="stylesheet" href="components/animate.css/animate.css">
+    <!-- build:css styles/screen.css -->
     <link rel="stylesheet" href="styles/screen.css">
-
-    <!-- Themes -->
-    <link rel="stylesheet" type="text/css" href="components/jquery-ui/themes/flick/jquery-ui.css">
     <!-- endbuild -->
+    
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -35,16 +29,12 @@
     <!-- Add your site or application content here -->
     <div class="container" ng-view></div>
 
-    <script src="components/jquery/jquery.js"></script>
-    <script src="components/jquery-ui/ui/jquery-ui.js"></script>
-
+    <!-- build:js scripts/scripts.js -->
     <script src="components/underscore/underscore.js"></script>
     <script src="components/async/lib/async.js"></script>
     <script src="components/angular-unstable/angular.js"></script>
     <script src="components/angular-resource-unstable/angular-resource.js"></script>
-    <script src="components/angular-http-auth/src/http-auth-interceptor.js"></script>
 
-    <!-- build:js scripts/scripts.js -->
     <script src="scripts/init.js"></script>
     <script src="scripts/routes.js"></script>
     <script src="scripts/controllers/home.js"></script>
@@ -59,17 +49,5 @@
 
     <script src="scripts/dom/browser-detect.js"></script>
     <!-- endbuild -->
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <!-- // <script>
-    //   var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-    //   (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    //   g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    //   s.parentNode.insertBefore(g,s)}(document,'script'));
-    // </script> -->
-    <!--
-    <div id="landscape-not-supported">
-      <p>Landscape mode is not supported on your device. Please switch your orientation to portrait mode</p>
-    </div>-->
   </body>
 </html>

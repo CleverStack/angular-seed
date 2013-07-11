@@ -1,8 +1,10 @@
 'use strict';
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
+
 var fallbackToIndex = function (connect, index) {
   return connect().use(function (req, res, next) {
     if(req.url === '/index.html') {
@@ -28,15 +30,6 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
-    dox: {
-      options: {
-        title: 'Angular Seed Docs'
-      },
-      files: {
-        src: ['app/scripts'],
-        dest: './docs'
-      }
-    },
     karma: {
       options: {
         configFile: 'karma.conf.js',
@@ -62,37 +55,6 @@ module.exports = function (grunt) {
         },
         e2e: {
           configFile: 'karma.e2e.conf.js'
-        }
-      }
-    },
-    deploy: {
-      options: {
-        key: '',
-        secret: '',
-        saveTo: '/'
-      },
-      prod: {
-        options: {
-          bucket: ''
-        },
-        files: {
-          folder: '<%= yeoman.dist %>/**/*'
-        }
-      },
-      dev: {
-        options: {
-          bucket: ''
-        },
-        files: {
-          folder: '<%= yeoman.dist %>/**/*'
-        }
-      },
-      stag: {
-        options: {
-          bucket: ''
-        },
-        files: {
-          folder: '<%= yeoman.dist %>/**/*'
         }
       }
     },
@@ -176,15 +138,7 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp',
-      app: {
-        files: [{
-          src: [
-            '<%= yeoman.app %>/views/**/*.html',
-            '<%= yeoman.app %>/views/**/*.css'
-          ]
-        }]
-      }
+      server: '.tmp'
     },
     jshint: {
       options: {
@@ -194,37 +148,6 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js'
       ]
-    },
-    jade: {
-      html: {
-        files: {
-          'app/views/': ['app/views/*.jade'],
-          'app/views/partials/': ['app/views/partials/*.jade']
-        },
-        options: {
-          client: false
-        }
-      }
-    },
-    stylus: {
-      compile: {
-        options: {
-          paths: ['node_modules/grunt-contrib-stylus/node_modules'],
-          compress: true
-        },
-        files: {
-          '<%= yeoman.app %>/styles/screen.css': '<%= yeoman.app %>/styles/screen.styl'
-        }
-      },
-      server: {
-        options: {
-          paths: ['node_modules/grunt-contrib-stylus/node_modules'],
-          compress: true
-        },
-        files: {
-          '<%= yeoman.app %>/styles/screen.css': ['<%= yeoman.app %>/styles/screen.styl']
-        }
-      }
     },
     concat: {
       dist: {
@@ -288,11 +211,6 @@ module.exports = function (grunt) {
           src: ['*.html', 'views/**/*.html', 'views/**/partials/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
-      }
-    },
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
       }
     },
     ngmin: {
@@ -369,35 +287,22 @@ module.exports = function (grunt) {
     'watch:e2e'
   ]);
 
-  grunt.registerTask('dox:server', [
-    'dox',
-    'open:docs'
-  ]);
-
   grunt.registerTask('server', [
     'clean:server',
-    'jade',
-    'stylus:server',
     'livereload-start',
     'connect:livereload',
-    // 'open:server',
-    'karma:unit',
-    'karma:e2e',
     'watch'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
     // 'jshint',
-    'jade',
-    'stylus',
     'useminPrepare',
     'imagemin',
     'cssmin',
     'htmlmin',
     'concat',
     'copy',
-    'cdnify',
     'ngmin',
     'uglify',
     'rev',

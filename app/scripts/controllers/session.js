@@ -1,5 +1,3 @@
-'use strict';
-
 var app = angular.module('app');
 
 /**
@@ -10,6 +8,8 @@ var app = angular.module('app');
 app.controller('SessionCtrl',
   ['$scope', '$location', '$route', '$timeout', 'authService', 'SessionService',
   function( $scope, $location, $route, $timeout, authService, SessionService ) {
+  
+  'use strict';
 
   /**
    * Initial credentials.

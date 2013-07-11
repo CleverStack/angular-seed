@@ -1,10 +1,11 @@
-'use strict';
 
 var app = angular.module('app');
 
 app.config(
   ['$routeProvider', '$locationProvider', '$httpProvider',
   function ($routeProvider, $locationProvider, $httpProvider) {
+  
+  'use strict';
 
   $httpProvider.defaults.withCredentials = true;
 
