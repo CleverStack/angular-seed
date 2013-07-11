@@ -6,10 +6,8 @@
     "email": "leandro@clevertech.biz"
   },
   "collaborators": [
-    {
-      "name": "Simon W. Jackson",
-      "email": "simon@clevertech.biz"
-    }
+    "Simon W. Jackson <simon@clevertech.biz>",
+    "Richard Gustin <richard@clevertech.biz>"
   ],
   "version": "0.0.2",
   "dependencies": {
