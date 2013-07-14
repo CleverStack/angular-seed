@@ -5,10 +5,8 @@
     "email": "leandro@clevertech.biz"
   },
   "collaborators": [
-    {
-      "name": "Simon W. Jackson",
-      "email": "simon@clevertech.biz"
-    }
+    "Simon W. Jackson <simon@clevertech.biz>",
+    "Richard Gustin <richard@clevertech.biz>"
   ],
   "version": "0.0.1",
   "dependencies": {
@@ -21,6 +19,9 @@
     "async": "~0.2.5"
   },
   "devDependencies": {
+    "sinon": "*",
+    "chai": "*",
+    "funcunit": "*",
     "angular-mocks": "~1.0.5",
     "angular-scenario": "~1.0.5",
     "async": "~0.2.5"

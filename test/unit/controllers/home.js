@@ -1,5 +1,7 @@
 'use strict';
 
+var should = chai.should();
+
 describe('Controller: HomeCtrl', function () {
 
   // load the controller's module
@@ -17,6 +19,6 @@ describe('Controller: HomeCtrl', function () {
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+    scope.awesomeThings.length.should.equal(3);
   });
 });

@@ -16,3 +16,7 @@ window.ngSeed.directives = angular.module('ngSeed.directives',
   ]);
 
 window.ngSeed.filters = angular.module('ngSeed.filters', []);
+
+window.app = angular.module('app', 
+  [ 'ngSeed'
+  ]);

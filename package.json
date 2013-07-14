@@ -36,13 +36,13 @@
     "grunt-ngmin": ">=0.0.x",
     "matchdep": ">=0.1.x",
     "di": ">=0.0.x",
-    "karma-jasmine": ">=0.0.x",
     "karma-ng-scenario": ">=0.0.x",
     "karma-junit-reporter": ">=0.0.x",
     "karma-coverage": ">=0.0.x",
     "karma-chrome-launcher": ">=0.0.x",
     "karma-script-launcher": ">=0.0.x",
-    "karma-phantomjs-launcher": ">=0.0.x"
+    "karma-phantomjs-launcher": ">=0.0.x",
+    "karma-growl-reporter": "0.0.2"
   },
   "engines": {
     "node": ">=0.8.0"

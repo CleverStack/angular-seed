@@ -6,7 +6,7 @@ describe("E2E: Testing Routes", function() {
 
   it('should have a working / route', function() {
     browser().navigateTo('#/');
-    expect(browser().location().path()).toBe("/");
+    browser().location().path().should.be("/");
   });
 
 });

@@ -7,5 +7,7 @@ app.controller( 'HomeCtrl',
   'use strict';  
   
   $scope.welcome = 'Hello!';
+
+  $scope.awesomeThings = [1,2,3];
   
 }]);
