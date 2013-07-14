@@ -9,9 +9,9 @@
 ### Usage:
 A shortcut `npm start` is provided to start a development server on `localhost:9000`.
 
-#### Documentation with [Dox](https://github.com/visionmedia/dox):
-1. To build the documentation run `grunt dox`.
-2. To open the documentation you can use `grunt dox:server`
+#### Documentation with [Docular](https://github.com/gitsome/docular):
+1. To build the documentation run `grunt docular`.
+2. To open the documentation you can use `grunt docular-server`
 
 #### Task Automation with [Grunt](http://http://gruntjs.com/):
 1. To start a local server do: `$ grunt server`
