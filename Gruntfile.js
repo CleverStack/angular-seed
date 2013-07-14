@@ -1,4 +1,5 @@
 'use strict';
+
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 
 var mountFolder = function (connect, dir) {
@@ -31,7 +32,6 @@ module.exports = function (grunt) {
   grunt.initConfig({
     yeoman: yeomanConfig,
     docular: {
-      copyDocDir: '/docs',
       baseUrl: 'http://localhost:8000', //base tag used by Angular
       showAngularDocs: false, //parse and render Angular documentation
       showDocularDocs: false, //parse and render Docular documentation
@@ -57,54 +57,7 @@ module.exports = function (grunt) {
         }
       ] //groups of documentation to parse
     },
-    karma: {
-      options: {
-        configFile: 'karma.conf.js',
-        browsers: ['PhantomJS'],
-
-      },
-      unit: {
-        reporters: ['dots'],
-        background: true,
-        runnerPort: 9100
-      },
-      e2e: {
-        configFile: 'karma.e2e.conf.js',
-        reporters: ['dots'],
-        background: true,
-        runnerPort: 9200
-      },
-      ci: {
-        unit: {
-          configFile: 'karma.conf.js',
-          reporters: ['junit', 'coverage'],
-          singleRun: true
-        },
-        e2e: {
-          configFile: 'karma.e2e.conf.js'
-        }
-      }
-    },
     watch: {
-      unit: {
-        files: ['app/scripts/**/*.js', 'test/unit/**/*.js'],
-        tasks: ['karma:unit:run']
-      },
-      e2e: {
-        files: ['app/scripts/**/*.js', 'test/e2e/**/*.js'],
-        tasks: ['karma:e2e:run']
-      },
-      jade: {
-        files: [
-          'app/views/**/*.jade',
-          'app/views/**/partials/*.jade'
-        ],
-        tasks: ['jade']
-      },
-      stylus: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.styl', '<%= yeoman.app %>/styles/**/*.styl'],
-        tasks: ['stylus']
-      },
       livereload: {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
@@ -296,25 +249,6 @@ module.exports = function (grunt) {
   grunt.renameTask('regarde', 'watch');
 
   grunt.registerTask('docs', ['docular']);
-
-  grunt.registerTask('test', [
-    'karma:unit',
-    'watch:unit'
-  ]);
-
-  grunt.registerTask('test:unit', [
-    'test'
-  ]);
-
-  grunt.registerTask('test:ci', [
-    'karma:ci:unit',
-    'karma:ci:e2e'
-  ]);
-
-  grunt.registerTask('test:e2e', [
-    'karma:e2e',
-    'watch:e2e'
-  ]);
 
   grunt.registerTask('server', [
     'clean:server',
