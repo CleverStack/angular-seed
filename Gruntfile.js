@@ -30,6 +30,33 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
+    docular: {
+      copyDocDir: '/docs',
+      baseUrl: 'http://localhost:8000', //base tag used by Angular
+      showAngularDocs: false, //parse and render Angular documentation
+      showDocularDocs: false, //parse and render Docular documentation
+      docAPIOrder : ['doc', 'angular'], //order to load ui resources
+      groups: [
+        {
+          groupTitle: 'CleverStack Seed', //Title used in the UI
+          groupId: 'cleverstack', //identifier and determines directory
+          groupIcon: 'icon-book', //Icon to use for this group
+          sections: [
+            {
+              id: "api",
+              title: "API",
+              scripts: [
+                "app/scripts/init.js",
+                "app/scripts/routes.js",
+                "app/scripts/services",
+                "app/scripts/filters",
+                "app/scripts/directives"
+              ]
+            }
+          ]
+        }
+      ] //groups of documentation to parse
+    },
     karma: {
       options: {
         configFile: 'karma.conf.js',
@@ -268,6 +295,8 @@ module.exports = function (grunt) {
 
   grunt.renameTask('regarde', 'watch');
 
+  grunt.registerTask('docs', ['docular']);
+
   grunt.registerTask('test', [
     'karma:unit',
     'watch:unit'
@@ -306,7 +335,8 @@ module.exports = function (grunt) {
     'ngmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'docs'
   ]);
 
   grunt.registerTask('default', ['build']);

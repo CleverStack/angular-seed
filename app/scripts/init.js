@@ -1,18 +1,18 @@
-window.app = angular.module('app',
-  [ 'app.directives',
-    'app.services',
-    'app.filters',
+window.ngSeed = angular.module('ngSeed',
+  [ 'ngSeed.directives',
+    'ngSeed.services',
+    'ngSeed.filters',
     'http-auth-interceptor',
     'ngResource'
   ]);
 
-window.services = angular.module('app.services',
+window.ngSeed.services = angular.module('ngSeed.services',
   [ 'http-auth-interceptor',
     'ngResource'
   ]);
 
-window.directives = angular.module('app.directives',
+window.ngSeed.directives = angular.module('ngSeed.directives',
   [ 'http-auth-interceptor'
   ]);
 
-window.filters = angular.module('app.filters', []);
+window.ngSeed.filters = angular.module('ngSeed.filters', []);

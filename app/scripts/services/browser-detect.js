@@ -1,26 +1,32 @@
 var services = angular.module('app.services');
 
 /**
- * BrowserDetect Service
+ * @ngdoc service
+ * @name ngSeed.services:$browserDetect
+ * @description
+ * 
  * Detects the type of browser, the version and the OS.
  * Easily usable in conjuction with ng-hide/ng-show.
  *
  * Example (jade):
- *   section(ng-show="browserDetect.browser == 'Explorer' && browserDetect.version < 10")
+ * ```haml
+ *   section(ng-show="$browserDetect.browser == 'Explorer' && $browserDetect.version < 10")
  *     span.warn This page is not supported in IE below 10
- *     
- * @return {String} .browser for the browser name
- * @return {String} .version for the browser version
- * @return {String} .OS for the OS in which the browser is running
+ * ```    
  */
-services.factory('browserDetect', function () {
+services.factory('$browserDetect', function () {
 
   'use strict';
 
   var browserDetect = {
 
     /**
+     * @ngdoc function
+     * @name init
+     * @methodOf ngSeed.services:$browserDetect
+     * @description 
      * Initializes the properties and error messages.
+     * 
      * @return {Boolean} True if no errors. False if errors.
      */
     init: function () {
@@ -77,8 +83,16 @@ services.factory('browserDetect', function () {
       if (index == -1) return;
       return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
     },
+
+
     /**
+     * @ngdoc property
+     * @name dataBrowser
+     * @propertyOf ngSeed.services:$browserDetect
+     * 
+     * @description 
      * Array of known Browsers
+     * 
      * @type {Array}
      */
     dataBrowser: [

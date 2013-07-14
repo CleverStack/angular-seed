@@ -1,19 +1,36 @@
 /**
+ * @ngdoc service
+ * @name ngSeed.services:GenericService
+ * @param {String} resourceName The name of the resource.
+ * @description
+ * 
  * Generates a factory function that uses ngResource
  * to talk to a REST resource that can be directly used
- * with angular.module.factory
- * @param {string} resourceName The resource name
+ * with factory.
+ *
+ * Example of use with factory:
+ * ```js
+ * services
+ *   .factory('ResourceService', GenericService('resource'));
+ * ```
  */
 function GenericService ( resourceName ) {
   
   'use strict';
   
   /**
-   * Generic resource function
-   * @param  {injected dep} $resource ngResource
-   * @return {resource}           The actual resource for resourceName
+   * @ngdoc function
+   * @name ngSeed.services:GenericService:builder
+   * @description
+   * 
+   * Generates an HTTP Resource.
+   *
+   * @param {$resource} $resource ngResource
+   * @param {$httpOptions} $httpOptions The HTTP Options object.
+   * 
+   * @return {resource} The actual resource for resourceName.
    */
-  var generic = function ( $resource, httpOptions ) {
+  var builder = function ( $resource, $httpOptions ) {
     var url = httpOptions.domain+'/'+resourceName+'/:id';
     var defaults = {};
     var actions =  {
@@ -29,12 +46,8 @@ function GenericService ( resourceName ) {
     return $resource(url, defaults, actions);
   };
  
-  return ['$resource','httpOptions',generic];
+  return ['$resource','$httpOptions',builder];
 };
 
-var services = angular.module('app.services');
-
-// Example of using GenericService
-services
-  .factory('ResourceService', GenericService('resource'));
+var services = angular.module('ngSeed.services');
 
