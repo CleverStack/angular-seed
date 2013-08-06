@@ -6,9 +6,10 @@
   },
   "collaborators": [
     "Simon W. Jackson <simon@clevertech.biz>",
+    "Daniel Young <daniel@clevertech.biz>",
     "Richard Gustin <richard@clevertech.biz>"
   ],
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "jquery": "*",
     "es5-shim": "~2.0.8",
@@ -16,7 +17,9 @@
     "angular-resource-unstable": "*",
     "angular-http-auth": "https://github.com/witoldsz/angular-http-auth.git",
     "underscore": "~1.4.4",
-    "async": "~0.2.5"
+    "async": "~0.2.5",
+    "bootstrap": "~3.0.0-rc1",
+    "requirejs": "*"
   },
   "devDependencies": {
     "sinon": "*",

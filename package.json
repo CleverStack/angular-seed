@@ -7,6 +7,7 @@
   },
   "collaborators": [
     "Simon W. Jackson <simon@clevertech.biz>",
+    "Daniel Young <daniel@clevertech.biz>",
     "Richard Gustin <richard@clevertech.biz>"
   ],
   "version": "0.0.2",
@@ -27,6 +28,8 @@
     "grunt-contrib-htmlmin": ">=0.1.x",
     "grunt-contrib-imagemin": ">=0.1.x",
     "grunt-contrib-livereload": ">=0.1.x",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-contrib-less": "~0.6.4",
     "grunt-usemin": ">=0.1.1",
     "grunt-regarde": ">=0.1.x",
     "grunt-knox": ">=0.1.x",
@@ -37,11 +40,13 @@
     "matchdep": ">=0.1.x",
     "di": ">=0.0.x",
     "karma-ng-scenario": ">=0.0.x",
-    "karma-junit-reporter": ">=0.0.x",
     "karma-coverage": ">=0.0.x",
+    "karma-html2js-preprocessor": ">=0.0.x",
     "karma-chrome-launcher": ">=0.0.x",
     "karma-script-launcher": ">=0.0.x",
+    "karma-browserstack-launcher": ">=0.0.x",
     "karma-phantomjs-launcher": ">=0.0.x",
+    "karma-junit-reporter": ">=0.0.x",
     "karma-growl-reporter": "0.0.2"
   },
   "engines": {
@@ -49,6 +54,8 @@
   },
   "scripts": {
     "setup": "node scripts/setup",
-    "start": "grunt server"
+    "start": "grunt server",
+    "bs-tunnel-unit": "sh scripts/bs-tunnel.sh ",
+    "bs-tunnel-e2e": "sh scripts/bs-tunnel.sh"
   }
 }

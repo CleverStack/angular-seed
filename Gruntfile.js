@@ -32,15 +32,15 @@ module.exports = function (grunt) {
   grunt.initConfig({
     yeoman: yeomanConfig,
     docular: {
-      baseUrl: 'http://localhost:8000', //base tag used by Angular
-      showAngularDocs: false, //parse and render Angular documentation
-      showDocularDocs: false, //parse and render Docular documentation
-      docAPIOrder : ['doc', 'angular'], //order to load ui resources
+      baseUrl: 'http://localhost:8000',
+      showAngularDocs: false,
+      showDocularDocs: false,
+      docAPIOrder : ['doc', 'angular'],
       groups: [
         {
-          groupTitle: 'CleverStack Seed', //Title used in the UI
-          groupId: 'cleverstack', //identifier and determines directory
-          groupIcon: 'icon-book', //Icon to use for this group
+          groupTitle: 'CleverStack Seed',
+          groupId: 'cleverstack',
+          groupIcon: 'icon-book',
           sections: [
             {
               id: "api",
@@ -60,13 +60,15 @@ module.exports = function (grunt) {
     watch: {
       livereload: {
         files: [
+          '<%= yeoman.app %>/components/bootstrap/less/{,*/}*.less',
+          '<%= yeoman.app %>/styles/less/{,*/}*.less',
           '<%= yeoman.app %>/{,*/}*.html',
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/views/{,*/}*.html',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
-        tasks: ['livereload']
+        tasks: ['livereload', 'less']
       }
     },
     connect: {
@@ -162,6 +164,26 @@ module.exports = function (grunt) {
         }]
       }
     },
+    less: {
+      development: {
+        options: {
+          paths: ['app/styles']
+        },
+        files: [
+          { '<%= yeoman.app %>/styles/application.css': '<%= yeoman.app %>/styles/less/application.less' },
+          { '<%= yeoman.app %>/styles/bootstrap.css': '<%= yeoman.app %>/components/bootstrap/less/bootstrap.less' }
+        ]
+      },
+      production: {
+        options: {
+          paths: ['app/styles']
+        },
+        files: [
+          { '<%= yeoman.app %>/styles/application.css': '<%= yeoman.app %>/styles/less/application.less' },
+          { '<%= yeoman.app %>/styles/bootstrap.css': '<%= yeoman.app %>/components/bootstrap/less/bootstrap.less' }
+        ]
+      },
+    },
     cssmin: {
       dist: {
         files: {
@@ -209,6 +231,21 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/scripts/scripts.js': [
             '<%= yeoman.dist %>/scripts/scripts.js'
           ]
+        }
+      }
+    },
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: 'app/scripts',
+          mainConfigFile: "app/scripts/main.js",
+          out: "<%=yeoman.dist %>/scripts/scripts.js",
+          uglify: {
+            beautify: false,
+            'no-copyright': true,
+            'no-seqs': true,
+            'lift-vars': true
+          }
         }
       }
     },
@@ -262,12 +299,14 @@ module.exports = function (grunt) {
     // 'jshint',
     'useminPrepare',
     'imagemin',
+    'less',
     'cssmin',
     'htmlmin',
-    'concat',
+    // 'concat',
     'copy',
     'ngmin',
-    'uglify',
+    'requirejs',
+    // 'uglify',
     'rev',
     'usemin',
     'docs'

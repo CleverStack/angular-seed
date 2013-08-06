@@ -42,5 +42,8 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
   echo('Installing components...');
   exec('bower install');
 
+  echo('Downloading BrowserStackTunnel jar cli tool...');
+  exec('wget http://www.browserstack.com/BrowserStackTunnel.jar')
+
   echo('OK!');
 });

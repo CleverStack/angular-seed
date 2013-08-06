@@ -13,12 +13,12 @@ describe('Controller: HomeCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    HomeCtrl = $controller('HomeCtrl', {
+    HomeCtrl = $controller('Home', {
       $scope: scope
     });
   }));
 
   it('should attach a list of awesomeThings to the scope', function () {
-    scope.awesomeThings.length.should.equal(3);
+    scope.welcome.should.equal('Hello there!');
   });
 });

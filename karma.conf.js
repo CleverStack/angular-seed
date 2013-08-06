@@ -13,19 +13,19 @@ module.exports = function (config) {
       'app/components/angular-mocks/angular-mocks.js',
       'app/components/angular-http-auth/src/http-auth-interceptor.js',
       'app/components/underscore/underscore.js',
-      'app/scripts/init.js',
-      'app/scripts/routes.js',
-      'app/scripts/directives/*.js',
-      'app/scripts/services/*.js',
-      'app/scripts/filters/*.js',
-      'app/scripts/controllers/*.js',
+      'app/components/requirejs/require.js',
+      'app/scripts/main.js',
+      { pattern: 'app/views/**/*.html', included: false, served: true },
+      { pattern: 'app/styles/**/*.css', included: false, served: true },
+      { pattern: 'app/*.html', included: false, served: true },
+      { pattern: 'app/index.html', included: true, served: true },
       'test/unit/**/*.js'
     ],
     // list of files to exclude
     exclude: [
     ],
 
-    browsers: ['Chrome'],
+    browsers: ['BrowserStack:Chrome:Mac'],
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
@@ -35,12 +35,14 @@ module.exports = function (config) {
     // plugins to load
     plugins: [
       'karma-jasmine',
+      'karma-coverage',
+      'karma-html2js-preprocessor',
       'karma-growl-reporter',
       'karma-junit-reporter',
-      'karma-coverage',
       'karma-phantomjs-launcher',
       'karma-chrome-launcher',
       'karma-script-launcher',
+      'karma-browserstack-launcher',
       'karma-ng-scenario'
     ]
   });

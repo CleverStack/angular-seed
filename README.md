@@ -21,6 +21,13 @@ A shortcut `npm start` is provided to start a development server on `localhost:9
 1. To run the Unit tests server do: `$ karma start`
 2. Do `$ karma run` for blazing fast test running
 
+#### Test Running on [BrowserStack](http://browserstack.com):
+1. Put `BrowserStackTunnel.jar` inside the `scripts` folder
+2. Configure `scripts/bs-tunnel.sh` and `.browserstack.json` with your BrowserStack credentials
+3. Open a new terminal an run `karma start` with your desired config
+4. Create the tunnel by running `npm run-script bs-tunnel`
+5. Run `karma run` every time you need to run your tests
+
 #### Client-side Package Management (using [Bower](http://bower.io)):
 1. Search a package doing: `$ bower search key words`
 2. Install a package doing: `$ bower install packageName[@version]`
