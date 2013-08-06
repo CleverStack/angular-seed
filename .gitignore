@@ -6,3 +6,5 @@ app/components
 test-results.xml
 .DS_Store
 docs/*
+libpeerconnection.log
+*.jar
