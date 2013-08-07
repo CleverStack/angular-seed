@@ -1,44 +1,47 @@
-var directives = angular.module('ngSeed.directives');
-
-/**
- * @ngdoc directive
- * @name ngSeed.directives:string2number
- * @description
- * Converts a string to a number. Useful in type="number" input
- * elements that bind to a stringified number model.
- */
-directives.directive('string2number', function() {
-  
+define(['angular', 'app'], function (angular) {
   'use strict';
 
-  return {
-    restrict: 'A',
-    require: 'ngModel',
-    link: function(scope, element, attr, ngModel) {
+  /**
+   * @ngdoc directive
+   * @name ngSeed.directives:string2number
+   * @description
+   * Converts a string to a number. Useful in type="number" input
+   * elements that bind to a stringified number model.
+   */
+  angular
+    .module('app.directives')
+    .directive('string2number', function() {
 
-      /**
-       * @ngdoc method
-       * @name fromField
-       * @methodOf ngSeed.directives:string2number
-       * @param  {Number, String} number Just the number that has been input.
-       * @return {Number}        The number.
-       */
-      function fromField(number) {
-          return Number(number);
-      }
+      return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function(scope, element, attr, ngModel) {
 
-      /**
-       * @ngdoc method
-       * @name toField
-       * @methodOf ngSeed.directives:string2number
-       * @param  {Number, String} number Just the number that has been input.
-       * @return {Number}        The number or 0.
-       */
-      function toField(text) {
-          return Number(text || 0);
-      }
-      ngModel.$parsers.push(fromField);
-      ngModel.$formatters.push(toField);
-    }
-  };
+          /**
+           * @ngdoc method
+           * @name fromField
+           * @methodOf ngSeed.directives:string2number
+           * @param  {Number, String} number Just the number that has been input.
+           * @return {Number}        The number.
+           */
+          function fromField(number) {
+              return Number(number);
+          }
+
+          /**
+           * @ngdoc method
+           * @name toField
+           * @methodOf ngSeed.directives:string2number
+           * @param  {Number, String} number Just the number that has been input.
+           * @return {Number}        The number or 0.
+           */
+          function toField(text) {
+              return Number(text || 0);
+          }
+          ngModel.$parsers.push(fromField);
+          ngModel.$formatters.push(toField);
+        }
+      };
+  });
+
 });

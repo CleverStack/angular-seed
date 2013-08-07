@@ -1,13 +1,6 @@
-var app = angular.module('app');
-
-app.controller( 'HomeCtrl',
-  ['$scope',
-  function( $scope ) {
-
-  'use strict';  
-  
-  $scope.welcome = 'Hello!';
-
-  $scope.awesomeThings = [1,2,3];
-  
-}]);
+define(['app'], function (app) {
+  'use strict';
+  app.controller('Home', ['$scope', function ($scope) {
+    $scope.welcome = "Hello there!";
+  }]);
+});
