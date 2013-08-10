@@ -1,5 +1,7 @@
 define(['angular', 'app'], function (angular, app) {
-  angular.module('app.services').factory('$browserDetect', function () {
+  angular
+  .module('app.services')
+  .factory('$browserDetect', function () {
     var browserDetect = {
 
       /**

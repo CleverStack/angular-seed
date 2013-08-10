@@ -1,90 +1,71 @@
-require.config({
-    pathUrl: '/app/scripts',
-    paths: {
-        angular: '../components/angular-unstable/angular',
-        async: '../components/async/lib/async',
-        jquery: '../components/jquery/jquery',
-        underscore: '../components/underscore/underscore',
-        ngResource: '../components/angular-resource-unstable/angular-resource',
-        'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor'
-    },
-    shim: {
-        app: {
-            deps: [
-                'angular',
-                'ngResource',
-                'http-auth-interceptor'
-            ]
-        },
-
-        angular: {
-            exports: 'angular'
-        },
-
-        'http-auth-interceptor': {
-            deps: ['angular']
-        },
-
-        ngResource: {
-            deps: ['angular']
-        },
-
-        underscore: {
-            exports: '_'
-        },
-
-
-        // Controllers
-        controllers: {
-            deps: [
-                'controllers/home',
-                'controllers/login',
-                'controllers/users'
-            ]
-        },
-
-        // Directives
-        directives: {
-            deps: [
-                'directives/string-to-number'
-            ]
-        },
-
-        // Filters
-        filters: {
-            deps: [
-                // 'filters/starts-with'
-            ]
-        },
-
-        // Services
-        services: {
-            deps: [
-                'services/debug',
-                'services/http-options',
-                'services/auth',
-                'services/user',
-                'services/templates',
-                // 'services/browser-detect',
-                // 'services/generic'
-            ]
-        }
-    }
-});
-
-require([
-    'angular',
+(function () {
+  // body...
+var deps = [
+    // Init
     'app',
-    'services',
-    'controllers',
-    'directives',
-    'filters',
+
+    // Controllers
+    'controllers/home',
+    'controllers/login',
+    'controllers/users',
+
+    // Directives
+    'directives/string-to-number',
+
+    // Filters
+    'filters/starts-with',
+
+    // Services
+    'services/debug',
+    'services/http-options',
+    'services/auth',
+    'services/user',
+    'services/templates',
+    'services/browser-detect',
+    'services/resource-factory',
+
+    // Config
     'config',
     'routes'
-], function (angular) {
-    'use strict';
+  ];
 
-    angular.element(document).ready(function () {
-        angular.bootstrap(document, ['app']);
-    });
+require.config({
+  pathUrl: '/app/scripts',
+  paths: {
+    angular: '../components/angular-unstable/angular',
+    async: '../components/async/lib/async',
+    jquery: '../components/jquery/jquery',
+    underscore: '../components/underscore/underscore',
+    ngResource: '../components/angular-resource-unstable/angular-resource',
+    'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor',
+    'app': './app',
+  },
+  shim: {
+    angular: {
+      exports: 'angular'
+    },
+
+    'http-auth-interceptor': {
+      deps: ['angular']
+    },
+
+    ngResource: {
+      deps: ['angular']
+    },
+  },
+
+  deps: deps,
+
 });
+
+deps = ['angular', 'ngResource', 'http-auth-interceptor'].concat(deps);
+
+require(deps, function (angular) {
+  'use strict';
+
+  angular.element(document).ready(function () {
+    angular.bootstrap(document, ['app']);
+  });
+});
+
+}());

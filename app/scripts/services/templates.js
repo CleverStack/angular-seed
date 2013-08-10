@@ -3,13 +3,13 @@ define(['angular', 'app'],function (angular) {
 
   /**
    * @ngdoc service
-   * @name $template
+   * @name $templates
    * @description
-   * Configurable Template provider.
+   * Configurable Templates provider.
    */
   angular
   .module('app.services')
-  .provider('$template', function () {
+  .provider('$templates', function () {
       /**
        * @name viewsPath
        * @type {String}

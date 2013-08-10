@@ -1,11 +1,12 @@
 define(['angular', 'app'], function (angular, app) {
+  
   'use strict';
 
   app.config(
-    ['$routeProvider', '$templateProvider'
-    , function ($routeProvider, $templateProvider) {
+    ['$routeProvider', '$templatesProvider'
+    , function ($routeProvider, $templatesProvider) {
 
-    var t = $templateProvider;
+    var t = $templatesProvider;
 
     $routeProvider
       .when('/', {

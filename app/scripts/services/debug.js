@@ -7,7 +7,7 @@ define(['angular', 'app'],function (angular) {
     function ($rootScope) {
 
     $rootScope.$on('$debug:msg', function (event, data) {
-      console.log(data);
+      console.log(arguments);
     })
 
   }]);

@@ -42,7 +42,7 @@ define(['angular', 'app'],function (angular, app) {
       return {
         $get: function () {
 
-          angular.config(['$httpProvider'], function ($httpProvider) {
+          app.config(['$httpProvider'], function ($httpProvider) {
             $httpProvider.defaults.withCredentials = withCredentials;
           });
           // Here add the interceptors to add the domain

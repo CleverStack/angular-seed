@@ -92,15 +92,15 @@ define(['angular', 'app'], function (angular, app) {
           }
 
           if (!handlers.loginStart) {
-            // console.log('$auth: using default loginStart method')
+            console.log('$auth: using default loginStart method')
           }
 
           if (!handlers.loginSuccess) {
-            // console.log('$auth: using default loginSuccess method')
+            console.log('$auth: using default loginSuccess method')
           }
 
           if (!handlers.locationChange) {
-            // console.log('$auth: using default locationChange method')
+            console.log('$auth: using default locationChange method')
           }
 
           /**
@@ -109,7 +109,7 @@ define(['angular', 'app'], function (angular, app) {
            * Default login starting logic.
            */
           handlers.loginStart = handlers.loginStart || function (redirect) {
-            // console.log("$auth: redirecting to /login");
+            console.log("$auth: redirecting to /login");
             $location.path('/login');
             $location.search({
               redirect: encodeURIComponent(redirect)
@@ -125,7 +125,7 @@ define(['angular', 'app'], function (angular, app) {
            */
           handlers.loginSuccess = handlers.loginSuccess || function () {
             if($location.search().redirect) {        
-              // console.log("$auth: redirecting to", $location.search().redirect);
+              console.log("$auth: redirecting to", $location.search().redirect);
               $location.path($location.search().redirect);
             }
           };
@@ -140,14 +140,14 @@ define(['angular', 'app'], function (angular, app) {
             if(currentUser === null || !!currentUser){
               next = '/'+next.split('/').splice(3).join('/').split("?")[0];
               var route = $route.routes[next] || false;
-              // console.log("$auth: Guest access to", next);
-              // console.log("$auth:",next, "is", route.public ? "public" : "private");
-              if(route && route.hasOwnProperty('public') && !route.public) {
+              console.log("$auth: Guest access to", next);
+              console.log("$auth:",next, "is", route.public ? "public" : "private");
+              if(route && !route.public) {
                 $rootScope.$broadcast('$auth:loginStart');
                 handlers.loginStart(next.substr(1));
                 return;
               }
-              // console.log("$auth: proceeding to load", next);
+              console.log("$auth: proceeding to load", next);
             }
           };
 
@@ -157,16 +157,16 @@ define(['angular', 'app'], function (angular, app) {
            */
           $rootScope.$on('$locationChangeStart', function (event, next, current) {
             if(!$route.current) {
-              // console.log("$auth: Welcome newcomer!");
-              // console.log("$auth: Checking your session...");
+              console.log("$auth: Welcome newcomer!");
+              console.log("$auth: Checking your session...");
               userService.getCurrentUser().then(function (user) {
-                // console.log("$auth: we got", user)
+                console.log("$auth: we got", user)
                 if(typeof handlers.locationChange === 'function') {
                   handlers.locationChange(event, next, current);
                 }
               }, function (err) {
-                // console.log("$auth: request failed");
-                // console.log("$auth: proceeding as guest.");
+                console.log("$auth: request failed");
+                console.log("$auth: proceeding as guest.");
                 if(typeof handlers.locationChange === 'function') {
                   handlers.locationChange(event, next, current);
                 }
@@ -215,7 +215,7 @@ define(['angular', 'app'], function (angular, app) {
                   $rootScope.$broadcast('$auth:loginFailure')
                 }
               }, function() {
-                // console.log("$auth: login error callback");
+                console.log("$auth: login error callback");
                 currentUser = null;
                 $rootScope.$broadcast('$auth:loginFailure');
               });
