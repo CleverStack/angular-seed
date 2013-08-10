@@ -12,7 +12,7 @@ define(['angular', 'app'],function (angular, app) {
    */
    angular
    .module('app.services')
-   .value('$httpOptions', {
+   .provider('$httpOptions', function() {
      /**
       * @ngdoc property
       * 
@@ -23,7 +23,7 @@ define(['angular', 'app'],function (angular, app) {
       * @description
       * Should it send session information with every request?
       */
-     withCredentials: true,
+     var withCredentials = true;
 
      /**
       * @ngdoc property
@@ -37,6 +37,37 @@ define(['angular', 'app'],function (angular, app) {
       * it allows you to test the app against a aws server
       * running either in dev, staging or production
       */
-      domain: 'http://localhost:8080'
+      var domain = 'http://localhost:8080';
+
+      return {
+        $get: function () {
+
+          angular.config(['$httpProvider'], function ($httpProvider) {
+            $httpProvider.defaults.withCredentials = withCredentials;
+          });
+          // Here add the interceptors to add the domain
+          // to all requests
+          // and the other options.
+
+          return {
+            withCredentials: withCredentials,
+            domain: domain
+          }
+        },
+
+        setDomain: function (uri) {
+          if(typeof uri !== 'string') {
+            throw new Error('$httpOptions: expecting string for domain');
+          }
+          domain = uri;
+        },
+
+        setWithCredentials: function (value) {
+          if(typeof value !== 'boolean') {
+            throw new Error('$httpOptions: expecting value to be boolean');
+          }
+          withCredentials = value;
+        }
+      }
   });
 })

@@ -3,17 +3,13 @@ define(['angular', 'app'],function (angular) {
 
   /**
    * @ngdoc service
-   * @name $auth
+   * @name $template
    * @description
-   * Dead-easy auth checking.
-   * 
-   * Please note that custom login requiring logic, on-location-change auth
-   * checking, and default login success behaviour can be configured
-   * using the authProvider on a config block.
+   * Configurable Template provider.
    */
   angular
   .module('app.services')
-  .provider('$auth', function () {
+  .provider('$template', function () {
       /**
        * @name viewsPath
        * @type {String}
@@ -39,49 +35,54 @@ define(['angular', 'app'],function (angular) {
       var extension = '.html';
 
       /**
+       * @ngdoc method
+       * @name ngSeed.services:templates.view
+       * @param  {String} viewName The name of the view.
+       * @return {String}          The path to the view.
+       * @description 
+       * Utility functions to get the path of a view.
+       */
+      function view (viewName) {
+        return viewsPath+viewName+extension;
+      }
+
+      /**
+       * @ngdoc method
+       * @name ngSeed.services:templates.partial
+       * @param  {String} section The folder path to look into.
+       * @param  {String} partialName The name of the partial.
+       * @return {String}          The path to the partial.
+       * @description 
+       * Utility functions to get the path of a partial.
+       */
+      function partial (section, partialName) {
+        var url;
+        if(partialName === undefined) {
+          url = partialsPath+section;
+        } else {
+          url = section+'/partials/'+partialName;
+        }
+        url += extension;
+        return url;
+      }
+
+      /**
        * @description
        * The actual service.
        */
       return {
 
-        $get = function () {
+        $get: function () {
           return {
-             /**
-               * @ngdoc method
-               * @name ngSeed.services:templates.view
-               * @param  {String} viewName The name of the view.
-               * @return {String}          The path to the view.
-               * @description 
-               * Utility functions to get the path of a view.
-               */
-              function view (viewName) {
-                return viewsPath+viewName+extension;
-              }
-
-              /**
-               * @ngdoc method
-               * @name ngSeed.services:templates.partial
-               * @param  {String} section The folder path to look into.
-               * @param  {String} partialName The name of the partial.
-               * @return {String}          The path to the partial.
-               * @description 
-               * Utility functions to get the path of a partial.
-               */
-              function partial (section, partialName) {
-                var url;
-                if(partialName === undefined) {
-                  url = partialsPath+section;
-                } else {
-                  url = section+'/partials/'+partialName;
-                }
-                url += extension;
-                return url;
-              }
+            view: view,
+            partial: partial   
           }
-        
         },
+
+        view: view,
+        partial: partial,
         
-        set = function (key, value) {
+        setPath: function (key, value) {
           if ( typeof key !== 'string') {
             throw new Error('$templates: expecting a string for key.');
           }
@@ -89,6 +90,26 @@ define(['angular', 'app'],function (angular) {
           if ( typeof value !== 'string') {
             throw new Error('$templates: expecting a string for value.');
           }
+
+          if(key === 'views' || key === 'partials') {
+            throw new Error('$templates: expecting viewsPath, partialsPath or extension as keys');
+          }
+
+          this[key+'Path'] = value;
+
+        }.bind(this),
+
+        setExtension: function (ext) {
+          if ( typeof ext !== 'string') {
+            throw new Error('$templates: expecting a string for extension.');
+          }
+
+          if(ext.substr(0) !== '.') {
+            ext = '.'+ext;
+          }
+
+          extension = value;
+
         }
       }
   });

@@ -1,42 +1,29 @@
 module.exports = function (karma) {
   karma.set({
     // url path, that will be used to resolve files and exclude
-    urlRoot: '/base/app',
+    basePath: './',
 
     // frameworks to use
-    frameworks: ['ng-scenario'],
+    frameworks: ['requirejs', 'jasmine', 'ng-scenario'],
 
     // list of files / patterns to load in the browser
     files: [
-      'app/components/chai/chai.js',
-      'app/components/sinon/lib/sinon.js',
-      'app/components/angular-unstable/angular.js',
-      'app/components/angular-resource-unstable/angular-resource.js',
-      'app/components/angular-mocks/angular-mocks.js',
-      'app/components/angular-http-auth/src/http-auth-interceptor.js',
-      'app/components/underscore/underscore.js',
       'app/components/requirejs/require.js',
-      { pattern: 'app/views/**/*.html', included: false, served: true },
-      { pattern: 'app/styles/**/*.css', included: false, served: true },
-      { pattern: 'app/*.html', included: false, served: true },
-      { pattern: 'app/index.html', included: true, served: true },
-      'test/e2e/**/*.js'
+      'test/e2e/main.js',
+      { pattern: 'app/scripts/**/*.js', included: false, served: true },
+      { pattern: 'app/components/**/*.js', included: false, served: true },
+      { pattern: 'test/e2e/**/*.js', included: false, served: true },
+      { pattern: 'test/app/**/*.js', included: false, served: true },
     ],
-
     // list of files to exclude
     exclude: [
+      'app/scripts/main.js'
     ],
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
     reporters: ['progress'],
-
-    // web server port
-    port: 9200,
-
-    // cli runner port
-    runnerPort: 9201,
-
+    
     // enable / disable colors in the output (reporters and logs)
     colors: true,
 
@@ -59,8 +46,8 @@ module.exports = function (karma) {
     // - BrowserStack:Firefox:Mac
     // - BrowserStack:IE:Win
     // - BrowserStack:iPad 3rd (6.0):iOS
-    browsers: ['BrowserStack:Chrome:Mac'],
-    // browsers: ['Chrome'],
+    // browsers: ['BrowserStack:Chrome:Mac'],
+    browsers: ['Chrome'],
     
     
     // If browser does not capture in given timeout [ms], kill it
@@ -69,6 +56,8 @@ module.exports = function (karma) {
     // plugins to load
     plugins: [
       'karma-coverage',
+      'karma-requirejs',
+      'karma-jasmine',
       'karma-ng-scenario',
       'karma-html2js-preprocessor',
       'karma-growl-reporter',

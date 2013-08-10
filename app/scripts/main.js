@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: '/base/app/scripts',
+    pathUrl: '/app/scripts',
     paths: {
         angular: '../components/angular-unstable/angular',
         async: '../components/async/lib/async',
@@ -64,6 +64,7 @@ require.config({
                 'services/http-options',
                 'services/auth',
                 'services/user',
+                'services/templates',
                 // 'services/browser-detect',
                 // 'services/generic'
             ]

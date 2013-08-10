@@ -1,12 +1,19 @@
-describe("E2E: Testing Routes", function() {
+define(['angular','app'], function (angular, app) {
+  'use strict';
 
-  beforeEach(function() {
-    browser().navigateTo('index.html');
-  });
+  describe("E2E: Testing Routes", function() {
 
-  it('should have a working / route', function() {
-    browser().navigateTo('#/');
-    browser().location().path().should.be("/");
+    beforeEach(function() {
+      console.log("Inside beforeEach")
+      browser().navigateTo('/base/app/index.html');
+    });
+
+    it('should have a working / route', function() {
+      console.log("Inside it")
+      browser().navigateTo('#/');
+      browser().location().path().should.be("/");
+    });
+
   });
 
 });

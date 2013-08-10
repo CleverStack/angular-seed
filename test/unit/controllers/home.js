@@ -1,24 +1,25 @@
-'use strict';
+define(['controllers/home'], function () {
+  'use strict';
 
-var should = chai.should();
+  describe('Controller: HomeCtrl', function () {
 
-describe('Controller: HomeCtrl', function () {
+    // load the controller's module
+    beforeEach(angular.mock.module('app'));
 
-  // load the controller's module
-  beforeEach(angular.mock.module('app'));
+    var HomeCtrl,
+      scope;
 
-  var HomeCtrl,
-    scope;
+    // Initialize the controller and a mock scope
+    beforeEach(inject(function ($controller, $rootScope) {
+      scope = $rootScope.$new();
+      HomeCtrl = $controller('Home', {
+        $scope: scope
+      });
+    }));
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    HomeCtrl = $controller('Home', {
-      $scope: scope
+    it('should attach a list of awesomeThings to the scope', function () {
+      scope.welcome.should.equal('Hello there!');
     });
-  }));
-
-  it('should attach a list of awesomeThings to the scope', function () {
-    scope.welcome.should.equal('Hello there!');
   });
+
 });

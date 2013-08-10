@@ -7,4 +7,6 @@ test-results.xml
 .DS_Store
 docs/*
 libpeerconnection.log
-*.jar
+scripts/*.jar
+.browserstack.json
+scripts/bs-tunnel.sh

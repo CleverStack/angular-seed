@@ -1,31 +1,39 @@
 module.exports = function (config) {
   config.set({
     // base path, that will be used to resolve files and exclude
-    basePath: '',
+    basePath: './',
     // frameworks to use
-    frameworks: ['jasmine'],
+    frameworks: ['requirejs', 'jasmine'],
     // list of files / patterns to load in the browser
     files: [
-      'app/components/chai/chai.js',
-      'app/components/sinon/lib/sinon.js',
-      'app/components/angular-unstable/angular.js',
-      'app/components/angular-resource-unstable/angular-resource.js',
-      'app/components/angular-mocks/angular-mocks.js',
-      'app/components/angular-http-auth/src/http-auth-interceptor.js',
-      'app/components/underscore/underscore.js',
       'app/components/requirejs/require.js',
-      'app/scripts/main.js',
-      { pattern: 'app/views/**/*.html', included: false, served: true },
-      { pattern: 'app/styles/**/*.css', included: false, served: true },
-      { pattern: 'app/*.html', included: false, served: true },
-      { pattern: 'app/index.html', included: true, served: true },
-      'test/unit/**/*.js'
+      'test/unit/main.js',
+      { pattern: 'app/scripts/**/*.js', included: false, served: true },
+      { pattern: 'app/components/**/*.js', included: false, served: true },
+      { pattern: 'test/unit/**/*.js', included: false, served: true },
     ],
     // list of files to exclude
     exclude: [
+      'app/scripts/main.js'
     ],
 
-    browsers: ['BrowserStack:Chrome:Mac'],
+    // Start these browsers, currently available:
+    // - Chrome
+    // - ChromeCanary
+    // - Firefox
+    // - Opera
+    // - Safari (only Mac)
+    // - PhantomJS
+    // - IE (only Windows)
+    // Also available are:
+    // - BrowserStack:Chrome:Win
+    // - BrowserStack:Chrome:Mac
+    // - BrowserStack:Firefox:Win
+    // - BrowserStack:Firefox:Mac
+    // - BrowserStack:IE:Win
+    // - BrowserStack:iPad 3rd (6.0):iOS
+    // browsers: ['BrowserStack:Chrome:Mac'],
+    browsers: ['Chrome'],
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
@@ -34,6 +42,7 @@ module.exports = function (config) {
 
     // plugins to load
     plugins: [
+      'karma-requirejs',
       'karma-jasmine',
       'karma-coverage',
       'karma-html2js-preprocessor',

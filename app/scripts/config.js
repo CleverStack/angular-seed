@@ -2,10 +2,19 @@ define(['angular', 'app'], function (angular, app) {
   'use strict';
 
   app.config(
-    ['$locationProvider', '$httpProvider', '$authProvider',
-    function ($locationProvider, $httpProvider, $authProvider) {
+    ['$locationProvider', '$authProvider', '$httpOptionsProvider'
+    ,'$templatesProvider'
+    ,function ($locationProvider, $authProvider, $httpOptionsProvider, $templatesProvider) {
     
-    $httpProvider.defaults.withCredentials = true;
+    // $httpOptionsProvider can be configured, refer to its documentation
+    $httpOptionsProvider.setDomain('http://localhost:8081');
+
+    // $authProvider can be configured, refer to its documentation
+    // $authProvider.setUserService('UserService');
+    
+    // $templatesProvider can be configured, refer to its documentation
+    // $templatesProvider.
+    
     $locationProvider.html5Mode( true );
   }]);
 
