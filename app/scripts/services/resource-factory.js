@@ -32,17 +32,14 @@ define(['angular', 'app'],function (angular) {
      * @return {resource} The actual resource for resourceName.
      */
     var builder = function ( $resource, $httpOptions ) {
-      var url = httpOptions.domain+'/'+resourceName+'/:id';
+      var url = $httpOptions.domain+'/'+resourceName+'/:id';
       var defaults = {};
       var actions =  {
-        'get':    {method:'GET', withCredentials: $httpOptions.withCredentials},
-        'query':  {method:'GET', isArray:true, withCredentials: $httpOptions.withCredentials},
-        'save':   {method:'POST', withCredentials: $httpOptions.withCredentials},
-        'create': {method:'POST', withCredentials: $httpOptions.withCredentials},
-        'update': {method:'PUT', withCredentials: $httpOptions.withCredentials},
-        'remove': {method:'DELETE', withCredentials: $httpOptions.withCredentials},
-        'destroy':{method:'DELETE', withCredentials: $httpOptions.withCredentials},
-        'delete': {method:'DELETE', withCredentials: $httpOptions.withCredentials}
+        'get':    {method:'GET'},
+        'query':  {method:'GET', isArray:true},
+        'save':   {method:'PUT'},
+        'create': {method:'POST'},
+        'destroy':{method:'DELETE'},
       };
       return $resource(url, defaults, actions);
     };
