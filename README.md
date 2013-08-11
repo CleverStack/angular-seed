@@ -5,6 +5,7 @@
 1. Install node and npm
 2. Clone the repo, cd into it
 3. Run `$ npm run-script setup`
+4. If 3. doesn't work, a normal `npm i; bower i;` works if you have `grunt-cli`, `bower`, `phantomjs`(optional) and `karma` installed.
 
 ### Usage:
 A shortcut `npm start` is provided to start a development server on `localhost:9000`.
