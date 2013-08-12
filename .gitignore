@@ -10,3 +10,5 @@ libpeerconnection.log
 scripts/*.jar
 .browserstack.json
 scripts/bs-tunnel.sh
+/BrowserStackTunnel.jar
+/BrowserStackTunnel.jar.1
