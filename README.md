@@ -25,9 +25,9 @@ A shortcut `npm start` is provided to start a development server on `localhost:9
 #### Test Running on [BrowserStack](http://browserstack.com):
 1. Put `BrowserStackTunnel.jar` inside the `scripts` folder
 2. Configure `scripts/bs-tunnel.sh` and `.browserstack.json` with your BrowserStack credentials
-3. Open a new terminal an run `karma start` with your desired config
+3. Open a new terminal an run `grunt test:e2e` with your desired config
 4. Create the tunnel by running `npm run-script bs-tunnel`
-5. Run `karma run` every time you need to run your tests
+5. Run `karma run karma.e2e.config.js` every time you need to run your tests
 
 #### Client-side Package Management (using [Bower](http://bower.io)):
 1. Search a package doing: `$ bower search key words`
