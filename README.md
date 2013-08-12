@@ -1,13 +1,15 @@
 # CleverStack Angular Seed
 ## An angular seed 
 
+### Prerequisites:
+1. sudo npm -g uninstall karma (There has been an issue with karma, if you see EPEERINVALID then this is the problem)
+2. sudo npm -g i karma
+3. sudo npm -g i grunt-cli
+
 ### Setup:
 1. Install node and npm
 2. Clone the repo, cd into it
-3. sudo npm -g uninstall karma (There has been an issue with karma, if you see EPEERINVALID then this is the problem)
-4. sudo npm -g i karma
-5. sudo npm -g i grunt-cli
-4. Run `$ npm run-script setup` (You need to use sudo on linux)
+3. Run `$ npm run-script setup` (You need to use sudo on linux)
 
 ### Usage:
 A shortcut `npm start` is provided to start a development server on `localhost:9000`.
