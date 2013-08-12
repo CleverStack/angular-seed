@@ -12,12 +12,6 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
     echo(exec('bower --version').output);
   }
 
-  if(!which('yo')) {
-    echo('Yeoman is missing...taking care of that now.');
-    exec('npm install --global yo');
-    echo(exec('yo --version').output);
-  }
-
   if(!which('grunt')) {
     echo('Grunt is missing...taking care of that now.');
     exec('npm install --global grunt-cli');
@@ -32,7 +26,7 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
 
   if(!which('karma')) {
     echo('Karma is missing...taking care of that now.');
-    exec('npm install --global karma@canary');
+    exec('npm install --global karma');
     echo(exec('karma --version').output);
   }
 
@@ -43,7 +37,7 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
   exec('bower install');
 
   echo('Downloading BrowserStackTunnel jar cli tool...');
-  exec('wget http://www.browserstack.com/BrowserStackTunnel.jar')
+  exec('wget http://www.browserstack.com/BrowserStackTunnel.jar -o scripts/BrowserStackTunnel.jar')
 
   echo('OK!');
 });

@@ -36,7 +36,7 @@ define(['angular', 'app'],function (angular) {
       var defaults = {};
       var actions =  {
         'get':    {method:'GET'},
-        'query':  {method:'GET', isArray:true},
+        'query':  {method:'GET`', isArray:true},
         'save':   {method:'PUT'},
         'create': {method:'POST'},
         'destroy':{method:'DELETE'},

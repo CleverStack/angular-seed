@@ -4,17 +4,19 @@ module.exports = function (karma) {
     basePath: './',
 
     // frameworks to use
-    frameworks: ['requirejs', 'jasmine', 'ng-scenario'],
+    frameworks: ['requirejs', 'jasmine'],
 
     // list of files / patterns to load in the browser
     files: [
       'app/components/requirejs/require.js',
       'test/e2e/main.js',
       { pattern: 'app/scripts/**/*.js', included: false, served: true },
+      { pattern: 'app/views/**/*.html', included: false, served: true },
       { pattern: 'app/components/**/*.js', included: false, served: true },
       { pattern: 'test/e2e/**/*.js', included: false, served: true },
-      { pattern: 'test/app/**/*.js', included: false, served: true },
+      { pattern: 'test/mocks/**/*.js', included: false, served: true },
     ],
+
     // list of files to exclude
     exclude: [
       'app/scripts/main.js'
@@ -48,7 +50,6 @@ module.exports = function (karma) {
     // - BrowserStack:iPad 3rd (6.0):iOS
     // browsers: ['BrowserStack:Chrome:Mac'],
     browsers: ['Chrome'],
-    
     
     // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 60000,

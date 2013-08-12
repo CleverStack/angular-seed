@@ -82,22 +82,20 @@ define(['angular', 'app'],function (angular) {
         view: view,
         partial: partial,
         
-        setPath: function (key, value) {
-          if ( typeof key !== 'string') {
-            throw new Error('$templates: expecting a string for key.');
+        setPath: function (path) {
+          if ( typeof path !== 'string') {
+            throw new Error('$templates: expecting a string for path.');
+          }     
+
+          if(path[path.length-1] !== '/') {
+            path += '/';
           }
 
-          if ( typeof value !== 'string') {
-            throw new Error('$templates: expecting a string for value.');
-          }
+          viewsPath = path;
+          partialsPath = viewsPath+'/partials';          
 
-          if(key === 'views' || key === 'partials') {
-            throw new Error('$templates: expecting viewsPath, partialsPath or extension as keys');
-          }
-
-          this[key+'Path'] = value;
-
-        }.bind(this),
+          console.log("$templates: path set to",viewsPath);
+        },
 
         setExtension: function (ext) {
           if ( typeof ext !== 'string') {

@@ -11,8 +11,7 @@ define(['angular', 'app'],function (angular) {
       login: function (credentials) {
         var def = $q.defer();
 
-        $http.post($httpOptions.domain+'/login', credentials,
-          {withCredentials: $httpOptions.withCredentials})
+        $http.post('/login', credentials)
         .success(function (res) {
           def.resolve(res.user);
         }).error(function (err) {
@@ -25,8 +24,7 @@ define(['angular', 'app'],function (angular) {
       logout: function () {
         var def = $q.defer();
 
-        $http.get($httpOptions.domain+'/logout',
-          {withCredentials: $httpOptions.withCredentials})
+        $http.get('/logout')
         .then(function (res) {
           def.resolve(res.user);
         }).error(function (err) {
@@ -39,8 +37,7 @@ define(['angular', 'app'],function (angular) {
       getCurrentUser: function () {
         var def = $q.defer();
 
-        $http.get($httpOptions.domain+'/current',
-          {withCredentials: $httpOptions.withCredentials})
+        $http.get('/current')
         .success(function (res) {
           def.resolve(res.user);
         }).error(function (err) {

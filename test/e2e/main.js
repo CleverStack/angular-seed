@@ -2,6 +2,38 @@ var tests = Object.keys(window.__karma__.files).filter(function (file) {
   return /^\/base\/test\/(.*)\.js$/.test(file) && !/main\.js$/.test(file);
 });
 
+var deps = [
+    // Init
+    'app',
+
+    // Controllers
+    'controllers/home',
+    'controllers/login',
+    'controllers/users',
+
+    // Directives
+    'directives/string-to-number',
+
+    // Filters
+    'filters/starts-with',
+
+    // Services
+    'services/debug',
+    'services/http-options',
+    'services/auth',
+    'services/user',
+    'services/templates',
+    'services/browser-detect',
+    'services/resource-factory',
+
+    // Mocks
+    '../../test/mocks/services/user',
+
+    // Config
+    '../../test/e2e/config',
+    'routes'
+  ];
+
 require.config({
   baseUrl: '/base/app/scripts',
   paths: {
@@ -47,62 +79,13 @@ require.config({
     ngResource: {
         deps: ['angular']
     },
-
-    underscore: {
-        exports: '_'
-    },
-
-
-    // Controllers
-    controllers: {
-        deps: [
-            'controllers/home',
-            'controllers/login',
-            'controllers/users'
-        ]
-    },
-
-    // Directives
-    directives: {
-        deps: [
-            'directives/string-to-number'
-        ]
-    },
-
-    // Filters
-    filters: {
-        deps: [
-            // 'filters/starts-with'
-        ]
-    },
-
-    // Services
-    services: {
-        deps: [
-            'services/debug',
-            '../../test/app/services/http-options',
-            'services/auth',
-            'services/user',
-            // 'services/browser-detect',
-            // 'services/generic'
-        ]
-    },
   },
   deps: tests,
 });
 
-require([
-  'angular',
-  'chai',
-  'app',
-  'angular-scenario',
-  'services',
-  'controllers',
-  'directives',
-  'filters',
-  'config',
-  'routes',
-], function (angular, chai, app) {
+deps = ['angular', 'chai'].concat(deps);
+
+require(deps, function (angular, chai) {
   'use strict';
 
   window.angular = angular;
