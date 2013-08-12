@@ -20,6 +20,21 @@
 ### Usage:
 A shortcut `npm start` is provided to start a development server on `localhost:9000`.
 
+What a normal start looks like:
+```
+richard@richard-ubuntu:~/Projects/cleverstack-angular-seed$ grunt server
+Running "clean:server" (clean) task
+
+Running "livereload-start" task
+... Starting Livereload server on 35729 ...
+
+Running "connect:livereload" (connect) task
+Started connect web server on localhost:9000.
+
+Running "watch" task
+Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.html,{.tmp,app}/scripts/{,*/}*.js,app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}
+```
+
 #### Documentation with [Docular](https://github.com/gitsome/docular):
 1. To build the documentation run `grunt docular`.
 2. To open the documentation you can use `grunt docular-server`
