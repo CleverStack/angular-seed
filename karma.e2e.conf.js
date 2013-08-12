@@ -1,8 +1,6 @@
 module.exports = function (karma) {
   karma.set({
     // url path, that will be used to resolve files and exclude
-    basePath: './',
-
     // frameworks to use
     frameworks: ['requirejs', 'jasmine'],
 
@@ -10,17 +8,23 @@ module.exports = function (karma) {
     files: [
       'app/components/requirejs/require.js',
       'test/e2e/main.js',
-      { pattern: 'app/scripts/**/*.js', included: false, served: true },
-      { pattern: 'app/views/**/*.html', included: false, served: true },
       { pattern: 'app/components/**/*.js', included: false, served: true },
       { pattern: 'test/e2e/**/*.js', included: false, served: true },
-      { pattern: 'test/mocks/**/*.js', included: false, served: true },
     ],
+
+    proxies: {
+      '/': 'http://localhost:9000/'
+    },
+
+    urlRoot: '/karma/',
 
     // list of files to exclude
     exclude: [
       'app/scripts/main.js'
     ],
+
+    // autoWatch: false,
+    // singleRun: true,
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'

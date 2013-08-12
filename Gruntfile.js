@@ -31,6 +31,14 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
+    karma:{
+      e2e: {
+        configFile: 'karma.e2e.conf.js'
+      },
+      unit: {
+        configFile: 'karma.conf.js'
+      }
+    },
     docular: {
       baseUrl: 'http://localhost:8000',
       showAngularDocs: false,
@@ -286,6 +294,13 @@ module.exports = function (grunt) {
   grunt.renameTask('regarde', 'watch');
 
   grunt.registerTask('docs', ['docular']);
+
+  grunt.registerTask('test:e2e', [
+    'clean:server',
+    'livereload-start',
+    'connect:livereload',
+    'karma:e2e'
+  ]);
 
   grunt.registerTask('server', [
     'clean:server',

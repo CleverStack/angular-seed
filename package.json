@@ -53,8 +53,6 @@
   },
   "scripts": {
     "setup": "node scripts/setup",
-    "start": "grunt server",
-    "bs-tunnel-unit": "sh scripts/bs-tunnel.sh ",
-    "bs-tunnel-e2e": "sh scripts/bs-tunnel.sh"
+    "bs-tunnel": "sh scripts/bs-tunnel.sh"
   }
 }
