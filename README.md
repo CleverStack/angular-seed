@@ -4,7 +4,10 @@
 ### Setup:
 1. Install node and npm
 2. Clone the repo, cd into it
-3. Run `$ npm run-script setup`
+3. sudo npm -g uninstall karma (There has been an issue with karma, if you see EPEERERROR then this is the problem)
+4. sudo npm -g i karma
+5. sudo npm -g i grunt
+4. Run `$ npm run-script setup`
 
 ### Usage:
 A shortcut `npm start` is provided to start a development server on `localhost:9000`.
