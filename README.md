@@ -1,6 +1,12 @@
 # CleverStack Angular Seed
 ## An angular seed 
 
+### Features:
+1. Live Reload in development
+2. Builds ANY preprocessor (less, sass, stylus, jade, ejs ...)
+3. Unit testing and Functional testing are easy to do with karma including running your tests in browserstack
+4. Easy integration with your CI/Deployment Solution
+
 ### Prerequisites:
 1. sudo npm -g uninstall karma (There has been an issue with karma, if you see EPEERINVALID then this is the problem)
 2. sudo npm -g i karma
