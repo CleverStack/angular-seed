@@ -15,7 +15,7 @@
 ### Setup:
 1. Install node and npm
 2. Clone the repo, cd into it
-3. Run `$ npm run-script setup` (You need to use sudo on linux)
+3. Run `$ npm run-script setup` (You may need to use sudo on linux)
 
 ### Usage:
 A shortcut `npm start` is provided to start a development server on `localhost:9000`.
