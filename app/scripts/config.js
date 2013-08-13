@@ -7,10 +7,10 @@ define(['angular', 'app'], function (angular, app) {
     ,function ($locationProvider, $authProvider, $httpOptionsProvider, $templatesProvider) {
     
     // $httpOptionsProvider can be configured, refer to its documentation
-    $httpOptionsProvider.setDomain('http://localhost:8080');
+    $httpOptionsProvider.setDomain('http://richard-ubuntu:8080');
 
     // $authProvider can be configured, refer to its documentation
-    // $authProvider.setUserService('UserService');
+    $authProvider.setUserService('UserService');
     
     // $templatesProvider can be configured, refer to its documentation
     // $templatesProvider.

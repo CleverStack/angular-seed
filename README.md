@@ -1,14 +1,40 @@
 # CleverStack Angular Seed
 ## An angular seed 
 
+### Features:
+1. Live Reload in development
+2. Builds ANY preprocessor (less, sass, stylus, jade, ejs ...)
+3. Unit testing and Functional testing are easy to do with karma including running your tests in browserstack
+4. Easy integration with your CI/Deployment Solution
+
+### Prerequisites:
+1. sudo npm -g uninstall karma (There has been an issue with karma, if you see EPEERINVALID then this is the problem)
+2. sudo npm -g i karma
+3. sudo npm -g i grunt-cli
+
 ### Setup:
 1. Install node and npm
 2. Clone the repo, cd into it
-3. Run `$ npm run-script setup`
+3. Run `$ npm run-script setup` (You may need to use sudo on linux)
 4. If 3. doesn't work, a normal `npm i; bower i;` works if you have `grunt-cli`, `bower`, `phantomjs`(optional) and `karma` installed.
 
 ### Usage:
 A shortcut `npm start` is provided to start a development server on `localhost:9000`.
+
+What a normal start looks like:
+```
+richard@richard-ubuntu:~/Projects/cleverstack-angular-seed$ grunt server
+Running "clean:server" (clean) task
+
+Running "livereload-start" task
+... Starting Livereload server on 35729 ...
+
+Running "connect:livereload" (connect) task
+Started connect web server on localhost:9000.
+
+Running "watch" task
+Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.html,{.tmp,app}/scripts/{,*/}*.js,app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}
+```
 
 #### Documentation with [Docular](https://github.com/gitsome/docular):
 1. To build the documentation run `grunt docular`.

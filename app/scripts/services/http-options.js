@@ -37,7 +37,7 @@ define(['angular', 'app'],function (angular, app) {
       * it allows you to test the app against a aws server
       * running either in dev, staging or production
       */
-      var domain = 'http://localhost:8080';
+      var domain = 'http://richard-ubuntu:8080';
 
       return {
         $get: function () {
@@ -45,6 +45,7 @@ define(['angular', 'app'],function (angular, app) {
           app.config(['$httpProvider'], function ($httpProvider) {
             $httpProvider.defaults.withCredentials = withCredentials;
           });
+
           // Here add the interceptors to add the domain
           // to all requests
           // and the other options.
