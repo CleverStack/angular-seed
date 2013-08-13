@@ -65,6 +65,29 @@ define(['angular', 'app'],function (angular, app) {
         }
       });
 
+      /**
+       * @name Unauthorized
+       * @ngdoc interceptor
+       * @param  {Object} $q the promise service
+       * @return {Object}    An object with the handlers.
+       * @description
+       * Add the domain to all the HTTP requests that are not
+       * templates.
+       *
+       * Note: Hookup the $templates service to get the proper
+       * regex. This works for now as is what we are using.
+       */
+      // $httpProvider.interceptors.push(['$rootScope', '$q',function ($rootScope, $q) {
+      //   return {
+      //     response: function (res) {
+      //       if(res.status === 401) {
+      //         $rootScope.$broadcast('$auth:loginRequired');
+      //       }
+      //       return res.data;
+      //     }
+      //   }
+      // }]);
+
       return {
         $get: function () {
           return {

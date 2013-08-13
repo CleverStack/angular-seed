@@ -7,6 +7,7 @@ var deps = [
     // Controllers
     'controllers/home',
     'controllers/login',
+    'controllers/logout',
     'controllers/users',
 
     // Directives

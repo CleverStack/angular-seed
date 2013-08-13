@@ -3,8 +3,8 @@ define(['angular', 'app'],function (angular) {
 
   angular
   .module('app.services')
-  .service('UserService',['$http', '$httpOptions', '$q',
-    function ($http, $httpOptions, $q) {
+  .service('UserService',['$http', '$q',
+    function ($http, $q) {
     
     return {
 
@@ -13,7 +13,7 @@ define(['angular', 'app'],function (angular) {
 
         $http.post('/user/login', credentials)
         .success(function (res) {
-          def.resolve(res.user);
+          def.resolve(res);
         }).error(function (err) {
           def.reject(err);
         });
@@ -26,9 +26,7 @@ define(['angular', 'app'],function (angular) {
 
         $http.get('/user/logout')
         .then(function (res) {
-          def.resolve(res.user);
-        }).error(function (err) {
-          def.reject(err);
+          def.resolve(res);
         });
 
         return def.promise;
@@ -38,9 +36,9 @@ define(['angular', 'app'],function (angular) {
         var def = $q.defer();
 
         $http.get('/user/current')
-        .success(function (res) {
-          def.resolve(res.user);
-        }).error(function (err) {
+        .then(function (res) {
+          def.resolve(res.data);
+        }, function (err) {
           def.reject(err);
         });
 
