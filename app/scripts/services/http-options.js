@@ -12,7 +12,8 @@ define(['angular', 'app'],function (angular, app) {
    */
    angular
    .module('app.services')
-   .provider('$httpOptions', function() {
+   .provider('$httpOptions', ['$httpProvider', '$rootScopeProvider'
+   ,function ($httpProvider, $rootScopeProvider) {
      /**
       * @ngdoc property
       * 
@@ -37,19 +38,35 @@ define(['angular', 'app'],function (angular, app) {
       * it allows you to test the app against a aws server
       * running either in dev, staging or production
       */
-      var domain = 'http://richard-ubuntu:8080';
+      var domain = 'http://localhost:8080';
+
+      $httpProvider.defaults.withCredentials = withCredentials;
+
+      /**
+       * @name AddDomain
+       * @ngdoc interceptor
+       * @param  {Object} $q the promise service
+       * @return {Object}    An object with the handlers.
+       * @description
+       * Add the domain to all the HTTP requests that are not
+       * templates.
+       *
+       * Note: Hookup the $templates service to get the proper
+       * regex. This works for now as is what we are using.
+       */
+      $httpProvider.interceptors.push(function ($q) {
+        return {
+          request: function (config) {
+            if(! /views\/(.*).html$/.test(config.url)) {
+              config.url = domain+config.url;
+            }
+            return config;
+          }
+        }
+      });
 
       return {
         $get: function () {
-
-          app.config(['$httpProvider'], function ($httpProvider) {
-            $httpProvider.defaults.withCredentials = withCredentials;
-          });
-
-          // Here add the interceptors to add the domain
-          // to all requests
-          // and the other options.
-
           return {
             withCredentials: withCredentials,
             domain: domain
@@ -70,5 +87,5 @@ define(['angular', 'app'],function (angular, app) {
           withCredentials = value;
         }
       }
-  });
+  }]);
 })
