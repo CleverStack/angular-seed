@@ -68,15 +68,22 @@ module.exports = function (grunt) {
     watch: {
       livereload: {
         files: [
-          '<%= yeoman.app %>/components/bootstrap/less/{,*/}*.less',
-          '<%= yeoman.app %>/styles/less/{,*/}*.less',
+          '<%= yeoman.app %>/components/bootstrap/{,*/}*.css',
+          '<%= yeoman.app %>/styles/{,*/}*.css',
           '<%= yeoman.app %>/{,*/}*.html',
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%= yeoman.app %>}/views/{,*/}*.html',
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
-        tasks: ['livereload', 'less']
+        tasks: ['livereload']
+      },
+      less: {
+        files: [
+          '<%= yeoman.app %>/components/bootstrap/less/{,*/}*.less',
+          '<%= yeoman.app %>/styles/less/{,*/}*.less'
+        ],
+        tasks: ['less']
       }
     },
     connect: {
@@ -99,22 +106,23 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test'),
-              fallbackToIndex(connect, '.tmp/index.html')
-            ];
-          }
+          port: 9090,
+          base: __dirname,
         }
       }
     },
     open: {
       server: {
-        url: 'http://localhost:<%= connect.options.port %>'
+        url: 'http://localhost:<%= connect.options.port %>',
+        app: 'Google Chrome',
+      },
+      test: {
+        url: 'http://localhost:<%= connect.test.options.port %>/test/e2e/runner.html',
+        app: 'Google Chrome',
       },
       docs: {
-        url: 'docs/index.html'
+        url: 'docs/index.html',
+        app: 'Google Chrome',
       }
     },
     clean: {
@@ -295,17 +303,13 @@ module.exports = function (grunt) {
 
   grunt.registerTask('docs', ['docular']);
 
-  grunt.registerTask('test:e2e', [
-    'clean:server',
-    'livereload-start',
-    'connect:livereload',
-    'karma:e2e'
-  ]);
-
   grunt.registerTask('server', [
     'clean:server',
     'livereload-start',
     'connect:livereload',
+    'connect:test',
+    'open:server',
+    'open:test',
     'watch'
   ]);
 

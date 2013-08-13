@@ -13,7 +13,8 @@ define(['angular', 'app'], function (angular, app) {
     // $authProvider.setUserService('UserService');
     
     // $templatesProvider can be configured, refer to its documentation
-    // $templatesProvider.setPath('views/')
+    var basePath = document.getElementsByTagName('base')[0];
+    $templatesProvider.setPath(basePath.href+'/views/');
     
     $locationProvider.html5Mode( true );
   }]);

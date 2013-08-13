@@ -1,17 +1,12 @@
-define(['angular'], function (angular) {
-  'use strict';
+module("Routes",{
+  setup: function() {
+    S.open('test-index.html');
+  }
+});
 
-  describe("E2E: Testing Routes", function() {
-
-    beforeEach(function() {
-      S.open("/");
-    });
-
-    it('should have a working / route', function() {
-      ok( S("body *").size(), "There be elements in that there body");
-    });
-
-
-  });
-
+test("/ template",function(){
+  // wait until we have some results
+  S('.container').visible(function(){
+    equal( S('h1').text(), "Hello there!", "Loads the template properly")
+  })
 });
