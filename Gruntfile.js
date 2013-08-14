@@ -11,7 +11,7 @@ var mountFolder = function (connect, dir) {
 var fallbackToTest = function (connect) {
   return connect().use(function (req, res, next) {
     fs.exists(__dirname+req.url, function (exists) {
-      if(exists) {
+      if(exists && req.url !== '/') {
         fs.createReadStream(req.url).pipe(res);
       } else {
         fs.createReadStream(__dirname+'/test/e2e/test-index.html').pipe(res);
