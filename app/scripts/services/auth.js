@@ -71,7 +71,8 @@ define(['angular', 'app'], function (angular, app) {
       var handlers = {
         loginStart: null,
         loginSuccess: null,
-        locationChange: null
+        logoutSuccess: null,
+        locationChange: null,
       };
 
       /**
@@ -127,7 +128,19 @@ define(['angular', 'app'], function (angular, app) {
             if($location.search().redirect) {        
               console.log("$auth: redirecting to", $location.search().redirect);
               $location.path($location.search().redirect);
+              $location.search(false);
             }
+          };
+
+          /**
+           * @name handleLoginSuccess
+           * @description
+           * This method redirects the user to the redirect search term if
+           * it exists.
+           */
+          handlers.logoutSuccess = handlers.logoutSuccess || function () {
+            console.log("$auth: redirecting to /");
+            $location.path('/');
           };
 
           /**
@@ -137,16 +150,16 @@ define(['angular', 'app'], function (angular, app) {
            * and if everything is alright proceeds.
            */
           handlers.locationChange = handlers.locationChange || function (event, next, current) {
-            if(currentUser === null || !!currentUser){
-              next = '/'+next.split('/').splice(3).join('/').split("?")[0];
+            next = '/'+next.split('/').splice(3).join('/').split("?")[0];
+            if(currentUser === null || !currentUser.id){
               var route = $route.routes[next] || false;
               console.log("$auth: Guest access to", next);
               console.log("$auth:",next, "is", route.public ? "public" : "private");
               if(route && !route.public) {
                 $rootScope.$broadcast('$auth:loginStart');
                 handlers.loginStart(next.substr(1));
-                return;
               }
+            } else {
               console.log("$auth: proceeding to load", next);
             }
           };
@@ -160,6 +173,7 @@ define(['angular', 'app'], function (angular, app) {
               console.log("$auth: Welcome newcomer!");
               console.log("$auth: Checking your session...");
               userService.getCurrentUser().then(function (user) {
+                currentUser = user;
                 console.log("$auth: we got", user)
                 if(typeof handlers.locationChange === 'function') {
                   handlers.locationChange(event, next, current);
@@ -182,6 +196,17 @@ define(['angular', 'app'], function (angular, app) {
             if(typeof handlers.locationChange === 'function') {
               handlers.loginSuccess(event, next, current);
             }
+          });
+
+          $rootScope.$on('$auth:logoutSuccess', function () {
+            if(typeof handlers.logoutSuccess === 'function') {
+              handlers.logoutSuccess();
+            }
+          })
+
+          $rootScope.$on('$auth:loginRequired', function () {
+            console.log("$auth: login was required");
+            $location.path('/login');
           });
 
           return {
@@ -208,14 +233,13 @@ define(['angular', 'app'], function (angular, app) {
              */
             login: function (credentials) {
               return userService.login(credentials).then(function (user) {
-                if(user) {
+                if(user.id) {
                   currentUser = user;
                   $rootScope.$broadcast('$auth:loginSuccess');
                 } else {
                   $rootScope.$broadcast('$auth:loginFailure')
                 }
               }, function() {
-                console.log("$auth: login error callback");
                 currentUser = null;
                 $rootScope.$broadcast('$auth:loginFailure');
               });
@@ -226,13 +250,12 @@ define(['angular', 'app'], function (angular, app) {
              * @return {Promise} the promise your login service returns on logout
              */
             logout: function () {
-              $rootScope.$broadcast('$auth:logoutStart');
-              return userService.logout().then(function () {
-                $rootScope.$broadcast('$auth:logoutSuccess');
-                currentUser = undefined;
-              }, function () {
-                $rootScope.$broadcast('$auth:logoutFailure');
-              });
+              $rootScope.$broadcast('$auth:logoutSuccess');
+              if(currentUser && currentUser.id) {
+                return userService.logout().then(function () {
+                  currentUser = null;
+                });
+              }
             }
           }
         

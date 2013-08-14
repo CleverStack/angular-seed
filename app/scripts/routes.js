@@ -23,6 +23,11 @@ define(['angular', 'app'], function (angular, app) {
         controller: 'Login',
         public: true
       })
+      .when('/logout', {
+        templateUrl: t.view('login'),
+        controller: 'Logout',
+        public: true
+      })
       .when('/error', {
         templateUrl: t.partial('error'),
         public: true

@@ -3,18 +3,17 @@ define(['angular', 'app'],function (angular) {
 
   angular
   .module('app.services')
-  .service('UserService',['$http', '$httpOptions', '$q',
-    function ($http, $httpOptions, $q) {
+  .service('UserService',['$http', '$q',
+    function ($http, $q) {
     
     return {
 
       login: function (credentials) {
         var def = $q.defer();
 
-        $http.post($httpOptions.domain+'/user/login', credentials,
-          {withCredentials: $httpOptions.withCredentials})
+        $http.post('/user/login', credentials)
         .success(function (res) {
-          def.resolve(res.user);
+          def.resolve(res);
         }).error(function (err) {
           def.reject(err);
         });
@@ -25,12 +24,9 @@ define(['angular', 'app'],function (angular) {
       logout: function () {
         var def = $q.defer();
 
-        $http.get($httpOptions.domain+'/user/logout',
-          {withCredentials: $httpOptions.withCredentials})
+        $http.get('/user/logout')
         .then(function (res) {
-          def.resolve(res.user);
-        }).error(function (err) {
-          def.reject(err);
+          def.resolve(res);
         });
 
         return def.promise;
@@ -39,11 +35,10 @@ define(['angular', 'app'],function (angular) {
       getCurrentUser: function () {
         var def = $q.defer();
 
-        $http.get($httpOptions.domain+'/user/current',
-          {withCredentials: $httpOptions.withCredentials})
-        .success(function (res) {
-          def.resolve(res.user);
-        }).error(function (err) {
+        $http.get('/user/current')
+        .then(function (res) {
+          def.resolve(res.data);
+        }, function (err) {
           def.reject(err);
         });
 
