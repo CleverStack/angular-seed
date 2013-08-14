@@ -5,7 +5,7 @@
 1. Live Reload in development.
 2. Builds ANY preprocessor (less, sass, stylus, jade, ejs, ...)
 3. Unit testing `karma` including running your tests in BrowserStack.
-4. Beautiful Functional Testing Support ([check it out](http://screencast.com/t/agMuroinCo))
+4. Beautiful Functional Testing Support ([check it out](http://screencast.com/t/OBxfgoM26T))
 5. Easy integration with your CI/Deployment Solution.
 
 ### Prerequisites:
