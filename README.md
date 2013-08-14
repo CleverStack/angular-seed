@@ -16,7 +16,7 @@
 1. Run `$ npm run-script setup`
 
 ### Usage:
-A shortcut `npm start` is provided to start a development server on `localhost:9000` and a functional testing server on `localhost:9090`.
+A shortcut `npm start` is provided to start a development server on `localhost:9000` and a functional testing server on `localhost:9090/test/e2e/runner.html`.
 
 What a normal start looks like:
 ```
@@ -27,10 +27,10 @@ Running "livereload-start" task
 ... Starting Livereload server on 35729 ...
 
 Running "connect:livereload" (connect) task
-Started connect web server on localhost:9090.
+Started connect web server on localhost:9000.
 
 Running "connect:test" (connect) task
-Started connect web server on localhost:9000.
+Started connect web server on localhost:9090.
 
 Running "watch" task
 Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.html,{.tmp,app}/scripts/{,*/}*.js,app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}
@@ -65,6 +65,10 @@ Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.ht
 1. Search a package doing: `$ bower search key words`
 2. Install a package doing: `$ bower install packageName[@version]`
 3. Remove a package doing: `$ bower uninstall packageName`
+
+#### Contributing
+We welcome all help, but please follow this guidelines (Work In Progress):
+1. We follow this [Git Commit Message Conventions](https://docs.google.com/document/d/12niRA9r8j8C4W0_0y_fRrKDjKIq2DBknbkrWQQl1taI/). Thou it's not entirely mandatory, we generate Changelogs with this so please keep in mind.
 
 #### Known Issues
 1. Sometimes the components folder doesn't get populated after setup raising weird erros in the browser. Calling `$ bower i` solves this issue.
