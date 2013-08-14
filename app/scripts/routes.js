@@ -28,6 +28,11 @@ define(['angular', 'app'], function (angular, app) {
         controller: 'Logout',
         public: true
       })
+      .when('/register', {
+        templateUrl: t.view('registration'),
+        controller: 'Registration',
+        public: true
+      })
       .when('/error', {
         templateUrl: t.partial('error'),
         public: true

@@ -3,6 +3,7 @@ define(['app'], function (app) {
 
   app.controller('Login', ['$scope','$auth', '$location'
   , function ($scope, $auth, $location) {
+    
     $scope.login = function () {
       $auth.login($scope.credentials);
     }

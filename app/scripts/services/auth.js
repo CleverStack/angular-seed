@@ -129,6 +129,8 @@ define(['angular', 'app'], function (angular, app) {
               console.log("$auth: redirecting to", $location.search().redirect);
               $location.path($location.search().redirect);
               $location.search(false);
+            } else {
+              $location.path('/');
             }
           };
 
@@ -157,6 +159,7 @@ define(['angular', 'app'], function (angular, app) {
               console.log("$auth:",next, "is", route.public ? "public" : "private");
               if(route && !route.public) {
                 $rootScope.$broadcast('$auth:loginStart');
+                debugger;
                 handlers.loginStart(next.substr(1));
               }
             } else {
@@ -224,6 +227,35 @@ define(['angular', 'app'], function (angular, app) {
              */
             isLoggedIn: function () {
               return !!currentUser;
+              // return (currentUser === null || !currentUser.id) ? false : true;
+            },
+
+            /**
+             * @name register
+             * @param  {Object} credentials the user credentials
+             * @return {Promise}             the promise your user service returns on registration.
+             */
+            register: function (credentials) {
+              if(credentials.password !== credentials.passwordConfirmation) {
+                $rootScope.$broadcast('$auth:registrationFailure', "Passwords don't match");
+                return;
+              }
+              
+              delete credentials.passwordConfirmation;
+
+              return userService.register(credentials).then(function (user) {
+                if(user.id) {
+                  currentUser = user;
+                  $rootScope.$broadcast('$auth:registrationSuccess');
+                  $rootScope.$broadcast('$auth:loginSuccess');
+                } else {
+                  currentUser = null;
+                  $rootScope.$broadcast('$auth:registrationFailure');
+                }
+              }, function () {
+                currentUser = null;
+                $rootScope.$broadcast('$auth:registrationFailure');
+              })
             },
 
             /**
