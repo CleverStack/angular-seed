@@ -16,7 +16,7 @@ test("Login Tests", function () {
     // And type username and password
     S("input#username").exists()
     .click()
-    .type('root');
+    .type('admin');
 
     S("input#password").exists()
     .click()

@@ -96,7 +96,7 @@ require([
   window.angular = angular;
   window.chai = chai;
   window.should = chai.should();
-  window.expect = chai.expect();
+  window.expect = chai.expect;
 
   angular.element(document).ready(function () {
     angular.bootstrap(document, ['app']);
