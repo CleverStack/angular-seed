@@ -1,11 +1,39 @@
 # CleverStack Angular Seed
 ## An angular seed 
 
+### Features:
+1. Live Reload in development.
+2. Builds ANY preprocessor (less, sass, stylus, jade, ejs, ...)
+3. Unit testing and Functional testing are easy to do with `karma` including running your tests in BrowserStack.
+4. Easy integration with your CI/Deployment Solution.
+
+### Prerequisites:
+1. `grunt-cli`, `karma`.
+2. Optionally are `bower` and `phantomjs`.
+
 ### Setup:
 1. Run `$ npm run-script setup`
 
 ### Usage:
 A shortcut `npm start` is provided to start a development server on `localhost:9000` and a functional testing server on `localhost:9090`.
+
+What a normal start looks like:
+```
+$ grunt server
+Running "clean:server" (clean) task
+
+Running "livereload-start" task
+... Starting Livereload server on 35729 ...
+
+Running "connect:livereload" (connect) task
+Started connect web server on localhost:9090.
+
+Running "connect:test" (connect) task
+Started connect web server on localhost:9000.
+
+Running "watch" task
+Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.html,{.tmp,app}/scripts/{,*/}*.js,app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}
+```
 
 #### Documentation with [Docular](https://github.com/gitsome/docular):
 1. To build the documentation run `$ grunt docular`.
@@ -40,6 +68,6 @@ A shortcut `npm start` is provided to start a development server on `localhost:9
 #### Known Issues
 1. Sometimes the components folder doesn't get populated after setup raising weird erros in the browser. Calling `$ bower i` solves this issue.
 
-2. EPEERINVALID after `npm i` or `npm run-script setup`. A recent update in Karma brought dependency management problems. We recommend to swipe karma out completely (and all globally installed plugins) and re install by running `npm run-script setup`.
+2. EPEERINVALID after `npm i` or `npm run-script setup`. A recent update in Karma brought dependency management problems. We recommend to wipe `karma` out completely (and all globally installed plugins) and re install by running `npm run-script setup`. [Read more here](https://github.com/karma-runner/karma/issues/483)
 
 3. `npm run-script setup` gives EACCESS error. Try running it with `sudo`.
