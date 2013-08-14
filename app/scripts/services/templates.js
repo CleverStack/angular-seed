@@ -10,13 +10,17 @@ define(['angular', 'app'],function (angular) {
   angular
   .module('app.services')
   .provider('$templates', function () {
+      var basePath = document.getElementsByTagName('base')[0].href;
+      if(basePath[basePath.length-1] === '/') {
+        basePath = basePath.slice(0,-1);
+      }
       /**
        * @name viewsPath
        * @type {String}
        * @description
        * The path to the views.
        */
-      var viewsPath = 'views/';
+      var viewsPath = basePath+'/views/';
 
       /**
        * @name partialsPath
@@ -92,7 +96,7 @@ define(['angular', 'app'],function (angular) {
             path += '/';
           }
 
-          viewsPath = path;
+          viewsPath = basePath+path;
           partialsPath = viewsPath+'/partials';          
 
           console.log("$templates: path set to",viewsPath);
