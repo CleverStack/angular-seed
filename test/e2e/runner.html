@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <link href='/app/components/funcunit/qunit/qunit.css' type='text/css' rel='stylesheet' />
+    <script src='/app/components/steal/steal.js'></script>
+    <script>
+      steal('/app/components/funcunit/browser/resources/jquery.js', function(){
+        if(!window.FuncUnit){
+          window.FuncUnit = {};
+        }
+        FuncUnit.jQuery = jQuery.noConflict(true);
+      })
+      .then('/app/components/syn/syn.js')
+      .then('/app/components/funcunit/browser/resources/json.js')
+      .then('/app/components/funcunit/browser/core.js')
+      .then('/app/components/funcunit/browser/adapters/adapters.js')
+      .then('/app/components/funcunit/browser/open.js',
+        '/app/components/funcunit/browser/actions.js', 
+        '/app/components/funcunit/browser/getters.js',
+        '/app/components/funcunit/browser/traversers.js',
+        '/app/components/funcunit/browser/queue.js', 
+        '/app/components/funcunit/browser/waits.js')
+      // <!-- Hereby thy tests shall be transcluded -->
+      .then('/test/e2e/routes.js')
+    </script> 
+
+    <title>Functional Test Running</title>
+  </head>
+  <body>
+    <h1 id="qunit-header">ngSeed Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+  </body>
+</html>

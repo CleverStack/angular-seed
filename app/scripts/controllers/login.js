@@ -1,7 +1,8 @@
 define(['app'], function (app) {
   'use strict';
 
-  app.controller('Login', ['$scope','$auth', function ($scope, $auth) {
+  app.controller('Login', ['$scope','$auth', '$location'
+  , function ($scope, $auth, $location) {
     $scope.login = function () {
       $auth.login($scope.credentials);
     }
@@ -12,6 +13,5 @@ define(['app'], function (app) {
         alert('Invalid username/password');
       } 
     });
-    
   }]);
 });

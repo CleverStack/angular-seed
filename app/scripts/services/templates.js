@@ -43,6 +43,7 @@ define(['angular', 'app'],function (angular) {
        * Utility functions to get the path of a view.
        */
       function view (viewName) {
+        console.log("$templates:",viewsPath+viewName+extension);
         return viewsPath+viewName+extension;
       }
 

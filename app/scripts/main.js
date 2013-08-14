@@ -3,10 +3,12 @@
 var deps = [
     // Init
     'app',
+    'config',
 
     // Controllers
     'controllers/home',
     'controllers/login',
+    'controllers/logout',
     'controllers/users',
 
     // Directives
@@ -25,7 +27,6 @@ var deps = [
     'services/resource-factory',
 
     // Config
-    'config',
     'routes'
   ];
 

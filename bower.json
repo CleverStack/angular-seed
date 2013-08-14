@@ -25,6 +25,7 @@
     "sinon": "*",
     "chai": "*",
     "funcunit": "*",
+    "syn": "*",
     "angular-mocks": "~1.0.5",
     "angular-scenario": "~1.0.5",
     "async": "~0.2.5"
