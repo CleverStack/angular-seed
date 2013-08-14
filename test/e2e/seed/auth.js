@@ -17,6 +17,7 @@ test("Login Tests", function () {
   S('ul.nav').visible(function () {
     // Click on the users link
     S("a[href='/login']").click(function () {
+
       S('.container').visible(function(){
         // Check if the login form exists
         // And type username and password
@@ -29,26 +30,25 @@ test("Login Tests", function () {
         .type('1234');
 
         // Click to login
-        S("button[type=submit]").exists()
-        .click({}, function () {
-
+        S("button[type=submit]").exists().click();
+        S.wait(2000, function() {
+          // Click on Users
           S("a[href='/users']").click();
+          S.wait(100, function() {
 
-          // See if the container has the text
-          S('.container').visible(2000, function(){
-            equal( S('h1').text(), "This is a private area.", "Access the private area")
+            equal( S('h1').text(), "This is a private area.", "Access the private area");
+
+            // Click on the logout button
+            S("a[href='/logout']").click();
+            S.wait(100, function() {
+
+              // Click again in the users link
+              S("a[href='/users']").click();
+              S.wait(100, function() {
+                ok( S('input#username'), "Login form is being displayed after logout")
+              });
+            });
           });
-
-        });
-
-        // Click on the logout button
-        S("a[href='/logout']").click();
-
-        // Click again in the users link
-        S("a[href='/users']").click(); 
-
-        S('.container').visible(function(){
-          ok( S('input#username'), "Login form is being displayed after logout")
         });
       });
     });
