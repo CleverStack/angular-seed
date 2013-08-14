@@ -68,6 +68,7 @@ Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.ht
 
 #### Contributing
 We welcome all help, but please follow this guidelines (Work In Progress):
+
 1. We follow this [Git Commit Message Conventions](https://docs.google.com/document/d/12niRA9r8j8C4W0_0y_fRrKDjKIq2DBknbkrWQQl1taI/). Thou it's not entirely mandatory, we generate Changelogs with this so please keep in mind.
 
 #### Known Issues
