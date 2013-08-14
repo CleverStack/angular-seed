@@ -113,16 +113,13 @@ module.exports = function (grunt) {
     },
     open: {
       server: {
-        url: 'http://localhost:<%= connect.options.port %>',
-        app: 'Google Chrome',
+        url: 'http://localhost:<%= connect.options.port %>'
       },
       test: {
-        url: 'http://localhost:<%= connect.test.options.port %>/test/e2e/runner.html',
-        app: 'Google Chrome',
+        url: 'http://localhost:<%= connect.test.options.port %>/test/e2e/runner.html'
       },
       docs: {
-        url: 'docs/index.html',
-        app: 'Google Chrome',
+        url: 'docs/index.html'
       }
     },
     clean: {
@@ -308,8 +305,6 @@ module.exports = function (grunt) {
     'livereload-start',
     'connect:livereload',
     'connect:test',
-    'open:server',
-    'open:test',
     'watch'
   ]);
 
