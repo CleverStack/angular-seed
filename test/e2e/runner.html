@@ -18,9 +18,21 @@
         '/app/components/funcunit/browser/getters.js',
         '/app/components/funcunit/browser/traversers.js',
         '/app/components/funcunit/browser/queue.js', 
-        '/app/components/funcunit/browser/waits.js')
+        '/app/components/funcunit/browser/waits.js', function(){
+        // Type fix to make angular catch the events
+        window.S.prototype.oldType = window.S.prototype.type;
+        window.S.prototype.type = function (text, success) {
+          this.oldType(text, success ? success : undefined)
+          .val(text, function() {
+            this.trigger('input');
+          }.bind(this));
+        };
+      })
+      // <!-- This are the seed tests -->
+      // Comment if you are not modifying the seed
+      .then('/test/e2e/seed/index.js')
       // <!-- Hereby thy tests shall be transcluded -->
-      .then('/test/e2e/routes.js')
+      .then('/test/e2e/app/index.js')
     </script> 
 
     <title>Functional Test Running</title>

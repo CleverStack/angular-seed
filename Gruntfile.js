@@ -1,17 +1,31 @@
 'use strict';
 
+var fs = require('fs');
+
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
 
-var fallbackToIndex = function (connect, index) {
+var fallbackToTest = function (connect) {
   return connect().use(function (req, res, next) {
-    if(req.url === '/index.html') {
+    fs.exists(__dirname+req.url, function (exists) {
+      if(exists) {
+        fs.createReadStream(req.url).pipe(res);
+      } else {
+        fs.createReadStream(__dirname+'/test/e2e/test-index.html').pipe(res);
+      }
+    });
+  });
+}
+
+var fallbackToIndex = function (connect, index, file) {
+  return connect().use(function (req, res, next) {
+    if(req.url === file) {
       return next();
     }
-    res.end( require('fs').readFileSync(index) );
+    res.end( fs.readFileSync(index) );
   });
 };
 
@@ -99,7 +113,7 @@ module.exports = function (grunt) {
               lrSnippet,
               mountFolder(connect, '.tmp'),
               mountFolder(connect, yeomanConfig.app),
-              fallbackToIndex(connect, 'app/index.html')
+              fallbackToIndex(connect, 'app/index.html', '/index.html')
             ];
           }
         }
@@ -108,6 +122,12 @@ module.exports = function (grunt) {
         options: {
           port: 9090,
           base: __dirname,
+          middleware: function (connect) {
+            return [
+              mountFolder(connect, '.'),
+              fallbackToTest(connect)
+            ]
+          }
         }
       }
     },

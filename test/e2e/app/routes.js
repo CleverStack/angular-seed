@@ -8,5 +8,6 @@ test("/ template",function(){
   // wait until we have some results
   S('.container').visible(function(){
     equal( S('h1').text(), "Hello there!", "Loads the template properly")
-  })
+  });
 });
+
