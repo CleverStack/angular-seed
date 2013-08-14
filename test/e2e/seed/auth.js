@@ -35,7 +35,7 @@ test("Login Tests", function () {
           S("a[href='/users']").click();
 
           // See if the container has the text
-          S('.container').visible(function(){
+          S('.container').visible(2000, function(){
             equal( S('h1').text(), "This is a private area.", "Access the private area")
           });
 
@@ -85,7 +85,7 @@ test("Registration Tests", function () {
         .click({}, function () {
 
           // See if the container has the text
-          S('.container').visible(function(){
+          S('.container').visible(2000, function(){
             equal( S('h1').text(), "Hello there!", "Redirected to home page")
 
             S("a[href='/users']").click(function () {
