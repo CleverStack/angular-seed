@@ -4,8 +4,9 @@
 ### Features:
 1. Live Reload in development.
 2. Builds ANY preprocessor (less, sass, stylus, jade, ejs, ...)
-3. Unit testing and Functional testing are easy to do with `karma` including running your tests in BrowserStack.
-4. Easy integration with your CI/Deployment Solution.
+3. Unit testing `karma` including running your tests in BrowserStack.
+4. Beautiful Functional Testing Support ([check it out](http://screencast.com/t/agMuroinCo))
+5. Easy integration with your CI/Deployment Solution.
 
 ### Prerequisites:
 1. `grunt-cli`, `karma`.

@@ -45,14 +45,6 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
-    karma:{
-      e2e: {
-        configFile: 'karma.e2e.conf.js'
-      },
-      unit: {
-        configFile: 'karma.conf.js'
-      }
-    },
     docular: {
       baseUrl: 'http://localhost:8000',
       showAngularDocs: false,

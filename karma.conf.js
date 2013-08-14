@@ -52,7 +52,6 @@ module.exports = function (config) {
       'karma-chrome-launcher',
       'karma-script-launcher',
       'karma-browserstack-launcher',
-      'karma-ng-scenario'
     ]
   });
 }

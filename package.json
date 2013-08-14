@@ -31,15 +31,12 @@
     "grunt-contrib-less": "~0.6.4",
     "grunt-usemin": ">=0.1.1",
     "grunt-regarde": ">=0.1.x",
-    "grunt-knox": ">=0.1.x",
-    "grunt-karma": "*",
     "grunt-rev": ">=0.1.x",
     "grunt-open": ">=0.2.x",
     "grunt-ngmin": ">=0.0.x",
     "matchdep": ">=0.1.x",
     "di": ">=0.0.x",
     "karma": "*",
-    "karma-ng-scenario": "*",
     "karma-junit-reporter": "*",
     "karma-coverage": "*",
     "karma-chrome-launcher": "*",
@@ -54,7 +51,7 @@
   "scripts": {
     "setup": "node scripts/setup",
     "start": "grunt server",
-    "bs-tunnel-unit": "sh scripts/bs-tunnel.sh ",
-    "bs-tunnel-e2e": "sh scripts/bs-tunnel.sh"
+    "bs-tunnel-karma": "sh scripts/bs-tunnel-karma.sh",
+    "bs-tunnel": "sh scripts/bs-tunnel-connect.sh"
   }
 }
