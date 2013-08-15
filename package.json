@@ -29,6 +29,7 @@
     "grunt-contrib-livereload": ">=0.1.x",
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-less": "~0.6.4",
+    "grunt-funcunit": "latest",
     "grunt-usemin": ">=0.1.1",
     "grunt-regarde": ">=0.1.x",
     "grunt-rev": ">=0.1.x",

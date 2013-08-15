@@ -40,5 +40,11 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
   exec('wget http://www.browserstack.com/BrowserStackTunnel.jar');
   exec('mv BrowserStackTunnel.jar scripts/BrowserStackTunnel.jar');
 
+  echo('Initializing submodules...');
+  exec('git submodule init; git submodule update');
+  
+  echo('FuncUnit...');
+  exec('cd test/vendor/funcunit; npm i;');
+
   echo('OK!');
 });

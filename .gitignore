@@ -12,3 +12,4 @@ scripts/*.jar
 scripts/bs-tunnel.sh
 /BrowserStackTunnel.jar
 /BrowserStackTunnel.jar.1
+test/vendor

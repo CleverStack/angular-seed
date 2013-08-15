@@ -75,6 +75,10 @@ module.exports = function (grunt) {
         }
       ] //groups of documentation to parse
     },
+    funcunit: {
+      src: '/test/vendor',
+      urls: ['http://localhost:9090/test/e2e/runner.html']
+    },
     watch: {
       livereload: {
         files: [
