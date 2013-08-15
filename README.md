@@ -1,5 +1,5 @@
-# CleverStack Angular Seed
-## An angular seed 
+# CleverStack ngSeed
+## A proper AngularJS seed
 
 ### Features:
 1. Live Reload in development.
