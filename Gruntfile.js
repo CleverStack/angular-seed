@@ -276,7 +276,7 @@ module.exports = function (grunt) {
           mainConfigFile: "app/scripts/main.js",
           out: "<%=yeoman.dist %>/scripts/scripts.js",
           uglify: {
-            beautify: true,
+            beautify: false,
             overwrite: true,
             verbose: true,
             no_mangle: true,
