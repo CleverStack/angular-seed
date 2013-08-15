@@ -2,6 +2,8 @@ var tests = Object.keys(window.__karma__.files).filter(function (file) {
   return /^\/base\/test\/(.*)\.js$/.test(file) && !/main\.js$/.test(file);
 });
 
+var should;
+
 require.config({
   baseUrl: '/base/app/scripts',
   paths: {
@@ -95,7 +97,7 @@ require([
 
   window.angular = angular;
   window.chai = chai;
-  window.should = chai.should();
+  should = chai.should();
   window.expect = chai.expect;
 
   angular.element(document).ready(function () {
