@@ -1,4 +1,5 @@
-define(['angular'],function (angular) {
+define(['angular', 'ngResource', 'http-auth-interceptor']
+  ,function (angular) {
 
     'use strict';
 

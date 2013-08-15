@@ -94,7 +94,7 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/styles/less/{,*/}*.less'
         ],
         tasks: ['less']
-      }
+      },
     },
     connect: {
       options: {
@@ -124,6 +124,12 @@ module.exports = function (grunt) {
               fallbackToTest(connect)
             ]
           }
+        }
+      },
+      dist: {
+        options: {
+          port: 9009,
+          base: __dirname+'/dist'
         }
       }
     },
@@ -270,10 +276,11 @@ module.exports = function (grunt) {
           mainConfigFile: "app/scripts/main.js",
           out: "<%=yeoman.dist %>/scripts/scripts.js",
           uglify: {
-            beautify: false,
-            'no-copyright': true,
-            'no-seqs': true,
-            'lift-vars': true
+            beautify: true,
+            overwrite: true,
+            verbose: true,
+            no_mangle: true,
+            copyright: true
           }
         }
       }
@@ -321,6 +328,7 @@ module.exports = function (grunt) {
     'livereload-start',
     'connect:livereload',
     'connect:test',
+    'connect:dist',
     'watch'
   ]);
 
@@ -332,11 +340,9 @@ module.exports = function (grunt) {
     'less',
     'cssmin',
     'htmlmin',
-    // 'concat',
     'copy',
     'ngmin',
     'requirejs',
-    // 'uglify',
     'rev',
     'usemin',
     'docs'

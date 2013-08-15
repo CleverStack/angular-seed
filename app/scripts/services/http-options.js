@@ -12,8 +12,8 @@ define(['angular', 'app'],function (angular, app) {
    */
    angular
    .module('app.services')
-   .provider('$httpOptions', ['$httpProvider', '$rootScopeProvider'
-   ,function ($httpProvider, $rootScopeProvider) {
+   .provider('$httpOptions', ['$httpProvider'
+   ,function ($httpProvider) {
      /**
       * @ngdoc property
       * 

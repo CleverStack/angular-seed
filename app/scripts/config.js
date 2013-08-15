@@ -28,7 +28,7 @@ define(['angular', 'app'], function (angular, app) {
     // in your controllers like regular services.
   // }]);
   // 
-  app.run(['$auth', '$debug', function ($auth, $debug) {
+  app.run(['$auth', function ($auth) {
   }]);
 
 });
