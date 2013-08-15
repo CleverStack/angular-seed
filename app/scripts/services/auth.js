@@ -82,7 +82,8 @@ define(['angular', 'app'], function (angular, app) {
       return {
 
         $get: ['$rootScope', '$location', '$route', '$injector',
-          function ($rootScope, $location, $route, $injector) {
+        function ($rootScope, $location, $route, $injector) {
+
 
           if(!userService && userServiceName) {
             userService = $injector.get(userServiceName);

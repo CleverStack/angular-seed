@@ -32,6 +32,9 @@ Started connect web server on localhost:9000.
 Running "connect:test" (connect) task
 Started connect web server on localhost:9090.
 
+Running "connect:dist" (connect) task
+Started connect web server on localhost:9009.
+
 Running "watch" task
 Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.html,{.tmp,app}/scripts/{,*/}*.js,app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}
 ```
