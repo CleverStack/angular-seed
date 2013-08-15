@@ -1,22 +1,23 @@
 # CleverStack ngSeed
-## A proper AngularJS seed
-
-### Features:
-1. Live Reload in development.
-2. Builds ANY preprocessor (less, sass, stylus, jade, ejs, ...)
-3. Unit testing `karma` including running your tests in BrowserStack.
+##### A proper AngularJS seed featuring:
+1. A Highly Configurable Environment
+2. Support for any `grunt`-enabled preprocessor
+3. Lightning Fast Unit Testing Suppoer with `karma` *Now with BrowserStack Support*.
 4. Beautiful Functional Testing Support ([check it out](http://screencast.com/t/OBxfgoM26T))
-5. Easy integration with your CI/Deployment Solution.
 
-### Prerequisites:
+## Setup:
+1. Run `$ npm run-script setup`
+
+##### Prerequisites:
 1. `grunt-cli`, `karma`.
 2. Optionally are `bower` and `phantomjs`.
 
-### Setup:
-1. Run `$ npm run-script setup`
+## Usage:
+A shortcut `npm start` is provided to start:
 
-### Usage:
-A shortcut `npm start` is provided to start a development server on `localhost:9000` and a functional testing server on `localhost:9090/test/e2e/runner.html`.
+* a development server on `localhost:9000`
+* a functional testing server on `localhost:9090/test/e2e/runner.html`
+* a production server on `localhost:9009`
 
 What a normal start looks like:
 ```
@@ -45,11 +46,14 @@ Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.ht
 
 #### Task Automation with [Grunt](http://gruntjs.com/):
 1. To start a local server do: `$ grunt server`
-4. To make a local build do: `$ grunt build`
+2. To make a local build do: `$ grunt build`
+
+**NOTE**: `this build will automatically be available at localhost:9009 if you are also running $ grunt server`
 
 #### Unit Test Running with [Karma](http://karma-runner.github.io):
 1. To run the Unit tests server do: `$ karma start`
 2. Do `$ karma run` for blazing fast test running
+3. To run the Unit tests just once do: `$ karma start --single-run`.
 
 #### Functional Test Running with [FuncUnit](http://funcunit.com):
 1. Run `npm start` or `grunt server`.
@@ -69,14 +73,20 @@ Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.ht
 2. Install a package doing: `$ bower install packageName[@version]`
 3. Remove a package doing: `$ bower uninstall packageName`
 
-#### Contributing
-We welcome all help, but please follow this guidelines (Work In Progress):
+#### Deploying
+Take the `dist` folder generated after `$ grunt build` and put it wherever you want:
 
-1. We follow this [Git Commit Message Conventions](https://docs.google.com/document/d/12niRA9r8j8C4W0_0y_fRrKDjKIq2DBknbkrWQQl1taI/). Thou it's not entirely mandatory, we generate Changelogs with this so please keep in mind.
+1. Serve it off `nginx`, `express`.
+2. Thou we use and recommend `S3` and `CloudFront`.
 
-#### Known Issues
+## Known Issues
 1. Sometimes the components folder doesn't get populated after setup raising weird erros in the browser. Calling `$ bower i` solves this issue.
 
 2. EPEERINVALID after `npm i` or `npm run-script setup`. A recent update in Karma brought dependency management problems. We recommend to wipe `karma` out completely (and all globally installed plugins) and re install by running `npm run-script setup`. [Read more here](https://github.com/karma-runner/karma/issues/483)
 
 3. `npm run-script setup` gives EACCESS error. Try running it with `sudo`.
+
+## Contributing
+We welcome all help, but please follow this guidelines (Work In Progress):
+
+1. We follow this [Git Commit Message Conventions](https://docs.google.com/document/d/12niRA9r8j8C4W0_0y_fRrKDjKIq2DBknbkrWQQl1taI/). Thou it's not entirely mandatory, we generate Changelogs with this so please keep in mind.
