@@ -95,7 +95,7 @@ We welcome all help, but please follow this guidelines (Work In Progress):
 ### Some words about coding style ###
 - semi-colons.
 - Curly braces for single line if blocks. Same for loops and other places.
-- Spacing. Indentation = 5 spaces.
+- Spacing. Indentation = 4 spaces.
 - Spacing in functions. `function( like, this ) {}`
 - Variable declarations. If multiple variables are defined, use a leading comma for separation.
 - Camelcased variable names. No underscores.
