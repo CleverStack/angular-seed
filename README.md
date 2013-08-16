@@ -90,3 +90,57 @@ Take the `dist` folder generated after `$ grunt build` and put it wherever you w
 We welcome all help, but please follow this guidelines (Work In Progress):
 
 1. We follow this [Git Commit Message Conventions](https://docs.google.com/document/d/12niRA9r8j8C4W0_0y_fRrKDjKIq2DBknbkrWQQl1taI/). Thou it's not entirely mandatory, we generate Changelogs with this so please keep in mind.
+
+
+### 6. Some words about coding style ###
+- semi-colons.
+- Curly braces for single line if blocks. Same for loops and other places.
+- Spacing. Indentation = 5 spaces.
+- Spacing in functions. `function( like, this ) {}`
+- Variable declarations. If multiple variables are defined, use a leading comma for separation.
+- Camelcased variable names. No underscores.
+- Make sure that key is in objects when iterating over it. See below.
+
+#### 6.1. Spaces ####
+
+Use spaces when defining functions.
+
+```js
+function( arg1, arg2, arg3 ) {
+    return 1;
+}
+```
+
+Use spaces for if statements.
+
+```js
+if ( condition ) {
+    // do something
+} else {
+    // something else
+}
+```
+
+#### 6.2. Variable declarations ####
+
+```js
+var num  = 1
+  , user = new User()
+  , date = new Date()
+```
+
+#### 6.3. For-In-loops ####
+
+```js
+for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      console.log(obj[key])
+    }
+}
+```
+
+#### 6.4. JSHint options ####
+
+```js
+fill me in
+```
