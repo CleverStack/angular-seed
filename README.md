@@ -5,40 +5,7 @@
 3. Lightning Fast Unit Testing Support with `karma` *Now with BrowserStack Support*.
 4. Beautiful Functional Testing Support ([check it out](http://screencast.com/t/OBxfgoM26T))
 
-## Setup:
-1. Run `$ npm run-script setup`
-
-##### Prerequisites:
-1. `grunt-cli`, `karma`.
-2. Optionally are `bower` and `phantomjs`.
-
-## Usage:
-A shortcut `npm start` is provided to start:
-
-* a development server on `localhost:9000`
-* a functional testing server on `localhost:9090/test/e2e/runner.html`
-* a production server on `localhost:9009`
-
-What a normal start looks like:
-```
-$ grunt server
-Running "clean:server" (clean) task
-
-Running "livereload-start" task
-... Starting Livereload server on 35729 ...
-
-Running "connect:livereload" (connect) task
-Started connect web server on localhost:9000.
-
-Running "connect:test" (connect) task
-Started connect web server on localhost:9090.
-
-Running "connect:dist" (connect) task
-Started connect web server on localhost:9009.
-
-Running "watch" task
-Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.html,{.tmp,app}/scripts/{,*/}*.js,app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}
-```
+## 1. Features ##
 
 #### Documentation with [Docular](https://github.com/gitsome/docular):
 1. To build the documentation run `$ grunt docular`.
@@ -73,26 +40,60 @@ Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.ht
 2. Install a package doing: `$ bower install packageName[@version]`
 3. Remove a package doing: `$ bower uninstall packageName`
 
-#### Deploying
+## 2. Setup ##
+Run `$ npm run-script setup`
+
+#### 2.1. Prerequisites ####
+1. `grunt-cli`, `karma`.
+2. Optionally are `bower` and `phantomjs`.
+
+#### 2.2 Known Issues ####
+1. Sometimes the components folder doesn't get populated after setup raising weird errors in the browser. Calling `$ bower i` solves this issue.
+2. EPEERINVALID after `npm i` or `npm run-script setup`. A recent update in Karma brought dependency management problems. We recommend to wipe `karma` out completely (and all globally installed plugins) and re install by running `npm run-script setup`. [Read more here](https://github.com/karma-runner/karma/issues/483)
+3. `npm run-script setup` gives EACCESS error. Try running it with `sudo`.
+
+## 3. Usage ##
+A shortcut `npm start` is provided to start:
+
+* a development server on `localhost:9000`
+* a functional testing server on `localhost:9090/test/e2e/runner.html`
+* a production server on `localhost:9009`
+
+What a normal start looks like:
+```
+$ grunt server
+Running "clean:server" (clean) task
+
+Running "livereload-start" task
+... Starting Livereload server on 35729 ...
+
+Running "connect:livereload" (connect) task
+Started connect web server on localhost:9000.
+
+Running "connect:test" (connect) task
+Started connect web server on localhost:9090.
+
+Running "connect:dist" (connect) task
+Started connect web server on localhost:9009.
+
+Running "watch" task
+Watching app/{,*/}*.html,{.tmp,app}/styles/{,*/}*.css,{.tmp,app}/views/{,*/}*.html,{.tmp,app}/scripts/{,*/}*.js,app/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}
+```
+
+## 4. Deployment ##
 Take the `dist` folder generated after `$ grunt build` and put it wherever you want:
 
 1. Serve it off `nginx`, `express`.
 2. Thou we use and recommend `S3` and `CloudFront`.
 
-## Known Issues
-1. Sometimes the components folder doesn't get populated after setup raising weird errors in the browser. Calling `$ bower i` solves this issue.
 
-2. EPEERINVALID after `npm i` or `npm run-script setup`. A recent update in Karma brought dependency management problems. We recommend to wipe `karma` out completely (and all globally installed plugins) and re install by running `npm run-script setup`. [Read more here](https://github.com/karma-runner/karma/issues/483)
-
-3. `npm run-script setup` gives EACCESS error. Try running it with `sudo`.
-
-## Contributing
+## 5. Contributing ##
 We welcome all help, but please follow this guidelines (Work In Progress):
 
-1. We follow these [Git Commit Message Conventions](https://docs.google.com/document/d/12niRA9r8j8C4W0_0y_fRrKDjKIq2DBknbkrWQQl1taI/). Thou it's not entirely mandatory, we generate Changelogs with this so please keep in mind.
+### 5.1 Git commit message style ###
+We follow these [Git Commit Message Conventions](https://docs.google.com/document/d/12niRA9r8j8C4W0_0y_fRrKDjKIq2DBknbkrWQQl1taI/). Thou it's not entirely mandatory, we generate Changelogs with this so please keep in mind.
 
-
-### Some words about coding style ###
+### 5.2 Some words about coding style ###
 - semi-colons.
 - Curly braces for single line if blocks. Same for loops and other places.
 - Spacing. Indentation = 4 spaces.
@@ -101,7 +102,7 @@ We welcome all help, but please follow this guidelines (Work In Progress):
 - Camelcased variable names. No underscores.
 - Make sure that key is in objects when iterating over it. See below.
 
-#### Spaces ####
+#### 5.3 Spaces ####
 
 Use spaces when defining functions.
 
@@ -121,7 +122,7 @@ if ( condition ) {
 }
 ```
 
-#### Variable declarations ####
+#### 5.4 Variable declarations ####
 
 ```js
 var num  = 1
@@ -129,7 +130,7 @@ var num  = 1
   , date = new Date();
 ```
 
-#### For-In-loops ####
+#### 5.5 For-In-loops ####
 
 ```js
 for (var key in obj) {
@@ -139,7 +140,7 @@ for (var key in obj) {
 }
 ```
 
-#### JSHint options ####
+#### 5.6 JSHint options ####
 
 ```js
 fill me in
