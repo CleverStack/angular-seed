@@ -80,7 +80,7 @@ Take the `dist` folder generated after `$ grunt build` and put it wherever you w
 2. Thou we use and recommend `S3` and `CloudFront`.
 
 ## Known Issues
-1. Sometimes the components folder doesn't get populated after setup raising weird erros in the browser. Calling `$ bower i` solves this issue.
+1. Sometimes the components folder doesn't get populated after setup raising weird errors in the browser. Calling `$ bower i` solves this issue.
 
 2. EPEERINVALID after `npm i` or `npm run-script setup`. A recent update in Karma brought dependency management problems. We recommend to wipe `karma` out completely (and all globally installed plugins) and re install by running `npm run-script setup`. [Read more here](https://github.com/karma-runner/karma/issues/483)
 
@@ -89,7 +89,7 @@ Take the `dist` folder generated after `$ grunt build` and put it wherever you w
 ## Contributing
 We welcome all help, but please follow this guidelines (Work In Progress):
 
-1. We follow this [Git Commit Message Conventions](https://docs.google.com/document/d/12niRA9r8j8C4W0_0y_fRrKDjKIq2DBknbkrWQQl1taI/). Thou it's not entirely mandatory, we generate Changelogs with this so please keep in mind.
+1. We follow these [Git Commit Message Conventions](https://docs.google.com/document/d/12niRA9r8j8C4W0_0y_fRrKDjKIq2DBknbkrWQQl1taI/). Thou it's not entirely mandatory, we generate Changelogs with this so please keep in mind.
 
 
 ### Some words about coding style ###
@@ -134,7 +134,7 @@ var num  = 1
 ```js
 for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
-      console.log(obj[key]);
+        console.log(obj[key]);
     }
 }
 ```
