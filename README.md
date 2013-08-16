@@ -126,7 +126,7 @@ if ( condition ) {
 ```js
 var num  = 1
   , user = new User()
-  , date = new Date()
+  , date = new Date();
 ```
 
 #### For-In-loops ####
@@ -134,7 +134,7 @@ var num  = 1
 ```js
 for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
-      console.log(obj[key])
+      console.log(obj[key]);
     }
 }
 ```
