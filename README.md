@@ -92,7 +92,7 @@ We welcome all help, but please follow this guidelines (Work In Progress):
 1. We follow this [Git Commit Message Conventions](https://docs.google.com/document/d/12niRA9r8j8C4W0_0y_fRrKDjKIq2DBknbkrWQQl1taI/). Thou it's not entirely mandatory, we generate Changelogs with this so please keep in mind.
 
 
-### 6. Some words about coding style ###
+### Some words about coding style ###
 - semi-colons.
 - Curly braces for single line if blocks. Same for loops and other places.
 - Spacing. Indentation = 5 spaces.
@@ -101,7 +101,7 @@ We welcome all help, but please follow this guidelines (Work In Progress):
 - Camelcased variable names. No underscores.
 - Make sure that key is in objects when iterating over it. See below.
 
-#### 6.1. Spaces ####
+#### Spaces ####
 
 Use spaces when defining functions.
 
@@ -121,7 +121,7 @@ if ( condition ) {
 }
 ```
 
-#### 6.2. Variable declarations ####
+#### Variable declarations ####
 
 ```js
 var num  = 1
@@ -129,7 +129,7 @@ var num  = 1
   , date = new Date()
 ```
 
-#### 6.3. For-In-loops ####
+#### For-In-loops ####
 
 ```js
 for (var key in obj) {
@@ -139,7 +139,7 @@ for (var key in obj) {
 }
 ```
 
-#### 6.4. JSHint options ####
+#### JSHint options ####
 
 ```js
 fill me in
