@@ -2,7 +2,7 @@
 ##### A proper AngularJS seed featuring:
 1. A Highly Configurable Environment
 2. Support for any `grunt`-enabled preprocessor
-3. Lightning Fast Unit Testing Suppoer with `karma` *Now with BrowserStack Support*.
+3. Lightning Fast Unit Testing Support with `karma` *Now with BrowserStack Support*.
 4. Beautiful Functional Testing Support ([check it out](http://screencast.com/t/OBxfgoM26T))
 
 ## Setup:
