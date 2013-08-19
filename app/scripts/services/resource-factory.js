@@ -3,10 +3,17 @@ define(['angular', 'app'],function (angular) {
 
   /**
    * @ngdoc service
+   * @name ngSeed.services:$resourceFactory
+   * @description
+   * A service used to generate and register resources.
+   */
+  
+  /**
+   * @ngdoc function
    * @name ngSeed.services:ResourceFactory
+   * @methodOf ngSeed.services:$resourceFactory
    * @param {String} resourceName The name of the resource.
    * @description
-   * 
    * Generates a factory function that uses ngResource
    * to talk to a REST resource that can be directly used
    * with factory.
@@ -21,7 +28,8 @@ define(['angular', 'app'],function (angular) {
 
     /**
      * @ngdoc function
-     * @name ngSeed.services:ResourceFactory:builder
+     * @name builder
+     * @methodOf ngSeed.services:$resourceFactory
      * @description
      * 
      * Generates an HTTP Resource.

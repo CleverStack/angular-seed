@@ -17,6 +17,7 @@
     "jpegtran-bin": "~0.1.7"
   },
   "devDependencies": {
+    "docular": "git://github.com/leostera/docular.git",
     "grunt-docular": "~0.1.1",
     "grunt-contrib-copy": ">=0.4.x",
     "grunt-contrib-concat": ">=0.1.x",

@@ -50,9 +50,10 @@ module.exports = function (grunt) {
   grunt.initConfig({
     yeoman: yeomanConfig,
     docular: {
-      baseUrl: 'http://localhost:8000',
+      baseUrl: 'http://localhost:9999',
       showAngularDocs: false,
       showDocularDocs: false,
+      copyDocDir: '/docs',
       docAPIOrder : ['doc', 'angular'],
       groups: [
         {
@@ -64,11 +65,13 @@ module.exports = function (grunt) {
               id: "api",
               title: "API",
               scripts: [
-                "app/scripts/init.js",
+                "app/scripts/app.js",
+                "app/scripts/config.js",
                 "app/scripts/routes.js",
                 "app/scripts/services",
                 "app/scripts/filters",
-                "app/scripts/directives"
+                "app/scripts/directives",
+                "app/scripts/controllers",
               ]
             }
           ]
@@ -131,6 +134,12 @@ module.exports = function (grunt) {
           port: 9009,
           base: __dirname+'/dist'
         }
+      },
+      docs: {
+        options: {
+          port: 9999,
+          base: __dirname+'/docs'
+        }
       }
     },
     open: {
@@ -155,7 +164,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      docs: 'docs'
     },
     jshint: {
       options: {
@@ -321,7 +331,7 @@ module.exports = function (grunt) {
 
   grunt.renameTask('regarde', 'watch');
 
-  grunt.registerTask('docs', ['docular']);
+  grunt.registerTask('docs', ['clean:docs','docular']);
 
   grunt.registerTask('server', [
     'clean:server',
@@ -329,6 +339,7 @@ module.exports = function (grunt) {
     'connect:livereload',
     'connect:test',
     'connect:dist',
+    'connect:docs',
     'watch'
   ]);
 
