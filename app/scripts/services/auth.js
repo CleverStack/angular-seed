@@ -3,7 +3,32 @@ define(['angular', 'app'], function (angular, app) {
 
   /**
    * @ngdoc service
-   * @name $auth
+   * @name ngSeed.services:$auth
+   * @description
+   * A set of functions to easily login/logout, register new users, and
+   * retrieving the user session from the server.
+   *
+   * ### Example
+   * ```js
+   * myApp.controller('Test', ['$scope', '$auth', function ($scope, $auth) {
+   *   $scope.$watch($auth.getCurrentUser, function() {
+   *     // do something as soon as the user changes
+   *     // and by this I mean logs in or out
+   *   });
+   *
+   *   if($auth.isLoggedIn()) {
+   *     // do something if the user is logged in
+   *     // thou this is not necessary on non-public pages
+   *     // on public ones you might want to use it
+   *     // to do some other logic
+   *   }
+   * }]);
+   * ```
+   */
+  
+  /**
+   * @ngdoc service
+   * @name ngSeed.providers:$authProvider
    * @description
    * Dead-easy auth checking.
    * 
@@ -60,14 +85,37 @@ define(['angular', 'app'], function (angular, app) {
       /**
        * @name currentUser
        * @type {Object}
-       * @description the logged in user or undefined
+       * @propertyOf ngSeed.providers:$authProvider
+       * @description
+       * the logged in user or undefined
        */
       var currentUser = null;
 
+      /**
+       * @name userService
+       * @type {Object}
+       * @propertyOf ngSeed.providers:$authProvider
+       * @description 
+       * The user service.
+       */
       var userService = null;
 
+      /**
+       * @name userServiceName
+       * @type {String}
+       * @propertyOf ngSeed.providers:$authProvider
+       * @description
+       * The name of the service to $inject.
+       */
       var userServiceName = 'UserService';
 
+      /**
+       * @name handlers
+       * @type {Object}
+       * @propertyOf ngSeed.providers:$authProvider
+       * @description 
+       * The handlers object.
+       */
       var handlers = {
         loginStart: null,
         loginSuccess: null,
@@ -106,7 +154,9 @@ define(['angular', 'app'], function (angular, app) {
           }
 
           /**
-           * @name handleLoginStart
+           * @ngdoc function
+           * @name handlers.loginStart
+           * @propertyOf ngSeed.providers:$authProvider
            * @description 
            * Default login starting logic.
            */
@@ -120,7 +170,9 @@ define(['angular', 'app'], function (angular, app) {
           };
 
           /**
-           * @name handleLoginSuccess
+           * @ngdoc function
+           * @name handlers.loginSuccess
+           * @propertyOf ngSeed.providers:$authProvider
            * @description
            * This method redirects the user to the redirect search term if
            * it exists.
@@ -136,7 +188,9 @@ define(['angular', 'app'], function (angular, app) {
           };
 
           /**
-           * @name handleLoginSuccess
+           * @ngdoc function
+           * @name handlers.loginSuccess
+           * @propertyOf ngSeed.providers:$authProvider
            * @description
            * This method redirects the user to the redirect search term if
            * it exists.
@@ -147,7 +201,9 @@ define(['angular', 'app'], function (angular, app) {
           };
 
           /**
-           * @name handleLocationChange
+           * @ngdoc function
+           * @name handlers.locationChange
+           * @propertyOf ngSeed.providers:$authProvider
            * @description
            * This method takes a user navigating, does a quick auth check
            * and if everything is alright proceeds.
@@ -216,6 +272,8 @@ define(['angular', 'app'], function (angular, app) {
           return {
             /**
              * @name getCurrentUser
+             * @ngdoc function
+             * @methodOf ngSeed.services:$auth
              * @return {Object} the current user
              */
             getCurrentUser: function () {
@@ -224,6 +282,8 @@ define(['angular', 'app'], function (angular, app) {
 
             /**
              * @name isLoggedIn
+             * @ngdoc function
+             * @methodOf ngSeed.services:$auth
              * @return {Boolean} true or false if there is or not a current user
              */
             isLoggedIn: function () {
@@ -233,6 +293,8 @@ define(['angular', 'app'], function (angular, app) {
 
             /**
              * @name register
+             * @ngdoc function
+             * @methodOf ngSeed.services:$auth
              * @param  {Object} credentials the user credentials
              * @return {Promise}             the promise your user service returns on registration.
              */
@@ -261,6 +323,8 @@ define(['angular', 'app'], function (angular, app) {
 
             /**
              * @name login
+             * @ngdoc function
+             * @methodOf ngSeed.services:$auth
              * @param  {Object} credentials the credentials to be passed to the login service
              * @return {Promise}            the promise your login service returns on login
              */
@@ -280,6 +344,8 @@ define(['angular', 'app'], function (angular, app) {
 
             /**
              * @name logout
+             * @ngdoc function
+             * @methodOf ngSeed.services:$auth
              * @return {Promise} the promise your login service returns on logout
              */
             logout: function () {
@@ -295,6 +361,8 @@ define(['angular', 'app'], function (angular, app) {
         }],
 
         /**
+         * @ngdoc function
+         * @methodOf ngSeed.providers:$authProvider
          * @name setUserService
          * @param  {String} usr the user service name
          */
@@ -306,6 +374,8 @@ define(['angular', 'app'], function (angular, app) {
         },
         
         /**
+         * @ngdoc function
+         * @methodOf ngSeed.providers:$authProvider
          * @name setHandler
          * @param  {String} key  the handler name
          * @param  {Function} foo    the handler function
@@ -322,7 +392,7 @@ define(['angular', 'app'], function (angular, app) {
           }
 
           if ( typeof foo !== 'function') {
-            throw new Error('$auth: handle name '+key+' is not a valid property.');
+            throw new Error('$auth: foo is not a function.');
           }
 
           handlers[key] = foo;
