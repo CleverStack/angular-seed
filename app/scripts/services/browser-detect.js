@@ -1,4 +1,23 @@
 define(['angular', 'app'], function (angular, app) {
+  /**
+   * @ngdoc service
+   * @name ngSeed.services:$browserDetect
+   * @description
+   * Easy check for Browser, version and OS with this service.
+   *
+   * ### Example
+   * ```js
+   * myApp.controller('Test', ['$scope', '$browserDetect', function ($scope, $browserDetect) {
+   *   if( $browserDetect.browser !== 'Chrome' ) {
+   *     // do something with non chrome browsers
+   *   }
+   *
+   *  if( $browserDetect.browser === 'Explorer' && $browserDetect.version < 10 ) {
+   *    // please upgrade your browser
+   *  }
+   * }]);
+   * ```
+   */
   angular
   .module('app.services')
   .factory('$browserDetect', function () {
@@ -75,7 +94,7 @@ define(['angular', 'app'], function (angular, app) {
        * @propertyOf ngSeed.services:$browserDetect
        * 
        * @description 
-       * Array of known Browsers
+       * Array of known Browsers.
        * 
        * @type {Array}
        */
