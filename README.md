@@ -133,9 +133,9 @@ var num  = 1
 #### 5.5 For-In-loops ####
 
 ```js
-for (var key in obj) {
-    if (obj.hasOwnProperty(key)) {
-        console.log(obj[key]);
+for ( var key in obj ) {
+    if ( obj.hasOwnProperty( key ) ) {
+        console.log( obj[ key ] );
     }
 }
 ```
