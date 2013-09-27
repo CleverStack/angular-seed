@@ -24,7 +24,7 @@
   "devDependencies": {
     "sinon": "*",
     "chai": "*",
-    "funcunit": "*",
+    "funcunit": "https://github.com/bitovi/funcunit.git",
     "syn": "*",
     "steal": "*",
     "angular-mocks": "~1.0.5",
