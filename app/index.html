@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/application.css">
     <!-- endbuild -->
-    
+
   </head>
   <body>
-    <div class="navbar" ng-controller="NavBar">
+    <div class="navbar">
       <a class="navbar-brand" href="#">ngSeed</a>
       <ul class="nav navbar-nav">
         <li><a href="/users" ng-show="user">Users</a></li>
@@ -42,8 +42,8 @@
     <div class="container" ng-view></div>
 
     <!-- build:js scripts/scripts.js -->
-    <script data-main="scripts/main" src="components/requirejs/require.js"></script>
+    <script data-main="modules/application/main" src="components/requirejs/require.js"></script>
     <!-- endbuild -->
-    
+
   </body>
 </html>
