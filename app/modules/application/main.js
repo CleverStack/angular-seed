@@ -1,6 +1,10 @@
 require.config({
   packages: [
     {
+      name: 'cs_account',
+      location: '/modules/cs_account'
+    },
+    {
       name: 'cs_common',
       location: '/modules/cs_common'
     },
@@ -23,7 +27,7 @@ require.config({
 define([
   'angular',
   './bootstrap',
-  './config',
+  'cs_account',
   'cs_common',
   'cs_session'
 ], function (ng){

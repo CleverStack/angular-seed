@@ -15,6 +15,30 @@ define(['angular'], function (ng) {
     'cs_common.services'
   ]);
 
+  module.config([
+    '$routeProvider',
+    'CSTemplateProvider',
+    function ($routeProvider, CSTemplate) {
+
+      $routeProvider
+        .when('/', {
+          template: 'HOME',
+          // templateUrl: CSTemplate.view('home'),
+          controller: 'CSHomeController',
+          public: true
+        })
+        .when('/error', {
+          templateUrl: CSTemplate.partial('error'),
+          public: true
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+
+    }
+
+  ]);
+
   return module;
 
 });

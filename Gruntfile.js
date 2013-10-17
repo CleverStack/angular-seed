@@ -14,20 +14,23 @@ var fallbackToTest = function (connect) {
     //   fs.createReadStream(__dirname+'/app/index.html').pipe(res);
     //   return;
     // }
-    fs.exists(__dirname+req.url, function (exists) {
+    fs.exists(__dirname + req.url, function (exists) {
       if(exists) {
         fs.createReadStream(req.url).pipe(res);
       } else {
-        fs.createReadStream(__dirname+'/test/e2e/test-index.html').pipe(res);
+        fs.createReadStream(__dirname + '/test/e2e/test-index.html').pipe(res);
       }
     });
   });
-}
+};
 
 var fallbackToIndex = function (connect, index, file) {
   return connect().use(function (req, res, next) {
     if(req.url === file) {
       return next();
+    }
+    if(/views\/(.*).html$/.test(req.url)) {
+      res.end( fs.readFileSync(index) );
     }
     res.end( fs.readFileSync(index) );
   });
@@ -62,16 +65,16 @@ module.exports = function (grunt) {
           groupIcon: 'icon-book',
           sections: [
             {
-              id: "api",
-              title: "API",
+              id: 'api',
+              title: 'API',
               scripts: [
-                "app/scripts/app.js",
-                "app/scripts/config.js",
-                "app/scripts/routes.js",
-                "app/scripts/services",
-                "app/scripts/filters",
-                "app/scripts/directives",
-                "app/scripts/controllers",
+                'app/scripts/app.js',
+                'app/scripts/config.js',
+                'app/scripts/routes.js',
+                'app/scripts/services',
+                'app/scripts/filters',
+                'app/scripts/directives',
+                'app/scripts/controllers',
               ]
             }
           ]
@@ -125,20 +128,20 @@ module.exports = function (grunt) {
             return [
               mountFolder(connect, '.'),
               fallbackToTest(connect)
-            ]
+            ];
           }
         }
       },
       dist: {
         options: {
           port: 9009,
-          base: __dirname+'/dist'
+          base: __dirname + '/dist'
         }
       },
       docs: {
         options: {
           port: 9999,
-          base: __dirname+'/docs'
+          base: __dirname + '/docs'
         }
       }
     },
@@ -283,13 +286,13 @@ module.exports = function (grunt) {
       compile: {
         options: {
           baseUrl: 'app/scripts',
-          mainConfigFile: "app/scripts/main.js",
-          out: "<%=yeoman.dist %>/scripts/scripts.js",
+          mainConfigFile: 'app/scripts/main.js',
+          out: '<%=yeoman.dist %>/scripts/scripts.js',
           uglify: {
             beautify: false,
             overwrite: true,
             verbose: true,
-            no_mangle: true,
+            'no_mangle': true,
             copyright: true
           }
         }

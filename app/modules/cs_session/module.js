@@ -12,6 +12,27 @@ define(['angular'], function (ng) {
     'cs_session.services'
   ]);
 
+  module.config([
+    '$routeProvider',
+    'CSTemplateProvider',
+    function ($routeProvider, CSTemplate) {
+
+      $routeProvider
+        .when('/login', {
+          template: 'LOGIN',
+          // templateUrl: CSTemplate.view('login'),
+          controller: 'CSLoginController',
+          public: true
+        })
+        .when('/logout', {
+          templateUrl: CSTemplate.view('login'),
+          controller: 'CSLogoutController',
+          public: true
+        });
+    }
+
+  ]);
+
   return module;
 
 });

@@ -5,7 +5,7 @@ require.config({
       location: '/modules/cs_common'
     }
   ],
-  baseUrl: '/modules/cs_session',
+  baseUrl: '/modules/cs_account',
   paths: {
     underscore: '/components/underscore/underscore'
   },
@@ -18,12 +18,12 @@ define([
   'cs_common',
 
   // Controllers
-  'controllers/cs_login_controller',
-  'controllers/cs_logout_controller',
+  'controllers/cs_account_create_controller',
+  // 'controllers/cs_account_confirm_controller',
 
   // Providers
-  'providers/cs_session_provider',
+  'providers/cs_account_provider',
 
   // Services
-  'services/cs_session_service'
+  'services/cs_account_service'
 ]);
