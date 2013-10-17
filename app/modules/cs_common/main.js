@@ -26,14 +26,13 @@ define([
   'ngResource',
 
   './module',
-  './config',
 
   // Controllers
-  'controllers/cs_home',
+  'controllers/cs_home_controller',
 
   // Providers
-  'providers/cs_template',
-  'providers/cs_http_options',
+  'providers/cs_template_provider',
+  'providers/cs_http_options_provider',
 
   'http-auth-interceptor'
 ]);

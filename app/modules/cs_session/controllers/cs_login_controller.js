@@ -2,18 +2,18 @@ define(['angular', '../module'], function (ng) {
   'use strict';
 
   ng.module('cs_session.controllers')
-  .controller('CSLogin', [
+  .controller('CSLoginController', [
     '$scope',
-    'CSAuth',
+    'CSSession',
     '$log',
-    function ($scope, CSAuth, $log) {
+    function ($scope, CSSessionProvider, $log) {
 
       $scope.login = function () {
-        CSAuth.login($scope.credentials);
+        CSSessionProvider.login($scope.credentials);
       };
 
-      $scope.$on('CSAuth:loginFailure', function (event, data) {
-        $log.log('LoginController:', event, data);
+      $scope.$on('CSSessionProvider:loginFailure', function (event, data) {
+        $log.log('CSLoginController:', event, data);
         if(data === '403') {
           $log.error('Invalid username/password');
         }

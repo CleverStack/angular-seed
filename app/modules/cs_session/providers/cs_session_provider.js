@@ -3,20 +3,20 @@ define(['angular', '../module'], function (ng) {
 
   /**
    * @ngdoc service
-   * @name ngSeed.services:CSAuth
+   * @name ngSeed.services:CSSession
    * @description
    * A set of functions to easily login/logout, register new users, and
    * retrieving the user session from the server.
    *
    * ### Example
    * ```js
-   * myApp.controller('Test', ['$scope', 'CSAuth', function ($scope, CSAuth) {
-   *   $scope.$watch(CSAuth.getCurrentUser, function() {
+   * myApp.controller('Test', ['$scope', 'CSSession', function ($scope, CSSession) {
+   *   $scope.$watch(CSSession.getCurrentUser, function() {
    *     // do something as soon as the user changes
    *     // and by this I mean logs in or out
    *   });
    *
-   *   if(CSAuth.isLoggedIn()) {
+   *   if(CSSession.isLoggedIn()) {
    *     // do something if the user is logged in
    *     // thou this is not necessary on non-public pages
    *     // on public ones you might want to use it
@@ -28,7 +28,7 @@ define(['angular', '../module'], function (ng) {
 
   /**
    * @ngdoc service
-   * @name ngSeed.providers:CSAuthProvider
+   * @name ngSeed.providers:CSSessionProvider
    * @description
    * Dead-easy auth checking.
    *
@@ -36,17 +36,17 @@ define(['angular', '../module'], function (ng) {
    * checking, and default login success behaviour can be configured
    * using the authProvider on a config block.
    *
-   * ### Configuring CSAuthProvider:
+   * ### Configuring CSSessionProvider:
    * This is the default value, feel free to change it to something else if your app requires it:
    *
    * ```js
-   * CSAuthProvider.setUserService('UserService');
+   * CSSessionProvider.setUserService('UserService');
    *
-   * CSAuthProvider.setHandler('handleLoginStart', function (redirect) {
+   * CSSessionProvider.setHandler('handleLoginStart', function (redirect) {
    *   $('#myLoginModal').open();
    * });
    *
-   * CSAuthProvider.setHandler('handleLoginSuccess', function () {
+   * CSSessionProvider.setHandler('handleLoginSuccess', function () {
    *   $('#myLoginModal').close();
    * });
    * ```
@@ -80,12 +80,12 @@ define(['angular', '../module'], function (ng) {
    */
 
   ng.module('cs_session.providers')
-  .provider('CSAuth', [
+  .provider('CSSession', [
     function () {
       /**
        * @name currentUser
        * @type {Object}
-       * @propertyOf ngSeed.providers:CSAuthProvider
+       * @propertyOf ngSeed.providers:CSSessionProvider
        * @description
        * the logged in user or undefined
        */
@@ -94,25 +94,25 @@ define(['angular', '../module'], function (ng) {
       /**
        * @name userService
        * @type {Object}
-       * @propertyOf ngSeed.providers:CSAuthProvider
+       * @propertyOf ngSeed.providers:CSSessionProvider
        * @description
        * The user service.
        */
       var userService = null;
 
       /**
-       * @name userServiceName
+       * @name sessionServiceName
        * @type {String}
-       * @propertyOf ngSeed.providers:CSAuthProvider
+       * @propertyOf ngSeed.providers:CSSessionProvider
        * @description
        * The name of the service to $inject.
        */
-      var userServiceName = 'UserService';
+      var sessionServiceName = 'CSSessionService';
 
       /**
        * @name handlers
        * @type {Object}
-       * @propertyOf ngSeed.providers:CSAuthProvider
+       * @propertyOf ngSeed.providers:CSSessionProvider
        * @description
        * The handlers object.
        */
@@ -132,35 +132,35 @@ define(['angular', '../module'], function (ng) {
         $get: ['$rootScope', '$location', '$route', '$injector',
         function ($rootScope, $location, $route, $injector) {
 
-          if(!userService && userServiceName) {
-            userService = $injector.get(userServiceName);
+          if(!userService && sessionServiceName) {
+            userService = $injector.get(sessionServiceName);
           }
 
           if (!userService) {
-            throw new Error('CSAuth: please configure a userService');
+            throw new Error('CSSessionProvider: please configure a userService');
           }
 
           if (!handlers.loginStart) {
-            console.log('CSAuth: using default loginStart method');
+            console.log('CSSessionProvider: using default loginStart method');
           }
 
           if (!handlers.loginSuccess) {
-            console.log('CSAuth: using default loginSuccess method');
+            console.log('CSSessionProvider: using default loginSuccess method');
           }
 
           if (!handlers.locationChange) {
-            console.log('CSAuth: using default locationChange method');
+            console.log('CSSessionProvider: using default locationChange method');
           }
 
           /**
            * @ngdoc function
            * @name handlers.loginStart
-           * @propertyOf ngSeed.providers:CSAuthProvider
+           * @propertyOf ngSeed.providers:CSSessionProvider
            * @description
            * Default login starting logic.
            */
           handlers.loginStart = handlers.loginStart || function (redirect) {
-            console.log('CSAuth: redirecting to /login');
+            console.log('CSSessionProvider: redirecting to /login');
             $location.path('/login');
             $location.search({
               redirect: encodeURIComponent(redirect)
@@ -171,14 +171,14 @@ define(['angular', '../module'], function (ng) {
           /**
            * @ngdoc function
            * @name handlers.loginSuccess
-           * @propertyOf ngSeed.providers:CSAuthProvider
+           * @propertyOf ngSeed.providers:CSSessionProvider
            * @description
            * This method redirects the user to the redirect search term if
            * it exists.
            */
           handlers.loginSuccess = handlers.loginSuccess || function () {
             if($location.search().redirect) {
-              console.log('CSAuth: redirecting to', $location.search().redirect);
+              console.log('CSSessionProvider: redirecting to', $location.search().redirect);
               $location.path($location.search().redirect);
               $location.search(false);
             } else {
@@ -189,20 +189,20 @@ define(['angular', '../module'], function (ng) {
           /**
            * @ngdoc function
            * @name handlers.loginSuccess
-           * @propertyOf ngSeed.providers:CSAuthProvider
+           * @propertyOf ngSeed.providers:CSSessionProvider
            * @description
            * This method redirects the user to the redirect search term if
            * it exists.
            */
           handlers.logoutSuccess = handlers.logoutSuccess || function () {
-            console.log('CSAuth: redirecting to /');
+            console.log('CSSessionProvider: redirecting to /');
             $location.path('/');
           };
 
           /**
            * @ngdoc function
            * @name handlers.locationChange
-           * @propertyOf ngSeed.providers:CSAuthProvider
+           * @propertyOf ngSeed.providers:CSSessionProvider
            * @description
            * This method takes a user navigating, does a quick auth check
            * and if everything is alright proceeds.
@@ -211,14 +211,14 @@ define(['angular', '../module'], function (ng) {
             next = '/' + next.split('/').splice(3).join('/').split('?')[0];
             if(currentUser === null || !currentUser.id){
               var route = $route.routes[next] || false;
-              console.log('CSAuth: Guest access to', next);
-              console.log('CSAuth:', next, 'is', route.public ? 'public' : 'private');
+              console.log('CSSessionProvider: Guest access to', next);
+              console.log('CSSessionProvider:', next, 'is', route.public ? 'public' : 'private');
               if(route && !route.public) {
-                $rootScope.$broadcast('CSAuth:loginStart');
+                $rootScope.$broadcast('CSSessionProvider:loginStart');
                 handlers.loginStart(next.substr(1));
               }
             } else {
-              console.log('CSAuth: proceeding to load', next);
+              console.log('CSSessionProvider: proceeding to load', next);
             }
           };
 
@@ -226,20 +226,19 @@ define(['angular', '../module'], function (ng) {
            * @description
            * $rootScope hookups
            */
-          console.log('Registering $locationChangeStart');
           $rootScope.$on('$locationChangeStart', function (event, next, current) {
             if(!$route.current) {
-              console.log('CSAuth: Welcome newcomer!');
-              console.log('CSAuth: Checking your session...');
+              console.log('CSSessionProvider: Welcome newcomer!');
+              console.log('CSSessionProvider: Checking your session...');
               userService.getCurrentUser().then(function (user) {
                 currentUser = user;
-                console.log('CSAuth: we got', user);
+                console.log('CSSessionProvider: we got', user);
                 if(typeof handlers.locationChange === 'function') {
                   handlers.locationChange(event, next, current);
                 }
               }, function (err) {
-                console.log('CSAuth: request failed');
-                console.log('CSAuth: proceeding as guest.');
+                console.log('CSSessionProvider: request failed');
+                console.log('CSSessionProvider: proceeding as guest.');
                 if(typeof handlers.locationChange === 'function') {
                   handlers.locationChange(event, next, current);
                 }
@@ -251,20 +250,20 @@ define(['angular', '../module'], function (ng) {
             }
           });
 
-          $rootScope.$on('CSAuth:loginSuccess', function (event, next, current) {
+          $rootScope.$on('CSSessionProvider:loginSuccess', function (event, next, current) {
             if(typeof handlers.locationChange === 'function') {
               handlers.loginSuccess(event, next, current);
             }
           });
 
-          $rootScope.$on('CSAuth:logoutSuccess', function () {
+          $rootScope.$on('CSSessionProvider:logoutSuccess', function () {
             if(typeof handlers.logoutSuccess === 'function') {
               handlers.logoutSuccess();
             }
           });
 
-          $rootScope.$on('CSAuth:loginRequired', function () {
-            console.log('CSAuth: login was required');
+          $rootScope.$on('CSSessionProvider:loginRequired', function () {
+            console.log('CSSessionProvider: login was required');
             $location.path('/login');
           });
 
@@ -272,7 +271,7 @@ define(['angular', '../module'], function (ng) {
             /**
              * @name getCurrentUser
              * @ngdoc function
-             * @methodOf ngSeed.services:CSAuth
+             * @methodOf ngSeed.services:CSSession
              * @return {Object} the current user
              */
             getCurrentUser: function () {
@@ -282,7 +281,7 @@ define(['angular', '../module'], function (ng) {
             /**
              * @name isLoggedIn
              * @ngdoc function
-             * @methodOf ngSeed.services:CSAuth
+             * @methodOf ngSeed.services:CSSession
              * @return {Boolean} true or false if there is or not a current user
              */
             isLoggedIn: function () {
@@ -290,35 +289,11 @@ define(['angular', '../module'], function (ng) {
               // return (currentUser === null || !currentUser.id) ? false : true;
             },
 
-            /**
-             * @name register
-             * @ngdoc function
-             * @methodOf ngSeed.services:CSAuth
-             * @param  {Object} credentials the user credentials
-             * @return {Promise}             the promise your user service returns on registration.
-             */
-            register: function (credentials, autoLogin) {
-              return userService.register(credentials).then(function (user) {
-                if(user.id) {
-                  if(autoLogin){
-                    currentUser = user;
-                    $rootScope.$broadcast('CSAuth:loginSuccess');
-                  }
-                  $rootScope.$broadcast('CSAuth:registrationSuccess');
-                } else {
-                  currentUser = null;
-                  $rootScope.$broadcast('CSAuth:registrationFailure');
-                }
-              }, function () {
-                currentUser = null;
-                $rootScope.$broadcast('CSAuth:registrationFailure');
-              });
-            },
 
             /**
              * @name login
              * @ngdoc function
-             * @methodOf ngSeed.services:CSAuth
+             * @methodOf ngSeed.services:CSSession
              * @param  {Object} credentials the credentials to be passed to the login service
              * @return {Promise}            the promise your login service returns on login
              */
@@ -326,24 +301,24 @@ define(['angular', '../module'], function (ng) {
               return userService.login(credentials).then(function (user) {
                 if(user.id) {
                   currentUser = user;
-                  $rootScope.$broadcast('CSAuth:loginSuccess');
+                  $rootScope.$broadcast('CSSessionProvider:loginSuccess');
                 } else {
-                  $rootScope.$broadcast('CSAuth:loginFailure');
+                  $rootScope.$broadcast('CSSessionProvider:loginFailure');
                 }
               }, function() {
                 currentUser = null;
-                $rootScope.$broadcast('CSAuth:loginFailure');
+                $rootScope.$broadcast('CSSessionProvider:loginFailure');
               });
             },
 
             /**
              * @name logout
              * @ngdoc function
-             * @methodOf ngSeed.services:CSAuth
+             * @methodOf ngSeed.services:CSSession
              * @return {Promise} the promise your login service returns on logout
              */
             logout: function () {
-              $rootScope.$broadcast('CSAuth:logoutSuccess');
+              $rootScope.$broadcast('CSSessionProvider:logoutSuccess');
               if(currentUser && currentUser.id) {
                 return userService.logout().then(function () {
                   currentUser = null;
@@ -356,20 +331,20 @@ define(['angular', '../module'], function (ng) {
 
         /**
          * @ngdoc function
-         * @methodOf ngSeed.providers:CSAuthProvider
+         * @methodOf ngSeed.providers:CSSessionProvider
          * @name setUserService
          * @param  {String} usr the user service name
          */
         setUserService: function (usr) {
           if(typeof usr !== 'string') {
-            throw new Error('CSAuth: setUserService expects a string to use $injector upon instantiation');
+            throw new Error('CSSessionProvider: setUserService expects a string to use $injector upon instantiation');
           }
-          userServiceName = usr;
+          sessionServiceName = usr;
         },
 
         /**
          * @ngdoc function
-         * @methodOf ngSeed.providers:CSAuthProvider
+         * @methodOf ngSeed.providers:CSSessionProvider
          * @name setHandler
          * @param  {String} key  the handler name
          * @param  {Function} foo    the handler function
@@ -377,16 +352,16 @@ define(['angular', '../module'], function (ng) {
          * Replaces one of the default handlers.
          */
         setHandler: function (key, foo) {
-          if( key.substr(0,6) !== 'handle' ) {
-            throw new Error('CSAuth: Expecting a handler name that starts with \'handle\'.');
+          if( key.substr(0, 6) !== 'handle' ) {
+            throw new Error('CSSessionProvider: Expecting a handler name that starts with \'handle\'.');
           }
 
-          if ( ! handlers.hasOwnProperty(key) ) {
-            throw new Error('CSAuth: handle name '+key+' is not a valid property.');
+          if ( !handlers.hasOwnProperty(key) ) {
+            throw new Error('CSSessionProvider: handle name "' + key + '" is not a valid property.');
           }
 
           if ( typeof foo !== 'function') {
-            throw new Error('CSAuth: foo is not a function.');
+            throw new Error('CSSessionProvider: foo is not a function.');
           }
 
           handlers[key] = foo;
