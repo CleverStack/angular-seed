@@ -10,7 +10,10 @@ define(['angular', 'underscore', '../module'], function (ng, _) {
       return {
 
         login: function (credentials) {
-          return $http.post('/user/login', credentials);
+          return $http.post('/user/login', credentials)
+            .then(function(response){
+              return response.data;
+            });
         },
 
         logout: function () {

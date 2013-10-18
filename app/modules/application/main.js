@@ -11,6 +11,10 @@ require.config({
     {
       name: 'cs_session',
       location: '/modules/cs_session'
+    },
+    {
+      name: 'users',
+      location: '/modules/users'
     }
   ],
   baseUrl: '/modules/application',
@@ -30,6 +34,7 @@ define([
   'cs_account',
   'cs_common',
   'cs_session',
+  'users',
 
   // Controllers
   'controllers/application_controller',

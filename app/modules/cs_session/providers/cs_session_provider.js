@@ -40,7 +40,7 @@ define(['angular', '../module'], function (ng) {
    * This is the default value, feel free to change it to something else if your app requires it:
    *
    * ```js
-   * CSSessionProvider.setUserService('UserService');
+   * CSSessionProvider.setSessionService('sessionService');
    *
    * CSSessionProvider.setHandler('handleLoginStart', function (redirect) {
    *   $('#myLoginModal').open();
@@ -92,13 +92,13 @@ define(['angular', '../module'], function (ng) {
       var currentUser = null;
 
       /**
-       * @name userService
+       * @name sessionService
        * @type {Object}
        * @propertyOf ngSeed.providers:CSSessionProvider
        * @description
        * The user service.
        */
-      var userService = null;
+      var sessionService = null;
 
       /**
        * @name sessionServiceName
@@ -132,12 +132,12 @@ define(['angular', '../module'], function (ng) {
         $get: ['$rootScope', '$location', '$route', '$injector',
         function ($rootScope, $location, $route, $injector) {
 
-          if(!userService && sessionServiceName) {
-            userService = $injector.get(sessionServiceName);
+          if(!sessionService && sessionServiceName) {
+            sessionService = $injector.get(sessionServiceName);
           }
 
-          if (!userService) {
-            throw new Error('CSSessionProvider: please configure a userService');
+          if (!sessionService) {
+            throw new Error('CSSessionProvider: please configure a sessionService');
           }
 
           if (!handlers.loginStart) {
@@ -230,7 +230,7 @@ define(['angular', '../module'], function (ng) {
             if(!$route.current) {
               console.log('CSSessionProvider: Welcome newcomer!');
               console.log('CSSessionProvider: Checking your session...');
-              userService.getCurrentUser().then(function (user) {
+              sessionService.getCurrentUser().then(function (user) {
                 currentUser = user;
                 console.log('CSSessionProvider: we got', user);
                 if(typeof handlers.locationChange === 'function') {
@@ -298,7 +298,7 @@ define(['angular', '../module'], function (ng) {
              * @return {Promise}            the promise your login service returns on login
              */
             login: function (credentials) {
-              return userService.login(credentials).then(function (user) {
+              return sessionService.login(credentials).then(function (user) {
                 if(user.id) {
                   currentUser = user;
                   $rootScope.$broadcast('CSSessionProvider:loginSuccess');
@@ -320,11 +320,28 @@ define(['angular', '../module'], function (ng) {
             logout: function () {
               $rootScope.$broadcast('CSSessionProvider:logoutSuccess');
               if(currentUser && currentUser.id) {
-                return userService.logout().then(function () {
+                return sessionService.logout().then(function () {
                   currentUser = null;
                 });
               }
+            },
+
+            /**
+             * @name authenticate
+             * @ngdoc function
+             * @methodOf ngSeed.services:CSSession
+             * @return {Promise} the promise your login service returns on logout
+             */
+            authenticate: function (user) {
+              if(!user || !user.id){
+                throw new Error('Unable to authenticate with', user);
+              }
+              currentUser = user;
+              $rootScope.$broadcast('CSSessionProvider:loginSuccess');
+              $rootScope.$broadcast('CSSessionProvider:authenticated');
             }
+
+
           };
 
         }],
@@ -332,14 +349,14 @@ define(['angular', '../module'], function (ng) {
         /**
          * @ngdoc function
          * @methodOf ngSeed.providers:CSSessionProvider
-         * @name setUserService
+         * @name setSessionService
          * @param  {String} usr the user service name
          */
-        setUserService: function (usr) {
-          if(typeof usr !== 'string') {
-            throw new Error('CSSessionProvider: setUserService expects a string to use $injector upon instantiation');
+        setSessionService: function (serviceName) {
+          if(typeof serviceName !== 'string') {
+            throw new Error('CSSessionProvider: setSessionService expects a string to use $injector upon instantiation');
           }
-          sessionServiceName = usr;
+          sessionServiceName = serviceName;
         },
 
         /**

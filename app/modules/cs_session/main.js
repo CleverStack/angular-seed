@@ -9,7 +9,11 @@ require.config({
   paths: {
     underscore: '/components/underscore/underscore'
   },
-  shim: {}
+  shim: {
+    underscore: {
+      exports: '_'
+    }
+  }
 });
 
 define([

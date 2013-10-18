@@ -43,7 +43,8 @@ define(['angular', '../module'], function (ng) {
 
         $get: [
           '$injector',
-          function ($injector) {
+          '$rootScope',
+          function ($injector, $rootScope) {
 
             if(!accountService && accountServiceName) {
               accountService = $injector.get(accountServiceName);
@@ -63,8 +64,9 @@ define(['angular', '../module'], function (ng) {
              * @propertyOf ngSeed.providers:CSAccountProvider
              * @description
              */
-            handlers.registrationSuccess = handlers.registrationSuccess || function (response) {
-              console.log(response);
+            handlers.registrationSuccess = handlers.registrationSuccess || function (user) {
+              console.log(user);
+              $rootScope.$broadcast('CSAccountProvider:registrationSuccess', user);
             };
 
             /**
@@ -75,6 +77,7 @@ define(['angular', '../module'], function (ng) {
              */
             handlers.registrationFailure = handlers.registrationFailure || function (response) {
               console.log(response);
+              $rootScope.$broadcast('CSAccountProvider:registrationFailure', response);
             };
 
 
@@ -89,7 +92,10 @@ define(['angular', '../module'], function (ng) {
                */
               register: function (credentials) {
                 return accountService.register(credentials)
-                  .then(handlers.registrationSuccess, handlers.registrationFailure);
+                  .then(function(user){
+                    handlers.registrationSuccess(user);
+                    $rootScope.$broadcast('CSAccountProvider:registrationSuccess', user);
+                  }, handlers.registrationFailure);
               }
 
             };
@@ -120,9 +126,6 @@ define(['angular', '../module'], function (ng) {
          * Replaces one of the default handlers.
          */
         setHandler: function (key, foo) {
-          if(key.substr(0, 6) !== 'handle') {
-            throw new Error('CSAccountProvider: Expecting a handler name that starts with "handle".');
-          }
 
           if (!handlers.hasOwnProperty(key)) {
             throw new Error('CSAccountProvider: handle name "' + key + '" is not a valid property.');

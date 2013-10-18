@@ -9,7 +9,10 @@ define(['angular', '../module'], function (ng) {
       return {
 
         register: function (credentials) {
-          return $http.post('/user', credentials);
+          return $http.post('/user', credentials)
+            .then(function(response){
+              return response.data;
+            });
         }
 
       };

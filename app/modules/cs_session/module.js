@@ -16,11 +16,14 @@ define(['angular'], function (ng) {
     '$routeProvider',
     'CSTemplateProvider',
     'CSSessionHelpersProvider',
-    function ($routeProvider, CSTemplate, CSSessionHelpersProvider) {
+    'CSSessionProvider',
+    function ($routeProvider, CSTemplate, CSSessionHelpersProvider, CSSessionProvider) {
 
       CSSessionHelpersProvider.extend('CSCommonHelpers');
 
       CSTemplate.setPath('/modules/cs_session/views');
+
+      CSSessionProvider.setSessionService('CSSessionService');
 
       $routeProvider
         .when('/login', {
@@ -30,6 +33,7 @@ define(['angular'], function (ng) {
         })
         .when('/logout', {
           controller: 'CSLogoutController',
+          template: ' ',
           public: true
         });
     }
