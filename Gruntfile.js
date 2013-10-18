@@ -193,8 +193,8 @@ module.exports = function (grunt) {
       }
     },
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      html: ['<%= yeoman.dist %>/index.html', '<%= yeoman.dist %>/views/**/*.html'],
+      css: ['<%= yeoman.dist %>/styles/**/*.css'],
       options: {
         dirs: ['<%= yeoman.dist %>']
       }
@@ -282,6 +282,7 @@ module.exports = function (grunt) {
     requirejs: {
       compile: {
         options: {
+          name: 'main',
           baseUrl: 'app/scripts',
           mainConfigFile: "app/scripts/main.js",
           out: "<%=yeoman.dist %>/scripts/scripts.js",
