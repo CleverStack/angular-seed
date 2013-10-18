@@ -77,7 +77,7 @@ define(['angular', '../module'], function (ng) {
        * This method is also available from CSTemplateProvider
        */
       function view (viewName) {
-        console.log('CSTemplate:', viewsPath + viewName + extension);
+        // console.log('CSTemplate:', viewsPath + viewName + extension);
         return viewsPath + viewName + extension;
       }
 
@@ -114,7 +114,7 @@ define(['angular', '../module'], function (ng) {
 
           viewsPath = basePath + path;
 
-          console.log('CSTemplate: path set to ', viewsPath);
+          // console.log('CSTemplate: path set to ', viewsPath);
         },
 
         /**

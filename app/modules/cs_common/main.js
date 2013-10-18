@@ -32,5 +32,17 @@ define([
   'providers/cs_template_provider',
   'providers/cs_http_options_provider',
 
-  'http-auth-interceptor'
+  'http-auth-interceptor',
+
+  // Directives
+  'directives/string_to_number',
+  'directives/must_equal_to',
+
+  // Filters
+  'filters/starts_with',
+
+  // Services
+  'services/cs_browser_detect',
+  'services/cs_resource_factory'
+
 ]);

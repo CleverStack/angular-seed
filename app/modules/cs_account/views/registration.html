@@ -16,7 +16,7 @@
       class="form-control"
       ng-model="credentials.password"
       required
-      _ng-pattern='/(?=^.{8,}$)(?!.*(.)\1\1\1\1)((?=.*\d)|(?=.*\W+))(?!.*\s)(?=.*[A-Z])(?=.*[a-z]).*/'
+      ng-pattern_='/(?=^.{8,}$)(?!.*(.)\1\1\1\1)((?=.*\d)|(?=.*\W+))(?!.*\s)(?=.*[A-Z])(?=.*[a-z]).*/'
     />
     <span class="help-block error" ng-show="helpers.hasError(this, 'password', 'required')">Password is required</span>
     <span class="help-block error" ng-show="helpers.hasError(this, 'password', 'pattern')">

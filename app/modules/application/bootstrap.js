@@ -1,8 +1,6 @@
 define(['angular'], function (ng) {
   'use strict';
 
-  console.log('app bootstrap');
-
   ng.module('app.providers', []);
   ng.module('app.controllers', []);
   ng.module('app.services', []);
@@ -11,6 +9,7 @@ define(['angular'], function (ng) {
     'cs_account',
     'cs_common',
     'cs_session',
+    'users',
     'app.providers',
     'app.controllers',
     'app.services'
@@ -19,19 +18,20 @@ define(['angular'], function (ng) {
   module.config([
     '$routeProvider',
     '$locationProvider',
+    '$injector',
     'CSTemplateProvider',
     'CSHttpOptionsProvider',
     'CSSessionProvider',
     'HelpersProvider',
-    function ($routeProvider, $locationProvider, CSTemplateProvider, CSHttpOptionsProvider, CSSessionProvider, HelpersProvider) {
+    function ($routeProvider, $locationProvider, $injector, CSTemplateProvider, CSHttpOptionsProvider, CSSessionProvider, HelpersProvider) {
 
       HelpersProvider.extend('CSCommonHelpers');
 
       CSTemplateProvider.setPath('/modules/application/views');
 
-      CSHttpOptionsProvider.setDomain('/api');
+      // CSHttpOptionsProvider.setDomain('/api');
 
-      CSSessionProvider.setUserService('CSSessionService');
+      CSSessionProvider.setSessionService('CSSessionService');
 
       $locationProvider.html5Mode(true);
 

@@ -1,4 +1,4 @@
-define(['angular', '../module'], function (ng) {
+define(['angular', 'underscore', '../module'], function (ng, _) {
   'use strict';
 
   ng.module('cs_account.controllers')
@@ -7,7 +7,9 @@ define(['angular', '../module'], function (ng) {
     '$log',
     'CSAccount',
     'CSAccountHelpers',
-    function ($scope, $log, CSAccountProvider, CSAccountHelpersProvider) {
+    'CSSession',
+    '$location',
+    function ($scope, $log, CSAccountProvider, CSAccountHelpersProvider, CSSessionProvider, $location) {
       $scope.helpers = CSAccountHelpersProvider;
 
       $scope.register = function () {
@@ -16,8 +18,15 @@ define(['angular', '../module'], function (ng) {
           return;
         }
 
-        CSAccountProvider.register($scope.credentials);
+        var credentials = _($scope.credentials).omit('passwordConfirmation');
+        credentials.username = credentials.email.split('@')[0];
+        CSAccountProvider.register(credentials);
       };
+
+      $scope.$on('CSAccountProvider:registrationSuccess', function(event, user){
+        CSSessionProvider.authenticate(user);
+        $location.url('/users');
+      });
 
       $scope.$on('CSAccountProvider:registrationFailure', function (event, data) {
         $log.log('CSAccountCreateController:', data);
