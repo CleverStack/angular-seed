@@ -282,6 +282,7 @@ module.exports = function (grunt) {
     requirejs: {
       compile: {
         options: {
+          name: 'main',
           baseUrl: 'app/scripts',
           mainConfigFile: "app/scripts/main.js",
           out: "<%=yeoman.dist %>/scripts/scripts.js",
