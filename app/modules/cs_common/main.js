@@ -27,10 +27,8 @@ define([
 
   './module',
 
-  // Controllers
-  'controllers/cs_home_controller',
-
   // Providers
+  'providers/cs_common_helpers_provider',
   'providers/cs_template_provider',
   'providers/cs_http_options_provider',
 

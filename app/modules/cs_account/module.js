@@ -15,7 +15,12 @@ define(['angular'], function (ng) {
   module.config([
     '$routeProvider',
     'CSTemplateProvider',
-    function ($routeProvider, CSTemplate) {
+    'CSAccountHelpersProvider',
+    function ($routeProvider, CSTemplate, CSAccountHelpersProvider) {
+
+      CSAccountHelpersProvider.extend('CSCommonHelpers');
+
+      CSTemplate.setPath('/modules/cs_account/views');
 
       $routeProvider
         .when('/register', {

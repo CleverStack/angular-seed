@@ -1,10 +1,11 @@
 define(['angular', '../module'], function (ng) {
   'use strict';
 
-  ng.module('cs_common.controllers')
-  .controller('CSHomeController', [
+  ng.module('app.controllers')
+  .controller('HomeController', [
     '$scope',
-    function ($scope) {
+    'Helpers',
+    function ($scope, Helpers) {
       $scope.welcome = 'Hello clever!';
     }
 

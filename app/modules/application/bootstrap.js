@@ -20,23 +20,26 @@ define(['angular'], function (ng) {
     '$routeProvider',
     '$locationProvider',
     'CSTemplateProvider',
-    function ($routeProvider, $locationProvider, CSTemplate) {
+    'CSHttpOptionsProvider',
+    'CSSessionProvider',
+    'HelpersProvider',
+    function ($routeProvider, $locationProvider, CSTemplateProvider, CSHttpOptionsProvider, CSSessionProvider, HelpersProvider) {
+
+      HelpersProvider.extend('CSCommonHelpers');
+
+      CSTemplateProvider.setPath('/modules/application/views');
+
+      CSHttpOptionsProvider.setDomain('/api');
+
+      CSSessionProvider.setUserService('CSSessionService');
 
       $locationProvider.html5Mode(true);
 
       $routeProvider
-        // .when('/', {
-        //   template: 'HOME!',
-        //   // templateUrl: CSTemplate.view('home'),
-        //   controller: 'CSHome',
-        //   public: true
-        // })
-        .when('/error', {
-          templateUrl: CSTemplate.partial('error'),
+        .when('/', {
+          templateUrl: CSTemplateProvider.view('home'),
+          controller: 'HomeController',
           public: true
-        })
-        .otherwise({
-          redirectTo: '/'
         });
 
     }

@@ -29,7 +29,15 @@ define([
   './bootstrap',
   'cs_account',
   'cs_common',
-  'cs_session'
+  'cs_session',
+
+  // Controllers
+  'controllers/application_controller',
+  'controllers/home_controller',
+
+  // Providers
+  'providers/helpers_provider'
+
 ], function (ng){
   'use strict';
 

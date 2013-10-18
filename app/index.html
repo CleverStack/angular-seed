@@ -18,16 +18,8 @@
     <!-- endbuild -->
 
   </head>
-  <body>
-    <div class="navbar">
-      <a class="navbar-brand" href="#">ngSeed</a>
-      <ul class="nav navbar-nav">
-        <li><a href="/users" ng-show="user">Users</a></li>
-        <li><a href="/logout" ng-show="user">Logout</a></li>
-        <li><a href="/login" ng-hide="user">Login</a></li>
-        <li><a href="/register" ng-hide="user">Register</a></li>
-      </ul>
-    </div>
+  <body ng-controller="ApplicationController">
+    <div class="navbar" ng-include="tpl.view('partials/navbar')"></div>
 
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
