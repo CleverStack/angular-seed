@@ -15,17 +15,20 @@ define(['angular'], function (ng) {
   module.config([
     '$routeProvider',
     'CSTemplateProvider',
-    function ($routeProvider, CSTemplate) {
+    'CSSessionHelpersProvider',
+    function ($routeProvider, CSTemplate, CSSessionHelpersProvider) {
+
+      CSSessionHelpersProvider.extend('CSCommonHelpers');
+
+      CSTemplate.setPath('/modules/cs_session/views');
 
       $routeProvider
         .when('/login', {
-          template: 'LOGIN',
-          // templateUrl: CSTemplate.view('login'),
+          templateUrl: CSTemplate.view('login'),
           controller: 'CSLoginController',
           public: true
         })
         .when('/logout', {
-          templateUrl: CSTemplate.view('login'),
           controller: 'CSLogoutController',
           public: true
         });

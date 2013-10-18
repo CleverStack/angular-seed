@@ -23,6 +23,7 @@ define([
 
   // Providers
   'providers/cs_account_provider',
+  'providers/cs_account_helpers_provider',
 
   // Services
   'services/cs_account_service'

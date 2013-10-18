@@ -1,0 +1,45 @@
+<form id="registration" name="form" ng-submit="submitted = true; register()" novalidate>
+
+  <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'email')}">
+    <label for="email">Email address</label>
+    <input type="email" name="email" class="form-control" id="email" ng-model="credentials.email" required />
+    <span class="help-block error" ng-show="helpers.hasError(this, 'email', 'email')">Invalid email</span>
+    <span class="help-block error" ng-show="helpers.hasError(this, 'email', 'required')">Email is required</span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'password')}">
+    <label for="password" class="required">Password</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      class="form-control"
+      ng-model="credentials.password"
+      required
+      _ng-pattern='/(?=^.{8,}$)(?!.*(.)\1\1\1\1)((?=.*\d)|(?=.*\W+))(?!.*\s)(?=.*[A-Z])(?=.*[a-z]).*/'
+    />
+    <span class="help-block error" ng-show="helpers.hasError(this, 'password', 'required')">Password is required</span>
+    <span class="help-block error" ng-show="helpers.hasError(this, 'password', 'pattern')">
+      Password must contain at least 1 uppercase letter, 1 lower case letter and 1 number or special character.
+      No spaces or double quotes or more than 4 consecutive identical characters are allowed. Minimum length is 8 characters.
+    </span>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'passwordConfirmation')}">
+    <label for="passwordConfirmation" class="required">Repeat Password</label>
+    <input
+      type="password"
+      id="passwordConfirmation"
+      name="passwordConfirmation"
+      class="form-control"
+      ng-model="credentials.passwordConfirmation"
+      must-equal-to="credentials.password"
+    />
+    <span class="help-block error" ng-show="helpers.hasError(this, 'passwordConfirmation', 'mustEqualTo')">Passwords must match</span>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Sign in</button>
+  </div>
+
+</form>

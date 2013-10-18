@@ -5,8 +5,10 @@ define(['angular', '../module'], function (ng) {
   .controller('CSLoginController', [
     '$scope',
     'CSSession',
+    'CSSessionHelpers',
     '$log',
-    function ($scope, CSSessionProvider, $log) {
+    function ($scope, CSSessionProvider, CSSessionHelpersProvider, $log) {
+      $scope.helpers = CSSessionHelpersProvider;
 
       $scope.login = function () {
         CSSessionProvider.login($scope.credentials);

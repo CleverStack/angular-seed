@@ -1,8 +1,6 @@
 define(['angular'], function (ng) {
   'use strict';
 
-  console.log('cs_common');
-
   ng.module('cs_common.providers', []);
   ng.module('cs_common.controllers', []);
   ng.module('cs_common.services', []);
@@ -20,15 +18,11 @@ define(['angular'], function (ng) {
     'CSTemplateProvider',
     function ($routeProvider, CSTemplate) {
 
+      CSTemplate.setPath('/modules/cs_common/views');
+
       $routeProvider
-        .when('/', {
-          template: 'HOME',
-          // templateUrl: CSTemplate.view('home'),
-          controller: 'CSHomeController',
-          public: true
-        })
         .when('/error', {
-          templateUrl: CSTemplate.partial('error'),
+          templateUrl: CSTemplate.view('error'),
           public: true
         })
         .otherwise({

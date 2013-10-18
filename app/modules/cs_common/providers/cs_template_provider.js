@@ -57,15 +57,6 @@ define(['angular', '../module'], function (ng) {
       var viewsPath = basePath + '/views/';
 
       /**
-       * @name partialsPath
-       * @type {String}
-       * @propertyOf ngSeed.providers:CSTemplateProvider
-       * @description
-       * The path to the partials.
-       */
-      var partialsPath = viewsPath + 'partials/';
-
-      /**
        * @name extension
        * @type {String}
        * @propertyOf ngSeed.providers:CSTemplateProvider
@@ -91,29 +82,6 @@ define(['angular', '../module'], function (ng) {
       }
 
       /**
-       * @ngdoc method
-       * @methodOf ngSeed.services:CSTemplate
-       * @name partial
-       * @param  {String} section The folder path to look into.
-       * @param  {String} partialName The name of the partial.
-       * @return {String}          The path to the partial.
-       * @description
-       * Utility functions to get the path of a partial.
-       *
-       * This method is also available from CSTemplateProvider
-       */
-      function partial (section, partialName) {
-        var url;
-        if(partialName === undefined) {
-          url = partialsPath+section;
-        } else {
-          url = section + '/partials/' + partialName;
-        }
-        url += extension;
-        return url;
-      }
-
-      /**
        * @description
        * The actual service.
        */
@@ -121,13 +89,11 @@ define(['angular', '../module'], function (ng) {
 
         $get: function () {
           return {
-            view: view,
-            partial: partial
+            view: view
           };
         },
 
         view: view,
-        partial: partial,
 
         /**
          * @ngdoc method
@@ -147,7 +113,6 @@ define(['angular', '../module'], function (ng) {
           }
 
           viewsPath = basePath + path;
-          partialsPath = viewsPath + '/partials';
 
           console.log('CSTemplate: path set to ', viewsPath);
         },

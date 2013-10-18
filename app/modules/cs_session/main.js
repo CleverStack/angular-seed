@@ -23,6 +23,7 @@ define([
 
   // Providers
   'providers/cs_session_provider',
+  'providers/cs_session_helpers_provider',
 
   // Services
   'services/cs_session_service'
