@@ -1,7 +1,7 @@
 define(['angular', 'controllers/home'], function (ng) {
   'use strict';
 
-  describe('Controller: HomeCtrl', function () {
+  describe('Controller: HomeController', function () {
 
     // load the controller's module
     beforeEach(ng.mock.module('app'));
@@ -12,7 +12,7 @@ define(['angular', 'controllers/home'], function (ng) {
     // Initialize the controller and a mock scope
     beforeEach(ng.mock.inject(function ($controller, $rootScope) {
       scope = $rootScope.$new();
-      HomeCtrl = $controller('Home', {
+      HomeCtrl = $controller('HomeController', {
         $scope: scope
       });
     }));

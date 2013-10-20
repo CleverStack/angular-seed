@@ -1,4 +1,4 @@
-require(['./rjs_config'], function (){
+require(['./config'], function (){
   'use strict';
 
   require([

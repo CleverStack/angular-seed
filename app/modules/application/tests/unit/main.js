@@ -1,30 +1,50 @@
 var tests = Object.keys(window.__karma__.files).filter(function (file) {
   'use strict';
-  return (/^\/base\/test\/(.*)\.js$/).test(file) && !/main\.js$/.test(file);
+  return (/^\/base\/(.*)\/tests\/(.*)\.js$/).test(file) && !/main\.js$/.test(file);
 });
 
 var should;
 
-// require.config({
-  // baseUrl: '/base/app'
-// });
-
-  // baseUrl: '/base/app/scripts',
-
-require(['rjs_config'], function (){
-  'use strict';
+// require(['/base/app/modules/application/config.js'], function (){
+  // 'use strict';
 
   require.config({
+    packages: [
+      {
+        name: 'cs_account',
+        location: '/modules/cs_account'
+      },
+      {
+        name: 'cs_common',
+        location: '/modules/cs_common'
+      },
+      {
+        name: 'cs_session',
+        location: '/modules/cs_session'
+      },
+      {
+        name: 'users',
+        location: '/modules/users'
+      }
+    ],
+  // baseUrl: '/modules/application',
+  // paths: {
+    // angular: '/components/angular-unstable/angular'
+  // },
     baseUrl: '/base/app/modules/application',
     paths: {
-      async: '/components/async/lib/async',
-      jquery: '/components/jquery/jquery',
-      underscore: '/components/underscore/underscore',
-      chai: '/components/chai/chai',
-      sinon: '/components/sinon/lib/sinon',
-      'angular-mocks':'../components/angular-mocks/angular-mocks'
+      angular: '../../components/angular-unstable/angular',
+      async: '../../components/async/lib/async',
+      jquery: '../../components/jquery/jquery',
+      underscore: '../../components/underscore/underscore',
+      chai: '../../components/chai/chai',
+      sinon: '../../components/sinon/lib/sinon',
+      'angular-mocks':'../../components/angular-mocks/angular-mocks'
     },
     shim: {
+      angular: {
+        exports: 'angular'
+      },
       'angular-mocks': {
         deps: ['angular']
       },
@@ -56,4 +76,4 @@ require(['rjs_config'], function (){
     });
   });
 
-});
+// });
