@@ -6,7 +6,7 @@ module.exports = function (config) {
     frameworks: ['requirejs', 'jasmine'],
     // list of files / patterns to load in the browser
     files: [
-      'test/unit/main.js',
+      'test/unit/test-main.js',
       { pattern: 'app/scripts/**/*.js', included: false, served: true },
       { pattern: 'app/components/**/*.js', included: false, served: true, watch: false },
       { pattern: 'test/unit/**/*.js', included: false, served: true }
