@@ -86,22 +86,7 @@ require.config({
     },
   },
   deps: tests,
-});
 
-require([
-  'angular',
-  'chai',
-  'app'
-], function (angular, chai, app) {
-  'use strict';
-
-  window.angular = angular;
-  window.chai = chai;
-  should = chai.should();
-  window.expect = chai.expect;
-
-  angular.element(document).ready(function () {
-    angular.bootstrap(document, ['app']);
-    window.__karma__.start();
-  });
+  // start test run, once Require.js is done
+  callback: window.__karma__.start
 });

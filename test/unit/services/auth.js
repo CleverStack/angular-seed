@@ -1,9 +1,15 @@
-define(['services/auth', 'services/user'], function () {
+define(['chai', 'services/auth', 'services/user', ],
+  function (chai) {
   'use strict';
 
   describe('Service: $auth', function () {
 
-    beforeEach(angular.mock.module('app'));
+    // load the controller's module
+    beforeEach(function () {
+      should = chai.should();
+      expect = chai.expect;
+      angular.mock.module('app')
+    });
 
     it('should exist', inject( function( $auth ) {
       expect( $auth ).to.exist;

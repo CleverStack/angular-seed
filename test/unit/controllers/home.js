@@ -1,10 +1,15 @@
-define(['controllers/home'], function () {
+define(['chai', 'controllers/home'],
+  function (chai) {
   'use strict';
 
   describe('Controller: HomeCtrl', function () {
 
-    // load the controller's module
-    beforeEach(angular.mock.module('app'));
+    // load the controller's module & setup chai should and expect
+    beforeEach(function () {
+      should = chai.should();
+      expect = chai.expect;
+      angular.mock.module('app')
+    });
 
     var HomeCtrl
       , scope;
@@ -17,7 +22,7 @@ define(['controllers/home'], function () {
       });
     }));
 
-    it('should attach a list of awesomeThings to the scope', function () {
+    it('should welcome visitors with a hello message', function () {
       scope.welcome.should.equal('Hello there!');
     });
   });
