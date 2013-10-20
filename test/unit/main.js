@@ -5,7 +5,25 @@ var tests = Object.keys(window.__karma__.files).filter(function (file) {
 var should;
 
 require.config({
-  baseUrl: '/base/app/scripts',
+  packages: [
+    {
+      name: 'cs_account',
+      // location: '/modules/cs_account'
+    },
+    {
+      name: 'cs_common',
+      // location: '/modules/cs_common'
+    },
+    {
+      name: 'cs_session',
+      // location: '/modules/cs_session'
+    },
+    {
+      name: 'users',
+      // location: '/modules/users'
+    }
+  ],
+  baseUrl: '/base/app/modules',
   paths: {
     angular: '../components/angular-unstable/angular',
     async: '../components/async/lib/async',
@@ -19,14 +37,21 @@ require.config({
   },
   shim: {
     app: {
-        deps: [
-            'angular',
-            'angular-mocks',
-            'ngResource',
-            'http-auth-interceptor',
-            'chai',
-            'sinon'
-        ]
+      deps: [
+        'angular',
+        'application/app',
+        'cs_account',
+        'cs_common',
+        'cs_session',
+        'users',
+
+        // Controllers
+        'controllers',
+
+        // Testing utility
+        'chai',
+        'sinon'
+      ]
     },
 
     'angular-mocks': {
@@ -34,56 +59,61 @@ require.config({
     },
 
     angular: {
-        exports: 'angular'
+      exports: 'angular'
     },
 
     'http-auth-interceptor': {
-        deps: ['angular']
+      deps: ['angular']
     },
 
     ngResource: {
-        deps: ['angular']
+      deps: ['angular']
     },
 
     underscore: {
-        exports: '_'
+      exports: '_'
     },
 
 
     // Controllers
     controllers: {
-        deps: [
-            'controllers/home',
-            'controllers/login',
-            'controllers/users'
-        ]
+      deps: [
+        'application/scripts/controllers/home_controller',
+        'application/scripts/controllers/application_controller'
+      ]
     },
 
     // Directives
     directives: {
-        deps: [
-            'directives/string-to-number'
-        ]
+      deps: [
+        // 'directives/string-to-number'
+      ]
     },
 
     // Filters
     filters: {
-        deps: [
-            // 'filters/starts-with'
-        ]
+      deps: [
+        // 'filters/starts-with'
+      ]
     },
 
     // Services
     services: {
-        deps: [
-            'services/debug',
-            'services/http-options',
-            'services/auth',
-            'services/user',
-            // 'services/browser-detect',
-            // 'services/generic'
-        ]
+      deps: [
+        // 'services/debug',
+        // 'services/http-options',
+        // 'services/auth',
+        // 'services/user',
+        // 'services/browser-detect',
+        // 'services/generic'
+      ]
     },
+
+    providers: {
+      deps: [
+        'application/scripts/providers/helpers_provider',
+      ]
+    }
   },
   deps: tests,
 });
@@ -91,8 +121,8 @@ require.config({
 require([
   'angular',
   'chai',
-  'app'
-], function (angular, chai, app) {
+  'app',
+], function (angular, chai) {
   'use strict';
 
   window.angular = angular;
