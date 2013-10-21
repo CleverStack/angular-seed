@@ -8,8 +8,7 @@ require.config({
   ],
   paths: {
     underscore: '../../components/underscore/underscore'
-  },
-  shim: {}
+  }
 });
 
 define([

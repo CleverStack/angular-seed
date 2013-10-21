@@ -34,8 +34,8 @@ require(['/base/app/modules/application/config.js'], function (){
     'app',
     'cs_common',
     'cs_session',
-    // 'cs_account',
-    // 'users',
+    'cs_account',
+    'users',
 
     // Controllers
     'scripts/application_controller',

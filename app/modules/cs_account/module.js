@@ -1,12 +1,14 @@
 define(['angular'], function (ng) {
   'use strict';
 
+  ng.module('cs_account.controllers', []);
   ng.module('cs_account.providers', []);
   ng.module('cs_account.controllers', []);
   ng.module('cs_account.services', []);
 
   var module = ng.module('cs_account', [
     'cs_common',
+    'cs_account.controllers',
     'cs_account.providers',
     'cs_account.controllers',
     'cs_account.services'

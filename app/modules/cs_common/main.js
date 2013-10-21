@@ -36,14 +36,14 @@ define([
   'http-auth-interceptor',
 
   // // Directives
-  // 'scripts/string_to_number',
-  // 'scripts/must_equal_to',
+  'scripts/string_to_number',
+  'scripts/must_equal_to',
 
-  // // Filters
-  // 'scripts/starts_with',
+  // Filters
+  'scripts/starts_with',
 
-  // // Services
-  // 'scripts/cs_browser_detect',
-  // 'scripts/cs_resource_factory'
+  // Services
+  'scripts/cs_browser_detect',
+  'scripts/cs_resource_factory'
 
 ]);

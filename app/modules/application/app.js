@@ -6,10 +6,10 @@ define(['angular'], function (ng) {
   ng.module('app.services', []);
 
   var module = ng.module('app', [
-    // 'cs_account',
+    'cs_account',
     'cs_common',
     'cs_session',
-    // 'users',
+    'users',
     'app.providers',
     'app.controllers',
     'app.services'
@@ -22,14 +22,13 @@ define(['angular'], function (ng) {
     'CSHttpOptionsProvider',
     'CSSessionProvider',
     'HelpersProvider',
-    // function ($routeProvider, $locationProvider, HelpersProvider) {
     function ($routeProvider, $locationProvider, CSTemplateProvider, CSHttpOptionsProvider, CSSessionProvider, HelpersProvider) {
 
       HelpersProvider.extend('CSCommonHelpers');
 
       CSTemplateProvider.setPath('/modules/application/views');
 
-      CSHttpOptionsProvider.setDomain('/api');
+      // CSHttpOptionsProvider.setDomain('/api');
 
       CSSessionProvider.setSessionService('CSSessionService');
 
@@ -37,8 +36,7 @@ define(['angular'], function (ng) {
 
       $routeProvider
         .when('/', {
-          // templateUrl: CSTemplateProvider.view('home'),
-          template: 'HOME',
+          templateUrl: CSTemplateProvider.view('home'),
           controller: 'HomeController',
           public: true
         });

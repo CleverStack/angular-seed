@@ -4,10 +4,10 @@ require(['./config'], function (){
   require([
     'angular',
     './app',
-    // 'cs_account',
+    'cs_account',
     'cs_common',
     'cs_session',
-    // 'users',
+    'users',
 
     // Controllers
     'scripts/application_controller',
