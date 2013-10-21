@@ -11,7 +11,7 @@
     "Daniel Young <daniel@clevertech.biz>",
     "Leandro Ostera <leostera@gmail.com>"
   ],
-  "version": "0.0.2",
+  "version": "1.0.2",
   "dependencies": {
     "jquery": "*",
     "es5-shim": "~2.0.8",
