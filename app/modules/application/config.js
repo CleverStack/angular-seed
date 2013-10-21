@@ -1,25 +1,25 @@
 require.config({
+  baseUrl: '/modules/application',
   packages: [
     {
       name: 'cs_account',
-      location: '/modules/cs_account'
+      location: '../cs_account'
     },
     {
       name: 'cs_common',
-      location: '/modules/cs_common'
+      location: '../cs_common'
     },
     {
       name: 'cs_session',
-      location: '/modules/cs_session'
+      location: '../cs_session'
     },
     {
       name: 'users',
-      location: '/modules/users'
+      location: '../users'
     }
   ],
-  baseUrl: '/modules/application',
   paths: {
-    angular: '/components/angular-unstable/angular'
+    angular: '../../components/angular-unstable/angular'
   },
   shim: {
     angular: {

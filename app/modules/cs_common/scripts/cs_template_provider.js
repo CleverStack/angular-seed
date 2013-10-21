@@ -1,4 +1,4 @@
-define(['angular', '../module'], function (ng) {
+define(['angular', 'module'], function (ng) {
   'use strict';
 
   /**
@@ -43,10 +43,19 @@ define(['angular', '../module'], function (ng) {
   ng.module('cs_common.providers')
   .provider('CSTemplate', [
     function(){
-      var basePath = document.getElementsByTagName('base')[0].href;
-      if(basePath[basePath.length - 1] === '/') {
-        basePath = basePath.slice(0, -1);
+      var basePath = '';
+      try {
+        basePath = document.getElementsByTagName('base')[0].href;
+      } catch(e){
+        console.warn('Unable to read href attr from base tag');
       }
+
+      if(basePath.length) {
+        if(basePath[basePath.length - 1] === '/') {
+          basePath = basePath.slice(0, -1);
+        }
+      }
+
       /**
        * @name viewsPath
        * @type {String}

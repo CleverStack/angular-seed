@@ -2,7 +2,6 @@ var tests = Object.keys(window.__karma__.files).filter(function (file) {
   'use strict';
   return (/^\/base\/app\/modules\/(.*)\/tests\/(.*)\.js$/).test(file) && !(/tests\/unit\/main\.js$/).test(file);
 });
-console.log(tests);
 
 var should;
 
@@ -10,7 +9,9 @@ require(['/base/app/modules/application/config.js'], function (){
   'use strict';
 
   require.config({
+     // baseUrl: '/base/app/scripts',
     baseUrl: '/base/app/modules/application',
+    // baseUrl: '/base/app',
     paths: {
       angular: '../../components/angular-unstable/angular',
       chai: '../../components/chai/chai',
@@ -33,16 +34,13 @@ require(['/base/app/modules/application/config.js'], function (){
     'sinon',
     'app',
     'cs_common',
-    'cs_session',
-    // 'cs_account',
-    // 'users',
 
     // Controllers
-    'scripts/application_controller',
-    'scripts/home_controller',
+    'scripts/controllers/application_controller',
+    'scripts/controllers/home_controller',
 
     // Providers
-    'scripts/helpers_provider'
+    'scripts/providers/helpers_provider'
   ], function (angular, chai) {
 
     window.angular = angular;

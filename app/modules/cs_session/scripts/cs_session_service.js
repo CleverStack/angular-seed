@@ -1,4 +1,4 @@
-define(['angular', 'underscore', '../module'], function (ng, _) {
+define(['angular', 'underscore', 'module'], function (ng, _) {
   'use strict';
 
   ng.module('cs_session.services')

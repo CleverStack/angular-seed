@@ -1,13 +1,13 @@
 require.config({
+  baseUrl: window.__karma__ ? '/base/app/modules/cs_session' : 'modules/cs_session',
   packages: [
     {
       name: 'cs_common',
-      location: '/modules/cs_common'
+      location: '../cs_common'
     }
   ],
-  baseUrl: '/modules/cs_session',
   paths: {
-    underscore: '/components/underscore/underscore'
+    underscore: '../../components/underscore/underscore'
   },
   shim: {
     underscore: {
@@ -22,13 +22,13 @@ define([
   'cs_common',
 
   // Controllers
-  'controllers/cs_login_controller',
-  'controllers/cs_logout_controller',
+  'scripts/cs_login_controller',
+  'scripts/cs_logout_controller',
 
   // Providers
-  'providers/cs_session_provider',
-  'providers/cs_session_helpers_provider',
+  'scripts/cs_session_provider',
+  'scripts/cs_session_helpers_provider',
 
   // Services
-  'services/cs_session_service'
+  'scripts/cs_session_service'
 ]);

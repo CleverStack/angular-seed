@@ -1,4 +1,4 @@
-define(['angular', 'controllers/home'], function (ng) {
+define(['angular', 'angular-mocks', '../../../scripts/controllers/home_controller.js'], function (ng) {
   'use strict';
 
   describe('Controller: HomeController', function () {
@@ -18,7 +18,7 @@ define(['angular', 'controllers/home'], function (ng) {
     }));
 
     it('should attach a list of awesomeThings to the scope', function () {
-      scope.welcome.should.equal('Hello there!');
+      scope.welcome.should.equal('Hello clever!');
     });
   });
 

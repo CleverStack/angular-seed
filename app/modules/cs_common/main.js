@@ -1,12 +1,13 @@
+// console.log(window.__karma__);
 require.config({
-  baseUrl: '/modules/cs_common',
+  baseUrl: window.__karma__ ? '/base/app/modules/cs_common' : 'modules/cs_common',
   paths: {
-    angular: '/components/angular-unstable/angular',
-    async: '/components/async/lib/async',
-    jquery: '/components/jquery/jquery',
-    underscore: '/components/underscore/underscore',
-    ngResource: '/components/angular-resource-unstable/angular-resource',
-    'http-auth-interceptor': '/components/angular-http-auth/src/http-auth-interceptor'
+    angular: '../../components/angular-unstable/angular',
+    async: '../../components/async/lib/async',
+    jquery: '../../components/jquery/jquery',
+    underscore: '../../components/underscore/underscore',
+    ngResource: '../../components/angular-resource-unstable/angular-resource',
+    'http-auth-interceptor': '../../components/angular-http-auth/src/http-auth-interceptor'
   },
   shim: {
     angular: {
@@ -22,27 +23,27 @@ require.config({
 });
 
 define([
-  'angular',
+  // 'angular',
   'ngResource',
 
   './module',
 
-  // Providers
-  'providers/cs_common_helpers_provider',
-  'providers/cs_template_provider',
-  'providers/cs_http_options_provider',
+  // // Providers
+  'scripts/cs_common_helpers_provider',
+  'scripts/cs_template_provider',
+  'scripts/cs_http_options_provider',
 
   'http-auth-interceptor',
 
-  // Directives
-  'directives/string_to_number',
-  'directives/must_equal_to',
+  // // Directives
+  // 'scripts/string_to_number',
+  // 'scripts/must_equal_to',
 
-  // Filters
-  'filters/starts_with',
+  // // Filters
+  // 'scripts/starts_with',
 
-  // Services
-  'services/cs_browser_detect',
-  'services/cs_resource_factory'
+  // // Services
+  // 'scripts/cs_browser_detect',
+  // 'scripts/cs_resource_factory'
 
 ]);

@@ -4,17 +4,17 @@ require(['./config'], function (){
   require([
     'angular',
     './app',
-    'cs_account',
+    // 'cs_account',
     'cs_common',
     'cs_session',
-    'users',
+    // 'users',
 
     // Controllers
-    'scripts/controllers/application_controller',
-    'scripts/controllers/home_controller',
+    'scripts/application_controller',
+    'scripts/home_controller',
 
     // Providers
-    'scripts/providers/helpers_provider'
+    'scripts/helpers_provider'
 
   ], function (ng){
 

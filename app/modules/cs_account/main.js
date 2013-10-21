@@ -1,13 +1,13 @@
 require.config({
+  baseUrl: window.__karma__ ? '/base/app/modules/cs_account' : 'modules/cs_account',
   packages: [
     {
       name: 'cs_common',
-      location: '/modules/cs_common'
+      location: '../cs_common'
     }
   ],
-  baseUrl: '/modules/cs_account',
   paths: {
-    underscore: '/components/underscore/underscore'
+    underscore: '../../components/underscore/underscore'
   },
   shim: {}
 });
@@ -18,13 +18,13 @@ define([
   'cs_common',
 
   // Controllers
-  'controllers/cs_account_create_controller',
+  'scripts/cs_account_create_controller',
   // 'controllers/cs_account_confirm_controller',
 
   // Providers
-  'providers/cs_account_provider',
-  'providers/cs_account_helpers_provider',
+  'scripts/cs_account_provider',
+  'scripts/cs_account_helpers_provider',
 
   // Services
-  'services/cs_account_service'
+  'scripts/cs_account_service'
 ]);

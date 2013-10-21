@@ -1,6 +1,6 @@
-define(['angular', '../module'], function (ng) {
+define(['angular', 'module'], function (ng) {
   'use strict';
-  console.log('logout loaded');
+
   ng.module('cs_session.controllers')
   .controller('CSLogoutController', [
     '$scope',

@@ -37,7 +37,7 @@ require.config({
   },
   shim: {
     app: {
-      deps: [
+      deps:  [
         'angular',
         'application/app',
         'cs_account',

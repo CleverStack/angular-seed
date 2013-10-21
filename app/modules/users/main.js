@@ -1,13 +1,13 @@
 require.config({
+  baseUrl: window.__karma__ ? '/base/app/modules/users' : 'modules/users',
   packages: [
     {
       name: 'cs_common',
-      location: '/modules/cs_common'
+      location: '../cs_common'
     }
   ],
-  baseUrl: '/modules/users',
   paths: {
-    angular: '/components/angular-unstable/angular'
+    angular: '../../components/angular-unstable/angular'
   },
   shim: {
     angular: {
@@ -22,6 +22,6 @@ define([
   'cs_common',
 
   // Controllers
-  'controllers/users_controller'
+  'scripts/users_controller'
 
 ]);

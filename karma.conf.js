@@ -6,13 +6,20 @@ module.exports = function (config) {
     frameworks: ['requirejs', 'jasmine'],
     // list of files / patterns to load in the browser
     files: [
-      'test/unit/main.js',
-      { pattern: 'app/modules/application/**/*.js', included: false, served: true },
-      { pattern: 'app/modules/cs_account/**/*.js', included: false, served: true },
-      { pattern: 'app/modules/cs_common/**/*.js', included: false, served: true },
-      { pattern: 'app/modules/cs_session/**/*.js', included: false, served: true },
+      'app/modules/application/tests/unit/main.js',
+      { pattern: 'app/modules/application/scripts/*.js', included: false, served: true },
+      { pattern: 'app/modules/application/*.js', included: false, served: true },
+      { pattern: 'app/modules/cs_account/scripts/*.js', included: false, served: true },
+      { pattern: 'app/modules/cs_account/*.js', included: false, served: true },
+      { pattern: 'app/modules/cs_common/scripts/*.js', included: false, served: true },
+      { pattern: 'app/modules/cs_common/*.js', included: false, served: true },
+      { pattern: 'app/modules/cs_session/scripts/*.js', included: false, served: true },
+      { pattern: 'app/modules/cs_session/*.js', included: false, served: true },
+      { pattern: 'app/modules/users/scripts/*.js', included: false, served: true },
+      { pattern: 'app/modules/users/*.js', included: false, served: true },
+
       { pattern: 'app/components/**/*.js', included: false, served: true, watch: false },
-      { pattern: 'test/unit/**/*.js', included: false, served: true },
+      // { pattern: 'test/unit/**/*.js', included: false, served: true },
     ],
     // list of files to exclude
     exclude: [

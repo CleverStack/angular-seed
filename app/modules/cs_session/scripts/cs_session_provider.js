@@ -1,4 +1,4 @@
-define(['angular', '../module'], function (ng) {
+define(['angular', 'module'], function (ng) {
   'use strict';
 
   /**
@@ -79,6 +79,7 @@ define(['angular', '../module'], function (ng) {
    * immediately be prompted for authentication.
    */
 
+console.log('CSSessionProvider loaded');
   ng.module('cs_session.providers')
   .provider('CSSession', [
     function () {
