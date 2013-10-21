@@ -5,9 +5,10 @@
     "email": "leandro@clevertech.biz"
   },
   "collaborators": [
+    "Richard Gustin <richard@clevertech.biz>",
     "Simon W. Jackson <simon@clevertech.biz>",
     "Daniel Young <daniel@clevertech.biz>",
-    "Richard Gustin <richard@clevertech.biz>"
+    "Leandro Ostera <leostera@gmail.com>"
   ],
   "version": "0.0.2",
   "dependencies": {
