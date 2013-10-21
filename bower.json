@@ -1,8 +1,9 @@
 {
   "name": "app",
   "author": {
-    "name": "Leandro Ostera",
-    "email": "leandro@clevertech.biz"
+    "name": "Clevertech",
+    "email": "info@clevertech.biz",
+    "web": "http://www.clevertech.biz"
   },
   "collaborators": [
     "Richard Gustin <richard@clevertech.biz>",
