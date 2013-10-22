@@ -7,6 +7,8 @@ require.config({
     underscore: '../components/underscore/underscore',
     ngResource: '../components/angular-resource-unstable/angular-resource',
     'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor',
+    ngSanitize: '../components/angular-sanitize/angular-sanitize',
+    webStorageModule: '../components/angular-webstorage/angular-webstorage'
   },
   shim: {
     angular: {
@@ -20,6 +22,18 @@ require.config({
     ngResource: {
       deps: ['angular']
     },
+
+    ngSanitize: {
+      deps: ['angular']
+    },
+
+    webStorageModule: {
+      deps: ['angular']
+    },
+
+    'services/digital-fingerprint': {
+      deps: ['angular', 'jquery']
+    }
   }
 });
 
@@ -27,6 +41,8 @@ require([
     'angular',
     'ngResource',
     'http-auth-interceptor',
+    'ngSanitize',
+    'webStorageModule',
 
     // Init
     'app',
@@ -55,6 +71,7 @@ require([
     'services/user',
     'services/templates',
     'services/browser-detect',
+    'services/digital-fingerprint',
     'services/resource-factory',
     'services/auth',
   ], function (angular) {

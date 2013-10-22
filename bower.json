@@ -21,7 +21,9 @@
     "underscore": "~1.4.4",
     "async": "~0.2.5",
     "bootstrap": "~3.0.0-rc1",
-    "requirejs": "*"
+    "requirejs": "*",
+    "angular-sanitize": "*",
+    "angular-webstorage": "https://github.com/fredricrylander/angular-webstorage.git"
   },
   "devDependencies": {
     "sinon": "*",
