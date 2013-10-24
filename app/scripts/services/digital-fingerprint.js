@@ -15,7 +15,7 @@ define(['angular', 'app'], function (angular, app) {
 
       settings: {
 
-          "grade": "1",  //security grade 1, 2, 3, 4 etc... (1 is better)
+          "grade": "1",  //security etc... (1 is better)
 
           //prints will run if they have a grade >= and active == 1;
           "prints": [
@@ -102,7 +102,7 @@ define(['angular', 'app'], function (angular, app) {
               //check to run print or not
               if (prints[i].check && prints[i].grade >= this.settings.grade) {
                 func = 'get'+(prints[i].name).toLowerCase().replace(' ','');
-                console.log('$digitalFingerprint: running '+ func + '...');
+                // console.log('$digitalFingerprint: running '+ func + '...');
                 delay = prints[i].delay ? prints[i].delay : 0;
                 //the print
                 p = {

@@ -23,13 +23,14 @@ define(['app'], function (app) {
 
     //testing only
     $scope.fill = function () {
-       $scope.credentials = { "username" : "admin", "password" : "abc123" };
+       $scope.credentials = { "username" : "admin", "password" : "abc123" }; //6367c48dd193d56ea7b0baad25b19455e529f5ee
     }
 
     //set session
     $scope.$on('$auth:loginSuccess', function (event, data) {
         console.log("LoginController:",event,data);
-        webStorage.add('SESSION', data.session);
+        console.log("LoginController: session token received.");
+        webStorage.add('SESSION', data.token);
     });
 
     $scope.$on('$auth:loginFailure', function (event, data) {
