@@ -3,9 +3,9 @@ define(['angular', 'app'],function (angular) {
 
   angular
   .module('app.services')
-  .service('UserService',['$http', '$q',
-    function ($http, $q) {
-    
+  .service('UserService',['$http', '$q', 'webStorage'
+  , function ($http, $q, webStorage) {
+
     return {
 
       register: function (credentials) {
@@ -48,10 +48,14 @@ define(['angular', 'app'],function (angular) {
       getCurrentUser: function () {
         var def = $q.defer();
 
-        $http.get('/user/current')
+        var securityCreds = { fingerprint:webStorage.get('fingerprint'), token:webStorage.get('token') };
+        console.log('security token = '+securityCreds.token);
+        console.log(securityCreds);
+
+        $http.post('/user/current', securityCreds)
         .then(function (res) {
           if(Object.keys(res.data).length !== 0) {
-            def.resolve(res.data);
+            def.resolve(res.data.user);
           } else {
             def.reject({error: "Empty object"});
           }

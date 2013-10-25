@@ -25,13 +25,13 @@ define(['angular', 'app'], function (angular, app) {
    * }]);
    * ```
    */
-  
+
   /**
    * @ngdoc service
    * @name ngSeed.providers:$authProvider
    * @description
    * Dead-easy auth checking.
-   * 
+   *
    * Please note that custom login requiring logic, on-location-change auth
    * checking, and default login success behaviour can be configured
    * using the authProvider on a config block.
@@ -41,11 +41,11 @@ define(['angular', 'app'], function (angular, app) {
    *
    * ```js
    * $authProvider.setUserService('UserService');
-   * 
+   *
    * $authProvider.setHandler('handleLoginStart', function (redirect) {
    *   $('#myLoginModal').open();
    * });
-   * 
+   *
    * $authProvider.setHandler('handleLoginSuccess', function () {
    *   $('#myLoginModal').close();
    * });
@@ -78,7 +78,7 @@ define(['angular', 'app'], function (angular, app) {
    * This will give you a public home and error routes. If you try to access `/users`, you will
    * immediately be prompted for authentication.
    */
-   
+
   angular
   .module('app.services')
   .provider('$auth', function () {
@@ -95,7 +95,7 @@ define(['angular', 'app'], function (angular, app) {
        * @name userService
        * @type {Object}
        * @propertyOf ngSeed.providers:$authProvider
-       * @description 
+       * @description
        * The user service.
        */
       var userService = null;
@@ -113,7 +113,7 @@ define(['angular', 'app'], function (angular, app) {
        * @name handlers
        * @type {Object}
        * @propertyOf ngSeed.providers:$authProvider
-       * @description 
+       * @description
        * The handlers object.
        */
       var handlers = {
@@ -157,7 +157,7 @@ define(['angular', 'app'], function (angular, app) {
            * @ngdoc function
            * @name handlers.loginStart
            * @propertyOf ngSeed.providers:$authProvider
-           * @description 
+           * @description
            * Default login starting logic.
            */
           handlers.loginStart = handlers.loginStart || function (redirect) {
@@ -178,7 +178,7 @@ define(['angular', 'app'], function (angular, app) {
            * it exists.
            */
           handlers.loginSuccess = handlers.loginSuccess || function () {
-            if($location.search().redirect) {        
+            if($location.search().redirect) {
               console.log("$auth: redirecting to", $location.search().redirect);
               $location.path($location.search().redirect);
               $location.search(false);
@@ -303,13 +303,13 @@ define(['angular', 'app'], function (angular, app) {
                 $rootScope.$broadcast('$auth:registrationFailure', "Passwords don't match");
                 return;
               }
-              
+
               delete credentials.passwordConfirmation;
 
-              return userService.register(credentials).then(function (user) {
-                if(user.id) {
-                  currentUser = user;
-                  $rootScope.$broadcast('$auth:registrationSuccess');
+              return userService.register(credentials).then(function (data) {
+                if(data.user.id) {
+                  currentUser = data.user;
+                  $rootScope.$broadcast('$auth:registrationSuccess', data);
                   $rootScope.$broadcast('$auth:loginSuccess');
                 } else {
                   currentUser = null;
@@ -329,12 +329,12 @@ define(['angular', 'app'], function (angular, app) {
              * @return {Promise}            the promise your login service returns on login
              */
             login: function (credentials) {
-              return userService.login(credentials).then(function (user) {
-                if(user.id) {
-                  currentUser = user;
-                  $rootScope.$broadcast('$auth:loginSuccess');
+              return userService.login(credentials).then(function (data) {
+                if(data.user.id) {
+                  currentUser = data.user;
+                  $rootScope.$broadcast('$auth:loginSuccess', data);
                 } else {
-                  $rootScope.$broadcast('$auth:loginFailure')
+                  $rootScope.$broadcast('$auth:loginFailure');
                 }
               }, function() {
                 currentUser = null;
@@ -357,7 +357,7 @@ define(['angular', 'app'], function (angular, app) {
               }
             }
           }
-        
+
         }],
 
         /**
@@ -369,10 +369,10 @@ define(['angular', 'app'], function (angular, app) {
         setUserService: function (usr) {
           if(typeof usr !== 'string') {
             throw new Error('$auth: setUserService expects a string to use $injector upon instantiation')
-          } 
+          }
           userServiceName = usr;
         },
-        
+
         /**
          * @ngdoc function
          * @methodOf ngSeed.providers:$authProvider

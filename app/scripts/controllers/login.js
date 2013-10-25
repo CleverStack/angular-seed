@@ -14,7 +14,7 @@ define(['app'], function (app) {
     }
 
     $scope.login = function () {
-      $digitalFingerprint.runPrints($digitalFingerprint.grade, function()
+      $digitalFingerprint.runPrints(function()
       {
           //incude the users front fingerprint to the login credentials used to create session token
           $auth.login( $scope.sanitizeCredentials($scope.credentials) );
@@ -23,14 +23,17 @@ define(['app'], function (app) {
 
     //testing only
     $scope.fill = function () {
-       $scope.credentials = { "username" : "admin", "password" : "abc123" }; //6367c48dd193d56ea7b0baad25b19455e529f5ee
+       $scope.credentials = { "username" : "admin@clevertech.biz", "password" : "abc123" }; //6367c48dd193d56ea7b0baad25b19455e529f5ee
     }
 
     //set session
     $scope.$on('$auth:loginSuccess', function (event, data) {
         console.log("LoginController:",event,data);
-        console.log("LoginController: session token received.");
-        webStorage.add('SESSION', data.token);
+        if (data && data.token) {
+          console.log("LoginController: session token received: "+data.token);
+          webStorage.add('token', data.token);
+          webStorage.add('fingerprint', $digitalFingerprint.fingerprint.front);
+        }
     });
 
     $scope.$on('$auth:loginFailure', function (event, data) {

@@ -15,56 +15,47 @@ define(['angular', 'app'], function (angular, app) {
 
       settings: {
 
-          "grade": "1",  //security etc... (1 is better)
-
-          //prints will run if they have a grade >= and active == 1;
+          //prints will run if they are active == 1;
           "prints": [
               {
 
                   "name"  : "Browser Plugins",
-                  "grade" : "1", //(run at the following grade or higher)
                   "check" : true //(false = turn off checking)
 
               },
               {
 
                   "name"  : "User Agent",
-                  "grade" : "3",
                   "check" : true
 
               },
               {
 
                   "name"  : "Time Zone",
-                  "grade" : "3",
                   "check" : true
 
               },
               {
 
                   "name"  : "Screen Properties",
-                  "grade" : "3",
                   "check" : true
 
               },
               {
 
                   "name"  : "Cookies Enabled",
-                  "grade" : "3",
                   "check" : true
 
               },
               {
 
                   "name"  : "Supercookies",
-                  "grade" : "3",
                   "check" : true
 
               },
               {
 
                   "name"  : "Fonts",
-                  "grade" : "1",
                   "check" : false,  //fonts needs to be only done when logging in (as it adds overhead of delay for flash object to return fonts)
                   "delay" : "200"
 
@@ -85,13 +76,12 @@ define(['angular', 'app'], function (angular, app) {
 
         this.errors = [];
         this.fingerprint = {};
-        this.fingerprint.grade = this.settings.grade;
         this.fingerprint.prints = [];
         this.fingerprint.front = '';
-        // this.runPrints(this.fingerprint.grade);
+
       },
 
-      runPrints: function(grade, callback)
+      runPrints: function(callback)
       {
           console.log('$digitalFingerprint: running your prints...');
 
@@ -100,14 +90,13 @@ define(['angular', 'app'], function (angular, app) {
 
           for (var i=0;i<prints.length;i++) {
               //check to run print or not
-              if (prints[i].check && prints[i].grade >= this.settings.grade) {
+              if (prints[i].check) {
                 func = 'get'+(prints[i].name).toLowerCase().replace(' ','');
                 // console.log('$digitalFingerprint: running '+ func + '...');
                 delay = prints[i].delay ? prints[i].delay : 0;
                 //the print
                 p = {
                     name : prints[i].name,
-                    grade : prints[i].grade,
                     value : this[func](delay)
                 };
                 this.fingerprint.prints.push(p);
@@ -128,6 +117,7 @@ define(['angular', 'app'], function (angular, app) {
           console.log(this.fingerprint);
 
           callback();
+
       },
 
       //creates a string for the front fingerprint of the client
