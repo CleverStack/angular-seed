@@ -31,8 +31,8 @@ define(['app'], function (app) {
         console.log("LoginController:",event,data);
         if (data && data.token) {
           console.log("LoginController: session token received: "+data.token);
-          webStorage.add('token', data.token);
           webStorage.add('fingerprint', $digitalFingerprint.fingerprint.front);
+          webStorage.add('token', data.token);
         }
     });
 

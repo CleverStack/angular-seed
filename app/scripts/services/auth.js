@@ -196,6 +196,8 @@ define(['angular', 'app'], function (angular, app) {
            * it exists.
            */
           handlers.logoutSuccess = handlers.logoutSuccess || function () {
+            localStorage.clear('fingerprint');
+            localStorage.clear('token');
             console.log("$auth: redirecting to /");
             $location.path('/');
           };

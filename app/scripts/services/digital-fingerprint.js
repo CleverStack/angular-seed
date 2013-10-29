@@ -100,7 +100,6 @@ define(['angular', 'app'], function (angular, app) {
                     value : this[func](delay)
                 };
                 this.fingerprint.prints.push(p);
-
               }
           };
 
@@ -127,7 +126,9 @@ define(['angular', 'app'], function (angular, app) {
               str = "", delay = 0;
           for (var i=0;i<_this.fingerprint.prints.length;i++) {
               delay = _this.fingerprint.prints[i].delay ? _this.fingerprint.prints[i].delay+100 : delay;
-              str += JSON.stringify(_this.fingerprint.prints[i].value);
+
+              //typcast to string, replace all whitespace and encode special characters
+              str += encodeURIComponent(new String(_this.fingerprint.prints[i].value).replace(/ /g,''));
           }
           return str;
       },
