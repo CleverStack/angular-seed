@@ -27,6 +27,7 @@
     "sinon": "*",
     "chai": "*",
     "funcunit": "https://github.com/bitovi/funcunit.git",
+    "qunit": "*",
     "syn": "*",
     "steal": "*",
     "angular-mocks": "~1.0.5",

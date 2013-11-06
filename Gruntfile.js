@@ -8,15 +8,28 @@ var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
 
+var fallbackToApp = function(url){
+  var paths = ['/components', '/images', '/scripts', '/styles'];
+  for( var i=0 ; i<paths.length ; i++){
+    if(url.substring(0, paths[i].length) === paths[i]){
+      return '/app' + url;
+    }
+  }
+}
 var fallbackToTest = function (connect) {
   return connect().use(function (req, res, next) {
-    // if(req.url === '/') {
-    //   fs.createReadStream(__dirname+'/app/index.html').pipe(res);
-    //   return;
-    // }
+    
+    if(req.url === '/'){
+      res.writeHead(302, {'location':'/test/e2e/runner.html'});
+      res.end();   
+      return;
+    }
+
+    req.url = fallbackToApp(req.url);
+    
     fs.exists(__dirname+req.url, function (exists) {
       if(exists) {
-        fs.createReadStream(req.url).pipe(res);
+        fs.createReadStream(__dirname+req.url).pipe(res);
       } else {
         fs.createReadStream(__dirname+'/test/e2e/test-index.html').pipe(res);
       }
