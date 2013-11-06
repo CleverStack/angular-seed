@@ -1,5 +1,5 @@
 require.config({
-  baseUrl: '/app/scripts',
+  baseUrl: './scripts',
   paths: {
     angular: '../components/angular-unstable/angular',
     async: '../components/async/lib/async',
