@@ -10,17 +10,22 @@ var mountFolder = function (connect, dir) {
 
 var fallbackToTest = function (connect) {
   return connect().use(function (req, res, next) {
-    // if(req.url === '/') {
-    //   fs.createReadStream(__dirname+'/app/index.html').pipe(res);
-    //   return;
-    // }
-    fs.exists(__dirname+req.url, function (exists) {
-      if(exists) {
-        fs.createReadStream(req.url).pipe(res);
-      } else {
-        fs.createReadStream(__dirname+'/test/e2e/test-index.html').pipe(res);
-      }
-    });
+    console.log(req.url);
+    
+    if(req.url == '/') {
+      console.log("DIRECTORY!");
+      fs.createReadStream(__dirname+'/test/e2e/runner.html').pipe(res);
+      //next();
+    } else {
+     fs.exists(__dirname+req.url, function (exists) {
+        if(exists) {
+          fs.createReadStream(req.url).pipe(res);
+        } else {
+          fs.createReadStream(__dirname+'/test/e2e/test-index.html').pipe(res);
+        }
+      });
+    }
+    
   });
 }
 

@@ -24,7 +24,7 @@
 
 #### Functional Test Running with [FuncUnit](http://funcunit.com):
 1. Run `npm start` or `grunt server`.
-2. The tests will run automatically as `localhost:9090` gets opened.
+2. The tests will run automatically as `localhost:9090/test/e2e/runner.html` gets opened.
 3. Refresh the page to rerun all the tests or click on `rerun` to rerun a specific one.
 
 #### Test Running on [BrowserStack](http://browserstack.com):
