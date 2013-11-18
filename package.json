@@ -10,7 +10,8 @@
     "Richard Gustin <richard@clevertech.biz>",
     "Simon W. Jackson <simon@clevertech.biz>",
     "Daniel Young <daniel@clevertech.biz>",
-    "Leandro Ostera <leostera@gmail.com>"
+    "Leandro Ostera <leostera@gmail.com>",
+    "Sam Deering <sam@clevertech.biz>"
   ],
   "version": "1.0.2",
   "dependencies": {

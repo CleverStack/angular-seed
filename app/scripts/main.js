@@ -18,7 +18,7 @@ require.config({
     },
 
     ngResource: {
-      deps: ['angular']
+      deps: ['angular','jquery']
     },
   }
 });
