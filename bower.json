@@ -1,15 +1,17 @@
 {
   "name": "app",
   "author": {
-    "name": "Leandro Ostera",
-    "email": "leandro@clevertech.biz"
+    "name": "Clevertech",
+    "email": "info@clevertech.biz",
+    "web": "http://www.clevertech.biz"
   },
   "collaborators": [
+    "Richard Gustin <richard@clevertech.biz>",
     "Simon W. Jackson <simon@clevertech.biz>",
     "Daniel Young <daniel@clevertech.biz>",
-    "Richard Gustin <richard@clevertech.biz>"
+    "Leandro Ostera <leostera@gmail.com>"
   ],
-  "version": "0.0.2",
+  "version": "1.0.2",
   "dependencies": {
     "jquery": "*",
     "es5-shim": "~2.0.8",
