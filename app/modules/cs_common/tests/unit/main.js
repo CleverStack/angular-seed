@@ -13,7 +13,7 @@ require(['/base/app/modules/application/config.js'], function (){
     baseUrl: '/base/app/modules/application',
     // baseUrl: '/base/app',
     paths: {
-      angular: '../../components/angular-unstable/angular',
+      angular: '../../components/angular/angular',
       chai: '../../components/chai/chai',
       sinon: '../../components/sinon/lib/sinon',
       'angular-mocks': '../../components/angular-mocks/angular-mocks'

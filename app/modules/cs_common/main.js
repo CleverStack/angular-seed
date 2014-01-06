@@ -2,18 +2,30 @@
 require.config({
   baseUrl: window.__karma__ ? '/base/app/modules/cs_common' : 'modules/cs_common',
   paths: {
-    angular: '../../components/angular-unstable/angular',
+    angular: '../../components/angular/angular',
     async: '../../components/async/lib/async',
     jquery: '../../components/jquery/jquery',
     underscore: '../../components/underscore/underscore',
-    ngResource: '../../components/angular-resource-unstable/angular-resource',
+    ngCookies: '../../../components/angular-cookies/angular-cookies',
+    ngResource: '../../components/angular-resource/angular-resource',
+    ngRoute: '../../components/angular-route/angular-route',
+    ngSanitize: '../../components/angular-sanitize/angular-sanitize',
     'http-auth-interceptor': '../../components/angular-http-auth/src/http-auth-interceptor'
   },
   shim: {
     angular: {
       exports: 'angular'
     },
+    ngCookies: {
+      deps: ['angular']
+    },
     ngResource: {
+      deps: ['angular']
+    },
+    ngRoute: {
+      deps: ['angular']
+    },
+    ngSanitize: {
       deps: ['angular']
     },
     'http-auth-interceptor': {
@@ -24,7 +36,10 @@ require.config({
 
 define([
   // 'angular',
+  'ngCookies',
   'ngResource',
+  'ngRoute',
+  'ngSanitize',
 
   './module',
 

@@ -8,7 +8,10 @@ define(['angular'], function (ng) {
   ng.module('cs_common.filters', []);
 
   var module = ng.module('cs_common', [
+    'ngCookies',
     'ngResource',
+    'ngRoute',
+    'ngSanitize',
     'http-auth-interceptor',
     'cs_common.providers',
     'cs_common.controllers',

@@ -25,11 +25,11 @@ require.config({
   ],
   baseUrl: '/base/app/modules',
   paths: {
-    angular: '../components/angular-unstable/angular',
+    angular: '../components/angular/angular',
     async: '../components/async/lib/async',
     jquery: '../components/jquery/jquery',
     underscore: '../components/underscore/underscore',
-    ngResource: '../components/angular-resource-unstable/angular-resource',
+    ngResource: '../components/angular-resource/angular-resource',
     'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor',
     chai: '../components/chai/chai',
     sinon: '../components/sinon/lib/sinon',

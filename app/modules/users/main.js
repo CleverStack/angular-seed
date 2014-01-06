@@ -7,7 +7,7 @@ require.config({
     }
   ],
   paths: {
-    angular: '../../components/angular-unstable/angular'
+    angular: '../../components/angular/angular'
   },
   shim: {
     angular: {
