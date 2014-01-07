@@ -1,26 +1,22 @@
 {
-  "name": "",
+  "name": "cleverstack-angular-seed",
   "private": true,
   "author": {
     "name": "Clevertech",
-    "email": "info@clevertech.biz",
-    "web": "http://www.clevertech.biz"
+    "email": "admin@cleverstack.io",
+    "web": "http://cleverstack.io"
   },
   "collaborators": [
     "Richard Gustin <richard@clevertech.biz>",
     "Simon W. Jackson <simon@clevertech.biz>",
     "Daniel Young <daniel@clevertech.biz>",
-    "Leandro Ostera <leostera@gmail.com>"
+    "Daniel Durrante <daniel.durante@clevertech.biz>",
+    "Sam Deering <sam@clevertech.biz>"
   ],
-  "version": "1.0.2",
-  "dependencies": {
-    "filesize": "~1.9.3",
-    "optipng-bin": "~0.2.6",
-    "jpegtran-bin": "~0.1.7"
-  },
+  "version": "1.1.0",
+  "dependencies": {},
   "devDependencies": {
-    "docular": "git://github.com/leostera/docular.git",
-    "grunt-docular": "~0.1.1",
+    "grunt-docular": "~0.1.2",
     "grunt-contrib-copy": ">=0.4.x",
     "grunt-contrib-concat": ">=0.1.x",
     "grunt-contrib-jshint": ">=0.3.x",
@@ -28,7 +24,7 @@
     "grunt-contrib-connect": ">=0.2.x",
     "grunt-contrib-clean": ">=0.4.x",
     "grunt-contrib-htmlmin": ">=0.1.x",
-    "grunt-contrib-imagemin": ">=0.1.x",
+    "grunt-contrib-imagemin": ">=0.4.x",
     "grunt-contrib-livereload": ">=0.1.x",
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-less": "~0.6.4",
@@ -49,12 +45,14 @@
     "karma-growl-reporter": "*"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">0.8.0",
+    "npm": "*"
   },
   "scripts": {
     "setup": "node scripts/setup",
     "start": "grunt server",
     "bs-tunnel-karma": "sh scripts/bs-tunnel-karma.sh",
-    "bs-tunnel": "sh scripts/bs-tunnel-connect.sh"
+    "bs-tunnel": "sh scripts/bs-tunnel-connect.sh",
+    "test": "grunt test:travis"
   }
 }

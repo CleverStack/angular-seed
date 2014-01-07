@@ -5,20 +5,21 @@
     "email": "info@clevertech.biz",
     "web": "http://www.clevertech.biz"
   },
+  "version": "1.0.2",
   "collaborators": [
     "Richard Gustin <richard@clevertech.biz>",
     "Simon W. Jackson <simon@clevertech.biz>",
     "Daniel Young <daniel@clevertech.biz>",
-    "Leandro Ostera <leostera@gmail.com>"
+    "Daniel Durrante <daniel.durante@clevertech.biz>",
+    "Sam Deering <sam@clevertech.biz>"
   ],
-  "version": "1.0.2",
   "dependencies": {
     "angular": "1.2.6",
     "angular-cookies": "1.2.6",
-    "angular-http-auth": "1.2.1",
     "angular-resource": "1.2.6",
     "angular-route": "1.2.6",
     "angular-sanitize": "1.2.6",
+    "angular-http-auth": "1.2.1",
     "async": "~0.2.5",
     "bootstrap": "~3.0.3",
     "es5-shim": "~2.1.0",

@@ -224,7 +224,8 @@ module.exports = function (grunt) {
       },
       production: {
         options: {
-          paths: ['app/styles']
+          paths: ['app/styles'],
+          cleancss: true
         },
         files: [
           { '<%= yeoman.app %>/styles/application.css': '<%= yeoman.app %>/styles/less/application.less' },
