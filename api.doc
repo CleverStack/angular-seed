@@ -1,0 +1,12 @@
+@doc overview
+@id index
+@name CleverStack Angular Seed API
+@description
+
+#CleverStack Angular Seed API
+
+This is an example of the front-end API provided by the AngularJS Seed.
+
+<page-list></page-list>
+
+<pager></pager>
