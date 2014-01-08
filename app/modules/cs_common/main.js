@@ -6,7 +6,7 @@ require.config({
     async: '../../components/async/lib/async',
     jquery: '../../components/jquery/jquery',
     underscore: '../../components/underscore/underscore',
-    ngCookies: '../../../components/angular-cookies/angular-cookies',
+    ngCookies: '../../components/angular-cookies/angular-cookies',
     ngResource: '../../components/angular-resource/angular-resource',
     ngRoute: '../../components/angular-route/angular-route',
     ngSanitize: '../../components/angular-sanitize/angular-sanitize',
