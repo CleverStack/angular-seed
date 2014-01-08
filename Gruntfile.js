@@ -1,3 +1,11 @@
+/*
+ * CleverStack.io
+ * https://github.com/clevertech/cleverstack-angular-seed/
+ *
+ * Copyright (c) 2013 Clevertech.biz
+ * Licensed under the MIT license.
+ */
+
 'use strict';
 
 var fs = require('fs');
@@ -96,8 +104,8 @@ module.exports = function (grunt) {
       },
       less: {
         files: [
-          '<%= yeoman.app %>/components/bootstrap/less/{,*/}*.less',
-          '<%= yeoman.app %>/styles/less/{,*/}*.less'
+          '<%= yeoman.app %>/components/bootstrap/less/*.less',
+          '<%= yeoman.app %>/styles/less/**/*.less'
         ],
         tasks: ['less']
       },
@@ -218,8 +226,7 @@ module.exports = function (grunt) {
           paths: ['app/styles']
         },
         files: [
-          { '<%= yeoman.app %>/styles/application.css': '<%= yeoman.app %>/styles/less/application.less' },
-          { '<%= yeoman.app %>/styles/bootstrap.css': '<%= yeoman.app %>/components/bootstrap/less/bootstrap.less' }
+          { '<%= yeoman.app %>/styles/application.css': '<%= yeoman.app %>/styles/less/application.less' }
         ]
       },
       production: {
@@ -228,15 +235,14 @@ module.exports = function (grunt) {
           cleancss: true
         },
         files: [
-          { '<%= yeoman.app %>/styles/application.css': '<%= yeoman.app %>/styles/less/application.less' },
-          { '<%= yeoman.app %>/styles/bootstrap.css': '<%= yeoman.app %>/components/bootstrap/less/bootstrap.less' }
+          { '<%= yeoman.app %>/styles/application.css': '<%= yeoman.app %>/styles/less/application.less' }
         ]
       },
     },
     cssmin: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/styles/screen.css': [
+          '<%= yeoman.dist %>/styles/application.css': [
             '.tmp/styles/{,*/}*.css',
             '<%= yeoman.app %>/styles/{,*/}*.css'
           ]
@@ -330,6 +336,39 @@ module.exports = function (grunt) {
             'home/**/*'
           ]
         }]
+      },
+      bootstrap: {
+        files: [
+          {
+              expand: true,
+              filter: 'isFile',
+              cwd: '<%= yeoman.app %>/components/bootstrap/dist',
+              dest: '<%= yeoman.app %>',
+              src: [
+                'fonts/*'
+              ]
+          },
+          {
+              expand: true,
+              filter: 'isFile',
+              cwd: '<%= yeoman.app %>/components/bootstrap/dist/css',
+              dest: '<%= yeoman.app %>/styles',
+              src: [
+                'bootstrap.css'
+              ]
+          },
+          {
+              expand: true,
+              filter: 'isFile',
+              cwd: '<%= yeoman.app %>/components/bootstrap/less',
+              dest: '<%= yeoman.app %>/styles/less/bootstrap',
+              src: [
+                'variables.less',
+                'mixins.less',
+                'theme.less'
+              ]
+          }
+        ]
       }
     }
   });
@@ -338,6 +377,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('docs', ['clean:docs','docular']);
 
+  //to initialise bootstrap run 'grunt copy:bootstrap'
+
+  grunt.option("force", true); //for less compilation force
   grunt.registerTask('server', [
     'clean:server',
     'livereload-start',
@@ -356,7 +398,7 @@ module.exports = function (grunt) {
     'less',
     'cssmin',
     'htmlmin',
-    'copy',
+    'copy:dist',
     'ngmin',
     'requirejs',
     'rev',
