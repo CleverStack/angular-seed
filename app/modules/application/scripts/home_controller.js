@@ -1,4 +1,4 @@
-define(['angular', 'app'], function (ng) {
+define(['angular', '../module'], function (ng) {
   'use strict';
 
   ng.module('app.controllers')

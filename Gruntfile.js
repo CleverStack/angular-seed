@@ -293,14 +293,14 @@ module.exports = function (grunt) {
       compile: {
         options: {
           name: 'main',
-          baseUrl: 'app/scripts',
-          mainConfigFile: 'app/scripts/main.js',
+          baseUrl: 'app/modules',
           out: '<%=yeoman.dist %>/scripts/scripts.js',
+          findNestedDependencies: true,
           uglify: {
-            beautify: false,
+            beautify: true,
             overwrite: true,
             verbose: true,
-            'no_mangle': true,
+            no_mangle: true,
             copyright: true
           }
         }
