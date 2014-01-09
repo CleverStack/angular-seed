@@ -42,7 +42,9 @@ module.exports = function (config) {
     // - BrowserStack:IE:Win
     // - BrowserStack:iPad 3rd (6.0):iOS
     // browsers: ['BrowserStack:Chrome:Mac'],
-    browsers: ['Chrome'],
+    browsers: [
+      'PhantomJS'
+    ],
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,

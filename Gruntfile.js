@@ -81,27 +81,6 @@ module.exports = function (grunt) {
         }
       ] //groups of documentation to parse
     },
-    watch: {
-      livereload: {
-        files: [
-          '<%= yeoman.app %>/components/bootstrap/{,*/}*.css',
-          '<%= yeoman.app %>/styles/{,*/}*.css',
-          '<%= yeoman.app %>/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/views/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ],
-        tasks: ['livereload']
-      },
-      less: {
-        files: [
-          '<%= yeoman.app %>/components/bootstrap/less/{,*/}*.less',
-          '<%= yeoman.app %>/styles/less/{,*/}*.less'
-        ],
-        tasks: ['less']
-      },
-    },
     connect: {
       options: {
         port: 9000,
@@ -143,6 +122,15 @@ module.exports = function (grunt) {
           port: 9999,
           base: __dirname + '/docs'
         }
+      },
+      coverage: {
+        options: {
+          base: './test/coverage/',
+          directory: './test/coverage/',
+          port: 5555,
+          keepalive: true,
+          livereload: false
+        }
       }
     },
     open: {
@@ -154,6 +142,9 @@ module.exports = function (grunt) {
       },
       docs: {
         url: 'docs/index.html'
+      },
+      coverage: {
+        url: 'http://localhost:5555'
       }
     },
     clean: {
@@ -168,7 +159,8 @@ module.exports = function (grunt) {
         }]
       },
       server: '.tmp',
-      docs: 'docs'
+      docs: 'docs',
+      coverage: './test/coverage'
     },
     jshint: {
       options: {
@@ -330,6 +322,65 @@ module.exports = function (grunt) {
           ]
         }]
       }
+    },
+    // unit testing config
+    karma: {
+      // options {
+      //   configFile: './test-unit.conf.js'
+      // },
+      unit: {
+        configFile: './test-unit.conf.js',
+        autoWatch: false,
+        singleRun: true
+      },
+      unitAuto: {
+        configFile: './test-unit.conf.js',
+        autoWatch: true,
+        singleRun: false
+      },
+      unitCoverage: {
+        configFile: './test-unit.conf.js',
+        autoWatch: false,
+        singleRun: true,
+        reporters: ['progress', 'coverage'],
+        preprocessors: {
+          './app/modules/**/*.js': ['coverage']
+        },
+        coverageReporter: {
+          type : 'html',
+          dir : './test/coverage/'
+        }
+      },
+      travis: {
+        configFile: './test-unit.conf.js',
+        autoWatch: false,
+        singleRun: true,
+        browsers: ['PhantomJS']
+      }
+    },
+    watch: {
+      livereload: {
+        files: [
+          '<%= yeoman.app %>/components/bootstrap/{,*/}*.css',
+          '<%= yeoman.app %>/styles/{,*/}*.css',
+          '<%= yeoman.app %>/{,*/}*.html',
+          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+          '{.tmp,<%= yeoman.app %>}/views/{,*/}*.html',
+          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ],
+        tasks: ['livereload']
+      },
+      less: {
+        files: [
+          '<%= yeoman.app %>/components/bootstrap/less/{,*/}*.less',
+          '<%= yeoman.app %>/styles/less/{,*/}*.less'
+        ],
+        tasks: ['less']
+      },
+      unitTests: {
+        files: '<%= karma.unitAuto.files %>'
+      }
     }
   });
 
@@ -361,6 +412,32 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'docs'
+  ]);
+
+  /* -- TEST TASKS ------------------------------------------------ */
+
+  grunt.registerTask('test', 'Start up the auto unit test server.', [
+    'autotest:unit'
+  ]);
+
+  grunt.registerTask('test:unit', 'Single run of unit tests.', [
+    'karma:unit'
+  ]);
+
+  grunt.registerTask('autotest:unit', 'Start up the auto unit test server.', [
+    'karma:unitAuto',
+    'watch:unitTests'
+  ]);
+
+  grunt.registerTask('test:travis', 'Single run of unit tests for Travis CI.', [
+    'karma:travis'
+  ]);
+
+  grunt.registerTask('test:coverage', 'Run a test coverage report.', [
+    'clean:coverage',
+    'karma:unitCoverage',
+    'open:coverage',
+    'connect:coverage'
   ]);
 
   grunt.registerTask('default', ['build']);
