@@ -42,7 +42,8 @@
     "karma-script-launcher": "*",
     "karma-browserstack-launcher": "*",
     "karma-phantomjs-launcher": "*",
-    "karma-growl-reporter": "*"
+    "karma-growl-reporter": "*",
+    "codepainter": "~0.3.25"
   },
   "engines": {
     "node": ">0.8.0",

@@ -1,27 +1,27 @@
-require(['./config'], function (){
-  'use strict';
+require(['./config'], function() {
+	'use strict';
 
-  require([
-    'angular',
-    './app',
-    'cs_account',
-    'cs_common',
-    'cs_session',
-    'users',
+	require([
+			'angular',
+			'./app',
+			'cs_account',
+			'cs_common',
+			'cs_session',
+			'users',
 
-    // Controllers
-    'scripts/application_controller',
-    'scripts/home_controller',
+			// Controllers
+			'scripts/application_controller',
+			'scripts/home_controller',
 
-    // Providers
-    'scripts/helpers_provider'
+			// Providers
+			'scripts/helpers_provider'
 
-  ], function (ng){
+		], function(ng) {
 
-    ng.element(document).ready(function () {
-      ng.bootstrap(document, ['app']);
-    });
+		ng.element(document).ready(function() {
+			ng.bootstrap(document, ['app']);
+		});
 
-  });
+	});
 
 });

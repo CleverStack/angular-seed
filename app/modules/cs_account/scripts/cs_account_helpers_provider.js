@@ -1,31 +1,31 @@
-define(['angular', 'module'], function (ng) {
-  'use strict';
+define(['angular', 'module'], function(ng) {
+	'use strict';
 
-  ng.module('cs_account.providers')
-  .provider('CSAccountHelpers', [
-    function () {
+	ng.module('cs_account.providers')
+	.provider('CSAccountHelpers', [
+		function() {
 
-      var helpers = {};
-      var inheritedProvider;
+			var helpers = {};
+			var inheritedProvider;
 
-      /**
+			/**
        * @description
        * The actual service.
        */
-      return {
-        $get: [
-          '$injector',
-          function ($injector) {
+			return {
+				$get: [
+						'$injector',
+					function($injector) {
 
-            if(inheritedProvider){
-              var provider = $injector.get(inheritedProvider);
-              if(!provider){
-                throw new Error('Unable to inject "' + inheritedProvider + '"');
-              }
-              ng.copy(provider, helpers);
-            }
+						if (inheritedProvider) {
+							var provider = $injector.get(inheritedProvider);
+							if (!provider) {
+								throw new Error('Unable to inject "' + inheritedProvider + '"');
+							}
+							ng.copy(provider, helpers);
+						}
 
-            /**
+						/**
              * Define your own helper functions here
              *
              * helpers.uppercase = function(string){
@@ -33,28 +33,28 @@ define(['angular', 'module'], function (ng) {
              * }
              */
 
-            return helpers;
+						return helpers;
 
-          }
-        ],
+					}
+					],
 
-        /**
+				/**
          * @ngdoc function
          * @methodOf ngSeed.providers:CSAccountProvider
          * @name setAccountService
          * @param  {String} serviceName the account service name
          */
-        extend: function (providerName) {
-          if(typeof providerName !== 'string') {
-            throw new Error('CSHelpersProvider: extend method expects a string (name of the helpers provider)');
-          }
-          inheritedProvider = providerName;
-        }
+				extend: function(providerName) {
+					if (typeof providerName !== 'string') {
+						throw new Error('CSHelpersProvider: extend method expects a string (name of the helpers provider)');
+					}
+					inheritedProvider = providerName;
+				}
 
-      };
+			};
 
-    }
+		}
 
-  ]);
+		]);
 
 });

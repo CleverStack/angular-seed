@@ -1,7 +1,7 @@
-define(['angular', 'module'], function (ng) {
-  'use strict';
+define(['angular', 'module'], function(ng) {
+	'use strict';
 
-  /**
+	/**
    * @ngdoc service
    * @name ngSeed.services:CSHttpOptions
    * @description
@@ -19,7 +19,7 @@ define(['angular', 'module'], function (ng) {
    * ```
    */
 
-  /**
+	/**
    * @ngdoc service
    * @name ngSeed.providers:CSHttpOptionsProvider
    * @description
@@ -35,20 +35,20 @@ define(['angular', 'module'], function (ng) {
    * ```
    */
 
-  ng.module('cs_common.providers')
-  .provider('CSHttpOptions', [
-    '$httpProvider',
-    function ($httpProvider) {
-     /**
+	ng.module('cs_common.providers')
+	.provider('CSHttpOptions', [
+			'$httpProvider',
+		function($httpProvider) {
+			/**
       * @ngdoc property
       * @name withCredentials
       * @propertyOf ngSeed.providers:CSHttpOptionsProvider
       * @description
       * Should it send session information with every request?
       */
-      var withCredentials = true;
+			var withCredentials = true;
 
-     /**
+			/**
       * @ngdoc property
       * @name domain
       * @propertyOf ngSeed.providers:CSHttpOptionsProvider
@@ -57,11 +57,11 @@ define(['angular', 'module'], function (ng) {
       * it allows you to test the app against a aws server
       * running either in dev, staging or production
       */
-      var domain = 'http://localhost:8080';
+			var domain = 'http://localhost:8080';
 
-      $httpProvider.defaults.withCredentials = withCredentials;
+			$httpProvider.defaults.withCredentials = withCredentials;
 
-      /**
+			/**
        * @ngdoc method
        * @name interceptors.addDomain
        * @methodOf ngSeed.providers:CSHttpOptionsProvider
@@ -74,18 +74,18 @@ define(['angular', 'module'], function (ng) {
        * Note: Hookup the $templates service to get the proper
        * regex. This works for now as is what we are using.
        */
-      $httpProvider.interceptors.push(function () {
-        return {
-          request: function (config) {
-            if(! /views\/(.*).html$/.test(config.url)) {
-              config.url = domain + config.url;
-            }
-            return config;
-          }
-        };
-      });
+			$httpProvider.interceptors.push(function() {
+				return {
+					request: function(config) {
+						if (!/views\/(.*).html$/.test(config.url)) {
+							config.url = domain + config.url;
+						}
+						return config;
+					}
+				};
+			});
 
-      /*
+			/*
        * @name Unauthorized
        * @methodOf ngSeed.services:CSHttpOptions
        * @param  {Object} $q the promise service
@@ -97,54 +97,54 @@ define(['angular', 'module'], function (ng) {
        * Note: Hookup the $templates service to get the proper
        * regex. This works for now as is what we are using.
        */
-      // $httpProvider.interceptors.push(['$rootScope', '$q',function ($rootScope, $q) {
-      //   return {
-      //     response: function (res) {
-      //       if(res.status === 401) {
-      //         $rootScope.$broadcast('$auth:loginRequired');
-      //       }
-      //       return res.data;
-      //     }
-      //   }
-      // }]);
+			// $httpProvider.interceptors.push(['$rootScope', '$q',function ($rootScope, $q) {
+			//   return {
+			//     response: function (res) {
+			//       if(res.status === 401) {
+			//         $rootScope.$broadcast('$auth:loginRequired');
+			//       }
+			//       return res.data;
+			//     }
+			//   }
+			// }]);
 
-      return {
-        $get: function () {
-          return {
-            withCredentials: withCredentials,
-            domain: domain
-          };
-        },
+			return {
+				$get: function() {
+					return {
+						withCredentials: withCredentials,
+						domain: domain
+					};
+				},
 
-        /**
+				/**
          * @ngdoc method
          * @name setDomain
          * @methodOf ngSeed.providers:CSHttpOptionsProvider
          * @param  {String} uri The domain.
          */
-        setDomain: function (uri) {
-          if(typeof uri !== 'string') {
-            throw new Error('CSHttpOptions: expecting string for domain');
-          }
-          domain = uri;
-        },
+				setDomain: function(uri) {
+					if (typeof uri !== 'string') {
+						throw new Error('CSHttpOptions: expecting string for domain');
+					}
+					domain = uri;
+				},
 
-        /**
+				/**
          * @ngdoc method
          * @name setWithCredentials
          * @methodOf ngSeed.providers:CSHttpOptionsProvider
          * @param  {Boolean} value Should it send credentials?
          */
-        setWithCredentials: function (value) {
-          if(typeof value !== 'boolean') {
-            throw new Error('CSHttpOptions: expecting value to be boolean');
-          }
-          withCredentials = value;
-        }
-      };
+				setWithCredentials: function(value) {
+					if (typeof value !== 'boolean') {
+						throw new Error('CSHttpOptions: expecting value to be boolean');
+					}
+					withCredentials = value;
+				}
+			};
 
-    }
+		}
 
-  ]);
+		]);
 
 });

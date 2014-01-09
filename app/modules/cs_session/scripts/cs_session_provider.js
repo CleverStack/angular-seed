@@ -1,7 +1,7 @@
-define(['angular', 'module'], function (ng) {
-  'use strict';
+define(['angular', 'module'], function(ng) {
+	'use strict';
 
-  /**
+	/**
    * @ngdoc service
    * @name ngSeed.services:CSSession
    * @description
@@ -26,7 +26,7 @@ define(['angular', 'module'], function (ng) {
    * ```
    */
 
-  /**
+	/**
    * @ngdoc service
    * @name ngSeed.providers:CSSessionProvider
    * @description
@@ -79,96 +79,96 @@ define(['angular', 'module'], function (ng) {
    * immediately be prompted for authentication.
    */
 
-  ng.module('cs_session.providers')
-  .provider('CSSession', [
-    function () {
-      /**
+	ng.module('cs_session.providers')
+	.provider('CSSession', [
+		function() {
+			/**
        * @name currentUser
        * @type {Object}
        * @propertyOf ngSeed.providers:CSSessionProvider
        * @description
        * the logged in user or undefined
        */
-      var currentUser = null;
+			var currentUser = null;
 
-      /**
+			/**
        * @name sessionService
        * @type {Object}
        * @propertyOf ngSeed.providers:CSSessionProvider
        * @description
        * The user service.
        */
-      var sessionService = null;
+			var sessionService = null;
 
-      /**
+			/**
        * @name sessionServiceName
        * @type {String}
        * @propertyOf ngSeed.providers:CSSessionProvider
        * @description
        * The name of the service to $inject.
        */
-      var sessionServiceName = 'CSSessionService';
+			var sessionServiceName = 'CSSessionService';
 
-      /**
+			/**
        * @name handlers
        * @type {Object}
        * @propertyOf ngSeed.providers:CSSessionProvider
        * @description
        * The handlers object.
        */
-      var handlers = {
-        loginStart: null,
-        loginSuccess: null,
-        logoutSuccess: null,
-        locationChange: null,
-      };
+			var handlers = {
+				loginStart: null,
+				loginSuccess: null,
+				logoutSuccess: null,
+				locationChange: null,
+			};
 
-      /**
+			/**
        * @description
        * The actual service.
        */
-      return {
+			return {
 
-        $get: ['$rootScope', '$location', '$route', '$injector',
-        function ($rootScope, $location, $route, $injector) {
+				$get: ['$rootScope', '$location', '$route', '$injector',
+					function($rootScope, $location, $route, $injector) {
 
-          if(!sessionService && sessionServiceName) {
-            sessionService = $injector.get(sessionServiceName);
-          }
+						if (!sessionService && sessionServiceName) {
+							sessionService = $injector.get(sessionServiceName);
+						}
 
-          if (!sessionService) {
-            throw new Error('CSSessionProvider: please configure a sessionService');
-          }
+						if (!sessionService) {
+							throw new Error('CSSessionProvider: please configure a sessionService');
+						}
 
-          if (!handlers.loginStart) {
-            console.log('CSSessionProvider: using default loginStart method');
-          }
+						if (!handlers.loginStart) {
+							console.log('CSSessionProvider: using default loginStart method');
+						}
 
-          if (!handlers.loginSuccess) {
-            console.log('CSSessionProvider: using default loginSuccess method');
-          }
+						if (!handlers.loginSuccess) {
+							console.log('CSSessionProvider: using default loginSuccess method');
+						}
 
-          if (!handlers.locationChange) {
-            console.log('CSSessionProvider: using default locationChange method');
-          }
+						if (!handlers.locationChange) {
+							console.log('CSSessionProvider: using default locationChange method');
+						}
 
-          /**
+						/**
            * @ngdoc function
            * @name handlers.loginStart
            * @propertyOf ngSeed.providers:CSSessionProvider
            * @description
            * Default login starting logic.
            */
-          handlers.loginStart = handlers.loginStart || function (redirect) {
-            console.log('CSSessionProvider: redirecting to /login');
-            $location.path('/login');
-            $location.search({
-              redirect: encodeURIComponent(redirect)
-            });
-            return;
-          };
+						handlers.loginStart = handlers.loginStart || function(redirect) {
+							console.log('CSSessionProvider: redirecting to /login');
+							$location.path('/login');
+							$location.search({
+								redirect: encodeURIComponent(redirect)
+							});
+							return;
+						};
 
-          /**
+						/**
            * @ngdoc function
            * @name handlers.loginSuccess
            * @propertyOf ngSeed.providers:CSSessionProvider
@@ -176,17 +176,17 @@ define(['angular', 'module'], function (ng) {
            * This method redirects the user to the redirect search term if
            * it exists.
            */
-          handlers.loginSuccess = handlers.loginSuccess || function () {
-            if($location.search().redirect) {
-              console.log('CSSessionProvider: redirecting to', $location.search().redirect);
-              $location.path($location.search().redirect);
-              $location.search(false);
-            } else {
-              $location.path('/');
-            }
-          };
+						handlers.loginSuccess = handlers.loginSuccess || function() {
+							if ($location.search().redirect) {
+								console.log('CSSessionProvider: redirecting to', $location.search().redirect);
+								$location.path($location.search().redirect);
+								$location.search(false);
+							} else {
+								$location.path('/');
+							}
+						};
 
-          /**
+						/**
            * @ngdoc function
            * @name handlers.loginSuccess
            * @propertyOf ngSeed.providers:CSSessionProvider
@@ -194,12 +194,12 @@ define(['angular', 'module'], function (ng) {
            * This method redirects the user to the redirect search term if
            * it exists.
            */
-          handlers.logoutSuccess = handlers.logoutSuccess || function () {
-            console.log('CSSessionProvider: redirecting to /');
-            $location.path('/');
-          };
+						handlers.logoutSuccess = handlers.logoutSuccess || function() {
+							console.log('CSSessionProvider: redirecting to /');
+							$location.path('/');
+						};
 
-          /**
+						/**
            * @ngdoc function
            * @name handlers.locationChange
            * @propertyOf ngSeed.providers:CSSessionProvider
@@ -207,159 +207,159 @@ define(['angular', 'module'], function (ng) {
            * This method takes a user navigating, does a quick auth check
            * and if everything is alright proceeds.
            */
-          handlers.locationChange = handlers.locationChange || function (event, next, current) {
-            next = '/' + next.split('/').splice(3).join('/').split('?')[0];
-            if(currentUser === null || !currentUser.id){
-              var route = $route.routes[next] || false;
-              console.log('CSSessionProvider: Guest access to', next);
-              console.log('CSSessionProvider:', next, 'is', route.public ? 'public' : 'private');
-              if(route && !route.public) {
-                $rootScope.$broadcast('CSSessionProvider:loginStart');
-                handlers.loginStart(next.substr(1));
-              }
-            } else {
-              console.log('CSSessionProvider: proceeding to load', next);
-            }
-          };
+						handlers.locationChange = handlers.locationChange || function(event, next, current) {
+							next = '/' + next.split('/').splice(3).join('/').split('?')[0];
+							if (currentUser === null || !currentUser.id) {
+								var route = $route.routes[next] || false;
+								console.log('CSSessionProvider: Guest access to', next);
+								console.log('CSSessionProvider:', next, 'is', route.public ? 'public' : 'private');
+								if (route && !route.public) {
+									$rootScope.$broadcast('CSSessionProvider:loginStart');
+									handlers.loginStart(next.substr(1));
+								}
+							} else {
+								console.log('CSSessionProvider: proceeding to load', next);
+							}
+						};
 
-          /**
+						/**
            * @description
            * $rootScope hookups
            */
-          $rootScope.$on('$locationChangeStart', function (event, next, current) {
-            if(!$route.current) {
-              console.log('CSSessionProvider: Welcome newcomer!');
-              console.log('CSSessionProvider: Checking your session...');
-              sessionService.getCurrentUser().then(function (user) {
-                currentUser = user;
-                console.log('CSSessionProvider: we got', user);
-                if(typeof handlers.locationChange === 'function') {
-                  handlers.locationChange(event, next, current);
-                }
-              }, function (err) {
-                console.log('CSSessionProvider: request failed');
-                console.log('CSSessionProvider: proceeding as guest.');
-                if(typeof handlers.locationChange === 'function') {
-                  handlers.locationChange(event, next, current);
-                }
-              });
-            } else {
-              if(typeof handlers.locationChange === 'function') {
-                handlers.locationChange(event, next, current);
-              }
-            }
-          });
+						$rootScope.$on('$locationChangeStart', function(event, next, current) {
+							if (!$route.current) {
+								console.log('CSSessionProvider: Welcome newcomer!');
+								console.log('CSSessionProvider: Checking your session...');
+								sessionService.getCurrentUser().then(function(user) {
+									currentUser = user;
+									console.log('CSSessionProvider: we got', user);
+									if (typeof handlers.locationChange === 'function') {
+										handlers.locationChange(event, next, current);
+									}
+								}, function(err) {
+									console.log('CSSessionProvider: request failed');
+									console.log('CSSessionProvider: proceeding as guest.');
+									if (typeof handlers.locationChange === 'function') {
+										handlers.locationChange(event, next, current);
+									}
+								});
+							} else {
+								if (typeof handlers.locationChange === 'function') {
+									handlers.locationChange(event, next, current);
+								}
+							}
+						});
 
-          $rootScope.$on('CSSessionProvider:loginSuccess', function (event, next, current) {
-            if(typeof handlers.locationChange === 'function') {
-              handlers.loginSuccess(event, next, current);
-            }
-          });
+						$rootScope.$on('CSSessionProvider:loginSuccess', function(event, next, current) {
+							if (typeof handlers.locationChange === 'function') {
+								handlers.loginSuccess(event, next, current);
+							}
+						});
 
-          $rootScope.$on('CSSessionProvider:logoutSuccess', function () {
-            if(typeof handlers.logoutSuccess === 'function') {
-              handlers.logoutSuccess();
-            }
-          });
+						$rootScope.$on('CSSessionProvider:logoutSuccess', function() {
+							if (typeof handlers.logoutSuccess === 'function') {
+								handlers.logoutSuccess();
+							}
+						});
 
-          $rootScope.$on('CSSessionProvider:loginRequired', function () {
-            console.log('CSSessionProvider: login was required');
-            $location.path('/login');
-          });
+						$rootScope.$on('CSSessionProvider:loginRequired', function() {
+							console.log('CSSessionProvider: login was required');
+							$location.path('/login');
+						});
 
-          return {
-            /**
+						return {
+							/**
              * @name getCurrentUser
              * @ngdoc function
              * @methodOf ngSeed.services:CSSession
              * @return {Object} the current user
              */
-            getCurrentUser: function () {
-              return currentUser;
-            },
+							getCurrentUser: function() {
+								return currentUser;
+							},
 
-            /**
+							/**
              * @name isLoggedIn
              * @ngdoc function
              * @methodOf ngSeed.services:CSSession
              * @return {Boolean} true or false if there is or not a current user
              */
-            isLoggedIn: function () {
-              return !!currentUser;
-              // return (currentUser === null || !currentUser.id) ? false : true;
-            },
+							isLoggedIn: function() {
+								return !!currentUser;
+								// return (currentUser === null || !currentUser.id) ? false : true;
+							},
 
 
-            /**
+							/**
              * @name login
              * @ngdoc function
              * @methodOf ngSeed.services:CSSession
              * @param  {Object} credentials the credentials to be passed to the login service
              * @return {Promise}            the promise your login service returns on login
              */
-            login: function (credentials) {
-              return sessionService.login(credentials).then(function (user) {
-                if(user.id) {
-                  currentUser = user;
-                  $rootScope.$broadcast('CSSessionProvider:loginSuccess');
-                } else {
-                  $rootScope.$broadcast('CSSessionProvider:loginFailure');
-                }
-              }, function() {
-                currentUser = null;
-                $rootScope.$broadcast('CSSessionProvider:loginFailure');
-              });
-            },
+							login: function(credentials) {
+								return sessionService.login(credentials).then(function(user) {
+									if (user.id) {
+										currentUser = user;
+										$rootScope.$broadcast('CSSessionProvider:loginSuccess');
+									} else {
+										$rootScope.$broadcast('CSSessionProvider:loginFailure');
+									}
+								}, function() {
+									currentUser = null;
+									$rootScope.$broadcast('CSSessionProvider:loginFailure');
+								});
+							},
 
-            /**
+							/**
              * @name logout
              * @ngdoc function
              * @methodOf ngSeed.services:CSSession
              * @return {Promise} the promise your login service returns on logout
              */
-            logout: function () {
-              $rootScope.$broadcast('CSSessionProvider:logoutSuccess');
-              if(currentUser && currentUser.id) {
-                return sessionService.logout().then(function () {
-                  currentUser = null;
-                });
-              }
-            },
+							logout: function() {
+								$rootScope.$broadcast('CSSessionProvider:logoutSuccess');
+								if (currentUser && currentUser.id) {
+									return sessionService.logout().then(function() {
+										currentUser = null;
+									});
+								}
+							},
 
-            /**
+							/**
              * @name authenticate
              * @ngdoc function
              * @methodOf ngSeed.services:CSSession
              * @return {Promise} the promise your login service returns on logout
              */
-            authenticate: function (user) {
-              if(!user || !user.id){
-                throw new Error('Unable to authenticate with', user);
-              }
-              currentUser = user;
-              $rootScope.$broadcast('CSSessionProvider:loginSuccess');
-              $rootScope.$broadcast('CSSessionProvider:authenticated');
-            }
+							authenticate: function(user) {
+								if (!user || !user.id) {
+									throw new Error('Unable to authenticate with', user);
+								}
+								currentUser = user;
+								$rootScope.$broadcast('CSSessionProvider:loginSuccess');
+								$rootScope.$broadcast('CSSessionProvider:authenticated');
+							}
 
 
-          };
+						};
 
-        }],
+					}],
 
-        /**
+				/**
          * @ngdoc function
          * @methodOf ngSeed.providers:CSSessionProvider
          * @name setSessionService
          * @param  {String} usr the user service name
          */
-        setSessionService: function (serviceName) {
-          if(typeof serviceName !== 'string') {
-            throw new Error('CSSessionProvider: setSessionService expects a string to use $injector upon instantiation');
-          }
-          sessionServiceName = serviceName;
-        },
+				setSessionService: function(serviceName) {
+					if (typeof serviceName !== 'string') {
+						throw new Error('CSSessionProvider: setSessionService expects a string to use $injector upon instantiation');
+					}
+					sessionServiceName = serviceName;
+				},
 
-        /**
+				/**
          * @ngdoc function
          * @methodOf ngSeed.providers:CSSessionProvider
          * @name setHandler
@@ -368,24 +368,24 @@ define(['angular', 'module'], function (ng) {
          * @description
          * Replaces one of the default handlers.
          */
-        setHandler: function (key, foo) {
-          if( key.substr(0, 6) !== 'handle' ) {
-            throw new Error('CSSessionProvider: Expecting a handler name that starts with \'handle\'.');
-          }
+				setHandler: function(key, foo) {
+					if (key.substr(0, 6) !== 'handle') {
+						throw new Error("CSSessionProvider: Expecting a handler name that starts with 'handle'.");
+					}
 
-          if ( !handlers.hasOwnProperty(key) ) {
-            throw new Error('CSSessionProvider: handle name "' + key + '" is not a valid property.');
-          }
+					if (!handlers.hasOwnProperty(key)) {
+						throw new Error('CSSessionProvider: handle name "' + key + '" is not a valid property.');
+					}
 
-          if ( typeof foo !== 'function') {
-            throw new Error('CSSessionProvider: foo is not a function.');
-          }
+					if (typeof foo !== 'function') {
+						throw new Error('CSSessionProvider: foo is not a function.');
+					}
 
-          handlers[key] = foo;
-        }
-      };
-    }
+					handlers[key] = foo;
+				}
+			};
+		}
 
-  ]);
+		]);
 
 });

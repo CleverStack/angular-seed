@@ -1,7 +1,7 @@
-define(['angular', 'module'], function (ng) {
-  'use strict';
+define(['angular', 'module'], function(ng) {
+	'use strict';
 
-  /**
+	/**
    * @ngdoc service
    * @name ngSeed.services:CSTemplate
    * @description
@@ -22,7 +22,7 @@ define(['angular', 'module'], function (ng) {
    * The extension can be changed using `CSTemplateProvider.setExtension`.
    */
 
-  /**
+	/**
    * @ngdoc service
    * @name ngSeed.providers:CSTemplateProvider
    * @description
@@ -40,41 +40,41 @@ define(['angular', 'module'], function (ng) {
    * ```
    */
 
-  ng.module('cs_common.providers')
-  .provider('CSTemplate', [
-    function(){
-      var basePath = '';
-      try {
-        basePath = document.getElementsByTagName('base')[0].href;
-      } catch(e){
-        console.warn('Unable to read href attr from base tag');
-      }
+	ng.module('cs_common.providers')
+	.provider('CSTemplate', [
+		function() {
+			var basePath = '';
+			try {
+				basePath = document.getElementsByTagName('base')[0].href;
+			} catch(e) {
+					console.warn('Unable to read href attr from base tag');
+				}
 
-      if(basePath.length) {
-        if(basePath[basePath.length - 1] === '/') {
-          basePath = basePath.slice(0, -1);
-        }
-      }
+			if (basePath.length) {
+				if (basePath[basePath.length - 1] === '/') {
+					basePath = basePath.slice(0, -1);
+				}
+			}
 
-      /**
+			/**
        * @name viewsPath
        * @type {String}
        * @propertyOf ngSeed.providers:CSTemplateProvider
        * @description
        * The path to the views.
        */
-      var viewsPath = basePath + '/views/';
+			var viewsPath = basePath + '/views/';
 
-      /**
+			/**
        * @name extension
        * @type {String}
        * @propertyOf ngSeed.providers:CSTemplateProvider
        * @description
        * The extension of the partials.
        */
-      var extension = '.html';
+			var extension = '.html';
 
-      /**
+			/**
        * @ngdoc method
        * @methodOf ngSeed.services:CSTemplate
        * @name view
@@ -85,26 +85,26 @@ define(['angular', 'module'], function (ng) {
        *
        * This method is also available from CSTemplateProvider
        */
-      function view (viewName) {
-        // console.log('CSTemplate:', viewsPath + viewName + extension);
-        return viewsPath + viewName + extension;
-      }
+			function view (viewName) {
+				// console.log('CSTemplate:', viewsPath + viewName + extension);
+				return viewsPath + viewName + extension;
+			}
 
-      /**
+			/**
        * @description
        * The actual service.
        */
-      return {
+			return {
 
-        $get: function () {
-          return {
-            view: view
-          };
-        },
+				$get: function() {
+					return {
+						view: view
+					};
+				},
 
-        view: view,
+				view: view,
 
-        /**
+				/**
          * @ngdoc method
          * @methodOf ngSeed.providers:CSTemplateProvider
          * @name setPath
@@ -112,21 +112,21 @@ define(['angular', 'module'], function (ng) {
          * @description
          * Changes the path of the views folder.
          */
-        setPath: function (path) {
-          if ( typeof path !== 'string') {
-            throw new Error('CSTemplate: expecting a string for path.');
-          }
+				setPath: function(path) {
+					if (typeof path !== 'string') {
+						throw new Error('CSTemplate: expecting a string for path.');
+					}
 
-          if(path[path.length - 1] !== '/') {
-            path += '/';
-          }
+					if (path[path.length - 1] !== '/') {
+						path += '/';
+					}
 
-          viewsPath = basePath + path;
+					viewsPath = basePath + path;
 
-          // console.log('CSTemplate: path set to ', viewsPath);
-        },
+					// console.log('CSTemplate: path set to ', viewsPath);
+				},
 
-        /**
+				/**
          * @ngdoc method
          * @methodOf ngSeed.providers:CSTemplateProvider
          * @name setExtension
@@ -134,22 +134,22 @@ define(['angular', 'module'], function (ng) {
          * @description
          * Changes the extension of the views files.
          */
-        setExtension: function (ext) {
-          if ( typeof ext !== 'string') {
-            throw new Error('CSTemplate: expecting a string for extension.');
-          }
+				setExtension: function(ext) {
+					if (typeof ext !== 'string') {
+						throw new Error('CSTemplate: expecting a string for extension.');
+					}
 
-          if(ext.substr(0) !== '.') {
-            ext = '.' + ext;
-          }
+					if (ext.substr(0) !== '.') {
+						ext = '.' + ext;
+					}
 
-          extension = ext;
+					extension = ext;
 
-        }
+				}
 
-      };
+			};
 
-    }
-  ]);
+		}
+		]);
 
 });

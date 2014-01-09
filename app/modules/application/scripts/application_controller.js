@@ -1,21 +1,21 @@
-define(['angular', 'app'], function (ng) {
-  'use strict';
+define(['angular', 'app'], function(ng) {
+	'use strict';
 
-  ng.module('app.controllers')
-  .controller('ApplicationController', [
-    '$scope',
-    'Helpers',
-    'CSTemplate',
-    'CSSession',
-    function ($scope, HelpersProvider, CSTemplateProvider, CSSessionProvider) {
-      $scope.helpers = HelpersProvider;
-      $scope.tpl = CSTemplateProvider;
+	ng.module('app.controllers')
+	.controller('ApplicationController', [
+			'$scope',
+			'Helpers',
+			'CSTemplate',
+			'CSSession',
+		function($scope, HelpersProvider, CSTemplateProvider, CSSessionProvider) {
+			$scope.helpers = HelpersProvider;
+			$scope.tpl = CSTemplateProvider;
 
-      $scope.$watch(CSSessionProvider.getCurrentUser, function (user) {
-        $scope.currentUser = user || false;
-      });
+			$scope.$watch(CSSessionProvider.getCurrentUser, function(user) {
+				$scope.currentUser = user || false;
+			});
 
-    }
+		}
 
-  ]);
+		]);
 });

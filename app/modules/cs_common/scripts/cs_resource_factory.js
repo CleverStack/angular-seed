@@ -1,14 +1,14 @@
-define(['angular', 'module'], function (ng) {
-  'use strict';
+define(['angular', 'module'], function(ng) {
+	'use strict';
 
-  /**
+	/**
    * @ngdoc service
    * @name ngSeed.services:$resourceFactory
    * @description
    * A service used to generate and register resources.
    */
 
-  /**
+	/**
    * @ngdoc function
    * @name ngSeed.services:ResourceFactory
    * @methodOf ngSeed.services:$resourceFactory
@@ -24,9 +24,9 @@ define(['angular', 'module'], function (ng) {
    *   .factory('ResourceService', ResourceFactory('resource'));
    * ```
    */
-  function ResourceFactory ( resourceName ) {
+	function ResourceFactory (resourceName) {
 
-    /**
+		/**
      * @ngdoc function
      * @name builder
      * @methodOf ngSeed.services:$resourceFactory
@@ -39,28 +39,28 @@ define(['angular', 'module'], function (ng) {
      *
      * @return {resource} The actual resource for resourceName.
      */
-    var builder = function ( $resource, $httpOptions ) {
-      var url = $httpOptions.domain+'/'+resourceName+'/:id';
-      var defaults = {};
-      var actions =  {
-        'get':    {method:'GET'},
-        'query':  {method:'GET`', isArray:true},
-        'save':   {method:'PUT'},
-        'create': {method:'POST'},
-        'destroy':{method:'DELETE'},
-      };
-      return $resource(url, defaults, actions);
-    };
+		var builder = function($resource, $httpOptions) {
+			var url = $httpOptions.domain + '/' + resourceName + '/:id';
+			var defaults = {};
+			var actions =  {
+				'get':    {method:'GET'},
+				'query':  {method:'GET`', isArray:true},
+				'save':   {method:'PUT'},
+				'create': {method:'POST'},
+				'destroy':{method:'DELETE'},
+			};
+			return $resource(url, defaults, actions);
+		};
 
-    return ['$resource', '$httpOptions', builder];
-  }
+		return ['$resource', '$httpOptions', builder];
+	}
 
-  ng.module('cs_common.services')
-  .service('CSResourceFactory',function () {
-    return function (resourceName) {
-      ng
-      .module('app.resources') /* TODO: Convert this to provider and make module name configurable */
-      .factory(resourceName, ResourceFactory(resourceName));
-    };
-  });
+	ng.module('cs_common.services')
+	.service('CSResourceFactory',function() {
+		return function(resourceName) {
+			ng
+			.module('app.resources') /* TODO: Convert this to provider and make module name configurable */
+			.factory(resourceName, ResourceFactory(resourceName));
+		};
+	});
 });
