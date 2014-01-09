@@ -38,10 +38,9 @@
     "karma": "*",
     "karma-junit-reporter": "*",
     "karma-coverage": "*",
-    "karma-chrome-launcher": "*",
     "karma-script-launcher": "*",
+    "karma-safari-launcher": "*",
     "karma-browserstack-launcher": "*",
-    "karma-phantomjs-launcher": "*",
     "karma-growl-reporter": "*"
   },
   "engines": {

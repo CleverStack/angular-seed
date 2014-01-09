@@ -57,9 +57,8 @@ module.exports = function (config) {
       'karma-html2js-preprocessor',
       'karma-growl-reporter',
       'karma-junit-reporter',
-      'karma-phantomjs-launcher',
-      'karma-chrome-launcher',
       'karma-script-launcher',
+      'karma-safari-launcher',
       'karma-browserstack-launcher',
     ]
   });
