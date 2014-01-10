@@ -2,7 +2,6 @@ var tests = Object.keys(window.__karma__.files).filter(function (file) {
   'use strict';
   return (/^\/base\/app\/modules\/(.*)\/tests\/(.*)\.js$/).test(file) && !(/tests\/unit\/main\.js$/).test(file);
 });
-console.log(tests);
 
 var should;
 

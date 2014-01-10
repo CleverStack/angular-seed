@@ -19,7 +19,7 @@ module.exports = function (config) {
       { pattern: 'app/modules/users/*.js', included: false, served: true },
 
       { pattern: 'app/components/**/*.js', included: false, served: true, watch: false },
-      // { pattern: 'test/unit/**/*.js', included: false, served: true },
+      { pattern: 'app/modules/**/tests/unit/**/*.js', included: false, served: true }
     ],
     // list of files to exclude
     exclude: [
@@ -42,7 +42,9 @@ module.exports = function (config) {
     // - BrowserStack:IE:Win
     // - BrowserStack:iPad 3rd (6.0):iOS
     // browsers: ['BrowserStack:Chrome:Mac'],
-    browsers: ['Chrome'],
+    browsers: [
+      'PhantomJS'
+    ],
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
