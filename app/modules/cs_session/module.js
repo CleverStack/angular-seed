@@ -17,26 +17,26 @@ define(['angular'], function(ng) {
 			'CSTemplateProvider',
 			'CSSessionHelpersProvider',
 			'CSSessionProvider',
-		function($routeProvider, CSTemplate, CSSessionHelpersProvider, CSSessionProvider) {
+			function($routeProvider, CSTemplate, CSSessionHelpersProvider, CSSessionProvider) {
 
-			CSSessionHelpersProvider.extend('CSCommonHelpers');
+				CSSessionHelpersProvider.extend('CSCommonHelpers');
 
-			CSTemplate.setPath('/modules/cs_session/views');
+				CSTemplate.setPath('/modules/cs_session/views');
 
-			CSSessionProvider.setSessionService('CSSessionService');
+				CSSessionProvider.setSessionService('CSSessionService');
 
-			$routeProvider
-			.when('/login', {
-				templateUrl: CSTemplate.view('login'),
-				controller: 'CSLoginController',
-				public: true
-			})
-			.when('/logout', {
-				controller: 'CSLogoutController',
-				template: ' ',
-				public: true
-			});
-		}
+				$routeProvider
+				.when('/login', {
+					templateUrl: CSTemplate.view('login'),
+					controller: 'CSLoginController',
+					public: true
+				})
+				.when('/logout', {
+					controller: 'CSLogoutController',
+					template: ' ',
+					public: true
+				});
+			}
 
 		]);
 

@@ -9,30 +9,30 @@ define(['angular', 'underscore', 'module'], function(ng, _) {
 			'CSAccountHelpers',
 			'CSSession',
 			'$location',
-		function($scope, $log, CSAccountProvider, CSAccountHelpersProvider, CSSessionProvider, $location) {
-			$scope.helpers = CSAccountHelpersProvider;
+			function($scope, $log, CSAccountProvider, CSAccountHelpersProvider, CSSessionProvider, $location) {
+				$scope.helpers = CSAccountHelpersProvider;
 
-			$scope.register = function() {
-				if ($scope.form && $scope.form.$invalid) {
-					$log.error('Please fix form errors and try again.');
-					return;
-				}
+				$scope.register = function() {
+					if ($scope.form && $scope.form.$invalid) {
+						$log.error('Please fix form errors and try again.');
+						return;
+					}
 
-				var credentials = _($scope.credentials).omit('passwordConfirmation');
-				credentials.username = credentials.email.split('@')[0];
-				CSAccountProvider.register(credentials);
-			};
+					var credentials = _($scope.credentials).omit('passwordConfirmation');
+					credentials.username = credentials.email.split('@')[0];
+					CSAccountProvider.register(credentials);
+				};
 
-			$scope.$on('CSAccountProvider:registrationSuccess', function(event, user) {
-				CSSessionProvider.authenticate(user);
-				$location.url('/users');
-			});
+				$scope.$on('CSAccountProvider:registrationSuccess', function(event, user) {
+					CSSessionProvider.authenticate(user);
+					$location.url('/users');
+				});
 
-			$scope.$on('CSAccountProvider:registrationFailure', function(event, data) {
-				$log.log('CSAccountCreateController:', data);
-			});
+				$scope.$on('CSAccountProvider:registrationFailure', function(event, data) {
+					$log.log('CSAccountCreateController:', data);
+				});
 
-		}
+			}
 
 		]);
 

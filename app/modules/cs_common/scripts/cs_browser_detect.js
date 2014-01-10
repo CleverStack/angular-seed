@@ -162,7 +162,7 @@ define(['angular', 'module'], function(ng) {
 					identity: 'Netscape',
 					versionSearch: 'Mozilla'
 				}
-				],
+			],
 			dataOS: [
 				{
 					string: navigator.platform,
@@ -184,7 +184,7 @@ define(['angular', 'module'], function(ng) {
 					subString: 'Linux',
 					identity: 'Linux'
 				}
-				]
+			]
 		};
 
 		browserDetect.init();

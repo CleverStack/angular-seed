@@ -150,6 +150,6 @@ define(['angular', 'module'], function(ng) {
 			};
 
 		}
-		]);
+	]);
 
 });

@@ -1,0 +1,1478 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ./app/modules/cs_session/scripts/cs_session_provider.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+            xtext-decoration: line-through;
+        }
+        .missing-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">./app/modules/cs_session/scripts/cs_session_provider.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">9.57% <small>(9 / 94)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">1.56% <small>(1 / 64)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">13.04% <small>(3 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">9.57% <small>(9 / 94)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">./app/modules/cs_session/scripts\</a> &#187; cs_session_provider.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">define(['angular', 'module'], function (ng) {
+  'use strict';
+&nbsp;
+  /**
+   * @ngdoc service
+   * @name ngSeed.services:CSSession
+   * @description
+   * A set of functions to easily login/logout, register new users, and
+   * retrieving the user session from the server.
+   *
+   * ### Example
+   * ```js
+   * myApp.controller('Test', ['$scope', 'CSSession', function ($scope, CSSession) {
+   *   $scope.$watch(CSSession.getCurrentUser, function() {
+   *     // do something as soon as the user changes
+   *     // and by this I mean logs in or out
+   *   });
+   *
+   *   if(CSSession.isLoggedIn()) {
+   *     // do something if the user is logged in
+   *     // thou this is not necessary on non-public pages
+   *     // on public ones you might want to use it
+   *     // to do some other logic
+   *   }
+   * }]);
+   * ```
+   */
+&nbsp;
+  /**
+   * @ngdoc service
+   * @name ngSeed.providers:CSSessionProvider
+   * @description
+   * Dead-easy auth checking.
+   *
+   * Please note that custom login requiring logic, on-location-change auth
+   * checking, and default login success behaviour can be configured
+   * using the authProvider on a config block.
+   *
+   * ### Configuring CSSessionProvider:
+   * This is the default value, feel free to change it to something else if your app requires it:
+   *
+   * ```js
+   * CSSessionProvider.setSessionService('sessionService');
+   *
+   * CSSessionProvider.setHandler('handleLoginStart', function (redirect) {
+   *   $('#myLoginModal').open();
+   * });
+   *
+   * CSSessionProvider.setHandler('handleLoginSuccess', function () {
+   *   $('#myLoginModal').close();
+   * });
+   * ```
+   *
+   * ### Securing Routes:
+   * Add a `public: false` property or a `public: true` property to your routes. In fact,
+   * any falsy value will end up requiring login. For instance:
+   *
+   * ```js
+   * $routeProvider
+   *  .when('/', {
+   *    templateUrl: view('home'),
+   *    controller: 'HomeCtrl',
+   *    public: true
+   *  })
+   *  .when('/users', {
+   *    templateUrl: view('users'),
+   *    controller: 'UserCtrl',
+   *  })
+   *  .when('/error', {
+   *    templateUrl: partial('error'),
+   *    public: true
+   *  })
+   *  .otherwise({
+   *    redirectTo: '/'
+   *  });
+   * ```
+   *
+   * This will give you a public home and error routes. If you try to access `/users`, you will
+   * immediately be prompted for authentication.
+   */
+&nbsp;
+  ng.module('cs_session.providers')
+  .provider('CSSession', [
+    function () {
+      /**
+       * @name currentUser
+       * @type {Object}
+       * @propertyOf ngSeed.providers:CSSessionProvider
+       * @description
+       * the logged in user or undefined
+       */
+      var currentUser = null;
+&nbsp;
+      /**
+       * @name sessionService
+       * @type {Object}
+       * @propertyOf ngSeed.providers:CSSessionProvider
+       * @description
+       * The user service.
+       */
+      var sessionService = null;
+&nbsp;
+      /**
+       * @name sessionServiceName
+       * @type {String}
+       * @propertyOf ngSeed.providers:CSSessionProvider
+       * @description
+       * The name of the service to $inject.
+       */
+      var sessionServiceName = 'CSSessionService';
+&nbsp;
+      /**
+       * @name handlers
+       * @type {Object}
+       * @propertyOf ngSeed.providers:CSSessionProvider
+       * @description
+       * The handlers object.
+       */
+      var handlers = {
+        loginStart: null,
+        loginSuccess: null,
+        logoutSuccess: null,
+        locationChange: null,
+      };
+&nbsp;
+      /**
+       * @description
+       * The actual service.
+       */
+      return {
+&nbsp;
+        $get: ['$rootScope', '$location', '$route', '$injector',
+<span class="fstat-no" title="function not covered" >        function ($rootScope, $location, $route, $injector) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if(!sessionService &amp;&amp; sessionServiceName) {</span>
+<span class="cstat-no" title="statement not covered" >            sessionService = $injector.get(sessionServiceName);</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (!sessionService) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error('CSSessionProvider: please configure a sessionService');</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (!handlers.loginStart) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('CSSessionProvider: using default loginStart method');</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (!handlers.loginSuccess) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('CSSessionProvider: using default loginSuccess method');</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (!handlers.locationChange) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('CSSessionProvider: using default locationChange method');</span>
+          }
+&nbsp;
+          /**
+           * @ngdoc function
+           * @name handlers.loginStart
+           * @propertyOf ngSeed.providers:CSSessionProvider
+           * @description
+           * Default login starting logic.
+           */
+<span class="cstat-no" title="statement not covered" >          handlers.loginStart = handlers.loginStart || <span class="fstat-no" title="function not covered" >function (redirect) {</span></span>
+<span class="cstat-no" title="statement not covered" >            console.log('CSSessionProvider: redirecting to /login');</span>
+<span class="cstat-no" title="statement not covered" >            $location.path('/login');</span>
+<span class="cstat-no" title="statement not covered" >            $location.search({</span>
+              redirect: encodeURIComponent(redirect)
+            });
+<span class="cstat-no" title="statement not covered" >            return;</span>
+          };
+&nbsp;
+          /**
+           * @ngdoc function
+           * @name handlers.loginSuccess
+           * @propertyOf ngSeed.providers:CSSessionProvider
+           * @description
+           * This method redirects the user to the redirect search term if
+           * it exists.
+           */
+<span class="cstat-no" title="statement not covered" >          handlers.loginSuccess = handlers.loginSuccess || <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            if($location.search().redirect) {</span>
+<span class="cstat-no" title="statement not covered" >              console.log('CSSessionProvider: redirecting to', $location.search().redirect);</span>
+<span class="cstat-no" title="statement not covered" >              $location.path($location.search().redirect);</span>
+<span class="cstat-no" title="statement not covered" >              $location.search(false);</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >              $location.path('/');</span>
+            }
+          };
+&nbsp;
+          /**
+           * @ngdoc function
+           * @name handlers.loginSuccess
+           * @propertyOf ngSeed.providers:CSSessionProvider
+           * @description
+           * This method redirects the user to the redirect search term if
+           * it exists.
+           */
+<span class="cstat-no" title="statement not covered" >          handlers.logoutSuccess = handlers.logoutSuccess || <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            console.log('CSSessionProvider: redirecting to /');</span>
+<span class="cstat-no" title="statement not covered" >            $location.path('/');</span>
+          };
+&nbsp;
+          /**
+           * @ngdoc function
+           * @name handlers.locationChange
+           * @propertyOf ngSeed.providers:CSSessionProvider
+           * @description
+           * This method takes a user navigating, does a quick auth check
+           * and if everything is alright proceeds.
+           */
+<span class="cstat-no" title="statement not covered" >          handlers.locationChange = handlers.locationChange || <span class="fstat-no" title="function not covered" >function (event, next, current) {</span></span>
+<span class="cstat-no" title="statement not covered" >            next = '/' + next.split('/').splice(3).join('/').split('?')[0];</span>
+<span class="cstat-no" title="statement not covered" >            if(currentUser === null || !currentUser.id){</span>
+<span class="cstat-no" title="statement not covered" >              var route = $route.routes[next] || false;</span>
+<span class="cstat-no" title="statement not covered" >              console.log('CSSessionProvider: Guest access to', next);</span>
+<span class="cstat-no" title="statement not covered" >              console.log('CSSessionProvider:', next, 'is', route.public ? 'public' : 'private');</span>
+<span class="cstat-no" title="statement not covered" >              if(route &amp;&amp; !route.public) {</span>
+<span class="cstat-no" title="statement not covered" >                $rootScope.$broadcast('CSSessionProvider:loginStart');</span>
+<span class="cstat-no" title="statement not covered" >                handlers.loginStart(next.substr(1));</span>
+              }
+            } else {
+<span class="cstat-no" title="statement not covered" >              console.log('CSSessionProvider: proceeding to load', next);</span>
+            }
+          };
+&nbsp;
+          /**
+           * @description
+           * $rootScope hookups
+           */
+<span class="cstat-no" title="statement not covered" >          $rootScope.$on('$locationChangeStart', <span class="fstat-no" title="function not covered" >function (event, next, current) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if(!$route.current) {</span>
+<span class="cstat-no" title="statement not covered" >              console.log('CSSessionProvider: Welcome newcomer!');</span>
+<span class="cstat-no" title="statement not covered" >              console.log('CSSessionProvider: Checking your session...');</span>
+<span class="cstat-no" title="statement not covered" >              sessionService.getCurrentUser().then(<span class="fstat-no" title="function not covered" >function (user) {</span></span>
+<span class="cstat-no" title="statement not covered" >                currentUser = user;</span>
+<span class="cstat-no" title="statement not covered" >                console.log('CSSessionProvider: we got', user);</span>
+<span class="cstat-no" title="statement not covered" >                if(typeof handlers.locationChange === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >                  handlers.locationChange(event, next, current);</span>
+                }
+              }, <span class="fstat-no" title="function not covered" >function (err) {</span>
+<span class="cstat-no" title="statement not covered" >                console.log('CSSessionProvider: request failed');</span>
+<span class="cstat-no" title="statement not covered" >                console.log('CSSessionProvider: proceeding as guest.');</span>
+<span class="cstat-no" title="statement not covered" >                if(typeof handlers.locationChange === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >                  handlers.locationChange(event, next, current);</span>
+                }
+              });
+            } else {
+<span class="cstat-no" title="statement not covered" >              if(typeof handlers.locationChange === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >                handlers.locationChange(event, next, current);</span>
+              }
+            }
+          });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          $rootScope.$on('CSSessionProvider:loginSuccess', <span class="fstat-no" title="function not covered" >function (event, next, current) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if(typeof handlers.locationChange === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >              handlers.loginSuccess(event, next, current);</span>
+            }
+          });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          $rootScope.$on('CSSessionProvider:logoutSuccess', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            if(typeof handlers.logoutSuccess === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >              handlers.logoutSuccess();</span>
+            }
+          });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          $rootScope.$on('CSSessionProvider:loginRequired', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            console.log('CSSessionProvider: login was required');</span>
+<span class="cstat-no" title="statement not covered" >            $location.path('/login');</span>
+          });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          return {</span>
+            /**
+             * @name getCurrentUser
+             * @ngdoc function
+             * @methodOf ngSeed.services:CSSession
+             * @return {Object} the current user
+             */
+            getCurrentUser: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >              return currentUser;</span>
+            },
+&nbsp;
+            /**
+             * @name isLoggedIn
+             * @ngdoc function
+             * @methodOf ngSeed.services:CSSession
+             * @return {Boolean} true or false if there is or not a current user
+             */
+            isLoggedIn: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >              return !!currentUser;</span>
+              // return (currentUser === null || !currentUser.id) ? false : true;
+            },
+&nbsp;
+&nbsp;
+            /**
+             * @name login
+             * @ngdoc function
+             * @methodOf ngSeed.services:CSSession
+             * @param  {Object} credentials the credentials to be passed to the login service
+             * @return {Promise}            the promise your login service returns on login
+             */
+            login: <span class="fstat-no" title="function not covered" >function (credentials) {</span>
+<span class="cstat-no" title="statement not covered" >              return sessionService.login(credentials).then(<span class="fstat-no" title="function not covered" >function (user) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if(user.id) {</span>
+<span class="cstat-no" title="statement not covered" >                  currentUser = user;</span>
+<span class="cstat-no" title="statement not covered" >                  $rootScope.$broadcast('CSSessionProvider:loginSuccess');</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                  $rootScope.$broadcast('CSSessionProvider:loginFailure');</span>
+                }
+              }, <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >                currentUser = null;</span>
+<span class="cstat-no" title="statement not covered" >                $rootScope.$broadcast('CSSessionProvider:loginFailure');</span>
+              });
+            },
+&nbsp;
+            /**
+             * @name logout
+             * @ngdoc function
+             * @methodOf ngSeed.services:CSSession
+             * @return {Promise} the promise your login service returns on logout
+             */
+            logout: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >              $rootScope.$broadcast('CSSessionProvider:logoutSuccess');</span>
+<span class="cstat-no" title="statement not covered" >              if(currentUser &amp;&amp; currentUser.id) {</span>
+<span class="cstat-no" title="statement not covered" >                return sessionService.logout().then(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                  currentUser = null;</span>
+                });
+              }
+            },
+&nbsp;
+            /**
+             * @name authenticate
+             * @ngdoc function
+             * @methodOf ngSeed.services:CSSession
+             * @return {Promise} the promise your login service returns on logout
+             */
+            authenticate: <span class="fstat-no" title="function not covered" >function (user) {</span>
+<span class="cstat-no" title="statement not covered" >              if(!user || !user.id){</span>
+<span class="cstat-no" title="statement not covered" >                throw new Error('Unable to authenticate with', user);</span>
+              }
+<span class="cstat-no" title="statement not covered" >              currentUser = user;</span>
+<span class="cstat-no" title="statement not covered" >              $rootScope.$broadcast('CSSessionProvider:loginSuccess');</span>
+<span class="cstat-no" title="statement not covered" >              $rootScope.$broadcast('CSSessionProvider:authenticated');</span>
+            }
+&nbsp;
+&nbsp;
+          };
+&nbsp;
+        }],
+&nbsp;
+        /**
+         * @ngdoc function
+         * @methodOf ngSeed.providers:CSSessionProvider
+         * @name setSessionService
+         * @param  {String} usr the user service name
+         */
+        setSessionService: function (serviceName) {
+          <span class="missing-if-branch" title="if path not taken"" >I</span>if(typeof serviceName !== 'string') {
+<span class="cstat-no" title="statement not covered" >            throw new Error('CSSessionProvider: setSessionService expects a string to use $injector upon instantiation');</span>
+          }
+          sessionServiceName = serviceName;
+        },
+&nbsp;
+        /**
+         * @ngdoc function
+         * @methodOf ngSeed.providers:CSSessionProvider
+         * @name setHandler
+         * @param  {String} key  the handler name
+         * @param  {Function} foo    the handler function
+         * @description
+         * Replaces one of the default handlers.
+         */
+        setHandler: <span class="fstat-no" title="function not covered" >function (key, foo) {</span>
+<span class="cstat-no" title="statement not covered" >          if( key.substr(0, 6) !== 'handle' ) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error('CSSessionProvider: Expecting a handler name that starts with \'handle\'.');</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if ( !handlers.hasOwnProperty(key) ) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error('CSSessionProvider: handle name "' + key + '" is not a valid property.');</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if ( typeof foo !== 'function') {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error('CSSessionProvider: foo is not a function.');</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          handlers[key] = foo;</span>
+        }
+      };
+    }
+&nbsp;
+  ]);
+&nbsp;
+});
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jan 10 2014 23:22:58 GMT+1000 (E. Australia Standard Time)</div>
+</div>
+
+<script src="../prettify.js"></script>
+
+<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

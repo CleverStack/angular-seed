@@ -17,7 +17,7 @@ require.config({
 			name: 'users',
 			location: '../users'
 		}
-		],
+	],
 	paths: {
 		angular: '../../components/angular/angular'
 	},

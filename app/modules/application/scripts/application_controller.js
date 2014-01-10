@@ -7,15 +7,15 @@ define(['angular', 'app'], function(ng) {
 			'Helpers',
 			'CSTemplate',
 			'CSSession',
-		function($scope, HelpersProvider, CSTemplateProvider, CSSessionProvider) {
-			$scope.helpers = HelpersProvider;
-			$scope.tpl = CSTemplateProvider;
+			function($scope, HelpersProvider, CSTemplateProvider, CSSessionProvider) {
+				$scope.helpers = HelpersProvider;
+				$scope.tpl = CSTemplateProvider;
 
-			$scope.$watch(CSSessionProvider.getCurrentUser, function(user) {
-				$scope.currentUser = user || false;
-			});
+				$scope.$watch(CSSessionProvider.getCurrentUser, function(user) {
+					$scope.currentUser = user || false;
+				});
 
-		}
+			}
 
 		]);
 });

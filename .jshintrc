@@ -21,7 +21,8 @@
     "spyOn",
     "runs",
     "waits",
-    "waitsFor"
+    "waitsFor",
+    "console"
   ],
   "globals": {
     "require": true,
@@ -31,7 +32,21 @@
     "steal": true,
     "test": true,
     "equal": true,
-    "ok": true
+    "ok": true,
+
+    /* angular.js */
+    "angular": false,
+    "msie": false,
+    "jqLite": false,
+    "jQuery": false,
+    "slice": false,
+    "push": false,
+    "toString": false,
+    "ngMinErr": false,
+    "_angular": false,
+    "angularModule": false,
+    "nodeName_": false,
+    "uid": false
   },
 
   // Development
@@ -39,7 +54,7 @@
   "devel": false,           // Allow developments statements e.g. `console.log();`.
 
   // EcmaScript 5
-  "es5": true,              // Allow EcmaScript 5 syntax.
+  //"es5": true,              // Allow EcmaScript 5 syntax.
   "esnext": true,           // Allow ECMAScript 6 specific syntax
   "strict": true,           // Require `use strict` pragma  in every file.
   "globalstrict": true,     // Allow global "use strict" (also enables 'strict').
@@ -67,7 +82,7 @@
   "shadow": false,          // Allows re-define variables later in code e.g. `var x=1; x=2;`.
   "supernew": false,        // Tolerate `new function () { ... };` and `new Object;`.
   "undef": true,            // Require all non-global variables be declared before they are used.
-  "unused": true,           // Warn when variable is defined but never used
+  "unused": false,           // Warn when variable is defined but never used
 
   // Styling prefrences.
   "quotmark": "single",     // Enforce the consistency of quotation marks

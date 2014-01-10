@@ -15,18 +15,18 @@ define(['angular'], function(ng) {
 	module.config([
 			'$routeProvider',
 			'CSTemplateProvider',
-		function($routeProvider, CSTemplateProvider) {
+			function($routeProvider, CSTemplateProvider) {
 
-			CSTemplateProvider.setPath('/modules/users/views');
+				CSTemplateProvider.setPath('/modules/users/views');
 
-			$routeProvider
-			.when('/users', {
-				templateUrl: CSTemplateProvider.view('index'),
-				controller: 'UsersController',
-				public: false
-			});
+				$routeProvider
+				.when('/users', {
+					templateUrl: CSTemplateProvider.view('index'),
+					controller: 'UsersController',
+					public: false
+				});
 
-		}
+			}
 
 		]);
 

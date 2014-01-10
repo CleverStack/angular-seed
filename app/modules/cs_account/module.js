@@ -18,19 +18,19 @@ define(['angular'], function(ng) {
 			'$routeProvider',
 			'CSTemplateProvider',
 			'CSAccountHelpersProvider',
-		function($routeProvider, CSTemplate, CSAccountHelpersProvider) {
+			function($routeProvider, CSTemplate, CSAccountHelpersProvider) {
 
-			CSAccountHelpersProvider.extend('CSCommonHelpers');
+				CSAccountHelpersProvider.extend('CSCommonHelpers');
 
-			CSTemplate.setPath('/modules/cs_account/views');
+				CSTemplate.setPath('/modules/cs_account/views');
 
-			$routeProvider
-			.when('/register', {
-				templateUrl: CSTemplate.view('registration'),
-				controller: 'CSAccountCreateController',
-				public: true
-			});
-		}
+				$routeProvider
+				.when('/register', {
+					templateUrl: CSTemplate.view('registration'),
+					controller: 'CSAccountCreateController',
+					public: true
+				});
+			}
 
 		]);
 

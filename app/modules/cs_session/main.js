@@ -5,7 +5,7 @@ require.config({
 			name: 'cs_common',
 			location: '../cs_common'
 		}
-		],
+	],
 	paths: {
 		underscore: '../../components/underscore/underscore'
 	},

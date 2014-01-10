@@ -23,20 +23,20 @@ define(['angular'], function(ng) {
 	module.config([
 			'$routeProvider',
 			'CSTemplateProvider',
-		function($routeProvider, CSTemplate) {
+			function($routeProvider, CSTemplate) {
 
-			CSTemplate.setPath('/modules/cs_common/views');
+				CSTemplate.setPath('/modules/cs_common/views');
 
-			$routeProvider
-			.when('/error', {
-				templateUrl: CSTemplate.view('error'),
-				public: true
-			})
-			.otherwise({
-				redirectTo: '/'
-			});
+				$routeProvider
+				.when('/error', {
+					templateUrl: CSTemplate.view('error'),
+					public: true
+				})
+				.otherwise({
+					redirectTo: '/'
+				});
 
-		}
+			}
 
 		]);
 

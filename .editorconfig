@@ -24,7 +24,7 @@ quote_type = auto
 spaces_around_operators = true
 space_after_control_statements = true
 space_after_anonymous_functions = false
-spaces_in_brackets = false
+spaces_in_brackets = true
 
 [*.{json,yml}]
 indent_style = space

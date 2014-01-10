@@ -110,7 +110,7 @@ module.exports = function(grunt) {
 				tasks: ['less']
 			},
 			jshint: {
-				files: [ '<%= yeoman.app %>/modules/**/*.js'],
+				files: ['<%= yeoman.app %>/modules/**/*.js'],
 				tasks: ['jshint']
 			}
 		},
@@ -188,7 +188,7 @@ module.exports = function(grunt) {
 				force: true
 			},
 			files: [
-					'Gruntfile.js',
+					// 'Gruntfile.js',
 					'<%= yeoman.app %>/modules/**/*.js'
 				]
 		},

@@ -370,7 +370,7 @@ define(['angular', 'module'], function(ng) {
          */
 				setHandler: function(key, foo) {
 					if (key.substr(0, 6) !== 'handle') {
-						throw new Error("CSSessionProvider: Expecting a handler name that starts with 'handle'.");
+						throw new Error('CSSessionProvider: Expecting a handler name that starts with "handle".');
 					}
 
 					if (!handlers.hasOwnProperty(key)) {
@@ -386,6 +386,6 @@ define(['angular', 'module'], function(ng) {
 			};
 		}
 
-		]);
+	]);
 
 });

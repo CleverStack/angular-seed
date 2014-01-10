@@ -18,10 +18,10 @@ require(['./config'], function() {
 
 		], function(ng) {
 
-		ng.element(document).ready(function() {
-			ng.bootstrap(document, ['app']);
-		});
+			ng.element(document).ready(function() {
+				ng.bootstrap(document, ['app']);
+			});
 
-	});
+		});
 
 });

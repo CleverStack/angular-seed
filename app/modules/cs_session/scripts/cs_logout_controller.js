@@ -5,11 +5,11 @@ define(['angular', 'module'], function(ng) {
 	.controller('CSLogoutController', [
 			'$scope',
 			'CSSession',
-		function($scope, CSSessionProvider) {
-			console.log('currentUser', $scope.currentUser);
-			CSSessionProvider.logout();
+			function($scope, CSSessionProvider) {
+				console.log('currentUser', $scope.currentUser);
+				CSSessionProvider.logout();
 
-		}
+			}
 		]);
 
 });

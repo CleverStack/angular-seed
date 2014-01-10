@@ -5,9 +5,10 @@ define(['angular', 'app'], function(ng) {
 	.controller('HomeController', [
 			'$scope',
 			'Helpers',
-		function($scope, Helpers) {
-			$scope.welcome = 'Hello clever!';
-		}
+			function($scope, Helpers) {
+				$scope.welcome = 'Hello clever!';
+			}
 
 		]);
+
 });

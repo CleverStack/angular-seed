@@ -43,15 +43,15 @@ require(['/base/app/modules/application/config.js'], function() {
 			'scripts/providers/helpers_provider'
 		], function(angular, chai) {
 
-		window.angular = angular;
-		window.chai = chai;
-		should = chai.should();
-		window.expect = chai.expect;
+			window.angular = angular;
+			window.chai = chai;
+			should = chai.should();
+			window.expect = chai.expect;
 
-		angular.element(document).ready(function() {
-			angular.bootstrap(document, ['app']);
-			window.__karma__.start();
+			angular.element(document).ready(function() {
+				angular.bootstrap(document, ['app']);
+				window.__karma__.start();
+			});
 		});
-	});
 
 });
