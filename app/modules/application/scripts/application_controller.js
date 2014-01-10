@@ -2,7 +2,7 @@ define(['angular', 'app'], function (ng) {
   'use strict';
 
   ng.module('app.controllers')
-  .controller('ApplicationController', [
+  .controller('AppCtrl', [
     '$scope',
     'Helpers',
     'CSTemplate',
