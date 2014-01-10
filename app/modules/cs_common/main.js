@@ -24,4 +24,4 @@ define([
   // Services
   './scripts/cs_browser_detect',
   './scripts/cs_resource_factory'
-]);
+], function(){});

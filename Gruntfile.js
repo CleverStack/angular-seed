@@ -333,7 +333,8 @@ module.exports = function (grunt) {
             'images/**/*.{gif,webp, png}',
             'styles/fonts/**/*',
             'fonts/**/*',
-            'home/**/*'
+            'home/**/*',
+            'modules/**/*'
           ]
         }]
       },

@@ -13,4 +13,6 @@ define([
 
   // Services
   './scripts/cs_account_service'
-]);
+], function() {
+
+});

@@ -14,4 +14,4 @@ define([
 
   // Services
   './scripts/cs_session_service'
-]);
+], function() {});

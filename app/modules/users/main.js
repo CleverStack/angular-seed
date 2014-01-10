@@ -6,4 +6,4 @@ define([
   // Controllers
   './scripts/users_controller'
 
-]);
+], function() {});

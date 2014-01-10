@@ -12,4 +12,6 @@ define([
 
     // Providers
     './scripts/helpers_provider'
-]);
+], function() {
+
+});
