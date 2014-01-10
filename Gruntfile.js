@@ -63,8 +63,9 @@ module.exports = function (grunt) {
       "path": "./test", // if you change this it must reflect in your karma.conf.js
       "coverage": {
         "port": "5555", // default 5555
-        "dir": "./test/coverage/" // browsable directory for unit testing code coverage reports
-      }
+        "path": "./test/coverage/" // browsable directory for unit testing code coverage reports
+      },
+      "conf": "./test-unit.conf.js"
     },
 
     // Production Preview Server
@@ -99,6 +100,12 @@ module.exports = function (grunt) {
         ],
         tasks: ['less:development']
       },
+      unitTests: {
+        files: [
+          'test*/unit/**/*.js',
+          '**/test*/unit/**/*.js'
+        ]
+      }
     },
     connect: {
       options: {
@@ -134,6 +141,15 @@ module.exports = function (grunt) {
           port: '<%= appConfig.dist.port %>',
           base: '<%= appConfig.dist.path %>'
         }
+      },
+      coverage: {
+        options: {
+          base: '<%= appConfig.test.coverage.path %>',
+          directory: '<%= appConfig.test.coverage.path %>',
+          port: '<%= appConfig.test.coverage.port %>',
+          keepalive: true,
+          livereload: false
+        }
       }
     },
     clean: {
@@ -147,7 +163,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      coverage: './test/coverage'
     },
     jshint: {
       options: {
@@ -266,7 +283,7 @@ module.exports = function (grunt) {
           name: 'main',
           baseUrl: '<%= appConfig.dist.path %>/scripts',
           mainConfigFile: '<%= appConfig.dist.path %>/scripts/main.js',
-          out: '<%=appConfig.dist.path %>/scripts/scripts.js',
+          out: '<%= appConfig.dist.path %>/scripts/scripts.js',
           uglify: {
             beautify: false,
             overwrite: true,
@@ -351,6 +368,44 @@ module.exports = function (grunt) {
       },
       dist: {
         url: 'http://localhost:<%= connect.dist.options.port %>'
+      },
+      coverage: {
+        url: 'http://localhost:<%= appConfig.test.coverage.port %>'
+      }
+    },
+    // unit testing config
+    karma: {
+      // options {
+      //   configFile: './test-unit.conf.js'
+      // },
+      unit: {
+        configFile: '<%= appConfig.test.conf %>',
+        autoWatch: false,
+        singleRun: true
+      },
+      unitAuto: {
+        configFile: '<%= appConfig.test.conf %>',
+        autoWatch: true,
+        singleRun: false
+      },
+      unitCoverage: {
+        configFile: '<%= appConfig.test.conf %>',
+        autoWatch: false,
+        singleRun: true,
+        reporters: ['progress', 'coverage'],
+        preprocessors: {
+          './app/modules/**/*.js': ['coverage']
+        },
+        coverageReporter: {
+          type : 'html',
+          dir : '<%= appConfig.test.coverage.path %>'
+        }
+      },
+      travis: {
+        configFile: '<%= appConfig.test.conf %>',
+        autoWatch: false,
+        singleRun: true,
+        browsers: ['PhantomJS']
       }
     }
   });
@@ -371,7 +426,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'jshint',
     'useminPrepare',
     'imagemin',
     'less',
@@ -382,6 +436,32 @@ module.exports = function (grunt) {
     'requirejs',
     'rev',
     'usemin'
+  ]);
+
+  /* -- TEST TASKS ------------------------------------------------ */
+
+  grunt.registerTask('test', 'Start up the auto unit test server.', [
+    'autotest:unit'
+  ]);
+
+  grunt.registerTask('test:unit', 'Single run of unit tests.', [
+    'karma:unit'
+  ]);
+
+  grunt.registerTask('autotest:unit', 'Start up the auto unit test server.', [
+    'karma:unitAuto',
+    'watch:unitTests'
+  ]);
+
+  grunt.registerTask('test:travis', 'Single run of unit tests for Travis CI.', [
+    'karma:travis'
+  ]);
+
+  grunt.registerTask('test:coverage', 'Run a test coverage report.', [
+    'clean:coverage',
+    'karma:unitCoverage',
+    'open:coverage',
+    'connect:coverage'
   ]);
 
   grunt.registerTask('default', ['build']);

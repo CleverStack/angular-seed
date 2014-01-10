@@ -14,3 +14,4 @@ libpeerconnection.log
 /dist
 /app/components
 /node_modules
+/test/coverage
