@@ -2,10 +2,10 @@
   "name": "app",
   "author": {
     "name": "Clevertech",
-    "email": "info@clevertech.biz",
-    "web": "http://www.clevertech.biz"
+    "email": "admin@cleverstack.io",
+    "web": "http://cleverstack.io"
   },
-  "version": "1.0.2",
+  "version": "1.1.0",
   "collaborators": [
     "Richard Gustin <richard@clevertech.biz>",
     "Simon W. Jackson <simon@clevertech.biz>",
@@ -29,12 +29,11 @@
     "underscore": "~1.5.2"
   },
   "devDependencies": {
+    "angular-mocks": "1.2.6",
+    "angular-scenario": "1.2.6",
     "sinon": "~1.7.3",
     "chai": "~1.8.1",
     "syn": "~3.3.1",
-    "steal": "~3.2.3",
-    "angular-mocks": "1.2.6",
-    "angular-scenario": "1.2.6",
-    "async": "~0.2.5"
+    "steal": "~3.2.3"
   }
 }
