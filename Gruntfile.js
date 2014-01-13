@@ -59,13 +59,20 @@ module.exports = function (grunt) {
 
     // Unit Testing Server
     "test": {
-      "port": "9090", // default 9090
-      "path": "./test", // if you change this it must reflect in your karma.conf.js
-      "coverage": {
-        "port": "5555", // default 5555
-        "path": "./test/coverage/" // browsable directory for unit testing code coverage reports
+      "unit": {
+        "port": "9090", // default 9090
+        "path": "./test", // if you change this it must reflect in your test-unit.conf.js
+        "coverage": {
+          "port": "5555", // default 5555
+          "path": "./test/coverage/" // browsable directory for unit testing code coverage reports
+        },
+        "conf": "./test-unit.conf.js"
       },
-      "conf": "./test-unit.conf.js"
+      "e2e": {
+        "seleniumPort": "4444", // default 4444
+        "path": "./test", // if you change this it must reflect in your test-e2e.conf.js
+        "conf": "./test-e2e.conf.js"
+      }
     },
 
     // Production Preview Server
@@ -105,6 +112,13 @@ module.exports = function (grunt) {
           'test*/unit/**/*.js',
           '**/test*/unit/**/*.js'
         ]
+      },
+      e2eTests: {
+        files: [
+          'test*/e2e/**/*.js',
+          '**/test*/e2e/**/*.js'
+        ],
+        tasks: ['protractor:singlerun']
       }
     },
     connect: {
@@ -124,7 +138,7 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          port: '<%= appConfig.test.port %>',
+          port: '<%= appConfig.test.unit.port %>',
           base: __dirname,
           livereload: false,
           middleware: function (connect) {
@@ -144,9 +158,9 @@ module.exports = function (grunt) {
       },
       coverage: {
         options: {
-          base: '<%= appConfig.test.coverage.path %>',
-          directory: '<%= appConfig.test.coverage.path %>',
-          port: '<%= appConfig.test.coverage.port %>',
+          base: '<%= appConfig.test.unit.coverage.path %>',
+          directory: '<%= appConfig.test.unit.coverage.path %>',
+          port: '<%= appConfig.test.unit.coverage.port %>',
           keepalive: true,
           livereload: false
         }
@@ -370,7 +384,7 @@ module.exports = function (grunt) {
         url: 'http://localhost:<%= connect.dist.options.port %>'
       },
       coverage: {
-        url: 'http://localhost:<%= appConfig.test.coverage.port %>'
+        url: 'http://localhost:<%= appConfig.test.unit.coverage.port %>'
       }
     },
     // unit testing config
@@ -379,17 +393,17 @@ module.exports = function (grunt) {
       //   configFile: './test-unit.conf.js'
       // },
       unit: {
-        configFile: '<%= appConfig.test.conf %>',
+        configFile: '<%= appConfig.test.unit.conf %>',
         autoWatch: false,
         singleRun: true
       },
       unitAuto: {
-        configFile: '<%= appConfig.test.conf %>',
+        configFile: '<%= appConfig.test.unit.conf %>',
         autoWatch: true,
         singleRun: false
       },
       unitCoverage: {
-        configFile: '<%= appConfig.test.conf %>',
+        configFile: '<%= appConfig.test.unit.conf %>',
         autoWatch: false,
         singleRun: true,
         reporters: ['progress', 'coverage'],
@@ -398,14 +412,30 @@ module.exports = function (grunt) {
         },
         coverageReporter: {
           type : 'html',
-          dir : '<%= appConfig.test.coverage.path %>'
+          dir : '<%= appConfig.test.unit.coverage.path %>'
         }
       },
       travis: {
-        configFile: '<%= appConfig.test.conf %>',
+        configFile: '<%= appConfig.test.unit.conf %>',
         autoWatch: false,
         singleRun: true,
         browsers: ['PhantomJS']
+      }
+    },
+
+    // e2e protractor testing config
+    protractor: {
+      options: {
+        configFile: '<%= appConfig.test.e2e.conf %>',
+        args: {
+          seleniumPort: '<%= appConfig.test.e2e.seleniumPort %>'
+        }
+      },
+      singlerun: {
+        keepAlive: false
+      },
+      auto: {
+        keepAlive: true
       }
     }
   });
@@ -441,7 +471,7 @@ module.exports = function (grunt) {
   /* -- TEST TASKS ------------------------------------------------ */
 
   grunt.registerTask('test', 'Start up the auto unit test server.', [
-    'autotest:unit'
+    'test:unit'
   ]);
 
   grunt.registerTask('test:unit', 'Single run of unit tests.', [
@@ -462,6 +492,17 @@ module.exports = function (grunt) {
     'karma:unitCoverage',
     'open:coverage',
     'connect:coverage'
+  ]);
+
+  grunt.registerTask('test:e2e', 'Single run of end to end (e2e) tests using protractor.', [
+    'connect:livereload',
+    'protractor:singlerun'
+  ]);
+
+  grunt.registerTask('autotest:e2e', 'Start up the auto end to end (e2e) test server using protractor.', [
+    'connect:livereload',
+    'protractor:auto',
+    'watch:e2eTests'
   ]);
 
   grunt.registerTask('default', ['build']);

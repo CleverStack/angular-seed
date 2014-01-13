@@ -10,6 +10,9 @@ libpeerconnection.log
 /scripts/*.jar
 /scripts/bs-tunnel.sh
 /scripts/BrowserStackTunnel.jar
+/scripts/selenium-server-standalone-2.39.0.jar
+/scripts/Chromedriver.exe
+/scripts/phantomjs.exe
 
 /dist
 /app/components
