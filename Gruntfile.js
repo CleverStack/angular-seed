@@ -373,6 +373,18 @@ module.exports = function (grunt) {
         ]
       }
     },
+    // Concurrent config
+    concurrent: {
+      watch: {
+        tasks: [
+          'watch:livereload',
+          'watch:less'
+        ],
+        options: {
+            logConcurrentOutput: true
+        }
+      }
+    },
     open: {
       server: {
         url: 'http://localhost:<%= connect.options.port %>'
@@ -451,7 +463,7 @@ module.exports = function (grunt) {
     'connect:livereload',
     'connect:test',
     'connect:dist',
-    'watch'
+    'concurrent:watch'
   ]);
 
   grunt.registerTask('build', [

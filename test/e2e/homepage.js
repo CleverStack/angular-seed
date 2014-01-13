@@ -1,10 +1,14 @@
 describe('homepage', function() {
 
-  var ptor = protractor.getInstance();
+  var ptor;
+  beforeEach(function() {
+    ptor = protractor.getInstance();
+    ptor.get('/#');
+  });
 
   it('should load the homepage and say Hello', function() {
-    ptor.get('/#');
-    expect(ptor.findElement(protractor.By.css('.container')).getText()).toContain('Hello');
+    expect(ptor.findElement(protractor.By.css('.container')).getText())
+      .toContain('Hello');
   });
 
 });

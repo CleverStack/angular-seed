@@ -62,7 +62,7 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
   //Note: download file is based on OS (CLI to handle which one to download)
   //http://phantomjs.org/download.htmlex.html
   //Size: ~7mb
-  echo('Downloading Chromedriver...');
+  echo('Downloading Phantomjs...');
   exec('wget http://phantomjs.googlecode.com/files/phantomjs-1.9.2-windows.zip');
   exec('unzip phantomjs-1.9.2-windows.zip');
   exec('mv phantomjs-1.9.2-windows/phantomjs.exe scripts/phantomjs.exe');
