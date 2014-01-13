@@ -230,7 +230,7 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= appConfig.dist.path %>/styles/application.css': [
+          '<%= appConfig.dist.path %>/styles/screen.css': [
             '.tmp/styles/{,*/}*.css',
             '<%= appConfig.dev.path %>/styles/{,*/}*.css'
           ]
