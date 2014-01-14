@@ -10,6 +10,8 @@
 
 var fs = require('fs');
 
+var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
@@ -116,10 +118,14 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          base: [
-            '.tmp',
-            '<%= appConfig.dev.path %>'
-          ]
+          middleware: function (connect) {
+            return [
+              lrSnippet,
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, appConfig.dev.path),
+              fallbackToIndex(connect, 'app/index.html', '/index.html')
+            ];
+          }
         }
       },
       test: {
