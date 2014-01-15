@@ -63,6 +63,7 @@
     "start": "grunt server",
     "bs-tunnel-karma": "sh scripts/bs-tunnel-karma.sh",
     "bs-tunnel": "sh scripts/bs-tunnel-connect.sh",
-    "test": "grunt test:travis"
+    "test": "grunt test:travis",
+    "testos": "node scripts/testos"
   }
 }
