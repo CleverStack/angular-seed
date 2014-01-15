@@ -16,6 +16,10 @@ require.config({
     {
       name: 'users',
       location: '../users'
+    },
+    {
+      name: 'cs_browserdetect',
+      location: '../cs_browserdetect'
     }
   ],
   paths: {
