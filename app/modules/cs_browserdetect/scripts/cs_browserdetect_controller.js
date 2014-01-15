@@ -6,8 +6,8 @@ define(['angular', '../module'], function (ng) {
     '$scope',
     'CSBrowserDetectService',
     function ($scope, $CSBrowserDetectService) {
-      $scope.browserdetect = 'Browserdetect Module';
-      console.log($CSBrowserDetectService.browser);
+      $scope.browserdetect = $CSBrowserDetectService;
+      console.log($scope.browserdetect);
     }
 
   ]);
