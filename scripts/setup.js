@@ -5,7 +5,9 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
 
   //detect OS
   var os = require('os')
-    , isWin = /^win32/.test(os.platform());
+    , isWin = /^win32/.test(os.platform())
+    , isLinux = /^linux/.test(os.platform())
+    , isMac = /^darwin/.test(os.platform()) || /^freebsd/.test(os.platform());
 
   echo('About to setup environment');
   echo('It works if it finishes with OK');
@@ -40,40 +42,62 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
   echo('Installing components...');
   exec('bower install');
 
+  //Note: Windows users use Cygwin or Chocolatey to get wget working.
   echo('Downloading BrowserStackTunnel jar cli tool...');
   exec('wget http://www.browserstack.com/BrowserStackTunnel.jar');
   exec('mv BrowserStackTunnel.jar scripts/BrowserStackTunnel.jar');
 
+  //Selenium Standalone Server - required for protractor e2e testing
+  //Note: Protractor comes with a script to help download and install the standalone server. Run 'webdriver-manager-update': https://github.com/angular/protractor/blob/master/docs/getting-started.md
+  //https://code.google.com/p/selenium/downloads/list
+  //Size: ~33mb
+  echo('Downloading specific Selenium Server jar...');
+  exec('wget http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar');
+  exec('mv selenium-server-standalone-2.39.0.jar scripts/selenium-server-standalone-2.39.0.jar');
+
+  //Chrome driver required to run Chrome on Selenium Server
+  //Note: download file is based on OS (CLI to handle which one to download)
+  //http://chromedriver.storage.googleapis.com/index.html
+  //Size: ~6mb
+  var chromedriverLink;
   if (isWin) {
-    //Selenium Standalone Server - required for protractor e2e testing
-    //Note: Protractor comes with a script to help download and install the standalone server. Run 'webdriver-manager-update': https://github.com/angular/protractor/blob/master/docs/getting-started.md
-    //https://code.google.com/p/selenium/downloads/list
-    //Size: ~33mb
-    echo('Downloading OS specific Selenium Server jar...');
-    exec('wget http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar');
-    exec('mv selenium-server-standalone-2.39.0.jar scripts/selenium-server-standalone-2.39.0.jar');
-
-    //Chrome driver required to run Chrome on Selenium Server
-    //Note: download file is based on OS (CLI to handle which one to download)
-    //http://chromedriver.storage.googleapis.com/index.html
-    //Size: ~6mb
-    echo('Downloading OS specific Chromedriver...');
-    exec('wget http://chromedriver.storage.googleapis.com/2.8/chromedriver_win32.zip');
-    exec('unzip chromedriver_win32.zip');
-    exec('mv Chromedriver.exe scripts/Chromedriver.exe');
-    exec('rm chromedriver_win32.zip');
-
-    //PhantomJS driver required to run on Selenium Server
-    //Note: download file is based on OS (CLI to handle which one to download)
-    //http://phantomjs.org/download.htmlex.html
-    //Size: ~7mb
-    echo('Downloading OS specific Phantomjs...');
-    exec('wget http://phantomjs.googlecode.com/files/phantomjs-1.9.2-windows.zip');
-    exec('unzip phantomjs-1.9.2-windows.zip');
-    exec('mv phantomjs-1.9.2-windows/phantomjs.exe scripts/phantomjs.exe');
-    exec('rm phantomjs-1.9.2-windows.zip');
-    exec('rm -rf phantomjs-1.9.2-windows');
+    chromedriverLink = 'chromedriver_win32.zip';
+  } else if (isLinux) {
+    chromedriverLink = 'chromedriver_linux32.zip';
+  } else if (isMac) {
+    chromedriverLink = 'chromedriver_mac32.zip';
   }
+  echo('Downloading OS specific Chromedriver...');
+  exec('wget http://chromedriver.storage.googleapis.com/2.8/'+chromedriverLink);
+  exec('unzip '+chromedriverLink);
+  exec('mv Chromedriver.exe scripts/Chromedriver.exe');
+  exec('rm '+chromedriverLink);
+
+  //PhantomJS driver required to run on Selenium Server
+  //Note: download file is based on OS (CLI to handle which one to download)
+  //http://phantomjs.org/download.html
+  //Size: ~7mb
+  var phantomjsLink, linkExt;
+  if (isWin) {
+    phantomjsLink = 'phantomjs-1.9.2-windows';
+    linkExt = '.zip';
+  } else if (isLinux) {
+    phantomjsLink = 'phantomjs-1.9.2-linux-i686';
+    linkExt = '.tar.bz2';
+  } else if (isMac) {
+    phantomjsLink = 'phantomjs-1.9.2-macosx';
+    linkExt = '.zip';
+  }
+  echo('Downloading OS specific Phantomjs...');
+  exec('wget http://phantomjs.googlecode.com/files/'+phantomjsLink+linkExt);
+  if (isLinux) {
+    exec('tar -xjvf '+phantomjsLink+linkExt);
+  } else {
+    exec('unzip '+phantomjsLink+linkExt);
+  }
+  exec('mv '+phantomjsLink+'/phantomjs.exe scripts/phantomjs.exe');
+  exec('rm '+phantomjsLink+linkExt);
+  exec('rm -rf '+phantomjsLink);
 
   echo('OK!');
 });
