@@ -5,7 +5,7 @@ define(['angular', 'app'],function (angular) {
   .module('app.services')
   .service('UserServiceMock',['$http', '$httpOptions', '$q', '$timeout'
     ,function ($http, $httpOptions, $q, $timeout) {
-    
+
     var loggedIn = false;
 
     return {
@@ -14,8 +14,8 @@ define(['angular', 'app'],function (angular) {
         var def = $q.defer();
 
         $timeout(function () {
-          if(credentials.username === 'root'
-            && credentials.password === 'root') {
+          if(credentials.username === 'admin'
+            && credentials.password === '1234') {
             loggedIn = true;
             def.resolve({status: 200, user: credentials});
           } else {

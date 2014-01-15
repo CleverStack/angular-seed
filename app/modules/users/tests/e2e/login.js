@@ -1,4 +1,4 @@
-describe('login', function() {
+xdescribe('login', function() {
 
   var ptor;
   beforeEach(function() {
@@ -6,12 +6,12 @@ describe('login', function() {
     ptor.get('/#/login');
   });
 
-  it('should login with default user account', function() {
+  it('should login with the default user account', function() {
     var username = element(by.model('credentials.username'));
     var password = element(by.model('credentials.password'));
 
-    ptor.sendKeys('admin');
-    ptor.sendKeys('1234');
+    username.sendKeys('admin');
+    password.sendKeys('1234');
     ptor.findElement(protractor.By.css('button[type="submit"]')).click();
 
     expect(ptor.findElement(protractor.By.tagName('h1')).getText())
