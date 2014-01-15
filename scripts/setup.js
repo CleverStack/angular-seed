@@ -49,7 +49,7 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
     //Note: Protractor comes with a script to help download and install the standalone server. Run 'webdriver-manager-update': https://github.com/angular/protractor/blob/master/docs/getting-started.md
     //https://code.google.com/p/selenium/downloads/list
     //Size: ~33mb
-    echo('Downloading Selenium Server jar...');
+    echo('Downloading OS specific Selenium Server jar...');
     exec('wget http://selenium.googlecode.com/files/selenium-server-standalone-2.39.0.jar');
     exec('mv selenium-server-standalone-2.39.0.jar scripts/selenium-server-standalone-2.39.0.jar');
 
@@ -57,7 +57,7 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
     //Note: download file is based on OS (CLI to handle which one to download)
     //http://chromedriver.storage.googleapis.com/index.html
     //Size: ~6mb
-    echo('Downloading Chromedriver...');
+    echo('Downloading OS specific Chromedriver...');
     exec('wget http://chromedriver.storage.googleapis.com/2.8/chromedriver_win32.zip');
     exec('unzip chromedriver_win32.zip');
     exec('mv Chromedriver.exe scripts/Chromedriver.exe');
@@ -67,7 +67,7 @@ async_exec('npm install shelljs', function (err, stdout, stderr) {
     //Note: download file is based on OS (CLI to handle which one to download)
     //http://phantomjs.org/download.htmlex.html
     //Size: ~7mb
-    echo('Downloading Phantomjs...');
+    echo('Downloading OS specific Phantomjs...');
     exec('wget http://phantomjs.googlecode.com/files/phantomjs-1.9.2-windows.zip');
     exec('unzip phantomjs-1.9.2-windows.zip');
     exec('mv phantomjs-1.9.2-windows/phantomjs.exe scripts/phantomjs.exe');
