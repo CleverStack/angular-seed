@@ -18,8 +18,8 @@
     <!-- endbuild -->
 
   </head>
-  <body ng-controller="ApplicationController">
-    <div class="navbar" ng-include="tpl.view('partials/navbar')"></div>
+  <body ng-controller="AppCtrl">
+    <div class="navbar navbar-default" ng-include="tpl.view('partials/navbar')"></div>
 
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
@@ -34,7 +34,7 @@
     <div class="container" ng-view></div>
 
     <!-- build:js scripts/scripts.js -->
-    <script data-main="modules/application/main" src="components/requirejs/require.js"></script>
+    <script data-main="modules/main" src="components/requirejs/require.js"></script>
     <!-- endbuild -->
 
   </body>

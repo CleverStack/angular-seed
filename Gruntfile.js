@@ -18,10 +18,6 @@ var mountFolder = function (connect, dir) {
 
 var fallbackToTest = function (connect) {
   return connect().use(function (req, res, next) {
-    // if(req.url === '/') {
-    //   fs.createReadStream(__dirname+'/app/index.html').pipe(res);
-    //   return;
-    // }
     fs.exists(__dirname + req.url, function (exists) {
       if(exists) {
         fs.createReadStream(req.url).pipe(res);
@@ -45,76 +41,80 @@ var fallbackToIndex = function (connect, index, file) {
 };
 
 module.exports = function (grunt) {
-  // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  // configurable paths
-  var yeomanConfig = {
-    app: 'app',
-    dist: 'dist'
+  // grunt helpers
+  require('time-grunt')(grunt);
+
+  // Load grunt tasks automatically
+  require('load-grunt-tasks')(grunt);
+
+  // configurations
+  var appConfig = {
+
+    // Development Server
+    "dev": {
+      "port": "9000", // default 9000
+      "path": "./app", // the development directory of your app
+      "liveReloadPort": "35729", // default 35729
+      "hostname": "localhost" // using 0.0.0.0 will make the server accessible from anywhere
+    },
+
+    // Unit Testing Server
+    "test": {
+      "port": "9090", // default 9090
+      "path": "./test", // if you change this it must reflect in your karma.conf.js
+      "coverage": {
+        "port": "5555", // default 5555
+        "path": "./test/coverage/" // browsable directory for unit testing code coverage reports
+      },
+      "conf": "./test-unit.conf.js"
+    },
+
+    // Production Preview Server
+    "dist": {
+      "port": "9009", // default 9009
+      "path": "./dist" // directory where you want your production builds to go
+    }
+
   };
 
-  try {
-    yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
-  } catch (e) {}
-
   grunt.initConfig({
-    yeoman: yeomanConfig,
-    docular: {
-      baseUrl: 'http://localhost:9999',
-      showAngularDocs: false,
-      showDocularDocs: false,
-      copyDocDir: '/docs',
-      docAPIOrder : ['doc', 'angular'],
-      groups: [
-        {
-          groupTitle: 'CleverStack Seed',
-          groupId: 'cleverstack',
-          groupIcon: 'icon-book',
-          sections: [
-            {
-              id: 'api',
-              title: 'API',
-              scripts: [
-                'app/scripts/app.js',
-                'app/scripts/config.js',
-                'app/scripts/routes.js',
-                'app/scripts/services',
-                'app/scripts/filters',
-                'app/scripts/directives',
-                'app/scripts/controllers',
-              ]
-            }
-          ]
-        }
-      ] //groups of documentation to parse
-    },
+    appConfig: appConfig,
     watch: {
       livereload: {
+        options: {
+          livereload: true
+        },
         files: [
-          '<%= yeoman.app %>/components/bootstrap/{,*/}*.css',
-          '<%= yeoman.app %>/styles/{,*/}*.css',
-          '<%= yeoman.app %>/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/views/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ],
-        tasks: ['livereload']
+          '<%= appConfig.dev.path %>/components/bootstrap/{,*/}*.css',
+          '<%= appConfig.dev.path %>/styles/{,*/}*.css',
+          '<%= appConfig.dev.path %>/{,*/}*.html',
+          '{.tmp,<%= appConfig.dev.path %>}/styles/{,*/}*.css',
+          '{.tmp,<%= appConfig.dev.path %>}/views/{,*/}*.html',
+          '{.tmp,<%= appConfig.dev.path %>}/scripts/{,*/}*.js',
+          '<%= appConfig.dev.path %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ]
       },
       less: {
         files: [
-          '<%= yeoman.app %>/components/bootstrap/less/*.less',
-          '<%= yeoman.app %>/styles/less/**/*.less'
+          '<%= appConfig.dev.path %>/components/bootstrap/less/*.less',
+          '<%= appConfig.dev.path %>/styles/less/**/*.less'
         ],
-        tasks: ['less']
+        tasks: ['less:development']
       },
+      unitTests: {
+        files: [
+          'test*/unit/**/*.js',
+          '**/test*/unit/**/*.js'
+        ]
+      }
     },
     connect: {
       options: {
-        port: 9000,
+        port: '<%= appConfig.dev.port %>',
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: '0.0.0.0'
+        hostname: '<%= appConfig.dev.hostname %>',
+        livereload: '<%= appConfig.dev.liveReloadPort %>'
       },
       livereload: {
         options: {
@@ -122,7 +122,7 @@ module.exports = function (grunt) {
             return [
               lrSnippet,
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.app),
+              mountFolder(connect, appConfig.dev.path),
               fallbackToIndex(connect, 'app/index.html', '/index.html')
             ];
           }
@@ -130,8 +130,9 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          port: 9090,
+          port: '<%= appConfig.test.port %>',
           base: __dirname,
+          livereload: false,
           middleware: function (connect) {
             return [
               mountFolder(connect, '.'),
@@ -142,26 +143,19 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
-          port: 9009,
-          base: __dirname + '/dist'
+          livereload: false,
+          port: '<%= appConfig.dist.port %>',
+          base: '<%= appConfig.dist.path %>'
         }
       },
-      docs: {
+      coverage: {
         options: {
-          port: 9999,
-          base: __dirname + '/docs'
+          base: '<%= appConfig.test.coverage.path %>',
+          directory: '<%= appConfig.test.coverage.path %>',
+          port: '<%= appConfig.test.coverage.port %>',
+          keepalive: true,
+          livereload: false
         }
-      }
-    },
-    open: {
-      server: {
-        url: 'http://localhost:<%= connect.options.port %>'
-      },
-      test: {
-        url: 'http://localhost:<%= connect.test.options.port %>/test/e2e/runner.html'
-      },
-      docs: {
-        url: 'docs/index.html'
       }
     },
     clean: {
@@ -170,13 +164,13 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*'
+            '<%= appConfig.dist.path %>/*',
+            '!<%= appConfig.dist.path %>/.git*'
           ]
         }]
       },
       server: '.tmp',
-      docs: 'docs'
+      coverage: './test/coverage'
     },
     jshint: {
       options: {
@@ -184,67 +178,67 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js'
+        '<%= appConfig.dev.path %>/scripts/{,*/}*.js'
       ]
     },
     concat: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
+          '<%= appConfig.dist.path %>/scripts/scripts.js': [
             '.tmp/scripts/{,*/}*.js',
-            '<%= yeoman.app %>/scripts/{,*/}*.js'
+            '<%= appConfig.dev.path %>/scripts/{,*/}*.js'
           ]
         }
       }
     },
     useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
+      html: '<%= appConfig.dev.path %>/index.html',
       options: {
-        dest: '<%= yeoman.dist %>'
+        dest: '<%= appConfig.dist.path %>'
       }
     },
     usemin: {
-      html: ['<%= yeoman.dist %>/index.html', '<%= yeoman.dist %>/views/**/*.html'],
-      css: ['<%= yeoman.dist %>/styles/**/*.css'],
+      html: ['<%= appConfig.dist.path %>/index.html', '<%= appConfig.dist.path %>/views/**/*.html'],
+      css: ['<%= appConfig.dist.path %>/styles/**/*.css'],
       options: {
-        dirs: ['<%= yeoman.dist %>']
+        dirs: ['<%= appConfig.dist.path %>']
       }
     },
     imagemin: {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= appConfig.dev.path %>/images',
           src: '**/*.{png,jpg,jpeg}',
-          dest: '<%= yeoman.dist %>/images'
+          dest: '<%= appConfig.dist.path %>/images'
         }]
       }
     },
     less: {
       development: {
         options: {
-          paths: ['app/styles']
+          paths: ['<%= appConfig.dist.path %>/styles']
         },
         files: [
-          { '<%= yeoman.app %>/styles/application.css': '<%= yeoman.app %>/styles/less/application.less' }
+          { '<%= appConfig.dev.path %>/styles/application.css': '<%= appConfig.dev.path %>/styles/less/application.less' }
         ]
       },
       production: {
         options: {
-          paths: ['app/styles'],
+          paths: ['<%= appConfig.dist.path %>/styles'],
           cleancss: true
         },
         files: [
-          { '<%= yeoman.app %>/styles/application.css': '<%= yeoman.app %>/styles/less/application.less' }
+          { '<%= appConfig.dev.path %>/styles/application.css': '<%= appConfig.dev.path %>/styles/less/application.less' }
         ]
       },
     },
     cssmin: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/styles/application.css': [
+          '<%= appConfig.dist.path %>/styles/screen.css': [
             '.tmp/styles/{,*/}*.css',
-            '<%= yeoman.app %>/styles/{,*/}*.css'
+            '<%= appConfig.dev.path %>/styles/{,*/}*.css'
           ]
         }
       }
@@ -253,7 +247,7 @@ module.exports = function (grunt) {
       dist: {
         options: {
           /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
+          // https://github.com/appConfig/grunt-usemin/issues/44
           //collapseWhitespace: true,
           collapseBooleanAttributes: true,
           removeAttributeQuotes: true,
@@ -264,9 +258,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>',
+          cwd: '<%= appConfig.dev.path %>',
           src: ['*.html', 'views/**/*.html', 'views/**/partials/*.html'],
-          dest: '<%= yeoman.dist %>'
+          dest: '<%= appConfig.dist.path %>'
         }]
       }
     },
@@ -274,17 +268,17 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.dist %>/scripts',
+          cwd: '<%= appConfig.dist.path %>/scripts',
           src: '*.js',
-          dest: '<%= yeoman.dist %>/scripts'
+          dest: '<%= appConfig.dist.path %>/scripts'
         }]
       }
     },
     uglify: {
       dist: {
         files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '<%= yeoman.dist %>/scripts/scripts.js'
+          '<%= appConfig.dist.path %>/scripts/scripts.js': [
+            '<%= appConfig.dist.path %>/scripts/scripts.js'
           ]
         }
       }
@@ -293,14 +287,14 @@ module.exports = function (grunt) {
       compile: {
         options: {
           name: 'main',
-          baseUrl: 'app/scripts',
-          mainConfigFile: 'app/scripts/main.js',
-          out: '<%=yeoman.dist %>/scripts/scripts.js',
+          baseUrl: '<%= appConfig.dist.path %>/modules',
+          out: '<%= appConfig.dist.path %>/scripts/scripts.js',
+          findNestedDependencies: true,
           uglify: {
             beautify: false,
             overwrite: true,
             verbose: true,
-            'no_mangle': true,
+            no_mangle: true,
             copyright: true
           }
         }
@@ -310,10 +304,10 @@ module.exports = function (grunt) {
       dist: {
         files: {
           src: [
-            '<%= yeoman.dist %>/scripts/{,*/}*.js',
-            '<%= yeoman.dist %>/styles/{,*/}*.css',
-            '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
+            '<%= appConfig.dist.path %>/scripts/{,*/}*.js',
+            '<%= appConfig.dist.path %>/styles/{,*/}*.css',
+            '<%= appConfig.dist.path %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            '<%= appConfig.dist.path %>/styles/fonts/*'
           ]
         }
       }
@@ -323,17 +317,18 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.app %>',
-          dest: '<%= yeoman.dist %>',
+          cwd: '<%= appConfig.dev.path %>',
+          dest: '<%= appConfig.dist.path %>',
           src: [
             '*.{ico,txt}',
             '.htaccess',
             'components/**/*.{js,css,eot,svg,ttf,woff,png,jpg,jpeg,gif,webp}',
-            'images/{,*/}*.{gif,webp, png}',
-            'images/**/*.{gif,webp, png}',
+            'images/{,*/}*.{gif,webp,png}',
+            'images/**/*.{gif,webp,png}',
             'styles/fonts/**/*',
             'fonts/**/*',
-            'home/**/*'
+            'home/**/*',
+            'modules/**/*'
           ]
         }]
       },
@@ -342,8 +337,8 @@ module.exports = function (grunt) {
           {
               expand: true,
               filter: 'isFile',
-              cwd: '<%= yeoman.app %>/components/bootstrap/dist',
-              dest: '<%= yeoman.app %>',
+              cwd: '<%= appConfig.dev.path %>/components/bootstrap/dist',
+              dest: '<%= appConfig.dev.path %>',
               src: [
                 'fonts/*'
               ]
@@ -351,8 +346,8 @@ module.exports = function (grunt) {
           {
               expand: true,
               filter: 'isFile',
-              cwd: '<%= yeoman.app %>/components/bootstrap/dist/css',
-              dest: '<%= yeoman.app %>/styles',
+              cwd: '<%= appConfig.dev.path %>/components/bootstrap/dist/css',
+              dest: '<%= appConfig.dev.path %>/styles',
               src: [
                 'bootstrap.css'
               ]
@@ -360,8 +355,8 @@ module.exports = function (grunt) {
           {
               expand: true,
               filter: 'isFile',
-              cwd: '<%= yeoman.app %>/components/bootstrap/less',
-              dest: '<%= yeoman.app %>/styles/less/bootstrap',
+              cwd: '<%= appConfig.dev.path %>/components/bootstrap/less',
+              dest: '<%= appConfig.dev.path %>/styles/less/bootstrap',
               src: [
                 'variables.less',
                 'mixins.less',
@@ -370,29 +365,74 @@ module.exports = function (grunt) {
           }
         ]
       }
+    },
+    open: {
+      server: {
+        url: 'http://localhost:<%= connect.options.port %>'
+      },
+      test: {
+        url: 'http://localhost:<%= connect.test.options.port %>'
+      },
+      dist: {
+        url: 'http://localhost:<%= connect.dist.options.port %>'
+      },
+      coverage: {
+        url: 'http://localhost:<%= appConfig.test.coverage.port %>'
+      }
+    },
+    // unit testing config
+    karma: {
+      // options {
+      //   configFile: './test-unit.conf.js'
+      // },
+      unit: {
+        configFile: '<%= appConfig.test.conf %>',
+        autoWatch: false,
+        singleRun: true
+      },
+      unitAuto: {
+        configFile: '<%= appConfig.test.conf %>',
+        autoWatch: true,
+        singleRun: false
+      },
+      unitCoverage: {
+        configFile: '<%= appConfig.test.conf %>',
+        autoWatch: false,
+        singleRun: true,
+        reporters: ['progress', 'coverage'],
+        preprocessors: {
+          './app/modules/**/*.js': ['coverage']
+        },
+        coverageReporter: {
+          type : 'html',
+          dir : '<%= appConfig.test.coverage.path %>'
+        }
+      },
+      travis: {
+        configFile: '<%= appConfig.test.conf %>',
+        autoWatch: false,
+        singleRun: true,
+        browsers: ['PhantomJS']
+      }
     }
   });
 
-  grunt.renameTask('regarde', 'watch');
+  //to initialise bootstrap run 'grunt bootstrap'
+  grunt.registerTask('bootstrap', ['copy:bootstrap']);
 
-  grunt.registerTask('docs', ['clean:docs','docular']);
+  //for less compilation force
+  grunt.option("force", true);
 
-  //to initialise bootstrap run 'grunt copy:bootstrap'
-
-  grunt.option("force", true); //for less compilation force
   grunt.registerTask('server', [
     'clean:server',
-    'livereload-start',
     'connect:livereload',
     'connect:test',
     'connect:dist',
-    'connect:docs',
     'watch'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
-    // 'jshint',
     'useminPrepare',
     'imagemin',
     'less',
@@ -402,8 +442,33 @@ module.exports = function (grunt) {
     'ngmin',
     'requirejs',
     'rev',
-    'usemin',
-    'docs'
+    'usemin'
+  ]);
+
+  /* -- TEST TASKS ------------------------------------------------ */
+
+  grunt.registerTask('test', 'Start up the auto unit test server.', [
+    'autotest:unit'
+  ]);
+
+  grunt.registerTask('test:unit', 'Single run of unit tests.', [
+    'karma:unit'
+  ]);
+
+  grunt.registerTask('autotest:unit', 'Start up the auto unit test server.', [
+    'karma:unitAuto',
+    'watch:unitTests'
+  ]);
+
+  grunt.registerTask('test:travis', 'Single run of unit tests for Travis CI.', [
+    'karma:travis'
+  ]);
+
+  grunt.registerTask('test:coverage', 'Run a test coverage report.', [
+    'clean:coverage',
+    'karma:unitCoverage',
+    'open:coverage',
+    'connect:coverage'
   ]);
 
   grunt.registerTask('default', ['build']);
