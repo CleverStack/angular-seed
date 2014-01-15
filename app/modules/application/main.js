@@ -1,27 +1,17 @@
-require(['./config'], function (){
-  'use strict';
-
-  require([
+define([
     'angular',
-    './app',
+    './module',
     'cs_account',
     'cs_common',
     'cs_session',
     'users',
 
     // Controllers
-    'scripts/application_controller',
-    'scripts/home_controller',
+    './scripts/application_controller',
+    './scripts/home_controller',
 
     // Providers
-    'scripts/helpers_provider'
-
-  ], function (ng){
-
-    ng.element(document).ready(function () {
-      ng.bootstrap(document, ['app']);
-    });
-
-  });
+    './scripts/helpers_provider'
+], function() {
 
 });

@@ -10,6 +10,8 @@
 
 var fs = require('fs');
 
+var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
 };
@@ -130,10 +132,14 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          base: [
-            '.tmp',
-            '<%= appConfig.dev.path %>'
-          ]
+          middleware: function (connect) {
+            return [
+              lrSnippet,
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, appConfig.dev.path),
+              fallbackToIndex(connect, 'app/index.html', '/index.html')
+            ];
+          }
         }
       },
       test: {
@@ -244,7 +250,7 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%= appConfig.dist.path %>/styles/application.css': [
+          '<%= appConfig.dist.path %>/styles/screen.css': [
             '.tmp/styles/{,*/}*.css',
             '<%= appConfig.dev.path %>/styles/{,*/}*.css'
           ]
@@ -295,14 +301,14 @@ module.exports = function (grunt) {
       compile: {
         options: {
           name: 'main',
-          baseUrl: '<%= appConfig.dist.path %>/scripts',
-          mainConfigFile: '<%= appConfig.dist.path %>/scripts/main.js',
+          baseUrl: '<%= appConfig.dist.path %>/modules',
           out: '<%= appConfig.dist.path %>/scripts/scripts.js',
+          findNestedDependencies: true,
           uglify: {
             beautify: false,
             overwrite: true,
             verbose: true,
-            'no_mangle': true,
+            no_mangle: true,
             copyright: true
           }
         }
@@ -335,7 +341,8 @@ module.exports = function (grunt) {
             'images/**/*.{gif,webp,png}',
             'styles/fonts/**/*',
             'fonts/**/*',
-            'home/**/*'
+            'home/**/*',
+            'modules/**/*'
           ]
         }]
       },
