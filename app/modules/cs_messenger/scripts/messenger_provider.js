@@ -1,8 +1,8 @@
-define(['angular'], function (ng) {
+define(['angular', '../module'], function (ng) {
   'use strict';
 
   ng
-  .module('cs_common.services')
+  .module('cs_messenger.services')
   .factory('Messenger',
     [
       '$rootScope',

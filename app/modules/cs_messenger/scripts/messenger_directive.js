@@ -1,7 +1,7 @@
 define(['angular', 'underscore', '../module'], function (ng, _) {
   'use strict';
 
-  ng.module('cs_common.directives')
+  ng.module('cs_messenger.directives')
   .directive('messenger', [
       '$timeout',
       '$log',
@@ -9,7 +9,7 @@ define(['angular', 'underscore', '../module'], function (ng, _) {
       'CSTemplate',
       function ($timeout, $log, messenger, CSTemplate) {
         return {
-          templateUrl: '/modules/messenger/views/messenger.html',
+          templateUrl: '/modules/cs_messenger/views/messenger.html',
           link: function ($scope, element) {
 
             var alertClass, appMessage, alertType, icon, textWrapper, closeButton, closingPromise;
