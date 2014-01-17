@@ -1,5 +1,7 @@
+@import url("../../modules/cs_calendar/styles/calendar.css");
+
 /* Use this file to add LESS for your application. */
-.btn-default,
+.btn-btn .btn-default,
 .btn-primary,
 .btn-success,
 .btn-info,
@@ -9,13 +11,13 @@
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
 }
-.btn-default:active,
+.btn-btn .btn-default:active,
 .btn-primary:active,
 .btn-success:active,
 .btn-info:active,
 .btn-warning:active,
 .btn-danger:active,
-.btn-default.active,
+.btn-btn .btn-default.active,
 .btn-primary.active,
 .btn-success.active,
 .btn-info.active,

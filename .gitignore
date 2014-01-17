@@ -15,3 +15,5 @@ libpeerconnection.log
 /app/components
 /node_modules
 /test/coverage
+
+.idea

@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-md-12 header-area">
+        <div class="header-buttons pull-right">
+            <a href="" class="btn btn-default">Add event</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div ui-calendar="uiConfig.calendar"
+                 ng-model="eventSources"
+                 calendar="calendar"
+                 ng-if="showCalendar">
+            </div>
+        </div>
+    </div>
+</div>
