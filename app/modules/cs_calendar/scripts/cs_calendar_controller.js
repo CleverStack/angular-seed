@@ -70,8 +70,8 @@ define( ['angular', '../module'], function ( ng ) {
 
                 /* remove event */
                 $scope.removeEvent = function ( event ) {
-                    if ( event.id ) {
-                        var index = parseInt( event.id );
+                    var index = $scope.events.indexOf( event );
+                    if ( index >= 0 ) {
                         $scope.events.splice( index, 1 );
                     }
                 };
@@ -86,8 +86,8 @@ define( ['angular', '../module'], function ( ng ) {
 
                 /* remove fn event */
                 $scope.removeFnEvent = function ( event ) {
-                    if ( event.id ) {
-                        var index = parseInt( event.id );
+                    var index = $scope.eventsFn.indexOf( event );
+                    if ( index >= 0 ) {
                         $scope.eventsFn.splice( index, 1 );
                     }
                 };
@@ -177,7 +177,7 @@ define( ['angular', '../module'], function ( ng ) {
                 };
 
                 $scope.close = function () {
-                    $scope.modalInstance.close()
+                    $scope.modalInstance.close();
                 };
 /* --------------------- add events section---------------------------------------------*/
 
@@ -188,7 +188,16 @@ define( ['angular', '../module'], function ( ng ) {
                 };
 
                 $scope.delEvent = function(){
+                    $scope.modalInstance = $modal.open( {
+                        templateUrl: '/modules/cs_calendar/views/forms/calendar_confirm_delete_form.html',
+                        scope: $scope
+                    } );
+                };
+
+                $scope.confirm = function(){
+                    console.log($scope.activeEvent)
                     $scope.removeEvent( $scope.activeEvent );
+                    $scope.modalInstance.close();
                     $scope.activeEvent = {};
                 };
 /* --------------------- remove events section---------------------------------------------*/
