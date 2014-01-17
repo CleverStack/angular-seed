@@ -89,6 +89,7 @@ module.exports = function (grunt) {
           '<%= appConfig.dev.path %>/components/bootstrap/{,*/}*.css',
           '<%= appConfig.dev.path %>/styles/{,*/}*.css',
           '<%= appConfig.dev.path %>/{,*/}*.html',
+          '<%= appConfig.dev.path %>/modules/**/{,*/}*.{css,js,less,html}',
           '{.tmp,<%= appConfig.dev.path %>}/styles/{,*/}*.css',
           '{.tmp,<%= appConfig.dev.path %>}/views/{,*/}*.html',
           '{.tmp,<%= appConfig.dev.path %>}/scripts/{,*/}*.js',
@@ -98,7 +99,8 @@ module.exports = function (grunt) {
       less: {
         files: [
           '<%= appConfig.dev.path %>/components/bootstrap/less/*.less',
-          '<%= appConfig.dev.path %>/styles/less/**/*.less'
+          '<%= appConfig.dev.path %>/styles/less/**/*.less',
+          '<%= appConfig.dev.path %>/modules/**/styles/less/*.less'
         ],
         tasks: ['less:development']
       },
@@ -219,18 +221,26 @@ module.exports = function (grunt) {
         options: {
           paths: ['<%= appConfig.dist.path %>/styles']
         },
-        files: [
-          { '<%= appConfig.dev.path %>/styles/application.css': '<%= appConfig.dev.path %>/styles/less/application.less' }
-        ]
+        files: [{
+          dest: '<%= appConfig.dev.path %>/styles/application.css',
+          src: [
+            '<%= appConfig.dev.path %>/styles/less/application.less',
+            '<%= appConfig.dev.path %>/modules/**/styles/less/*.less'
+          ]
+        }]
       },
       production: {
         options: {
           paths: ['<%= appConfig.dist.path %>/styles'],
           cleancss: true
         },
-        files: [
-          { '<%= appConfig.dev.path %>/styles/application.css': '<%= appConfig.dev.path %>/styles/less/application.less' }
-        ]
+        files: [{
+          dest: '<%= appConfig.dev.path %>/styles/application.css',
+          src: [
+            '<%= appConfig.dev.path %>/styles/less/application.less',
+            '<%= appConfig.dev.path %>/modules/**/styles/less/*.less'
+          ]
+        }]
       },
     },
     cssmin: {
