@@ -17,7 +17,8 @@ define(['angular', '../module'], function (ng) {
           '$injector',
           '$location',
           '$log',
-          function ($injector, $location, $log) {
+          '$window',
+          function ($injector, $location, $log, $window) {
 
             if(inheritedProvider){
               var provider = $injector.get(inheritedProvider);
@@ -62,6 +63,10 @@ define(['angular', '../module'], function (ng) {
 
               $location.url(path);
               return false;
+            };
+
+            helpers.goBack = function () {
+              $window.history.back();
             };
 
             return helpers;

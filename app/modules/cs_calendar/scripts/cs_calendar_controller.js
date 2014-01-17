@@ -18,10 +18,12 @@ define( ['angular', '../module'], function ( ng ) {
             '$scope',
             'CSCalendarService',
             'CSCalendarConfig',
-            function ( $scope, service, config ) {
+            '$modal',
+            function ( $scope, service, config, $modal ) {
 
                 /* config object */
                 $scope.showCalendar = false;
+                $scope.activeEvent = {};
 
                 /* events source */
                 $scope.events = [];
@@ -35,7 +37,7 @@ define( ['angular', '../module'], function ( ng ) {
 
                 /* action on eventClick */
                 $scope.actionEventOnClick = function ( event, jsEvent ) {
-
+                    $scope.$apply( $scope.onClickEvent( event ) );
                 };
 
                 /* action on Drop */
@@ -68,8 +70,10 @@ define( ['angular', '../module'], function ( ng ) {
 
                 /* remove event */
                 $scope.removeEvent = function ( event ) {
-                    var index = parseInt( event.id );
-                    $scope.events.splice( index, 1 );
+                    if ( event.id ) {
+                        var index = parseInt( event.id );
+                        $scope.events.splice( index, 1 );
+                    }
                 };
 
                 /* add fn event*/
@@ -82,8 +86,10 @@ define( ['angular', '../module'], function ( ng ) {
 
                 /* remove fn event */
                 $scope.removeFnEvent = function ( event ) {
-                    var index = parseInt( event.id );
-                    $scope.eventsFn.splice( index, 1 );
+                    if ( event.id ) {
+                        var index = parseInt( event.id );
+                        $scope.eventsFn.splice( index, 1 );
+                    }
                 };
 
                 /* config object */
@@ -143,6 +149,49 @@ define( ['angular', '../module'], function ( ng ) {
                 $scope.getEvents();
                 $scope.getFilters();
 
+/* --------------------- add events section---------------------------------------------*/
+                $scope.newEvent = function () {
+                    $scope.event = {};
+
+                    $scope.modalInstance = $modal.open( {
+                        templateUrl: '/modules/cs_calendar/views/forms/calendar_add_event_form.html',
+                        scope: $scope
+                    } );
+                };
+
+                $scope.addOrUpdateEvent = function () {
+                    if ( !$scope.editingEvent ) {
+                        $scope.saveEvent();
+                    } else {
+                        $scope.updateEvent();
+                    }
+                    $scope.modalInstance.close();
+                };
+
+                $scope.saveEvent = function () {
+                    service.save( $scope.event )
+                        .then( function ( result ) {
+                            $scope.event.editable = true;
+                            $scope.addEvent( $scope.event );
+                        }, function ( err ) {} );
+                };
+
+                $scope.close = function () {
+                    $scope.modalInstance.close()
+                };
+/* --------------------- add events section---------------------------------------------*/
+
+/* --------------------- remove events section---------------------------------------------*/
+
+                $scope.onClickEvent = function( event ){
+                    $scope.activeEvent = event.event.editable ? event : {} ;
+                };
+
+                $scope.delEvent = function(){
+                    $scope.removeEvent( $scope.activeEvent );
+                    $scope.activeEvent = {};
+                };
+/* --------------------- remove events section---------------------------------------------*/
             }
         ] );
 } );

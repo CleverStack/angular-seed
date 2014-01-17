@@ -5,6 +5,8 @@ define([
     'cs_common',
     'cs_session',
     'cs_calendar',
+    'cs_browserdetect',
+    'cs_modal',
     'users',
 
     // Controllers

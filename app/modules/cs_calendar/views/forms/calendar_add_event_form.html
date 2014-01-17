@@ -1,0 +1,53 @@
+<div class=" event-form">
+    <div class="modal-header">
+        <button type="button" class="close" aria-hidden="true" ng-click="close()">&times;</button>
+        <h4>Add event</h4>
+    </div>
+    <form class="form-horizontal" name="eventForm">
+        <div class="modal-body">
+            <!--*Event name-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">*Event name</label>
+
+                <div class="col-md-8">
+                    <input type="text" class="form-control" ng-model="event.name" required=""/>
+                </div>
+            </div>
+            <!--Event note-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Event note</label>
+
+                <div class="col-md-8">
+                    <textarea rows="3" class="form-control" ng-model="event.note"></textarea>
+                </div>
+            </div>
+            <!--*Start date-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">*Start date</label>
+
+                <div class="col-md-8">
+                    <input type="datetime-local" ng-model="event.start" class="form-control"/>
+                </div>
+            </div>
+            <!--*End date-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">*Start date</label>
+
+                <div class="col-md-8">
+                    <input type="datetime-local" ng-model="event.end" class="form-control"/>
+                </div>
+            </div>
+            <!--require-->
+            <div class="form-group">
+                <div class="col-md-3 col-md-offset-4">
+                    <h6>* required field</h6>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="addOrUpdateEvent()" ng-disabled="!eventForm.$valid">OK
+            </button>
+            <button class="btn btn-default" ng-click="close()">Cancel</button>
+        </div>
+    </form>
+</div>

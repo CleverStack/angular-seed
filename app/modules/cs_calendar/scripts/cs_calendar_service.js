@@ -21,11 +21,11 @@ define( ['angular', '../module'], function ( ng ) {
                     createEvent: function( event, config, id ) {
                         return {
                             id:                 id,
-                            title:              '<strong>' + event.title + '</strong>',
+                            title:              '<strong>' + event.name + '</strong>' + ' / ' + event.note,
                             start:              ng.isDate( event.start ) ? event.start : new Date( event.start ),
                             end:                ng.isDate( event.end ) ? event.end : new Date( event.end ),
                             editable:           event.editable,
-                            backgroundColor:    config.bgColor ,
+                            backgroundColor:    config.bgColor,
                             borderColor:        config.brColor,
                             textColor:          config.txtColor,
                             event:              event
@@ -69,13 +69,15 @@ define( ['angular', '../module'], function ( ng ) {
 
                         var events = [
                             {
-                                title: 'events #1',
+                                name: 'events #1',
+                                note: 'note for events #1',
                                 start: new Date().toString(),
                                 end: new Date().toString(),
                                 editable: true
                             },
                             {
-                                title: 'events #2',
+                                name: 'events #2',
+                                note: 'note for events #2',
                                 start: new Date().toString(),
                                 end: new Date().toString(),
                                 editable: true
@@ -84,7 +86,8 @@ define( ['angular', '../module'], function ( ng ) {
 
                         var fnEvents = [
                             {
-                                title: 'periodic events #1',
+                                name: 'periodic events #1',
+                                note: 'note for periodic events #1',
                                 start: new Date().toString(),
                                 end: new Date(2014, 2, 1).toString(),
                                 from: new Date(0, 0, 1, 11, 0).toString(),
@@ -93,7 +96,8 @@ define( ['angular', '../module'], function ( ng ) {
                                 period: { y:0, m:0, d: 1 }
                             },
                             {
-                                title: 'periodic events #2',
+                                name: 'periodic events #2',
+                                note: 'note for periodic events #2',
                                 start: new Date().toString(),
                                 end: new Date(2015, 5, 25).toString(),
                                 from: new Date( 0, 0, 1, 11, 0).toString(),
@@ -118,6 +122,14 @@ define( ['angular', '../module'], function ( ng ) {
                         };
 
                         deferred.resolve( filters );
+
+                        return deferred.promise;
+                    },
+
+                    save: function( event ){
+                        var deferred = $q.defer();
+
+                        deferred.resolve( /*return obj*/ );
 
                         return deferred.promise;
                     },

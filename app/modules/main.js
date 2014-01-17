@@ -10,6 +10,8 @@ require.config({
     'cs_common',
     'cs_session',
     'cs_calendar',
+    'cs_browserdetect',
+    'cs_modal',
     'users'
   ],
   paths: {
@@ -23,7 +25,9 @@ require.config({
     'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor',
     'jquery-ui': '../components/jquery-ui/ui/minified/jquery-ui.min',
     'angular-ui-calendar': '../components/angular-ui-calendar/src/calendar',
-    'fullcalendar': '../components/fullcalendar/fullcalendar.min'
+    'fullcalendar': '../components/fullcalendar/fullcalendar.min',
+    'bootstrap': '../components/bootstrap/dist/js/bootstrap.min',
+    'ui-bootstrap': '../components/angular-ui-bootstrap-bower/ui-bootstrap'
   },
   shim: {
     angular: {
@@ -55,6 +59,12 @@ require.config({
     },
     'jquery-ui': {
       deps: ['jquery']
+    },
+    'bootstrap': {
+      deps: ['jquery']
+    },
+    'ui-bootstrap': {
+      deps: ['angular', 'bootstrap']
     }
   }
 });
@@ -67,6 +77,8 @@ require([
   'http-auth-interceptor',
   'angular-ui-calendar',
   'jquery',
+  'bootstrap',
+  'ui-bootstrap',
 
   // Init
   'app'
