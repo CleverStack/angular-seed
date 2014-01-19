@@ -1,4 +1,4 @@
-define(['angular', 'angular-mocks', '../../../scripts/home_controller.js'], function (ng) {
+define(['angular', 'angular-mocks'], function (ng) {
   'use strict';
 
   describe('Controller: HomeController', function () {

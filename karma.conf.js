@@ -6,24 +6,15 @@ module.exports = function (config) {
     frameworks: ['requirejs', 'jasmine'],
     // list of files / patterns to load in the browser
     files: [
-      'app/modules/application/tests/unit/main.js',
-      { pattern: 'app/modules/application/scripts/*.js', included: false, served: true },
-      { pattern: 'app/modules/application/*.js', included: false, served: true },
-      { pattern: 'app/modules/cs_account/scripts/*.js', included: false, served: true },
-      { pattern: 'app/modules/cs_account/*.js', included: false, served: true },
-      { pattern: 'app/modules/cs_common/scripts/*.js', included: false, served: true },
-      { pattern: 'app/modules/cs_common/*.js', included: false, served: true },
-      { pattern: 'app/modules/cs_session/scripts/*.js', included: false, served: true },
-      { pattern: 'app/modules/cs_session/*.js', included: false, served: true },
-      { pattern: 'app/modules/users/scripts/*.js', included: false, served: true },
-      { pattern: 'app/modules/users/*.js', included: false, served: true },
-
-      { pattern: 'app/components/**/*.js', included: false, served: true, watch: false },
+      'test/unit/main.js',
+      { pattern: 'app/modules/**/**/*.js', included: false, served: true },
+      { pattern: 'app/modules/**/scripts/*.js', included: false, served: true },
+      { pattern: 'app/components/**/*.js', included: false, served: true, watched: false },
       { pattern: 'app/modules/**/tests/unit/**/*.js', included: false, served: true }
     ],
     // list of files to exclude
     exclude: [
-      'app/modules/application/main.js'
+      'app/modules/main.js'
     ],
 
     // Start these browsers, currently available:
@@ -60,6 +51,7 @@ module.exports = function (config) {
       'karma-growl-reporter',
       'karma-junit-reporter',
       'karma-script-launcher',
+      'karma-phantomjs-launcher',
       'karma-safari-launcher',
       'karma-browserstack-launcher',
     ]
