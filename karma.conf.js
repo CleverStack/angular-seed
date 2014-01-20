@@ -1,10 +1,14 @@
-module.exports = function (config) {
+// Karma configuration
+// http://karma-runner.github.io/0.10/config/configuration-file.html
+
+module.exports = function(config) {
   config.set({
-    // base path, that will be used to resolve files and exclude
-    basePath: './',
-    // frameworks to use
-    frameworks: ['requirejs', 'jasmine'],
     // list of files / patterns to load in the browser
+
+    // **/*.js: All files with a "js" extension in all subdirectories
+    // **/!(jquery).js: Same as previous, but excludes "jquery.js"
+    // **/(foo|bar).js: In all subdirectories, all "foo.js" or "bar.js" files
+
     files: [
       'test/unit/main.js',
       { pattern: 'app/modules/**/**/*.js', included: false, served: true },
@@ -12,48 +16,66 @@ module.exports = function (config) {
       { pattern: 'app/components/**/*.js', included: false, served: true, watched: false },
       { pattern: 'app/modules/**/tests/unit/**/*.js', included: false, served: true }
     ],
-    // list of files to exclude
+
+    // list of files / patterns to exclude
     exclude: [
       'app/modules/main.js'
     ],
 
-    // Start these browsers, currently available:
-    // - Chrome
-    // - ChromeCanary
-    // - Firefox
-    // - Opera
-    // - Safari (only Mac)
-    // - PhantomJS
-    // - IE (only Windows)
-    // Also available are:
-    // - BrowserStack:Chrome:Win
-    // - BrowserStack:Chrome:Mac
-    // - BrowserStack:Firefox:Win
-    // - BrowserStack:Firefox:Mac
-    // - BrowserStack:IE:Win
-    // - BrowserStack:iPad 3rd (6.0):iOS
-    // browsers: ['BrowserStack:Chrome:Mac'],
+    /* Start these browsers, currently available:
+      Chrome
+      ChromeCanary
+      PhantomJS
+      Firefox
+      Opera
+      Internet Explorer
+      Safari
+
+    */
     browsers: [
+      'Chrome',
       'PhantomJS'
     ],
 
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
-    // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    // logLevel: config.LOG_DEBUG,
+    // http://karma-runner.github.io/0.8/config/preprocessors.html
+    preprocessors: {
+      'app/**/*.html': ['ng-html2js']
+    },
 
-    // plugins to load
-    plugins: [
-      'karma-requirejs',
-      'karma-jasmine',
-      'karma-coverage',
-      'karma-html2js-preprocessor',
-      'karma-growl-reporter',
-      'karma-junit-reporter',
-      'karma-script-launcher',
-      'karma-phantomjs-launcher',
-      'karma-safari-launcher',
-      'karma-browserstack-launcher',
-    ]
+    //https://github.com/karma-runner/karma-ng-html2js-preprocessor
+    ngHtml2JsPreprocessor: {
+      // strip this from the file path
+      stripPrefix: 'app/',
+      // prepend this to the
+      // prependPrefix: '',
+      // setting this option will create only a single module that contains templates
+      // from all the files, so you can load them all with module('foo')
+      // moduleName: 'templates'
+    },
+
+    // level of logging: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
+    logLevel: config.LOG_INFO,
+
+    // base path, that will be used to resolve files and exclude
+    basePath: './',
+
+    // web server port
+    port: 9090,
+
+    // testing framework to use (jasmine/mocha/qunit/...)
+    frameworks: ['requirejs', 'jasmine'],
+
+    // Additional reporters, such as growl, junit, teamcity or coverage
+    reporters: ['progress'],
+
+    // Continuous Integration mode, if true, it capture browsers, run tests and exit
+    // singleRun: false, // (set it grunt file)
+
+    // enable / disable watching file and executing tests whenever any file changes
+    // autoWatch: true, // (set it grunt file)
+
+    // Enable or disable colors in the output (reporters and logs).
+    colors: true
+
   });
 };

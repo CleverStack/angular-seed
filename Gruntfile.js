@@ -67,7 +67,7 @@ module.exports = function (grunt) {
         "port": "5555", // default 5555
         "path": "./test/coverage/" // browsable directory for unit testing code coverage reports
       },
-      "conf": "./test-unit.conf.js"
+      "conf": "./karma.conf.js"
     },
 
     // Production Preview Server
