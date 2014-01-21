@@ -233,31 +233,31 @@ define(['angular', '../module'], function (ng) {
               sessionService.getCurrentUser().then(function (user) {
                 currentUser = user;
                 console.log('CSSessionProvider: we got', user);
-                if(typeof handlers.locationChange === 'function') {
+                if (angular.isFunction(handlers.locationChange)) {
                   handlers.locationChange(event, next, current);
                 }
               }, function (err) {
                 console.log('CSSessionProvider: request failed');
                 console.log('CSSessionProvider: proceeding as guest.');
-                if(typeof handlers.locationChange === 'function') {
+                if(angular.isFunction(handlers.locationChange)) {
                   handlers.locationChange(event, next, current);
                 }
               });
             } else {
-              if(typeof handlers.locationChange === 'function') {
+              if(angular.isFunction(handlers.locationChange)) {
                 handlers.locationChange(event, next, current);
               }
             }
           });
 
-          $rootScope.$on('CSSessionProvider:loginSuccess', function (event, next, current) {
-            if(typeof handlers.locationChange === 'function') {
-              handlers.loginSuccess(event, next, current);
+          $rootScope.$on('CSSessionProvider:loginSuccess', function () {
+            if(angular.isFunction(handlers.loginSuccess)) {
+              handlers.loginSuccess();
             }
           });
 
           $rootScope.$on('CSSessionProvider:logoutSuccess', function () {
-            if(typeof handlers.logoutSuccess === 'function') {
+            if(angular.isFunction(handlers.logoutSuccess)) {
               handlers.logoutSuccess();
             }
           });
@@ -353,7 +353,7 @@ define(['angular', '../module'], function (ng) {
          * @param  {String} usr the user service name
          */
         setSessionService: function (serviceName) {
-          if(typeof serviceName !== 'string') {
+          if (!angular.isString(serviceName)) {
             throw new Error('CSSessionProvider: setSessionService expects a string to use $injector upon instantiation');
           }
           sessionServiceName = serviceName;
@@ -377,7 +377,7 @@ define(['angular', '../module'], function (ng) {
             throw new Error('CSSessionProvider: handle name "' + key + '" is not a valid property.');
           }
 
-          if ( typeof foo !== 'function') {
+          if (!angular.isFunction(foo)) {
             throw new Error('CSSessionProvider: foo is not a function.');
           }
 

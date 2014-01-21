@@ -3,7 +3,6 @@
 
 module.exports = function(config) {
   config.set({
-
     // list of files / patterns to load in the browser
 
     // **/*.js: All files with a "js" extension in all subdirectories
@@ -11,26 +10,15 @@ module.exports = function(config) {
     // **/(foo|bar).js: In all subdirectories, all "foo.js" or "bar.js" files
 
     files: [
-      // 'app/modules/application/tests/unit/main.js',
-      // { pattern: 'app/modules/application/scripts/*.js', included: false, served: true },
-      // { pattern: 'app/modules/application/*.js', included: false, served: true },
-      // { pattern: 'app/modules/cs_account/scripts/*.js', included: false, served: true },
-      // { pattern: 'app/modules/cs_account/*.js', included: false, served: true },
-      // { pattern: 'app/modules/cs_common/scripts/*.js', included: false, served: true },
-      // { pattern: 'app/modules/cs_common/*.js', included: false, served: true },
-      // { pattern: 'app/modules/cs_session/scripts/*.js', included: false, served: true },
-      // { pattern: 'app/modules/cs_session/*.js', included: false, served: true },
-      // { pattern: 'app/modules/users/scripts/*.js', included: false, served: true },
-      // { pattern: 'app/modules/users/*.js', included: false, served: true },
-      // { pattern: 'app/components/**/*.js', included: false, served: true, watch: false },
-
-      { pattern: 'app/modules/**/tests/unit/**/*.js', included: false, served: true },
-      { pattern: 'tests/unit/**/*.js', included: false, served: true }
+      'test/unit/main.js',
+      { pattern: 'app/modules/**/**/*.js', included: false, served: true },
+      { pattern: 'app/modules/**/scripts/*.js', included: false, served: true },
+      { pattern: 'app/components/**/*.js', included: false, served: true, watched: false },
     ],
 
     // list of files / patterns to exclude
     exclude: [
-      'app/modules/application/main.js'
+      'app/modules/main.js'
     ],
 
     /* Start these browsers, currently available:
@@ -41,14 +29,10 @@ module.exports = function(config) {
       Opera
       Internet Explorer
       Safari
-
     */
     browsers: [
-      // 'ChromeCanary',
-      // 'Firefox',
-      // 'IE',
-      // 'PhantomJS',
-      'Chrome'
+      'Chrome',
+      'PhantomJS',
     ],
 
     // http://karma-runner.github.io/0.8/config/preprocessors.html
@@ -90,6 +74,5 @@ module.exports = function(config) {
 
     // Enable or disable colors in the output (reporters and logs).
     colors: true
-
   });
 };
