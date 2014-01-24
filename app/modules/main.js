@@ -5,6 +5,7 @@ require.config({
     'cs_account',
     'cs_common',
     'cs_session',
+    'cs_browserdetect',
     'users'
   ],
   paths: {

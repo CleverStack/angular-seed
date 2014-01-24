@@ -9,7 +9,6 @@ define(['angular'], function (ng) {
     'cs_account',
     'cs_common',
     'cs_session',
-    'cs_browserdetect',
     'users',
     'app.providers',
     'app.controllers',
