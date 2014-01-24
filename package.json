@@ -61,6 +61,7 @@
   },
   "scripts": {
     "setup": "node scripts/setup",
+    "setup-protractor": "node scripts/setup-protractor",
     "start": "grunt server",
     "bs-tunnel-karma": "sh scripts/bs-tunnel-karma.sh",
     "bs-tunnel": "sh scripts/bs-tunnel-connect.sh",
