@@ -17,6 +17,7 @@
   "dependencies": {},
   "devDependencies": {
     "grunt-contrib-copy": "~0.4.1",
+    "grunt-concurrent": "~0.4.1",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-contrib-cssmin": "~0.7.0",
@@ -63,6 +64,7 @@
     "start": "grunt server",
     "bs-tunnel-karma": "sh scripts/bs-tunnel-karma.sh",
     "bs-tunnel": "sh scripts/bs-tunnel-connect.sh",
-    "test": "grunt test:travis"
+    "test": "grunt test:travis",
+    "testos": "node scripts/testos"
   }
 }

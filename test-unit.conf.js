@@ -14,7 +14,6 @@ module.exports = function(config) {
       { pattern: 'app/modules/**/**/*.js', included: false, served: true },
       { pattern: 'app/modules/**/scripts/*.js', included: false, served: true },
       { pattern: 'app/components/**/*.js', included: false, served: true, watched: false },
-      { pattern: 'app/modules/**/tests/unit/**/*.js', included: false, served: true }
     ],
 
     // list of files / patterns to exclude
@@ -30,11 +29,10 @@ module.exports = function(config) {
       Opera
       Internet Explorer
       Safari
-
     */
     browsers: [
       'Chrome',
-      'PhantomJS'
+      'PhantomJS',
     ],
 
     // http://karma-runner.github.io/0.8/config/preprocessors.html
@@ -76,6 +74,5 @@ module.exports = function(config) {
 
     // Enable or disable colors in the output (reporters and logs).
     colors: true
-
   });
 };
