@@ -1,0 +1,6 @@
+<div class="form-group">
+    <label class="col-md-3 control-label" ng-show="field.name" for="{{ field.id }}">{{ field.name }}</label>
+    <div class="col-md-4">
+        <dropdown-select ng-model="field.ngModel" dropdown-list="field.data" id="{{ field.id }}" ng-required="field.required"></dropdown-select>
+    </div>
+</div>

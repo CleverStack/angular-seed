@@ -1,0 +1,8 @@
+<div class="form-group">
+    <label class="col-md-3 control-label" ng-show="field.name" for="{{ field.id }}">{{ field.name }}</label>
+    <div class="col-md-4">
+        <select class="form-control" id="{{ field.id }}" ng-model="field.ngModel" ng-required="field.required">
+            <option ng-repeat="item in field.options">{{ item }}</option>
+        </select>
+    </div>
+</div>
