@@ -10,7 +10,7 @@ module.exports = function(config) {
     // **/(foo|bar).js: In all subdirectories, all "foo.js" or "bar.js" files
 
     files: [
-      'test/unit/main.js',
+      'tests/unit/main.js',
       { pattern: 'app/modules/**/**/*.js', included: false, served: true },
       { pattern: 'app/modules/**/scripts/*.js', included: false, served: true },
       { pattern: 'app/components/**/*.js', included: false, served: true, watched: false },
