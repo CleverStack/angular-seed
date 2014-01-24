@@ -10,6 +10,7 @@ libpeerconnection.log
 /scripts/*.jar
 /scripts/bs-tunnel.sh
 /scripts/BrowserStackTunnel.jar
+/scripts/*.exe
 
 /dist
 /app/components
