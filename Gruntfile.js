@@ -524,5 +524,9 @@ module.exports = function (grunt) {
     'watch:e2eTests'
   ]);
 
+  grunt.registerTask('serve', 'Alias.', [
+    'server'
+  ]);
+
   grunt.registerTask('default', ['build']);
 };
