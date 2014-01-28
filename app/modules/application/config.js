@@ -16,6 +16,10 @@ require.config({
     {
       name: 'users',
       location: '../users'
+    },
+    {
+      name: 'cs_file_upload',
+      location: '../cs_file_upload'
     }
   ],
   paths: {

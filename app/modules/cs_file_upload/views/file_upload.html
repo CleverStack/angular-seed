@@ -1,0 +1,106 @@
+<div class="col-md-12">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal">
+
+                        <div class="form-group">
+                            <label for="fileOnInk" class="col-md-2 control-label">Upload file on Ink</label>
+
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default col-md-6" uploader="getOptions(save)"
+                                        id="fileOnInk">Upload file
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="filesOnInc" class="col-md-2 control-label">Upload files on Ink</label>
+
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-default col-md-6" uploader="getOptions(save)"
+                                        multiple id="filesOnInc">Upload files
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row" ng-if="!!filesForUser.length">
+        <div class="col-md-12">
+            <br/>
+            <h4>Files for User: {{ !!filesForUser.length ? filesForUser[0].username : '' }}</h4>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>file name</th>
+                    <th>file size</th>
+                    <th>file type</th>
+                    <th>last modified</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="file in filesForUser">
+                    <td>{{ $index + 1}}</td>
+                    <td><a ng-href="{{ file.url }}">{{ file.name }}</a></td>
+                    <td>{{ file.size }} byte</td>
+                    <td>{{ file.type }}</td>
+                    <td>{{ file.lastModified | date:'medium' }}</td>
+                    <td>
+                        <a href="" ng-click="download( file )" class="btn btn-default btn-xs pull-right">download</a>
+                        <a href="" ng-click="preUpdate( file )" class="btn btn-default btn-xs pull-right"
+                           uploader="getOptions(update)">update</a>
+                        <a href="" ng-click="delete( file )" class="btn btn-default btn-xs pull-right">delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row" ng-if="!!filesForAccount.length">
+        <div class="col-md-12">
+            <br/>
+            <h4>Files for Account</h4>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>file name</th>
+                    <th>file size</th>
+                    <th>file type</th>
+                    <th>last modified</th>
+                    <th>user</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="file in filesForAccount">
+                    <td>{{ $index + 1}}</td>
+                    <td><a ng-href="{{ file.url }}">{{ file.name }}</a></td>
+                    <td>{{ file.size }} byte</td>
+                    <td>{{ file.type }}</td>
+                    <td>{{ file.lastModified | date:'medium' }}</td>
+                    <td>{{ file.username }}</td>
+                    <td>
+                        <a href="" ng-click="download( file )" class="btn btn-default btn-xs pull-right">download</a>
+                        <a href="" ng-click="preUpdate( file )" class="btn btn-default btn-xs pull-right"
+                           uploader="getOptions(update)">update</a>
+                        <a href="" ng-click="delete( file )" class="btn btn-default btn-xs pull-right">delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
