@@ -10,6 +10,7 @@ define(['angular'], function (ng) {
     'cs_common',
     'cs_session',
     'users',
+    'cs_file_upload',
     'app.providers',
     'app.controllers',
     'app.services'

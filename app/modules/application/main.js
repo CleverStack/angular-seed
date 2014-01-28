@@ -5,6 +5,7 @@ define([
     'cs_common',
     'cs_session',
     'users',
+    'cs_file_upload',
 
     // Controllers
     './scripts/application_controller',

@@ -5,7 +5,8 @@ require.config({
     'cs_account',
     'cs_common',
     'cs_session',
-    'users'
+    'users',
+    'cs_file_upload'
   ],
   paths: {
     angular: '../components/angular/angular',
@@ -15,7 +16,8 @@ require.config({
     ngResource: '../components/angular-resource/angular-resource',
     ngRoute: '../components/angular-route/angular-route',
     ngSanitize: '../components/angular-sanitize/angular-sanitize',
-    'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor'
+    'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor',
+    'filepicker': '../modules/cs_file_upload/scripts/filepicker/filepicker'
   },
   shim: {
     angular: {
@@ -38,6 +40,9 @@ require.config({
     },
     underscore: {
       exports: '_'
+    },
+    filepicker: {
+        exports: 'filepicker'
     }
   }
 });
@@ -50,7 +55,7 @@ require([
   'http-auth-interceptor',
 
   // Init
-  'application',
+  'application'
 
 ], function (angular) {
   'use strict';
