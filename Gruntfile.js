@@ -361,6 +361,15 @@ module.exports = function (grunt) {
           {
               expand: true,
               filter: 'isFile',
+              cwd: '<%= appConfig.dev.path %>/components/bootstrap/dist/js',
+              dest: '<%= appConfig.dev.path %>/scripts',
+              src: [
+                'bootstrap.js'
+              ]
+          },
+          {
+              expand: true,
+              filter: 'isFile',
               cwd: '<%= appConfig.dev.path %>/components/bootstrap/dist',
               dest: '<%= appConfig.dev.path %>',
               src: [

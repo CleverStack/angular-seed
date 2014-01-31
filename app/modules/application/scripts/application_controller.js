@@ -8,6 +8,7 @@ define(['angular', 'application'], function (ng) {
     'CSTemplate',
     'CSSession',
     function ($scope, HelpersProvider, CSTemplateProvider, CSSessionProvider) {
+
       $scope.helpers = HelpersProvider;
       $scope.tpl = CSTemplateProvider;
 

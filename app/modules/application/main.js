@@ -1,4 +1,5 @@
 define([
+    'jquery',
     'angular',
     './module',
     'cs_account',
@@ -9,9 +10,14 @@ define([
     // Controllers
     './scripts/application_controller',
     './scripts/home_controller',
+    './scripts/navbar_controller',
 
     // Providers
-    './scripts/helpers_provider'
+    './scripts/helpers_provider',
+
+    // Directives
+    './scripts/navbar_directive'
+
 ], function() {
 
 });

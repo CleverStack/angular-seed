@@ -19,12 +19,16 @@ require.config({
     }
   ],
   paths: {
+    jquery: '../../components/jquery/jquery',
     angular: '../../components/angular/angular',
     ngResource: '../../components/angular-resource/angular-resource',
     ngRoute: '../../components/angular-route/angular-route',
     ngSanitize: '../../components/angular-sanitize/angular-sanitize',
   },
   shim: {
+    jquery: {
+      exports: '$'
+    },
     angular: {
       exports: 'angular'
     },

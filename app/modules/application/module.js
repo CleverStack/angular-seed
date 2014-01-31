@@ -4,6 +4,7 @@ define(['angular'], function (ng) {
   ng.module('app.providers', []);
   ng.module('app.controllers', []);
   ng.module('app.services', []);
+  ng.module('app.directives', []);
 
   var module = ng.module('app', [
     'cs_account',
@@ -12,7 +13,8 @@ define(['angular'], function (ng) {
     'users',
     'app.providers',
     'app.controllers',
-    'app.services'
+    'app.services',
+    'app.directives'
   ]);
 
   module.config([
