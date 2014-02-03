@@ -15,7 +15,8 @@ require.config({
     ngResource: '../components/angular-resource/angular-resource',
     ngRoute: '../components/angular-route/angular-route',
     ngSanitize: '../components/angular-sanitize/angular-sanitize',
-    'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor'
+    'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor',
+    bootstrap: '../scripts/bootstrap'
   },
   shim: {
     angular: {
@@ -36,6 +37,9 @@ require.config({
     'http-auth-interceptor': {
       deps: ['angular']
     },
+    bootstrap: {
+      deps: ['jquery']
+    },
     underscore: {
       exports: '_'
     }
@@ -48,6 +52,7 @@ require([
   'ngResource',
   'ngSanitize',
   'http-auth-interceptor',
+  'bootstrap',
 
   // Init
   'application',
