@@ -25,6 +25,7 @@ define(['angular', '../module'], function (ng) {
             return ($location.path() == item.href) ? 'active' : '';
           }
 
+          //show if the item requires login and the user is logged in
           $scope.showItem = function(item) {
             return ($scope.currentUser == item.requiresLogin) ? true : false;
           }

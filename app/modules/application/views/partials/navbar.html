@@ -11,7 +11,19 @@
     </div>
     <nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" style="height: 1px;">
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in navbarItems.left | orderBy:'order'" ng-class="activeHref(item)" ng-if="showItem(item)"></span><a href="{{item.href}}"><span class="glyphicon glyphicon-{{item.glyph}}"></span> {{item.label}}</a></li>
+        <li ng-repeat="item in navbarItems.left | orderBy:'order'" ng-class="activeHref(item)" ng-if="showItem(item)">
+            <ul class="navbar-nav" ng-if="item.subMenu">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-{{item.glyph}}"></span> {{item.label}} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li ng-repeat="subitem in item.subMenu | orderBy:'order'" ng-class="activeHref(item)" ng-if="showItem(item)">
+                    <a href="{{subitem.href}}"><span class="glyphicon glyphicon-{{subitem.glyph}}"></span> {{subitem.label}}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <a ng-if="!item.subMenu" href="{{item.href}}"><span class="glyphicon glyphicon-{{item.glyph}}"></span> {{item.label}}</a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li ng-repeat="item in navbarItems.right | orderBy:'order'" ng-class="activeHref(item)" ng-if="showItem(item)"></span><a href="{{item.href}}"><span class="glyphicon glyphicon-{{item.glyph}}"></span> {{item.label}}</a></li>

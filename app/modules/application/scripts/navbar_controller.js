@@ -17,6 +17,7 @@ define(['angular', 'application'], function (ng) {
       });
 
       //navbar menu items
+      //glyphs: http://getbootstrap.com/components/#glyphicons
       $scope.navbarItems = {
 
         //these items appear in the navbar on the left
@@ -55,6 +56,41 @@ define(['angular', 'application'], function (ng) {
           }
         ]
       };
+
+      /* sub menu (dropdown) example
+
+          {
+            "label": "Menu Item 2",
+            "href": "",
+            "glyph": "list-alt",
+            "requiresLogin": false,
+            "order": 2,
+            "subMenu": [
+              {
+                "label": "Sub Menu Item 1",
+                "href": "",
+                "glyph": "list-alt",
+                "requiresLogin": false,
+                "order": 1
+              },
+              {
+                "label": "Sub Menu Item 2",
+                "href": "",
+                "glyph": "list-alt",
+                "requiresLogin": false,
+                "order": 2
+              },
+              {
+                "label": "Sub Menu Item 3",
+                "href": "",
+                "glyph": "list-alt",
+                "requiresLogin": false,
+                "order": 3
+              }
+            ]
+          }
+
+      */
 
     }
 
