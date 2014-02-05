@@ -27,7 +27,7 @@ define(['angular', '../module'], function (ng) {
 
           //show if the item requires login and the user is logged in
           $scope.showItem = function(item) {
-            return ($scope.currentUser == item.requiresLogin) ? true : false;
+            return angular.isDefined($scope.currentUser) && angular.isDefined($scope.currentUser.id) === item.requiresLogin;
           }
 
         }

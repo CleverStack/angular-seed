@@ -5,12 +5,12 @@
     "email": "admin@cleverstack.io",
     "web": "http://cleverstack.io"
   },
-  "version": "1.1.0",
+  "version": "1.0.4",
   "collaborators": [
     "Richard Gustin <richard@clevertech.biz>",
     "Simon W. Jackson <simon@clevertech.biz>",
     "Daniel Young <daniel@clevertech.biz>",
-    "Daniel Durrante <daniel.durante@clevertech.biz>",
+    "Daniel Durante <daniel.durante@clevertech.biz>",
     "Sam Deering <sam@clevertech.biz>"
   ],
   "dependencies": {
