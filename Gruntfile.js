@@ -350,6 +350,7 @@ module.exports = function (grunt) {
             'images/{,*/}*.{gif,webp,png}',
             'images/**/*.{gif,webp,png}',
             'styles/fonts/**/*',
+            'scripts/**/*',
             'fonts/**/*',
             'home/**/*',
             'modules/**/*'
