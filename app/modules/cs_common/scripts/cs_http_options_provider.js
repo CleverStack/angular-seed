@@ -69,7 +69,7 @@ define(['angular', '../module'], function (ng) {
        * Interceptor.
        *
        * Add the domain to all the HTTP requests that are not
-       * templates.
+       * templates. And doesn't add it to absolute urls.
        *
        * Note: Hookup the $templates service to get the proper
        * regex. This works for now as is what we are using.
@@ -77,7 +77,7 @@ define(['angular', '../module'], function (ng) {
       $httpProvider.interceptors.push(function () {
         return {
           request: function (config) {
-            if(! /views\/(.*).html$/.test(config.url)) {
+            if( ! /views\/(.*).html$/.test( config.url ) && ! /^(http|https:\/\/)/i.test( config.url ) ) {
               config.url = domain + config.url;
             }
             return config;
