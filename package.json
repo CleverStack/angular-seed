@@ -1,8 +1,8 @@
 {
-  "name": "cleverstack-angular-seed",
+  "name": "angular-seed",
   "private": true,
   "author": {
-    "name": "Clevertech",
+    "name": "CleverStack",
     "email": "admin@cleverstack.io",
     "web": "http://cleverstack.io"
   },
