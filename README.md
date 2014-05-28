@@ -1,4 +1,4 @@
-CleverStack Angular Seed [![Build Status](https://secure.travis-ci.org/clevertech/cleverstack-angular-seed.png?branch=master)](https://travis-ci.org/clevertech/cleverstack-angular-seed) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+CleverStack Angular Seed [![Build Status](https://secure.travis-ci.org/CleverStack/angular-seed.png?branch=master)](https://travis-ci.org/CleverStack/angular-seed) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ====================
 
 ![CleverStack Angular Seed](http://cleverstack.github.io/assets/img/logos/angular-seed-logo-clean.png "CleverStack Angular Seed")
@@ -9,7 +9,7 @@ CleverStack Angular Seed provides you with a cutting edge AngularJS development 
 
 ## Documentation
 
-See [cleverstack.io](http://cleverstack.io/getting-started/#frontend) for more detailed information on the Angular seed.
+See [cleverstack.io](http://cleverstack.io/documentation/#frontend) for more detailed information on the Angular seed.
 
 ## Install
 
