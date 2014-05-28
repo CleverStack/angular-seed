@@ -1,7 +1,7 @@
 {
   "name": "app",
   "author": {
-    "name": "Clevertech",
+    "name": "CleverStack",
     "email": "admin@cleverstack.io",
     "web": "http://cleverstack.io"
   },
@@ -33,8 +33,6 @@
     "angular-mocks": "1.2.6",
     "angular-scenario": "1.2.6",
     "sinon": "~1.7.3",
-    "chai": "~1.8.1",
-    "syn": "~0.0.2",
-    "steal": "~3.2.3"
+    "chai": "~1.8.1"
   }
 }
