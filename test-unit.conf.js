@@ -13,12 +13,17 @@ module.exports = function(config) {
       'tests/unit/main.js',
       { pattern: 'app/modules/**/**/*.js', included: false, served: true },
       { pattern: 'app/modules/**/scripts/*.js', included: false, served: true },
+      { pattern: 'app/modules/**/controllers/*.js', included: false, served: true },
+      { pattern: 'app/modules/**/directives/*.js', included: false, served: true },
+      { pattern: 'app/modules/**/factories/*.js', included: false, served: true },
+      { pattern: 'app/modules/**/services/*.js', included: false, served: true },
       { pattern: 'app/components/**/*.js', included: false, served: true, watched: false },
     ],
 
     // list of files / patterns to exclude
     exclude: [
-      'app/modules/main.js'
+      'app/modules/main.js',
+      'app/modules/**/test*/e2e/*'
     ],
 
     /* Start these browsers, currently available:
