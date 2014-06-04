@@ -33,9 +33,11 @@ var fallbackToIndex = function (connect, index, file) {
     if(req.url === file) {
       return next();
     }
+
     if(/views\/(.*).html$/.test(req.url)) {
       res.end( fs.readFileSync(index) );
     }
+
     res.end( fs.readFileSync(index) );
   });
 };
@@ -66,14 +68,24 @@ module.exports = function (grunt) {
         "path": "./test", // if you change this it must reflect in your test-unit.conf.js
         "coverage": {
           "port": "5555", // default 5555
-          "path": "./test/coverage/" // browsable directory for unit testing code coverage reports
+          "path": "./test/coverage/unit/" // browsable directory for unit testing code coverage reports
         },
       "conf": "./test-unit.conf.js"
       },
       "e2e": {
         "seleniumPort": "4444", // default 4444
         "path": "./test", // if you change this it must reflect in your test-e2e.conf.js
-        "conf": "./test-e2e.conf.js"
+        "conf": "./test-e2e.conf.js",
+        "coverage": {
+          "port": "7776", // default 5555
+          "path": "./test/coverage/e2e/" // browsable directory for e2e testing code coverage reports
+        },
+        "report": {
+          "port": "7777"
+        },
+        "instrumented": {
+          "path": './test/coverage/e2e/instrumented/'
+        }
       }
     },
 
@@ -122,7 +134,7 @@ module.exports = function (grunt) {
           'test*/e2e/**/*.js',
           '**/test*/e2e/**/*.js'
         ],
-        tasks: ['protractor:singlerun']
+        tasks: [ 'protractor:singlerun' ]
       }
     },
     connect: {
@@ -172,6 +184,45 @@ module.exports = function (grunt) {
           keepalive: true,
           livereload: false
         }
+      },
+      coverageE2E: {
+        options: {
+          port: '<%= appConfig.test.e2e.coverage.port %>',
+          middleware: function (connect) {
+            return [
+              mountFolder( connect, appConfig.test.e2e.instrumented.path + 'app' ),
+              fallbackToIndex( connect, appConfig.test.e2e.instrumented.path + 'app/index.html', '/index.html' )
+            ];
+          },
+          livereload: false,
+          debug: false
+        }
+      },
+      coverageE2EReport: {
+        options: {
+          port: '<%= appConfig.test.e2e.report.port %>',
+          middleware: function (connect) {
+            return [
+              mountFolder( connect, appConfig.test.e2e.coverage.path + '/reports' ),
+              fallbackToIndex( connect, appConfig.test.e2e.coverage.path + 'reports/index.html', '/index.html' )
+            ];
+          },
+          keepalive: true,
+          livereload: false
+        }
+      },
+      coverageE2EReportNoWait: {
+        options: {
+          port: '<%= appConfig.test.e2e.report.port %>',
+          middleware: function (connect) {
+            return [
+              mountFolder( connect, appConfig.test.e2e.coverage.path + '/reports' ),
+              fallbackToIndex( connect, appConfig.test.e2e.coverage.path + 'reports/index.html', '/index.html' )
+            ];
+          },
+          keepalive: false,
+          livereload: false
+        }
       }
     },
     clean: {
@@ -186,7 +237,22 @@ module.exports = function (grunt) {
         }]
       },
       server: '.tmp',
-      coverage: './test/coverage'
+      coverage: {
+        files: [{
+          dot: true,
+          src: [
+            '<%= appConfig.test.unit.coverage.path %>*'
+          ]
+        }]
+      },
+      coverageE2E: {
+        files: [{
+          dot: true,
+          src: [
+            '<%= appConfig.test.e2e.coverage.path %>*'
+          ]
+        }]
+      },
     },
     jshint: {
       options: {
@@ -357,6 +423,31 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      coverageE2E: {
+          files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= appConfig.dev.path %>',
+          dest: '<%= appConfig.test.e2e.instrumented.path %>app',
+          src: [
+            '*.{ico,txt}',
+            '.htaccess',
+            'components/**/*.{js,css,eot,svg,ttf,woff,png,jpg,jpeg,gif,webp}',
+            'images/{,*/}*.{gif,webp,png}',
+            'images/**/*.{gif,webp,png}',
+            'styles/**/*',
+            'scripts/**/*',
+            'fonts/**/*',
+            'home/**/*',
+            'modules/main.js',
+            'modules/**/main.js',
+            'modules/**/module.js',
+            'modules/**/views/**',
+            'modules/**/styles/**',
+            'index.html'
+          ]
+        }]
+      },
       bootstrap: {
         files: [
           {
@@ -424,13 +515,13 @@ module.exports = function (grunt) {
       },
       coverage: {
         url: 'http://localhost:<%= appConfig.test.unit.coverage.port %>'
+      },
+      coverageE2E: {
+        url: 'http://localhost:<%= appConfig.test.e2e.report.port %>'
       }
     },
     // unit testing config
     karma: {
-      // options {
-      //   configFile: './test-unit.conf.js'
-      // },
       unit: {
         configFile: '<%= appConfig.test.unit.conf %>',
         autoWatch: false,
@@ -475,6 +566,42 @@ module.exports = function (grunt) {
       },
       auto: {
         keepAlive: true
+      }
+    },
+
+    // e2e protractor coverage
+    protractor_coverage: {
+      local: {
+        options: {
+          configFile: '<%= appConfig.test.e2e.conf %>',
+          keepAlive: true,
+          noColor: false,
+          coverageDir: '<%= appConfig.test.e2e.instrumented.path %>',
+          args: {
+            baseUrl: 'http://localhost:<%= appConfig.test.e2e.coverage.port %>'
+          }
+        }
+      }
+    },
+    instrument: {
+      options: {
+        lazy: true,
+        basePath: '<%= appConfig.test.e2e.instrumented.path %>'
+      },
+      files: [
+        'app/modules/**/scripts/*.js',
+        'app/modules/**/controllers/*.js',
+        'app/modules/**/directives/*.js',
+        'app/modules/**/factories/*.js',
+        'app/modules/**/services/*.js'
+      ]
+    },
+    makeReport: {
+      src: '<%= appConfig.test.e2e.instrumented.path %>*.json',
+      options: {
+        type: 'html',
+        dir: '<%= appConfig.test.e2e.coverage.path %>reports',
+        print: 'detail'
       }
     }
   });
@@ -526,11 +653,37 @@ module.exports = function (grunt) {
     'karma:travis'
   ]);
 
-  grunt.registerTask('test:coverage', 'Run a test coverage report.', [
+  grunt.registerTask('test:coverage', 'Run a unit test coverage report.', [
+    'test:run-e2e-coverage',
+    'open:coverageE2E',
+    'connect:coverageE2EReportNoWait',
+    'test:unit-coverage'
+  ]);
+
+  grunt.registerTask('test:unit-coverage', 'Run a unit test coverage report and server.', [
+    'test:run-unit-coverage',
+    'connect:coverage'
+  ]);
+
+  grunt.registerTask('test:run-unit-coverage', 'Run a unit test coverage report.', [
     'clean:coverage',
     'karma:unitCoverage',
-    'open:coverage',
-    'connect:coverage'
+    'open:coverage'
+  ]);
+
+  grunt.registerTask('test:e2e-coverage', 'Run an e2e test coverage report and server.', [
+    'test:run-e2e-coverage',
+    'open:coverageE2E',
+    'connect:coverageE2EReport'
+  ]);
+
+  grunt.registerTask('test:run-e2e-coverage', 'Run an e2e test coverage report.', [
+    'clean:coverageE2E',
+    'copy:coverageE2E',
+    'instrument',
+    'connect:coverageE2E',
+    'protractor_coverage',
+    'makeReport'
   ]);
 
   grunt.registerTask('test:e2e', 'Single run of end to end (e2e) tests using protractor.', [
