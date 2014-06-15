@@ -14,7 +14,7 @@ See [cleverstack.io](http://cleverstack.io/documentation/#frontend) for more det
 
 ## Install
 
-Install is made easy using the CleverStack CLI, first install [node.js](http://nodejs.org)
+Install is made easy using the CleverStack CLI, first install [node.js](http://nodejs.org) and wget (linux and mac, required for setup-protractor script)
 
 1. `$ npm install -g cleverstack-cli`
 2. `$ clever init my-app` && `$ cd my-app`
