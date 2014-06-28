@@ -1,6 +1,11 @@
 CleverStack Angular Seed
 ====================
-[![Build Status](https://secure.travis-ci.org/CleverStack/angular-seed.png?branch=master)](https://travis-ci.org/CleverStack/angular-seed) [![Code Climate](https://codeclimate.com/github/CleverStack/angular-seed.png)](https://codeclimate.com/github/CleverStack/angular-seed) [![Dependency Status](https://david-dm.org/CleverStack/angular-seed.svg?theme=shields.io)](https://david-dm.org/CleverStack/angular-seed) [![devDependency Status](https://david-dm.org/CleverStack/angular-seed/dev-status.svg?theme=shields.io)](https://david-dm.org/CleverStack/angular-seed#info=devDependencies) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![GitHub version](https://badge.fury.io/gh/cleverstack%2Fangular-seed.png)](http://badge.fury.io/gh/cleverstack%2Fangular-seed) [![Dependency Status](https://david-dm.org/CleverStack/angular-seed.png)](https://david-dm.org/CleverStack/angular-seed) [![devDependency Status](https://david-dm.org/CleverStack/angular-seed/dev-status.png)](https://david-dm.org/CleverStack/angular-seed#info=devDependencies) [![Code Climate](https://codeclimate.com/github/CleverStack/angular-seed.png)](https://codeclimate.com/github/CleverStack/angular-seed) 
+[![Build Status](https://secure.travis-ci.org/CleverStack/angular-seed.png?branch=master)](https://travis-ci.org/CleverStack/angular-seed) 
+[![Coverage](https://codeclimate.com/github/CleverStack/angular-seed/coverage.png)](https://codeclimate.com/github/CleverStack/angular-seed) 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) 
+
+![CleverStack Node Seed](http://cleverstack.github.io/assets/img/logos/angular-seed-logo-clean.png "CleverStack Node Seed")
 
 ![CleverStack Angular Seed](http://cleverstack.github.io/assets/img/logos/angular-seed-logo-clean.png "CleverStack Angular Seed")
 
@@ -10,7 +15,7 @@ CleverStack Angular Seed provides you with a cutting edge AngularJS development 
 
 ## Documentation
 
-See [cleverstack.io](http://cleverstack.io/documentation/#frontend) for more detailed information on the Angular seed.
+See [cleverstack.io](http://cleverstack.io/documentation/#frontend) for more detailed information on the Angular seed or visit the [Getting Started Guide](http://cleverstack.io/getting-started/)
 
 ## Install
 
@@ -23,4 +28,4 @@ Install is made easy using the CleverStack CLI, first install [node.js](http://n
 
 ## License
 
-CleverStack is copyright of [Clevertech](http://clevertech.biz) and is licensed under the MIT License.
+See our [LICENSE](https://github.com/CleverStack/angular-seed/blob/master/LICENSE)
