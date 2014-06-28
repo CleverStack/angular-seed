@@ -5,8 +5,6 @@ CleverStack Angular Seed
 [![Coverage](https://codeclimate.com/github/CleverStack/angular-seed/coverage.png)](https://codeclimate.com/github/CleverStack/angular-seed) 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) 
 
-![CleverStack Node Seed](http://cleverstack.github.io/assets/img/logos/angular-seed-logo-clean.png "CleverStack Node Seed")
-
 ![CleverStack Angular Seed](http://cleverstack.github.io/assets/img/logos/angular-seed-logo-clean.png "CleverStack Angular Seed")
 
 <blockquote>
