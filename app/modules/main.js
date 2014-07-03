@@ -9,7 +9,7 @@ require.config({
   ],
   paths: {
     angular: '../components/angular/angular',
-    jquery: '../components/jquery/dist/jquery',
+    jquery: '../components/jquery/jquery',
     underscore: '../components/underscore/underscore',
     ngCookies: '../components/angular-cookies/angular-cookies',
     ngResource: '../components/angular-resource/angular-resource',
