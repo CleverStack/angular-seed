@@ -26,6 +26,20 @@ module.exports = function(config) {
       'app/modules/**/test*/e2e/*'
     ],
 
+    // sauceLabs: {
+    //   testName: 'CleverStack AngularJS (Frontend) Unit Tests',
+    //   username: '',
+    //   accessKey: ''
+    // },
+
+    // Define any custom launchers you want, use this for saucelabs
+    customLaunchers: {
+      slChrome: { base: 'SauceLabs', browserName: 'chrome', platform: 'Windows 7' },
+      slFirefox: { base: 'SauceLabs', browserName: 'firefox', version: '27' },
+      slIosSafari: { base: 'SauceLabs', browserName: 'iphone', platform: 'OS X 10.9', version: '7.1' },
+      slIe11: { base: 'SauceLabs', browserName: 'internet explorer', platform: 'Windows 8.1', version: '11' }
+    },
+
     /* Start these browsers, currently available:
       Chrome
       ChromeCanary
@@ -69,10 +83,13 @@ module.exports = function(config) {
     frameworks: ['requirejs', 'jasmine'],
 
     // Additional reporters, such as growl, junit, teamcity or coverage
-    reporters: ['progress'],
+    reporters: ['progress'/*, 'saucelabs' */],
 
     // Continuous Integration mode, if true, it capture browsers, run tests and exit
     // singleRun: false, // (set it grunt file)
+    
+    // Set this for CI, encase its slow (SauceLabs)
+    // captureTimeout: 120000,
 
     // enable / disable watching file and executing tests whenever any file changes
     // autoWatch: true, // (set it grunt file)
