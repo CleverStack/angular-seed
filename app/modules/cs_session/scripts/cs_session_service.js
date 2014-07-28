@@ -10,20 +10,20 @@ define(['angular', 'underscore', '../module'], function (ng, _) {
       return {
 
         login: function (credentials) {
-          return $http.post('/user/login', credentials)
+          return $http.post('/auth/signIn', credentials)
             .then(function(response){
               return response.data;
             });
         },
 
         logout: function () {
-          return $http.get('/user/logout');
+          return $http.get('/auth/signOut');
         },
 
         getCurrentUser: function () {
           var def = $q.defer();
 
-          $http.get('/user/current')
+          $http.get('/auth/session')
             .then(function (response) {
               if(_(response.data).has('id')) {
                 def.resolve(response.data);
