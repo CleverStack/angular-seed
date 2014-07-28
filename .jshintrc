@@ -31,7 +31,9 @@
     "steal": true,
     "test": true,
     "equal": true,
-    "ok": true
+    "ok": true,
+    "console": true,
+    "process": true
   },
 
   // Development
