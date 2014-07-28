@@ -687,7 +687,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test:e2e', 'Single run of end to end (e2e) tests using protractor.', [
-    'connect:livereload',
+    'connect:dist',
     'protractor:singlerun'
   ]);
 
