@@ -1,11 +1,3 @@
-/*
- * CleverStack.io
- * https://github.com/clevertech/cleverstack-angular-seed/
- *
- * Copyright (c) 2013 Clevertech.biz
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 var fs = require('fs');
@@ -603,6 +595,41 @@ module.exports = function (grunt) {
         dir: '<%= appConfig.test.e2e.coverage.path %>reports',
         print: 'detail'
       }
+    },
+    run: {
+      wbDriverUpdate: {
+        args: [ './node_modules/protractor/bin/webdriver-manager', 'update', '--out_dir="./scripts/"' ],
+        options: {
+          passArgs: [
+            'ie',
+            'chrome',
+            'standalone',
+            'seleniumPort'
+          ]
+        }
+      },
+      wbDriverStatus: {
+        args: [ './node_modules/protractor/bin/webdriver-manager', 'status', '--out_dir="./scripts/"' ],
+        options: {
+          passArgs: [
+            'ie',
+            'chrome',
+            'standalone',
+            'seleniumPort'
+          ]
+        }
+      },
+      wbDriverStart: {
+        args: [ './node_modules/protractor/bin/webdriver-manager', 'start', '--out_dir="./scripts/"' ],
+        options: {
+          passArgs: [
+            'ie',
+            'chrome',
+            'standalone',
+            'seleniumPort'
+          ]
+        }
+      }
     }
   });
 
@@ -632,6 +659,23 @@ module.exports = function (grunt) {
     'requirejs',
     'rev',
     'usemin'
+  ]);
+
+  grunt.registerTask( 'webdriver', [
+    'run:wbDriverStatus',
+    'run:wbDriverUpdate'
+  ]);
+
+  grunt.registerTask( 'webdriver:update', [
+    'run:wbDriverUpdate'
+  ]);
+
+  grunt.registerTask( 'webdriver:status', [
+    'run:wbDriverStatus'
+  ]);
+
+  grunt.registerTask( 'webdriver:start', [
+    'run:wbDriverStart'
   ]);
 
   /* -- TEST TASKS ------------------------------------------------ */

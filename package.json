@@ -30,7 +30,7 @@
   ],
   "license": "BSD-2-Clause",
   "dependencies": {},
-    "devDependencies": {
+  "devDependencies": {
     "grunt-concurrent": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-concat": "~0.3.0",
@@ -52,6 +52,7 @@
     "grunt-protractor-coverage": "^0.2.8",
     "grunt-protractor-runner": "~0.1.6",
     "grunt-rev": "~0.1.0",
+    "grunt-run": "~0.2.2",
     "grunt-usemin": "~0.1.12",
     "karma": "~0.11.11",
     "karma-browserstack-launcher": "~0.0.7",
@@ -67,8 +68,8 @@
     "karma-phantomjs-launcher": "~0.1.1",
     "karma-requirejs": "~0.2.0",
     "karma-safari-launcher": "~0.1.1",
-    "karma-script-launcher": "~0.1.0",
     "karma-sauce-launcher": "~0.2.8",
+    "karma-script-launcher": "~0.1.0",
     "load-grunt-tasks": "~0.2.0",
     "phantomjs": "~1.9.2",
     "protractor": "~0.24.2",
@@ -76,7 +77,7 @@
   },
   "scripts": {
     "setup": "node scripts/setup",
-    "setup-protractor": "node scripts/setup-protractor",
+    "setup-protractor": "grunt webdriver:update",
     "start": "grunt server",
     "bs-tunnel-karma": "sh scripts/bs-tunnel-karma.sh",
     "bs-tunnel": "sh scripts/bs-tunnel-connect.sh",

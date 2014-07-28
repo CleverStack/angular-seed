@@ -67,7 +67,7 @@ exports.config = {
   */
   // capabilities: {
   //   'browserName': 'phantomjs',
-  //   'phantomjs.binary.path': './scripts/phantomjs.exe'
+  //   'phantomjs.binary.path': './node_modules/phantom/bin/phantomjs'
   // },
 
   // A base URL for your application under test. Calls to protractor.get()
