@@ -16,3 +16,5 @@ libpeerconnection.log
 /app/components
 /node_modules
 /test/coverage
+
+scripts/Chromedriver
