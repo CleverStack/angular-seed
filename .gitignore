@@ -18,3 +18,5 @@ libpeerconnection.log
 /test/coverage
 
 scripts/Chromedriver
+
+scripts/chromedriver_2.9.zip
