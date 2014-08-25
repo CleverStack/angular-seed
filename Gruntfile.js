@@ -598,7 +598,7 @@ module.exports = function (grunt) {
     },
     run: {
       wbDriverUpdate: {
-        args: [ './node_modules/protractor/bin/webdriver-manager', 'update', '--out_dir="./scripts/"' ],
+        args: [ './node_modules/protractor/bin/webdriver-manager', 'update', '--out_dir=./scripts/' ],
         options: {
           passArgs: [
             'ie',
@@ -609,7 +609,7 @@ module.exports = function (grunt) {
         }
       },
       wbDriverStatus: {
-        args: [ './node_modules/protractor/bin/webdriver-manager', 'status', '--out_dir="./scripts/"' ],
+        args: [ './node_modules/protractor/bin/webdriver-manager', 'status' ],
         options: {
           passArgs: [
             'ie',
@@ -620,7 +620,7 @@ module.exports = function (grunt) {
         }
       },
       wbDriverStart: {
-        args: [ './node_modules/protractor/bin/webdriver-manager', 'start', '--out_dir="./scripts/"' ],
+        args: [ './node_modules/protractor/bin/webdriver-manager', 'start', '--out_dir=./scripts/' ],
         options: {
           passArgs: [
             'ie',
