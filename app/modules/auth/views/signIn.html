@@ -1,0 +1,38 @@
+<div class="col-md-6 col-md-push-3">
+  <div class="jumbotron notebox">
+    <div class="container">
+      <form id="signIn" name="form" ng-submit="submitted = true; signIn()" novalidate>
+        <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'email')}">
+          <label for="username">Email Address</label>
+          <input type="email" name="email" class="form-control" id="email" ng-model="credentials.username" required />
+          <span class="help-block error" ng-show="helpers.hasError(this, 'email', 'email')">Invalid email</span>
+          <span class="help-block error" ng-show="helpers.hasError(this, 'email', 'required')">Email is required</span>
+        </div>
+        <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'password')}">
+            <label for="password" class="required">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              ng-model="credentials.password"
+              required
+              ng-pattern_='/(?=^.{8,}$)(?!.*(.)\1\1\1\1)((?=.*\d)|(?=.*\W+))(?!.*\s)(?=.*[A-Z])(?=.*[a-z]).*/'
+            />
+            <span class="help-block error" ng-show="helpers.hasError(this, 'password', 'required')">Password is required</span>
+            <span class="help-block error" ng-show="helpers.hasError(this, 'password', 'pattern')">Invalid password</span>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-6">
+              <button type="submit" class="btn btn-primary login-button" ng-disabled="processing">Sign In</button>
+            </div>
+            <div class="col-xs-6">
+              <p class="help-block"><a class="pull-right" href="/password_reset_request">forgot my password</a></p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

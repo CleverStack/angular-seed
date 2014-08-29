@@ -1,0 +1,69 @@
+<div ng-include="t.partial('settings_tabs')"></div>
+
+<form warn-unsaved-changes="account" role="form" name="form" id="account" class="form-horizontal col-md-10" ng-submit="submitted = true; save();" novalidate>
+
+  <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'name')}">
+    <label for="name" class="col-md-2 control-label required">Company name</label>
+    <div class="col-md-10">
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        ng-model="account.name"
+        name="name"
+        focused-on
+        required
+      />
+      <span class="help-block error" ng-show="helpers.hasError(this, 'name', 'required')">Company name is required</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="companyUrl" class="col-md-2 control-label">Company URL</label>
+    <div class="col-md-10">
+      <input
+        type="text"
+        class="form-control"
+        id="companyUrl"
+        ng-model="account.companyUrl"
+        name="companyUrl"
+      />
+    </div>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'hrEmail', null, true)}">
+    <label for="companyUrl" class="col-md-2 control-label">HR Department Email</label>
+    <div class="col-md-10">
+      <input
+        type="email"
+        class="form-control"
+        id="hrEmail"
+        ng-model="account.hrEmail"
+        name="hrEmail"
+      />
+      <span class="help-block error" ng-show="helpers.hasError(this, 'hrEmail', 'email', true)">Invalid email address</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name" class="col-md-2 control-label">Subdomain</label>
+    <div class="col-md-10">
+      <p class="form-control-static" ng-bind="account.subdomain"></p>
+    </div>
+  </div>
+
+  <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'name')}">
+    <label for="name" class="col-md-2 control-label">Forwarding Email Address</label>
+    <div class="col-md-10">
+      <p class="form-control-static" ng-bind="account.emailFwd"></p>
+      <p class="muted"><small><em>Use this email address to forward new prospects into your resume pool without relating them to a specific job posting.</em></small></p>
+    </div>
+  </div>
+
+  <div class="col-md-10 col-md-offset-2">
+    <hr/>
+    <button type="submit" class="btn btn-primary" ng-disabled="processing">Save Changes</button>
+    <span class="cancel-links"> or <a ng-click="helpers.goBack();" ng-disabled="processing">Cancel</a></span>
+  </div>
+
+</form>

@@ -1,0 +1,43 @@
+<div style="width:250px;">
+  <button
+    ng-click="helpers.openUserModal( row.id, currentUser ); $event.stopPropagation();"
+    class="btn btn-sm btn-primary axn-btn"
+    tooltip="Edit">
+    <b id="edit-user">
+      <i class="fa fa-pencil"></i>
+      <span id="edit-users-text">Edit</span>
+    </b>
+  </button>
+  <button
+    ng-disabled="!row.confirmed || currentUser.id === row.id || !row.active"
+    ng-click="manager.toggleStatus(row); $event.stopPropagation();"
+    class="btn btn-sm btn-default axn-btn"
+    tooltip="Deactivate">
+    <b id="deactivate-user">
+      <i class="fa fa-power-off"></i>
+      <span id="deactivate-user-text">Deactivate</span>
+    </b>
+  </button>
+
+  <button
+    ng-if="row.confirmed && currentUser.id !== row.id && !row.active"
+    ng-click="manager.toggleStatus(row); $event.stopPropagation();"
+    class="btn btn-sm btn-default axn-btn"
+    tooltip="Activate">
+    <b id="deactivate-user">
+      <i class="fa fa-play"></i>
+      <span id="activate-users-text">Activate</span>
+    </b>
+  </button>
+
+  <button
+    ng-if="!row.confirmed"
+    ng-click="manager.resend(row); $event.stopPropagation();"
+    class="btn btn-sm btn-default axn-btn"
+    tooltip="Resend">
+    <b id="deactivate-user">
+      <i class="fa fa-envelope-o"></i>
+      <span id="resend-users-text">Re-send</span>
+    </b>
+  </button>
+</div>

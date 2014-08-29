@@ -4,24 +4,38 @@ define([
   'ngResource',
   'ngRoute',
   'ngSanitize',
+  'ngTable',
+  'ngTableResizableColumns',
+  'selectn',
+  'jqueryMinicolors',
 
   './module',
 
   // Providers
-  './scripts/cs_common_helpers_provider',
-  './scripts/cs_template_provider',
-  './scripts/cs_http_options_provider',
-
-  'http-auth-interceptor',
+  './providers/HelpersProvider',
+  './providers/TemplateProvider',
+  './providers/HttpOptionsProvider',
+  './providers/NavbarProvider',
+  './providers/ResourceFactoryProvider',
 
   // Directives
-  './scripts/string_to_number',
-  './scripts/must_equal_to',
+  './directives/CleverTableDirective',
+  './directives/ColorPickerDirective',
+  './directives/FocusedOnDirective',
+  './directives/LoadingDirective',
+  './directives/MustBeEqualToDirective',
+  './directives/NavbarDirective',
+  './directives/NgBlurDirective',
+  './directives/NgFocusDirective',
+  './directives/StringToNumberDirective',
+  './directives/WarnUnsavedChangesDirective',
+
+  // Controllers
+  './controllers/CleverTableController',
+  './controllers/NavbarController',
 
   // Filters
-  './scripts/starts_with',
+  './filters/StartsWithFilter',
+  './filters/TimeAgoFilter'
 
-  // Services
-  './scripts/cs_browser_detect',
-  './scripts/cs_resource_factory'
-], function(){});
+], function() {});

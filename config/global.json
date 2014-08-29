@@ -1,0 +1,42 @@
+{
+  "dev": {
+    "port":           "9000",
+    "path":           "./app",
+    "liveReloadPort": "35729",
+    "hostname":       "0.0.0.0"
+  },
+
+
+  "test": {
+    "unit": {
+      "port":         "9090",
+      "path":         "./test",
+      "coverage": {
+        "port":       "5555",
+        "path":       "./test/coverage/unit/"
+      },
+    "conf":           "./test-unit.conf.js"
+    },
+    "e2e": {
+      "seleniumPort": "4444",
+      "path":         "./test",
+      "conf":         "./test-e2e.conf.js",
+      "coverage": {
+        "port":       "7776",
+        "path":       "./test/coverage/e2e/"
+      },
+      "report": {
+        "port":       "7777"
+      },
+      "instrumented": {
+        "path": "./test/coverage/e2e/instrumented/"
+      }
+    }
+  },
+
+
+  "dist": {
+    "port":           "9009",
+    "path":           "./dist"
+  }
+}

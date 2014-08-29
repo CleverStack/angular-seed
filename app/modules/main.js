@@ -1,66 +1,129 @@
 require.config({
   baseUrl: 'modules',
   packages: [
-    'application',
-    'cs_account',
+    'app',
     'cs_common',
-    'cs_session',
-    'users'
+    'cs_messenger',
+    'cs_modal',
+    'auth',
+    'roles'
   ],
   paths: {
-    angular: '../components/angular/angular',
-    jquery: '../components/jquery/jquery',
-    underscore: '../components/underscore/underscore',
-    ngCookies: '../components/angular-cookies/angular-cookies',
-    ngResource: '../components/angular-resource/angular-resource',
-    ngRoute: '../components/angular-route/angular-route',
-    ngSanitize: '../components/angular-sanitize/angular-sanitize',
-    'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor',
-    bootstrap: '../scripts/bootstrap'
+    angular:                  '../components/angular/angular',
+    ngCookies:                '../components/angular-cookies/angular-cookies',
+    ngResource:               '../components/angular-resource/angular-resource',
+    ngRoute:                  '../components/angular-route/angular-route',
+    ngSanitize:               '../components/angular-sanitize/angular-sanitize',
+    ngTable:                  '../components/ng-table/ng-table',
+    ngTableResizableColumns:  '../components/ng-table-resizable-columns/ng-table-resizable-columns.src',
+    ngUi:                     '../components/angular-ui/build/angular-ui',
+    ngUiBootstrap:            '../components/angular-bootstrap/ui-bootstrap-tpls',
+    httpAuthInterceptor:      '../components/angular-http-auth/src/http-auth-interceptor',
+    bootstrap:                '../scripts/bootstrap',
+    jquery:                   '../components/jquery/jquery',
+    jqueryMinicolors:         '../components/jquery-minicolors/jquery.minicolors',
+    underscore:               '../components/underscore/underscore',
+    selectn:                  '../components/selectn/selectn',
+    inflection:               '../components/inflection/lib/inflection',
+    select2:                  '../components/select2/select2',
+    'ui.select2':             '../components/angular-ui-select2/src/select2',
+    moment:                   '../components/momentjs/moment'
   },
   shim: {
     angular: {
-      exports: 'angular'
+      deps:     [ 'jquery' ],
+      exports:  'angular'
     },
     ngCookies: {
-      deps: ['angular']
+      deps:     [ 'angular' ]
     },
     ngResource: {
-      deps: ['angular']
+      deps:     [ 'angular' ]
     },
     ngRoute: {
-      deps: ['angular']
+      deps:     [ 'angular' ]
     },
     ngSanitize: {
-      deps: ['angular']
+      deps:     [ 'angular' ]
     },
-    'http-auth-interceptor': {
-      deps: ['angular']
+    ngTable: {
+      deps:     [ 'angular' ],
+      exports:  'ngTable'
+    },
+    ngTableResizableColumns: {
+      deps:     [ 'angular' ],
+      exports:  'ngTableResizableColumns'
+    },
+    ngUi: {
+      deps:     [ 'angular' ]
+    },
+    ngUiBootstrap: {
+      deps:     [ 'angular' ]
+    },
+    httpAuthInterceptor: {
+      deps:     [ 'angular' ]
     },
     bootstrap: {
-      deps: ['jquery']
+      deps:     [ 'jquery' ]
     },
     underscore: {
-      exports: '_'
+      exports:  '_'
+    },
+    selectn: {
+      deps:     [ 'bootstrap' ]
+    },
+    inflection: {
+      exports:  'inflection'
+    },
+    select2: {
+      deps:     [ 'jquery' ]
+    },
+    'ui.select2': {
+      deps:     [ 'angular', 'select2' ]
+    },
+    moment: {
+      exports:  'moment'
+    },
+    jqueryMinicolors: {
+      deps:     [ 'jquery' ]
     }
-  }
+  },
+  waitSeconds: 15
 });
 
 require([
   'angular',
+  'bootstrap',
+  'ngUi',
+  'ngUiBootstrap',
   'ngRoute',
   'ngResource',
   'ngSanitize',
-  'http-auth-interceptor',
-  'bootstrap',
+  'ngTable',
+  'ngTableResizableColumns',
+  'httpAuthInterceptor',
 
-  // Init
-  'application',
+  'ui.select2',
+  'selectn',
+  'inflection',
 
-], function (angular) {
+  // CleverStack modules
+  'cs_common',
+  'cs_messenger',
+  'cs_modal',
+  'auth',
+  'roles',
+
+  // Main app module
+  'app',
+
+  // Custom modules
+
+
+], function( angular ) {
   'use strict';
 
-  angular.element(document).ready(function () {
-    angular.bootstrap(document, ['app']);
+  angular.element( document ).ready( function() {
+    angular.bootstrap( document, [ 'app' ] );
   });
 });
