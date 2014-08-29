@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="pull-left col-xs-7 col-sm-8 col-md-9 col-lg-8">
+    <h3>Users <br/><small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small></h3>
+  </div>
+  <div class="pull-right add-button">
+    <button
+      ng-click="helpers.openUserModal(false); $event.stopPropagation();"
+        class="btn btn-sm btn-success axn-btn"
+        tooltip="Create a new User">
+        <b id="add-user">
+          <i class="fa fa-plus"></i>
+          <span id="add-user-text">Add User</span>
+        </b>
+    </button>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div clever-table="columns" service="UserService"></div>
+</div>

@@ -1,0 +1,55 @@
+<div ng-include="t.view('settings/users/partials/header')"></div>
+
+<div class="tab-content">
+  <div class="container tab-pane active">
+
+    <div class="row">
+
+      <div class="col-md-9">
+
+          <form class="form-horizontal" role="form">
+
+            <div class="form-group">
+              <label class="col-md-2 control-label">Name</label>
+              <div class="col-md-10">
+                <p class="form-control-static" ng-bind="user.fullName"><span class="label label-warning pull-right" ng-if="!user.active">INACTIVE</span></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-2 control-label">Email</label>
+              <div class="col-md-10">
+                <p class="form-control-static" ng-bind="user.email"></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-2 control-label">Phone</label>
+              <div class="col-md-10">
+                <p class="form-control-static" ng-bind="user.phone"></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-2 control-label">Role</label>
+              <div class="col-md-10">
+                <p class="form-control-static" ng-bind="user.role.name"></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-2 control-label">Team</label>
+              <div class="col-md-10">
+                <p class="form-control-static" ng-bind="user.team.name"></p>
+              </div>
+            </div>
+            <!-- <pre>{{user | json}}</pre> -->
+
+            <div class="col-md-6" ng-include="t.view('settings/users/partials/actions')"></div>
+
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>

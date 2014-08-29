@@ -1,0 +1,178 @@
+<div class="modal-header au-description">
+  <button type="button" class="close" ng-click="$close()">&times;</button>
+  <span ng-if="!user.id">Add User</span>
+  <span ng-if="user.id" ng-bind="user.fullName"></span>
+</div>
+
+<div class="modal-helpertext" ng-if="!myAccount">
+  <p ng-if="!user.id"><strong>Create a new user account</strong></p>
+  <p ng-if="user.id"><strong>{{user.firstname}} {{user.lastname}}</strong><span class="label label-warning pull-right" ng-if="!user.active">INACTIVE</span></p>
+  <p>Tip: Exercise caution when assigning a user Administrator rights, as any user that has been assigned Administrator rights can also add and remove other users.</p>
+</div>
+
+<div class="modal-body addUserBody">
+
+  <div class="row">
+    <div class="row">
+      <div class="col-xs-12">
+        <div messenger ng-cloak></div>
+      </div>
+    </div>
+
+    <form role="form" name="form" id="users_new" class="" ng-submit="submitted = true; save(form);" novalidate warn-unsaved-changes="role">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mar-rt5" ng-class="{'has-error': helpers.hasError(this, 'firstname')}">
+            <input
+            type="text"
+            placeholder="First Name *"
+            class="form-control"
+            id="firstname"
+            ng-model="user.firstname"
+            name="firstname"
+            focused-on
+            required />
+            <span class="help-block error" ng-show="helpers.hasError(this, 'firstname', 'required')">First name is required</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mar-rt5" ng-class="{'has-error': helpers.hasError(this, 'lastname')}">
+            <input
+            type="text"
+            placeholder="Last Name *"
+            class="form-control"
+            id="lastname"
+            ng-model="user.lastname"
+            name="lastname" />
+            <span class="help-block error" ng-show="helpers.hasError(this, 'lastname', 'required')">Last name is required</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <div class="form-group mar-rt5" ng-class="{'has-error': helpers.hasError(this, 'email')}">
+            <input
+              type="email"
+              placeholder="Email *"
+              id="email"
+              name="email"
+              class="form-control"
+              ng-model="user.email"
+              required
+            />
+            <span class="help-block error" ng-show="helpers.hasError(this, 'email', 'required')">Email is required</span>
+          </div>
+        </div>
+
+        <div class="col-md-6" ng-if="!myAccount">
+          <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'RoleId')}">
+            <select name="RoleId" ng-model="user.RoleId" required ng-options="role.id as role.name for role in roles" class="form-control">
+              <option value="">-- Role --</option>
+            </select>
+            <span class="help-block error" ng-show="helpers.hasError(this, 'RoleId', 'required')">Role is required</span>
+          </div>
+        </div>
+
+        <div class="col-md-6" ng-if="myAccount">
+          <div class="form-group">
+            <input
+              type="tel"
+              placeholder="Phone"
+              id="phone"
+              name="phone"
+              class="form-control"
+              ng-model="user.phone"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <div ng-if="myAccount">
+
+        <button type="button" class="btn btn-link btn-sm" ng-click="showPassword=!showPassword;">Change password</button>
+
+        <div class="row" ng-if="showPassword">
+
+          <div class="col-md-6">
+
+            <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'password')}">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                ng-model="user.password"
+                ng-required="user.new_password"
+                placeholder="Current password"
+              />
+              <span class="help-block error" ng-show="helpers.hasError(this, 'password', 'required')">You need to enter current password if you want to change it</span>
+            </div>
+
+          </div>
+
+          <div class="col-md-6">
+
+            <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'new_password')}">
+              <input
+                type="password"
+                id="new_password"
+                name="new_password"
+                class="form-control"
+                ng-model="user.new_password"
+                ng-pattern='/(?=^.{8,}$)(?!.*(.)\1\1\1\1)((?=.*\d)|(?=.*\W+))(?!.*\s)(?=.*[A-Z])(?=.*[a-z]).*/'
+                ng-minlength="8"
+                placeholder="New password"
+              />
+              <span class="help-block error" ng-show="helpers.hasError(this, 'new_password', 'pattern')">
+                Password must contain at least 1 uppercase letter, 1 lower case letter and 1 number or special character.
+                No spaces or double quotes or more than 4 consecutive identical characters are allowed. Minimum length is 8 characters.
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-block btn-primary" ng-disabled="processing" ng-bind="user.id ? 'Save changes' : 'Add User'"></button>
+        </div>
+        <div class="col-md-6">
+          <span class="cancel-links"><a ng-click="$close()">Cancel</a></span>
+        </div>
+      </div>
+      <ul class="nav nav-pills nav-stacked">
+
+        <li ng-if="show && user.confirmed">
+          <button ng-click="helpers.openUserModal(user.id, currentUser);" class="btn btn-default btn-block">Edit</button>
+        </li>
+
+        <li ng-if="edit">
+          <a ng-href="/settings/users/{{user.id}}" class="btn btn-default btn-block">Show</a>
+        </li>
+
+        <li ng-if="user.confirmed && currentUser.id !== user.id">
+          <a href ng-click="manager.toggleStatus(user)" class="btn btn-default btn-block">
+            <span ng-if="user.active">Deactivate</span>
+            <span ng-if="!user.active">Activate</span>
+          </a>
+        </li>
+
+        <li ng-if="user.id && !user.confirmed">
+          <a href ng-click="manager.resend(user)" class="btn btn-default btn-block">Resend Activation Email</a>
+        </li>
+
+        <!-- <li class="divider"></li>
+        <li>
+          <a href="/settings/users" class="btn btn-default stats-button-12 autowidth">All Users</a>
+        </li> -->
+
+      </ul>
+    </form>
+  </div>
+</div>
