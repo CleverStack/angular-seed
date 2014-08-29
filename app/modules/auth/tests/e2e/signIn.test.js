@@ -1,13 +1,13 @@
-// test if the login is working against a running back-end
-describe('e2e: login', function() {
+// test if the signIn is working against a running back-end
+describe('e2e: signIn', function() {
 
   var ptor;
   beforeEach(function() {
     ptor = protractor.getInstance();
-    ptor.get( '/login?redirect=users' );
+    ptor.get( '/signIn?redirect=users' );
   });
 
-  it('should login with the default user account', function() {
+  it('should signIn with the default user account', function() {
     var username = element( by.model( 'credentials.username' ) );
     var password = element( by.model( 'credentials.password' ) );
 
