@@ -1,0 +1,134 @@
+<div class="">
+  <div class="navbar navbar-fixed-top navbar-main">
+    <div class="container">
+      <div class="navbar-header navbar-left header-area">
+
+        <button type="button btn-default" class="navbar-toggle pull-right" data-toggle="collapse" data-target=".navbar-collapse">
+          <i class="fa fa-bars"></i>
+        </button>
+
+        <div class="pull-left">
+          <img class="brand-logo" id="brand-image" ng-click="helpers.redirect('/')" src="/images/cs-nav-logo.png" title="Powered by CleverStack">
+        </div>
+
+        <div class="pull-left">
+          <div ng-if=" !!navbarItems.left " class="btn-group btn-group-md">
+            <a
+            ng-repeat-start=" item in navbarItems.left | orderBy:'order' "
+            ng-if=" !item.subMenu && showItem( item ) "
+            ng-class=" { 'dropdown-toggle': !!item.subMenu } "
+            class="btn btn-default"
+            type="button"
+            href="{{item.href}}"
+            ng-click=" item.click ? item.click( this, $event ) : true ">
+              <i ng-class=" classHandler( item ) "> </i> {{item.label}} <b ng-if=" !!item.subMenu " class="caret"></b>
+            </a>
+
+            <div
+            ng-repeat-end
+            ng-class=" { 'btn-group': item.subMenu, 'btn-group-md': item.subMenu } "
+            ng-if=" !!item.subMenu && showItem( item ) "
+            style="margin-top:0;">
+
+              <a
+              ng-if=" !!item.subMenu && showItem( item ) "
+              ng-class=" { 'dropdown-toggle': !!item.subMenu } "
+              data-toggle="dropdown"
+              class="btn btn-default"
+              type="button">
+                <i ng-class=" classHandler( item ) "> </i> {{item.label}} <b ng-if=" !!item.subMenu " class="caret"></b>
+              </a>
+
+              <ul
+              ng-if=" item.subMenu && showItem( item ) "
+              class="dropdown-menu" role="menu">
+
+                <li
+                ng-repeat=" subitem in item.subMenu | orderBy:'order' "
+                ng-if=" showItem( subitem ) "
+                ng-class=" activeHref( subitem ) ">
+
+                  <a href="{{subitem.href}}" ng-click=" subitem.click ? subitem.click( this, $event ) : true "><i ng-class=" classHandler( subitem ) "> </i> <span>{{subitem.label}}</span></a>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div> <!--/.navbar-left -->
+
+      <div class="navbar-right navbar-collapse collapse">
+
+        <p class="navbar-text" ng-if="currentUser">
+          Signed in as
+          <span ng-bind="currentUser.fullName"></span>
+          (<span ng-bind="currentUser.role.name"></span>)
+        </p>
+
+        <div class="pull-right">
+          <div class="btn-group btn-group-md">
+            <a
+            ng-repeat-start=" item in navbarItems.right | orderBy:'order' "
+            ng-if=" !item.subMenu && showItem( item ) "
+            ng-class=" { 'dropdown-toggle': !!item.subMenu } "
+            class="btn btn-default"
+            type="button"
+            href="{{item.href}}"
+            ng-click=" item.click ? item.click( this, $event ) : true ">
+              <i ng-class=" classHandler( item ) "> </i> {{item.label}} <b ng-if=" !!item.subMenu " class="caret"></b>
+            </a>
+
+            <div
+            ng-repeat-end
+            ng-class=" { 'btn-group': item.subMenu, 'btn-group-md': item.subMenu } "
+            ng-if=" !!item.subMenu && showItem( item ) "
+            style="margin-top:0;">
+
+              <a
+              ng-if=" !!item.subMenu && showItem( item ) "
+              ng-class=" { 'dropdown-toggle': !!item.subMenu } "
+              data-toggle="dropdown"
+              class="btn btn-default"
+              type="button">
+                <i ng-class=" classHandler( item ) "> </i> {{item.label}} <b ng-if=" !!item.subMenu " class="caret"></b>
+              </a>
+
+              <ul
+              ng-if=" item.subMenu && showItem( item ) "
+              class="dropdown-menu" role="menu">
+
+                <li
+                ng-repeat=" subitem in item.subMenu | orderBy:'order' "
+                ng-if=" showItem( subitem ) "
+                ng-class=" activeHref( subitem ) ">
+
+                  <a href="{{subitem.href}}" ng-click=" subitem.click ? subitem.click( this, $event ) : true "><i ng-class=" classHandler( subitem ) "> </i> <span>{{subitem.label}}</span></a>
+                </li>
+              </ul>
+
+            </div>
+
+        </div>
+
+      </div><!--/.navbar-collapse -->
+
+    </div>
+  </div>
+
+  <div class="navbar-app">
+    <ul class="nav">
+      <li ng-repeat="item in navbarItems.app | orderBy:'order'" ng-class="{dropdown:!!item.subMenu}" ng-if="showItem(item)">
+        <a ng-if="item.subMenu === undefined" href="{{item.href}}"><i ng-class="classHandler(item)"></i><span>{{item.label}}</span></a>
+        <a ng-if="item.subMenu" href="#" class="dropdown-toggle" data-toggle="dropdown"><i ng-class="classHandler(item)"></i><span>{{item.label}}</span></a>
+        <ul ng-if="item.subMenu" class="dropdown-menu">
+          <li ng-repeat="subitem in item.subMenu | orderBy:'order'" ng-class="activeHref(item)" ng-if="showItem(item)">
+            <a href="{{subitem.href}}" ng-click=" subitem.click ? subitem.click( this, $event ) : true "><i ng-class=" classHandler( subitem ) "> </i> <span style="display:inline-block;">{{subitem.label}}</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+</div>

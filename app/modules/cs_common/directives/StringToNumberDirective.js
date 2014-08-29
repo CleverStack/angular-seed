@@ -1,4 +1,4 @@
-define(['angular', '../module'], function (ng) {
+define( [ 'angular', '../module' ], function( ng ) {
   'use strict';
 
   /**
@@ -8,13 +8,14 @@ define(['angular', '../module'], function (ng) {
    * Converts a string to a number. Useful in type="number" input
    * elements that bind to a stringified number model.
    */
-  ng.module('cs_common.directives')
-  .directive('string2number', function() {
+  ng
+  .module( 'cs_common.directives' )
+  .directive( 'stringToNumber', function() {
 
     return {
       restrict: 'A',
       require: 'ngModel',
-      link: function(scope, element, attr, ngModel) {
+      link: function( scope, element, attr, ngModel ) {
 
         /**
          * @ngdoc method
@@ -23,8 +24,8 @@ define(['angular', '../module'], function (ng) {
          * @param  {Number, String} number Just the number that has been input.
          * @return {Number}        The number.
          */
-        function fromField(number) {
-          return Number(number);
+        function fromField( number ) {
+          return Number( number );
         }
 
         /**
@@ -34,12 +35,12 @@ define(['angular', '../module'], function (ng) {
          * @param  {Number, String} number Just the number that has been input.
          * @return {Number}        The number or 0.
          */
-        function toField(text) {
-          return Number(text || 0);
+        function toField( text ) {
+          return Number( text || 0 );
         }
 
-        ngModel.$parsers.push(fromField);
-        ngModel.$formatters.push(toField);
+        ngModel.$parsers.push( fromField );
+        ngModel.$formatters.push( toField );
       }
     };
 
