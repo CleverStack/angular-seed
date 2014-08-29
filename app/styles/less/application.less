@@ -1,3 +1,120 @@
-/* Use this file to add LESS for your application. */
 
+/*  Bootstrap Theme
+────────────────────────────────────────────────────────────*/
 @import "bootstrap/theme.less";
+@import "bootstrap/variables.less";
+
+
+/*  Global Styles
+────────────────────────────────────────────────────────────*/
+body {
+  padding-top       : 67px;
+
+  a {
+    color           : @brand-second-color;
+  }
+}
+.jumbotron {
+  font-size         : 14px;
+  background        : none;
+  border            : 1px solid #D7D7D7;
+}
+.well {
+  border-radius     : 0;
+  background        : none;
+  border            : 0;
+  border-left       : @trim-border;
+  .box-shadow( none );
+}
+.badge {
+  background        : #e4e7e7;
+  color             : #2c333d;
+  border-radius     : 5px;
+  padding           : 5px 8px;
+}
+.btn-lg {
+  border-radius     : 0;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background        : @trim-color;
+  border-color      : darken( @trim-color, 10%);
+}
+html > .no-js > div.js-warning {
+  display           : none;
+}
+
+/*  Success/Error Message Custom Styling
+────────────────────────────────────────────────────────────*/
+.has-error .help-block {
+  font-size         : 11px;
+}
+
+#app_message {
+  display           : none;
+  top               : 45%;
+  .alert {
+    font-size       : 13px;
+    font-weight     : bold;
+    padding         : 16px;
+    border-radius   : 2px;
+  }
+  .alert-warning {
+    color           : #000;
+  }
+  .alert-danger {
+    color           : #FFF;
+  }
+}
+
+/*  Form Custom Styling
+────────────────────────────────────────────────────────────*/
+.wrapper-form {
+  max-width         : 900px;
+}
+.form-horizontal {
+  label {
+    font-size       : 12px;
+  }
+}
+.select2-container .select2-choices .select2-search-field input,
+.select2-container .select2-choice, .select2-container .select2-choices {
+  border-radius     : 0px;
+}
+
+
+/*  Mobile @1200px
+────────────────────────────────────────────────────────────*/
+@media ( max-width  : @screen-lg ) {
+  .content {
+
+  }
+}
+
+/*  Desktop @992px
+────────────────────────────────────────────────────────────*/
+@media ( max-width  : @screen-md ) {
+  .content {
+
+  }
+}
+
+/*  Mobile @768px
+────────────────────────────────────────────────────────────*/
+@media ( max-width  : @screen-sm ) {
+  .content {
+
+  }
+}
+
+/*  Mobile @480px
+────────────────────────────────────────────────────────────*/
+@media ( max-width  : @screen-xs ) {
+  .content {
+
+  }
+}
