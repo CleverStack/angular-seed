@@ -1,0 +1,85 @@
+<div class="modal-header au-description">
+  <button type="button" class="close" ng-click="$close()">&times;</button>
+  <span ng-if="!permission.id">Add Permission</span>
+  <span ng-if="permission.id">Edit "<span ng-bind="permission.action"></span>" Permission</span>
+</div>
+
+<div class="modal-helpertext">
+  <p ng-if="!permission.id"><strong>Create a new permission for the current account</strong></p>
+  <p ng-if="permission.id"><strong>{{permission.name}}</strong></p>
+  <p>Tip: Exercise caution when assigning a role permissions, as any role that has been assigned Role.* rights can also add and remove other users.</p>
+</div>
+
+<div class="modal-body addPermissionBody">
+
+  <div class="row">
+    <div class="row">
+      <div class="col-xs-12">
+        <div messenger ng-cloak></div>
+      </div>
+    </div>
+
+    <form warn-unsaved-changes="permission" permission="form" name="form" class="form-horizontal container" ng-submit="submitted = true; save();" novalidate>
+
+      <div class="row">
+        <div class="col-md-12">
+          <!-- <pre>{{permission | json}}</pre> -->
+          <div class="form-group mar-rt5" ng-class="{ 'has-error': helpers.hasError( this, 'action' ) }">
+            <label class="col-lg-2 control-label">Action:</label>
+            <div class="col-lg-10">
+              <input
+                ng-disabled="!!permission.systemPermission"
+                type="text" class="form-control"
+                name="action" id="action"
+                ng-model="permission.action"
+                required focused-on/>
+              <span class="help-block error" ng-show="helpers.hasError( this, 'action', 'required' )">Permission action is required.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mar-rt5" ng-class="{ 'has-error': helpers.hasError( this, 'description' ) }">
+            <label class="col-lg-2 control-label">Description:</label>
+            <div class="col-lg-10">
+              <textarea name="description" ng-model="permission.description" rows="3" class="form-control"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <!-- <pre>{{permissions | json}}</pre> -->
+          <div class="form-group mar-rt5">
+            <label class="col-lg-2 control-label">Roles:</label>
+            <div class="col-lg-10">
+              <select
+                ng-disabled="!helpers.hasPermission( 'Permission.assignRole' )"
+                multiple
+                class="form-control"
+                ui-select2="roleSelectOptions"
+                ng-model="permission.roles"
+                data-placeholder="Select Roles">
+
+                <option ng-repeat="role in roles | orderBy:'name'" value="{{role.id}}">{{role.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-block btn-primary btn-block" ng-disabled="processing" ng-bind="permission.id ? 'Save Changes' : 'Add Permission'"></button>
+        </div>
+        <div class="col-md-12">
+          <button type="button" class="btn btn-block btn-default btn-block" ng-click="$close()">Cancel</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

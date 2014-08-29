@@ -1,0 +1,23 @@
+<div class="actions">
+  <button
+    ng-disabled="!helpers.hasPermission( 'Permission.edit' )"
+    ng-click="helpers.openPermissionModal( row.id ); $event.stopPropagation();"
+    class="btn btn-sm btn-primary axn-btn"
+    tooltip="Edit">
+    <b id="edit-permission">
+      <i class="fa fa-pencil"></i>
+      <span id="edit-permission-text">Edit</span>
+    </b>
+  </button>
+
+  <button
+    ng-disabled="!helpers.hasPermission( 'Permission.delete' ) || !!row.systemPermission"
+    ng-click="helpers.openDeletePermissionModal( row.id ); $event.stopPropagation();"
+    class="btn btn-sm btn-danger axn-btn"
+    tooltip="Delete">
+    <b id="delete-permission">
+      <i class="fa fa-times"></i>
+      <span id="delete-permission-text">Delete</span>
+    </b>
+  </button>
+</div>
