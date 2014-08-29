@@ -1,40 +1,31 @@
-'use strict';
+var fs        = require( 'fs' )
+  , path      = require( 'path' )
+  , lrSnippet = require( 'grunt-contrib-livereload/lib/utils' ).livereloadSnippet;
 
-var fs = require('fs');
+var mountFolder = function( connect, dir ) {
+  'use strict';
 
-var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-
-var mountFolder = function (connect, dir) {
-  return connect.static(require('path').resolve(dir));
+  return connect.static( path.resolve( dir ) );
 };
 
-var fallbackToTest = function (connect) {
-  return connect().use(function (req, res, next) {
-    fs.exists(__dirname + req.url, function (exists) {
-      if(exists) {
-        fs.createReadStream(req.url).pipe(res);
-      } else {
-        fs.createReadStream(__dirname + '/test/e2e/test-index.html').pipe(res);
-      }
-    });
-  });
-};
+var fallbackToIndex = function( connect, index, file ) {
+  'use strict';
 
-var fallbackToIndex = function (connect, index, file) {
-  return connect().use(function (req, res, next) {
-    if(req.url === file) {
+  return connect().use( function( req, res, next ) {
+    if( req.url === file ) {
       return next();
     }
 
-    if(/views\/(.*).html$/.test(req.url)) {
-      res.end( fs.readFileSync(index) );
+    if( /views\/(.*).html$/.test( req.url ) ) {
+      res.end( fs.readFileSync( index ) );
     }
 
-    res.end( fs.readFileSync(index) );
+    res.end( fs.readFileSync( index ) );
   });
 };
 
 module.exports = function (grunt) {
+  'use strict';
 
   // grunt helpers
   require('time-grunt')(grunt);
@@ -43,65 +34,21 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
 
   // configurations
-  var appConfig = {
-
-    // Development Server
-    "dev": {
-      "port": "9000", // default 9000
-      "path": "./app", // the development directory of your app
-      "liveReloadPort": "35729", // default 35729
-      "hostname": "localhost" // using 0.0.0.0 will make the server accessible from anywhere
-    },
-
-    // Unit Testing Server
-    "test": {
-      "unit": {
-        "port": "9090", // default 9090
-        "path": "./test", // if you change this it must reflect in your test-unit.conf.js
-        "coverage": {
-          "port": "5555", // default 5555
-          "path": "./test/coverage/unit/" // browsable directory for unit testing code coverage reports
-        },
-      "conf": "./test-unit.conf.js"
-      },
-      "e2e": {
-        "seleniumPort": "4444", // default 4444
-        "path": "./test", // if you change this it must reflect in your test-e2e.conf.js
-        "conf": "./test-e2e.conf.js",
-        "coverage": {
-          "port": "7776", // default 5555
-          "path": "./test/coverage/e2e/" // browsable directory for e2e testing code coverage reports
-        },
-        "report": {
-          "port": "7777"
-        },
-        "instrumented": {
-          "path": './test/coverage/e2e/instrumented/'
-        }
-      }
-    },
-
-    // Production Preview Server
-    "dist": {
-      "port": "9009", // default 9009
-      "path": "./dist" // directory where you want your production builds to go
-    }
-
-  };
+  var appConfig = require( path.resolve( path.join( __dirname, 'config', 'global.json' ) ) );
 
   grunt.initConfig({
-    appConfig: appConfig,
+    appConfig:          appConfig,
     watch: {
       livereload: {
         options: {
-          livereload: true
+          livereload:   true
         },
         files: [
           '<%= appConfig.dev.path %>/components/bootstrap/{,*/}*.css',
           '<%= appConfig.dev.path %>/styles/{,*/}*.css',
           '<%= appConfig.dev.path %>/{,*/}*.html',
-          '<%= appConfig.dev.path %>/modules/**/{,*/}*.{css,js,less,html}',
-          '{.tmp,<%= appConfig.dev.path %>}/styles/{,*/}*.css',
+          '<%= appConfig.dev.path %>/modules/**/{,*/}*.{css,js,html}',
+          '{.tmp,<%= appConfig.dev.path %>}/styles/*.css',
           '{.tmp,<%= appConfig.dev.path %>}/views/{,*/}*.html',
           '{.tmp,<%= appConfig.dev.path %>}/scripts/{,*/}*.js',
           '<%= appConfig.dev.path %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -111,9 +58,11 @@ module.exports = function (grunt) {
         files: [
           '<%= appConfig.dev.path %>/components/bootstrap/less/*.less',
           '<%= appConfig.dev.path %>/styles/less/**/*.less',
-          '<%= appConfig.dev.path %>/modules/**/styles/less/*.less'
+          '<%= appConfig.dev.path %>/modules/**/styles/**/*.less'
         ],
-        tasks: ['less:development']
+        tasks: [
+          'less:css'
+        ]
       },
       unitTests: {
         files: [
@@ -131,253 +80,240 @@ module.exports = function (grunt) {
     },
     connect: {
       options: {
-        port: '<%= appConfig.dev.port %>',
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: '<%= appConfig.dev.hostname %>',
-        livereload: '<%= appConfig.dev.liveReloadPort %>'
+        port:           '<%= appConfig.dev.port %>',
+        hostname:       '<%= appConfig.dev.hostname %>',
+        livereload:     '<%= appConfig.dev.liveReloadPort %>'
       },
       livereload: {
         options: {
-          middleware: function (connect) {
+          middleware:   function( connect ) {
             return [
               lrSnippet,
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, appConfig.dev.path),
-              fallbackToIndex(connect, 'app/index.html', '/index.html')
-            ];
-          }
-        }
-      },
-      test: {
-        options: {
-          port: '<%= appConfig.test.unit.port %>',
-          base: __dirname,
-          livereload: false,
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, '.'),
-              fallbackToTest(connect)
+              mountFolder( connect, '.tmp' ),
+              mountFolder( connect, appConfig.dev.path ),
+              fallbackToIndex( connect, 'app/index.html', '/index.html' )
             ];
           }
         }
       },
       dist: {
         options: {
-          livereload: false,
-          port: '<%= appConfig.dist.port %>',
-          base: '<%= appConfig.dist.path %>'
+          livereload:   false,
+          port:         '<%= appConfig.dist.port %>',
+          base:         '<%= appConfig.dist.path %>',
+          middleware:   function( connect ) {
+            return [
+              connect.compress(),
+              mountFolder( connect, appConfig.dist.path ),
+              fallbackToIndex( connect, appConfig.dist.path + '/index.html', '/index.html' )
+            ];
+          }
         }
       },
       coverage: {
         options: {
-          base: '<%= appConfig.test.unit.coverage.path %>',
-          directory: '<%= appConfig.test.unit.coverage.path %>',
-          port: '<%= appConfig.test.unit.coverage.port %>',
-          keepalive: true,
-          livereload: false
+          base:         '<%= appConfig.test.unit.coverage.path %>',
+          directory:    '<%= appConfig.test.unit.coverage.path %>',
+          port:         '<%= appConfig.test.unit.coverage.port %>',
+          keepalive:    true,
+          livereload:   false
         }
       },
       coverageE2E: {
         options: {
-          port: '<%= appConfig.test.e2e.coverage.port %>',
-          middleware: function (connect) {
+          port:         '<%= appConfig.test.e2e.coverage.port %>',
+          middleware:   function( connect ) {
             return [
               mountFolder( connect, appConfig.test.e2e.instrumented.path + 'app' ),
               fallbackToIndex( connect, appConfig.test.e2e.instrumented.path + 'app/index.html', '/index.html' )
             ];
           },
-          livereload: false,
-          debug: false
+          livereload:   false,
+          debug:        false
         }
       },
       coverageE2EReport: {
         options: {
-          port: '<%= appConfig.test.e2e.report.port %>',
-          middleware: function (connect) {
+          port:         '<%= appConfig.test.e2e.report.port %>',
+          middleware:   function( connect ) {
             return [
               mountFolder( connect, appConfig.test.e2e.coverage.path + '/reports' ),
               fallbackToIndex( connect, appConfig.test.e2e.coverage.path + 'reports/index.html', '/index.html' )
             ];
           },
-          keepalive: true,
-          livereload: false
+          keepalive:    true,
+          livereload:   false
         }
       },
       coverageE2EReportNoWait: {
         options: {
-          port: '<%= appConfig.test.e2e.report.port %>',
-          middleware: function (connect) {
+          port:         '<%= appConfig.test.e2e.report.port %>',
+          middleware:   function( connect ) {
             return [
               mountFolder( connect, appConfig.test.e2e.coverage.path + '/reports' ),
               fallbackToIndex( connect, appConfig.test.e2e.coverage.path + 'reports/index.html', '/index.html' )
             ];
           },
-          keepalive: false,
-          livereload: false
+          keepalive:    false,
+          livereload:   false
         }
       }
     },
     clean: {
+      server:           '.tmp',
       dist: {
         files: [{
-          dot: true,
-          src: [
-            '.tmp',
-            '<%= appConfig.dist.path %>/*',
-            '!<%= appConfig.dist.path %>/.git*'
-          ]
+          dot:          true,
+          src:          [ '.tmp', '<%= appConfig.dist.path %>/*', '!<%= appConfig.dist.path %>/.git*' ]
         }]
       },
-      server: '.tmp',
       coverage: {
         files: [{
-          dot: true,
-          src: [
-            '<%= appConfig.test.unit.coverage.path %>*'
-          ]
+          dot:          true,
+          src:          [ '<%= appConfig.test.unit.coverage.path %>*' ]
         }]
       },
       coverageE2E: {
         files: [{
-          dot: true,
-          src: [
-            '<%= appConfig.test.e2e.coverage.path %>*'
-          ]
+          dot:          true,
+          src:          [ '<%= appConfig.test.e2e.coverage.path %>*' ]
         }]
       },
     },
     jshint: {
       options: {
-        jshintrc: '.jshintrc'
+        jshintrc:       '.jshintrc',
+        reporter:       require( 'jshint-stylish' ),
+        ignores: [
+          '<%= appConfig.dev.path %>/modules/**/test*/**/*.js'
+        ]
       },
-      all: [
+      all:              [
         'Gruntfile.js',
-        '<%= appConfig.dev.path %>/scripts/{,*/}*.js'
-      ]
-    },
-    concat: {
-      dist: {
-        files: {
-          '<%= appConfig.dist.path %>/scripts/scripts.js': [
-            '.tmp/scripts/{,*/}*.js',
-            '<%= appConfig.dev.path %>/scripts/{,*/}*.js'
-          ]
-        }
-      }
+        '<%= appConfig.dev.path %>/modules/**/*.js'
+      ],
     },
     useminPrepare: {
-      html: '<%= appConfig.dev.path %>/index.html',
+      html:             '<%= appConfig.dev.path %>/index.html',
       options: {
-        dest: '<%= appConfig.dist.path %>'
+        root:           '<%= appConfig.dev.path %>',
+        dest:           '<%= appConfig.dist.path %>'
       }
     },
     usemin: {
-      html: ['<%= appConfig.dist.path %>/index.html', '<%= appConfig.dist.path %>/views/**/*.html'],
-      css: ['<%= appConfig.dist.path %>/styles/**/*.css'],
+      html:             [ '<%= appConfig.dist.path %>/index.html', '<%= appConfig.dist.path %>/modules/**/views/**/*.html' ],
+      css:              [ '<%= appConfig.dist.path %>/styles/**/*.css' ],
       options: {
-        dirs: ['<%= appConfig.dist.path %>']
+        dirs:           [ '<%= appConfig.dist.path %>' ]
       }
     },
     imagemin: {
       dist: {
         files: [{
-          expand: true,
-          cwd: '<%= appConfig.dev.path %>/images',
-          src: '**/*.{png,jpg,jpeg}',
-          dest: '<%= appConfig.dist.path %>/images'
+          expand:       true,
+          cwd:          '<%= appConfig.dev.path %>/images',
+          src:          '**/*.{png,jpg,jpeg}',
+          dest:         '<%= appConfig.dist.path %>/images'
+        },
+        {
+          expand:       true,
+          cwd:          '<%= appConfig.dev.path %>/components',
+          src:          '**/*.{png,jpg,jpeg}',
+          dest:         '<%= appConfig.dist.path %>/components'
         }]
       }
     },
     less: {
-      development: {
+      css: {
         options: {
-          paths: ['<%= appConfig.dist.path %>/styles']
+          paths:        [ '<%= appConfig.dist.path %>/styles' ]
         },
-        files: [{
-          dest: '<%= appConfig.dev.path %>/styles/application.css',
-          src: [
-            '<%= appConfig.dev.path %>/styles/less/application.less',
-            '<%= appConfig.dev.path %>/modules/**/styles/less/*.less'
-          ]
-        }]
-      },
-      production: {
-        options: {
-          paths: ['<%= appConfig.dist.path %>/styles'],
-          cleancss: true
-        },
-        files: [{
-          dest: '<%= appConfig.dev.path %>/styles/application.css',
-          src: [
-            '<%= appConfig.dev.path %>/styles/less/application.less',
-            '<%= appConfig.dev.path %>/modules/**/styles/less/*.less'
-          ]
-        }]
-      },
+        files: [
+          {
+            dest:       '<%= appConfig.dev.path %>/styles/application.css',
+            src:        [
+
+              '<%= appConfig.dev.path %>/styles/less/application.less',
+              '<%= appConfig.dev.path %>/modules/**/styles/**/*.less',
+              '<%= appConfig.dev.path %>/modules/**/styles/**/*.css'
+            ]
+          }
+        ]
+      }
     },
     cssmin: {
+      options: {
+        root:           './app',
+        relativeTo:     '/'
+      },
       dist: {
         files: {
           '<%= appConfig.dist.path %>/styles/screen.css': [
-            '.tmp/styles/{,*/}*.css',
-            '<%= appConfig.dev.path %>/styles/{,*/}*.css'
+            '<%= appConfig.dev.path %>/styles/preloader.css',
+            '<%= appConfig.dev.path %>/styles/bootstrap.css',
+            '<%= appConfig.dev.path %>/components/fontawesome/css/font-awesome.min.css',
+            '<%= appConfig.dev.path %>/components/angular-ui/build/angular-ui.min.css',
+            '<%= appConfig.dev.path %>/components/ng-table/ng-table.min.css',
+            '<%= appConfig.dev.path %>/components/jquery-minicolors/jquery.minicolors.css',
+            '<%= appConfig.dev.path %>/components/select2/select2.css',
+            '<%= appConfig.dev.path %>/components/select2/select2-bootstrap.css',
+            '<%= appConfig.dev.path %>/styles/application.css'
           ]
         }
-      }
+      },
     },
     htmlmin: {
       dist: {
         options: {
-          /*removeCommentsFromCDATA: true,
-          // https://github.com/appConfig/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
+          collapseBooleanAttributes:      true,
+          collapseWhitespace:             true,
+          removeAttributeQuotes:          true,
+          removeComments:                 true,
+          removeEmptyAttributes:          true,
+          removeRedundantAttributes:      true,
+          removeScriptTypeAttributes:     true,
+          removeStyleLinkTypeAttributes:  true
         },
         files: [{
-          expand: true,
-          cwd: '<%= appConfig.dev.path %>',
-          src: ['*.html', 'views/**/*.html', 'views/**/partials/*.html'],
-          dest: '<%= appConfig.dist.path %>'
+          expand:       true,
+          cwd:          '<%= appConfig.dist.path %>',
+          src:          [ 'index.html', 'modules/**/views/**/*.html' ],
+          dest:         '<%= appConfig.dist.path %>'
         }]
       }
     },
-    ngmin: {
+    ngAnnotate: {
+      options: {
+        singleQuotes:   true,
+        regexp:         '^(ng\n?[\\ ]+(.*)|(module.*))$'
+      },
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= appConfig.dist.path %>/scripts',
-          src: '*.js',
-          dest: '<%= appConfig.dist.path %>/scripts'
-        }]
-      }
-    },
-    uglify: {
-      dist: {
-        files: {
-          '<%= appConfig.dist.path %>/scripts/scripts.js': [
-            '<%= appConfig.dist.path %>/scripts/scripts.js'
-          ]
-        }
+        files:          [ { add: true, src: 'dist/modules/**/*.js' } ]
       }
     },
     requirejs: {
       compile: {
         options: {
-          name: 'main',
-          baseUrl: '<%= appConfig.dist.path %>/modules',
-          out: '<%= appConfig.dist.path %>/scripts/scripts.js',
-          findNestedDependencies: true,
-          uglify: {
-            beautify: false,
-            overwrite: true,
-            verbose: true,
-            no_mangle: true,
-            copyright: true
+          name:                     'main',
+          baseUrl:                  '<%= appConfig.dist.path %>/modules',
+          out:                      '<%= appConfig.dist.path %>/scripts/scripts.js',
+          findNestedDependencies:   true,
+          preserveLicenseComments:  false,
+          generateSourceMaps:       false,
+          optimize:                 'uglify2',
+          uglify2: {
+            mangle:                 true,
+            compress: {
+              'drop_console':       true,
+              'drop_debugger':      true,
+              'dead_code':          true,
+              'join_vars':          true,
+              'if_return':          true,
+              'negate_iife':        true,
+              booleans:             true,
+              loops:                true,
+              unused:               true
+            }
           }
         }
       }
@@ -385,7 +321,7 @@ module.exports = function (grunt) {
     rev: {
       dist: {
         files: {
-          src: [
+          src:          [
             '<%= appConfig.dist.path %>/scripts/{,*/}*.js',
             '<%= appConfig.dist.path %>/styles/{,*/}*.css',
             '<%= appConfig.dist.path %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
@@ -397,11 +333,11 @@ module.exports = function (grunt) {
     copy: {
       dist: {
         files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= appConfig.dev.path %>',
-          dest: '<%= appConfig.dist.path %>',
-          src: [
+          expand:       true,
+          dot:          true,
+          cwd:          '<%= appConfig.dev.path %>',
+          dest:         '<%= appConfig.dist.path %>',
+          src:          [
             '*.{ico,txt}',
             '.htaccess',
             'components/**/*.{js,css,eot,svg,ttf,woff,png,jpg,jpeg,gif,webp}',
@@ -411,17 +347,18 @@ module.exports = function (grunt) {
             'scripts/**/*',
             'fonts/**/*',
             'home/**/*',
-            'modules/**/*'
+            'modules/**/*',
+            'index.html'
           ]
         }]
       },
       coverageE2E: {
-          files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%= appConfig.dev.path %>',
-          dest: '<%= appConfig.test.e2e.instrumented.path %>app',
-          src: [
+        files: [{
+          expand:       true,
+          dot:          true,
+          cwd:          '<%= appConfig.dev.path %>',
+          dest:         '<%= appConfig.test.e2e.instrumented.path %>app',
+          src:          [
             '*.{ico,txt}',
             '.htaccess',
             'components/**/*.{js,css,eot,svg,ttf,woff,png,jpg,jpeg,gif,webp}',
@@ -441,146 +378,132 @@ module.exports = function (grunt) {
         }]
       },
       bootstrap: {
-        files: [
+        files:          [
           {
-              expand: true,
-              filter: 'isFile',
-              cwd: '<%= appConfig.dev.path %>/components/bootstrap/dist/js',
-              dest: '<%= appConfig.dev.path %>/scripts',
-              src: [
-                'bootstrap.js'
-              ]
+            expand:     true,
+            filter:     'isFile',
+            cwd:        '<%= appConfig.dev.path %>/components/bootstrap/dist/js',
+            dest:       '<%= appConfig.dev.path %>/scripts',
+            src:        [ 'bootstrap.js' ]
           },
           {
-              expand: true,
-              filter: 'isFile',
-              cwd: '<%= appConfig.dev.path %>/components/bootstrap/dist',
-              dest: '<%= appConfig.dev.path %>',
-              src: [
-                'fonts/*'
-              ]
+            expand:     true,
+            filter:     'isFile',
+            cwd:        '<%= appConfig.dev.path %>/components/bootstrap/dist',
+            dest:       '<%= appConfig.dev.path %>',
+            src:        [ 'fonts/*' ]
           },
           {
-              expand: true,
-              filter: 'isFile',
-              cwd: '<%= appConfig.dev.path %>/components/bootstrap/dist/css',
-              dest: '<%= appConfig.dev.path %>/styles',
-              src: [
-                'bootstrap.css'
-              ]
+            expand:     true,
+            filter:     'isFile',
+            cwd:        '<%= appConfig.dev.path %>/components/bootstrap/dist/css',
+            dest:       '<%= appConfig.dev.path %>/styles',
+            src:        [ 'bootstrap.css' ]
           },
           {
-              expand: true,
-              filter: 'isFile',
-              cwd: '<%= appConfig.dev.path %>/components/bootstrap/less',
-              dest: '<%= appConfig.dev.path %>/styles/less/bootstrap',
-              src: [
-                'variables.less',
-                'mixins.less',
-                'theme.less'
-              ]
+            expand:     true,
+            filter:     'isFile',
+            cwd:        '<%= appConfig.dev.path %>/components/bootstrap/less',
+            dest:       '<%= appConfig.dev.path %>/styles/less/bootstrap',
+            src:        [
+              '*.less'
+            ]
           }
         ]
       }
     },
-    // Concurrent config
     concurrent: {
       watch: {
-        tasks: [
+        tasks:          [
           'watch:livereload',
           'watch:less'
         ],
-        options: {
-            logConcurrentOutput: true
+        options:        {
+          logConcurrentOutput: true
         }
       }
     },
     open: {
       server: {
-        url: 'http://localhost:<%= connect.options.port %>'
+        url:            'http://localhost:<%= connect.options.port %>'
       },
       test: {
-        url: 'http://localhost:<%= connect.test.options.port %>'
+        url:            'http://localhost:<%= connect.test.options.port %>'
       },
       dist: {
-        url: 'http://localhost:<%= connect.dist.options.port %>'
+        url:            'http://localhost:<%= connect.dist.options.port %>'
       },
       coverage: {
-        url: 'http://localhost:<%= appConfig.test.unit.coverage.port %>'
+        url:            'http://localhost:<%= appConfig.test.unit.coverage.port %>'
       },
       coverageE2E: {
-        url: 'http://localhost:<%= appConfig.test.e2e.report.port %>'
+        url:            'http://localhost:<%= appConfig.test.e2e.report.port %>'
       }
     },
-    // unit testing config
     karma: {
       unit: {
-        configFile: '<%= appConfig.test.unit.conf %>',
-        autoWatch: false,
-        singleRun: true
+        configFile:     '<%= appConfig.test.unit.conf %>',
+        autoWatch:      false,
+        singleRun:      true
       },
       unitAuto: {
-        configFile: '<%= appConfig.test.unit.conf %>',
-        autoWatch: true,
-        singleRun: false
+        configFile:     '<%= appConfig.test.unit.conf %>',
+        autoWatch:      true,
+        singleRun:      false
       },
       unitCoverage: {
-        configFile: '<%= appConfig.test.unit.conf %>',
-        autoWatch: false,
-        singleRun: true,
-        reporters: ['progress', 'coverage'],
+        configFile:     '<%= appConfig.test.unit.conf %>',
+        autoWatch:      false,
+        singleRun:      true,
+        reporters:      [ 'progress', 'coverage' ],
         preprocessors: {
-          './app/modules/**/*.js': ['coverage']
+          './app/modules/**/*.js': [ 'coverage' ]
         },
         coverageReporter: {
-          type : 'html',
-          dir : '<%= appConfig.test.unit.coverage.path %>'
+          type:         'html',
+          dir:          '<%= appConfig.test.unit.coverage.path %>'
         }
       },
       travis: {
-        configFile: '<%= appConfig.test.unit.conf %>',
-        autoWatch: false,
-        singleRun: true,
-        browsers: ['PhantomJS']
+        configFile:     '<%= appConfig.test.unit.conf %>',
+        autoWatch:      false,
+        singleRun:      true,
+        browsers:       [ 'PhantomJS' ]
       }
     },
-
-    // e2e protractor testing config
     protractor: {
       options: {
-        configFile: '<%= appConfig.test.e2e.conf %>',
+        configFile:     '<%= appConfig.test.e2e.conf %>',
         args: {
           seleniumPort: '<%= appConfig.test.e2e.seleniumPort %>'
         }
       },
       singlerun: {
-        keepAlive: false
+        keepAlive:      false
       },
       auto: {
-        keepAlive: true
+        keepAlive:      true
       }
     },
-
-    // e2e protractor coverage
-    protractor_coverage: {
+    'protractor_coverage': {
       local: {
         options: {
-          configFile: '<%= appConfig.test.e2e.conf %>',
-          keepAlive: true,
-          noColor: false,
-          coverageDir: '<%= appConfig.test.e2e.instrumented.path %>',
+          configFile:   '<%= appConfig.test.e2e.conf %>',
+          keepAlive:    true,
+          noColor:      false,
+          coverageDir:  '<%= appConfig.test.e2e.instrumented.path %>',
           args: {
-            baseUrl: 'http://localhost:<%= appConfig.test.e2e.coverage.port %>'
+            baseUrl:    'http://localhost:<%= appConfig.test.e2e.coverage.port %>'
           }
         }
       }
     },
     instrument: {
       options: {
-        lazy: true,
-        basePath: '<%= appConfig.test.e2e.instrumented.path %>'
+        lazy:           true,
+        basePath:       '<%= appConfig.test.e2e.instrumented.path %>'
       },
-      files: [
+      files:            [
         'app/modules/**/scripts/*.js',
         'app/modules/**/controllers/*.js',
         'app/modules/**/directives/*.js',
@@ -589,46 +512,11 @@ module.exports = function (grunt) {
       ]
     },
     makeReport: {
-      src: '<%= appConfig.test.e2e.instrumented.path %>*.json',
+      src:              '<%= appConfig.test.e2e.instrumented.path %>*.json',
       options: {
-        type: 'html',
-        dir: '<%= appConfig.test.e2e.coverage.path %>reports',
-        print: 'detail'
-      }
-    },
-    run: {
-      wbDriverUpdate: {
-        args: [ './node_modules/protractor/bin/webdriver-manager', 'update', '--out_dir=./scripts/' ],
-        options: {
-          passArgs: [
-            'ie',
-            'chrome',
-            'standalone',
-            'seleniumPort'
-          ]
-        }
-      },
-      wbDriverStatus: {
-        args: [ './node_modules/protractor/bin/webdriver-manager', 'status' ],
-        options: {
-          passArgs: [
-            'ie',
-            'chrome',
-            'standalone',
-            'seleniumPort'
-          ]
-        }
-      },
-      wbDriverStart: {
-        args: [ './node_modules/protractor/bin/webdriver-manager', 'start', '--out_dir=./scripts/' ],
-        options: {
-          passArgs: [
-            'ie',
-            'chrome',
-            'standalone',
-            'seleniumPort'
-          ]
-        }
+        type:           'html',
+        dir:            '<%= appConfig.test.e2e.coverage.path %>reports',
+        print:          'detail'
       }
     }
   });
@@ -637,12 +525,11 @@ module.exports = function (grunt) {
   grunt.registerTask('bootstrap', ['copy:bootstrap']);
 
   //for less compilation force
-  grunt.option("force", true);
+  grunt.option( 'force', true );
 
   grunt.registerTask('server', [
     'clean:server',
     'connect:livereload',
-    'connect:test',
     'connect:dist',
     'concurrent:watch'
   ]);
@@ -650,32 +537,16 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'useminPrepare',
+    'jshint',
     'imagemin',
     'less',
     'cssmin',
-    'htmlmin',
     'copy:dist',
-    'ngmin',
+    'ngAnnotate:dist',
     'requirejs',
     'rev',
-    'usemin'
-  ]);
-
-  grunt.registerTask( 'webdriver', [
-    'run:wbDriverStatus',
-    'run:wbDriverUpdate'
-  ]);
-
-  grunt.registerTask( 'webdriver:update', [
-    'run:wbDriverUpdate'
-  ]);
-
-  grunt.registerTask( 'webdriver:status', [
-    'run:wbDriverStatus'
-  ]);
-
-  grunt.registerTask( 'webdriver:start', [
-    'run:wbDriverStart'
+    'usemin',
+    'htmlmin'
   ]);
 
   /* -- TEST TASKS ------------------------------------------------ */
@@ -731,7 +602,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test:e2e', 'Single run of end to end (e2e) tests using protractor.', [
-    'connect:dist',
+    'connect:livereload',
     'protractor:singlerun'
   ]);
 
