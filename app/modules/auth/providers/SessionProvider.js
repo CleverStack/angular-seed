@@ -1,4 +1,4 @@
-define( [ 'angular', '../module' ], function( ng ) {
+define( [ 'angular', 'underscore', '../module' ], function( ng, _ ) {
   'use strict';
 
   /**
@@ -321,22 +321,47 @@ define( [ 'angular', '../module' ], function( ng ) {
               next = next.substr(0, next.length - 1);
             }
 
+            var route
+              , permissions
+              , roles;
+
+            ng.forEach($route.routes, function(when, pathTemplate){
+              if(switchRouteMatcher(next, pathTemplate, when)){
+                route = route || when;
+              }
+            });
+
             if ( currentUser === null || !currentUser.id ){
-              var route;
-              ng.forEach($route.routes, function(when, pathTemplate){
-                if(switchRouteMatcher(next, pathTemplate, when)){
-                  route = route || when;
-                }
-              });
 
               $log.log( 'SessionProvider: Guest access to', next );
               $log.log( 'SessionProvider:', next, 'is', route.public ? 'public' : 'private' );
 
-              if ( route && !route.public ) {
+              if ( route && ( !route.public || route.permissions || route.roles ) ) {
                 $rootScope.$broadcast( 'SessionProvider:signInStart' );
                 handlers.signInStart( next.substr( 1 ) );
               }
             } else {
+              if ( route && route.permissions ) {
+                permissions = route.permissions instanceof Array ? route.permissions : [ route.permissions ];
+                console.dir(currentUser);
+                console.dir( permissions );
+              }
+
+              if ( route && route.roles ) {
+                var hasRole = false;
+
+                roles = route.roles instanceof Array ? route.roles : [ route.roles ];
+                roles.forEach( function( role ) {
+                  if ( currentUser.role.name === role ) {
+                    hasRole = true;
+                  }
+                });
+                
+                if ( !hasRole ) {
+                  // @TODO invalid role error page
+                  $location.path( '/error' );
+                }
+              }
               $log.log( 'SessionProvider: proceeding to load', next );
             }
           };

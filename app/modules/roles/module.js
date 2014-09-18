@@ -53,7 +53,8 @@ define( [ 'angular', 'underscore' ], function( ng, _ ) {
       .when( '/settings/roles', {
         templateUrl: TemplateProvider.view( 'roles', 'role/list' ),
         controller: 'RoleListController',
-        public: false
+        public: false,
+        roles: [ 'Admin' ]
       })
       .when( '/settings/role/:id', {
         templateUrl: TemplateProvider.view( 'roles', 'role/form' ),
