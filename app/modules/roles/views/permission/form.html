@@ -1,5 +1,5 @@
 <div class="modal-header au-description">
-  <button type="button" class="close" ng-click="$close()">&times;</button>
+  <button type="button" class="close" ng-click="cancel()">&times;</button>
   <span ng-if="!permission.id">Add Permission</span>
   <span ng-if="permission.id">Edit "<span ng-bind="permission.action"></span>" Permission</span>
 </div>
@@ -61,7 +61,7 @@
                 multiple
                 class="form-control"
                 ui-select2="roleSelectOptions"
-                ng-model="permission.roles"
+                ng-model="permission.Roles"
                 data-placeholder="Select Roles">
 
                 <option ng-repeat="role in roles | orderBy:'name'" value="{{role.id}}">{{role.name}}</option>
@@ -72,11 +72,11 @@
       </div>
 
       <div class="row">
-        <div class="col-md-12">
-          <button type="submit" class="btn btn-block btn-primary btn-block" ng-disabled="processing" ng-bind="permission.id ? 'Save Changes' : 'Add Permission'"></button>
+        <div class="col-xs-6">
+          <button type="button" class="btn btn-block btn-default btn-block" ng-click="cancel()">Cancel</button>
         </div>
-        <div class="col-md-12">
-          <button type="button" class="btn btn-block btn-default btn-block" ng-click="$close()">Cancel</button>
+        <div class="col-xs-6">
+          <button type="submit" class="btn btn-block btn-primary btn-block" ng-disabled="processing" ng-bind="permission.id ? 'Save' : 'Add'"></button>
         </div>
       </div>
 

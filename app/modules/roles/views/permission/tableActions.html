@@ -1,7 +1,7 @@
 <div class="actions">
   <button
     ng-disabled="!helpers.hasPermission( 'Permission.edit' )"
-    ng-click="helpers.openPermissionModal( row.id ); $event.stopPropagation();"
+    ng-click="helpers.openPermissionModal( row ); $event.stopPropagation();"
     class="btn btn-sm btn-primary axn-btn"
     tooltip="Edit">
     <b id="edit-permission">

@@ -1,7 +1,4 @@
-<div class="container-fluid">
-  <div class="pull-left col-xs-7 col-sm-8 col-md-9 col-lg-8">
-    <h3>Permissions <br/><small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small></h3>
-  </div>
+<div>
   <div class="pull-right add-button">
     <button
       ng-click="helpers.openPermissionModal(false); $event.stopPropagation();"
@@ -13,8 +10,7 @@
       </b>
     </button>
   </div>
-
-  <div class="clearfix"></div>
+  <h3>Permissions <br/><small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small></h3>
 
   <div clever-table="columns" service="PermissionService"></div>
 </div>

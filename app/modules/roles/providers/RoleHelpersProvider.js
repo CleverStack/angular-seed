@@ -35,13 +35,13 @@ define( [ 'angular', '../module' ], function( ng ) {
                   return role;
                 } else if ( role !== false && role !== undefined ) {
                   return RoleService
-                    .get( { id: role, _include: 'Permission,User' } )
+                    .get( { id: role, _include: 'User' } )
                     .then( function( role ) {
 
-                      role.users        = role.users.map( function( user ) {
+                      role.Users        = role.Users.map( function( user ) {
                         return user.id;
                       });
-                      role.permissions  = role.permissions.map( function( role ) {
+                      role.Permissions  = role.Permissions.map( function( role ) {
                         return role.id;
                       });
 
@@ -131,7 +131,7 @@ define( [ 'angular', '../module' ], function( ng ) {
                     .get( { id: permission, _include: 'Role' } )
                     .then( function( permission ) {
 
-                      permission.roles  = permission.roles.map( function( role ) {
+                      permission.Roles  = permission.Roles.map( function( role ) {
                         return role.id;
                       });
 
@@ -206,8 +206,8 @@ define( [ 'angular', '../module' ], function( ng ) {
               return;
             }
 
-            if (user && user.role && user.role.permissions) {
-              user.role.permissions.every(function(perm) {
+            if (user && user.role && user.Role.Permissions) {
+              user.Role.Permissions.every(function(perm) {
                 if (perm.action === permission) {
                   hasPerm = true;
                   return false;
@@ -234,11 +234,11 @@ define( [ 'angular', '../module' ], function( ng ) {
 
         helpers.hasPermission = function( requiredPermission, user ) {
           var currentUser = user || Session.getCurrentUser()
-            , role        = currentUser && currentUser.role
+            , role        = currentUser && currentUser.Role
             , hasPerm     = false;
 
-          if (  role && role.permissions ) {
-            role.permissions.every( function( permission ) {
+          if (  role && role.Permissions ) {
+            role.Permissions.every( function( permission ) {
               if (permission.action === requiredPermission) {
                 hasPerm = true;
                 return false;
@@ -249,6 +249,11 @@ define( [ 'angular', '../module' ], function( ng ) {
           }
 
           return hasPerm;
+        };
+
+        helpers.hasRole = function( requiredRole, user ) {
+          var currentUser = user || Session.getCurrentUser();
+          return currentUser && currentUser.Role && currentUser.Role.name === requiredRole ? true : false;
         };
 
         return helpers;

@@ -1,5 +1,5 @@
 <div class="modal-header au-description">
-  <button type="button" class="close" ng-click="$close()">&times;</button>
+  <button type="button" class="close" ng-click="cancel()">&times;</button>
   <span ng-if="!role.id">Add Role</span>
   <span ng-if="role.id">Edit "<span ng-bind="role.name"></span>" Role</span>
 </div>
@@ -22,7 +22,7 @@
     <form warn-unsaved-changes="role" role="form" name="form" class="form-horizontal container" ng-submit="submitted = true; save();" novalidate>
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <!-- <pre>{{role | json}}</pre> -->
           <div class="form-group mar-rt5" ng-class="{ 'has-error': helpers.hasError( this, 'name' ) }">
             <label class="col-lg-2 control-label">Name:</label>
@@ -39,7 +39,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="form-group mar-rt5" ng-class="{ 'has-error': helpers.hasError( this, 'description' ) }">
             <label class="col-lg-2 control-label">Description:</label>
             <div class="col-lg-10">
@@ -50,7 +50,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <!-- <pre>{{permissions | json}}</pre> -->
           <div class="form-group mar-rt5">
             <label class="col-lg-2 control-label">Permissions:</label>
@@ -59,7 +59,7 @@
                 ng-disabled="!helpers.hasPermission( 'Permission.assignRole' )"
                 multiple class="form-control"
                 ui-select2="permissionsSelectOptions"
-                ng-model="role.permissions"
+                ng-model="role.Permissions"
                 data-placeholder="Select Permissions">
 
                 <option ng-repeat="permission in permissions | orderBy:'action'" value="{{permission.id}}">{{permission.action}}</option>
@@ -70,7 +70,7 @@
       </div>
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <!-- <pre>{{permissions | json}}</pre> -->
           <div class="form-group mar-rt5">
             <label class="col-lg-2 control-label">Users:</label>
@@ -80,7 +80,7 @@
                 multiple
                 class="form-control"
                 ui-select2="usersSelectOptions"
-                ng-model="role.users"
+                ng-model="role.Users"
                 data-placeholder="Select Users">
 
                 <option ng-repeat="user in users | orderBy:'fullName'" value="{{user.id}}">{{user.fullName}}</option>
@@ -91,11 +91,11 @@
       </div>
 
       <div class="row">
-        <div class="col-md-6">
-          <button type="submit" class="btn btn-block btn-primary" ng-disabled="processing" ng-bind="role.id ? 'Save Changes' : 'Add Role'"></button>
+        <div class="col-xs-6">
+          <button type="button" class="btn btn-block btn-default" ng-click="cancel()">Cancel</button>
         </div>
-        <div class="col-md-6">
-          <button type="button" class="btn btn-block btn-default" ng-click="$close()">Cancel</button>
+        <div class="col-xs-6">
+          <button type="submit" class="btn btn-block btn-primary" ng-disabled="processing" ng-bind="role.id ? 'Save' : 'Add'"></button>
         </div>
       </div>
 
