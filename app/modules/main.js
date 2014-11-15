@@ -3,7 +3,6 @@ require.config({
   packages: [
     'app',
     'cs_common',
-    'cs_messenger',
     'cs_modal',
     'auth',
     'roles'
@@ -109,7 +108,6 @@ require([
 
   // CleverStack modules
   'cs_common',
-  'cs_messenger',
   'cs_modal',
   'auth',
   'roles',

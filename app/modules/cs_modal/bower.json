@@ -1,0 +1,25 @@
+{
+  "name": "clever-modal",
+  "version": "0.0.1",
+  "authors": [
+    "Daniel Durante <me@danieldurante.com>"
+  ],
+  "description": "This module will provides a factory for making modals.",
+  "main": "main.js",
+  "keywords": [
+    "cleverstack",
+    "clevertech",
+    "cleverstack-module",
+    "cleverstack-frontend"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/CleverStack/clever-modal",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "rename": "cs_modal"
+}

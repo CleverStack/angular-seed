@@ -3,7 +3,9 @@ define( [ 'angular', '../module' ], function( ng ) {
 
   ng
   .module( 'roles.controllers' )
-  .controller( 'RoleEditController', function( $scope, Helpers, Messenger, RoleService, $modalInstance, role, users, permissions ) {
+  .controller( 'RoleEditController', function( $injector, $log, $scope, Helpers, RoleService, $modalInstance, role, users, permissions ) {
+    var Messenger = $injector.has( 'Messenger' ) ? $injector.get( 'Messenger' ) : $log;
+    
     $scope.helpers      = Helpers;
 
     $scope.role         = role;

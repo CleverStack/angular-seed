@@ -10,7 +10,6 @@ define( [ 'angular', 'underscore' ], function( ng, _ ) {
 
   var module = ng.module( 'roles', [
     'cs_common',
-    'cs_messenger',
     'cs_modal',
     'auth',
     'ui.bootstrap',
