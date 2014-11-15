@@ -1,38 +1,45 @@
-<div class="row">
+<div>
 
-  <div class="pull-right clear-filters">
-    <button
-      class="btn btn-sm"
-      ng-click="resetFilters()">Clear
-      <i class="fa fa-fw fa-filter" tooltip="Clear Filters" title="Clear Filters"></i>
-    </button>
-
-    <button
-      class="btn btn-sm"
-      ng-click="tableParams.sorting({id: 'asc'})">Clear
-      <i class="fa fa-fw fa-sort" tooltip="Clear Sorting" title="Clear Sorting"></i>
-    </button>
-  </div>
   <div class="table-responsive">
     <table
       ng-table="tableParams"
+      template-pagination="{{tpl.view('cs_common', 'tablePagination')}}"
       show-filter="true"
-      class="table-hover table-striped table-bordered table-condensed ng-table-resizable-columns">
+      class="table-hover table-bordered table-condensed ng-table-resizable-columns">
       <thead>
         <tr class="ng-table-filters">
           <th
             ng-repeat="column in columns"
             class="sortable"
             data-resizable-column-id="column.name"
-            ng-class="filterClass(column.name)"
+            ng-class="[ filterClass(column.name), 'col-head-' + column.name.replace('.', '-'), column.customClass ]"
             ng-click="setSorting(column.name)">
 
             <div>
               <i ng-if="column.glyph" class="{{column.glyph}}"></i> {{column.title}}
             </div>
           </th>
+          <th ng-if="hasFilters && ( !!showClearFilters || !!showClearSorting )">
+            <div
+              class="clear-filters clear-sorting">
+              <button
+                class="btn btn-xs"
+                ng-click="resetFilters()"
+                ng-if="hasFilters && !!showClearFilters">
+                Clear
+                <i class="fa fa-fw fa-filter" title="Clear Filters"></i>
+              </button>
+
+              <button
+                ng-if="!!showClearSorting"
+                class="btn btn-xs"
+                ng-click="tableParams.sorting({id: 'asc'})">Clear
+                <i class="fa fa-fw fa-sort" title="Clear Sorting"></i>
+              </button>
+            </div>
+          </th>
         </tr>
-        <tr class="ng-table-filters">
+        <tr class="ng-table-filters" ng-if="hasFilters">
           <th ng-repeat="column in columns">
             <input
               ng-if="column.filter && column.filterType === 'text'"
@@ -59,26 +66,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="row in $data">
-          <td
-            ng-repeat="column in columns"
-            data-title="column"
-            sortable="column"
-            filters="column"
-            class="text-center"
-            style="vertical-align:middle;">
-
-            <div ng-if="!column.display && !column.click">{{ outputRow( row, column.name ) }}</div>
-            <div ng-if="!column.display && !!column.click"><a href="#" ng-click="column.click( this, $event, row )">{{ outputRow( row, column.name ) }}</a></div>
-            <div ng-if="!!column.display" ng-bind-html="column.display( outputRow( row, column.name ), row )"></div>
-          </td>
-          <td
-            ng-if="actionsTemplate"
-            ng-include="actionsTemplate"
-            class="text-center"
-            data-title="'Available Actions'">
-          </td>
-        </tr>
+        <tr ng-repeat="row in $data" ng-include="rowTemplate"></tr>
       </tbody>
     </table>
   </div>

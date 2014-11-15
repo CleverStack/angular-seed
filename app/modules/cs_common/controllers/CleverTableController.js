@@ -3,7 +3,7 @@ define( [ 'angular', 'underscore', 'selectn', '../module' ], function( ng, _, se
 
   ng
   .module( 'cs_common.controllers' )
-  .controller( 'CleverTableController', function( $scope, $element, $attrs, $rootScope, $injector, $log, $filter, ngTableParams ) {
+  .controller( 'CleverTableController', function( $scope, $element, $attrs, $rootScope, $injector, $log, $filter, ngTableParams, Template ) {
     var NgTableParams = ngTableParams;
 
     $scope.service      = $injector.has( $attrs.service ) ? $injector.get( $attrs.service ) : false;
@@ -15,17 +15,25 @@ define( [ 'angular', 'underscore', 'selectn', '../module' ], function( ng, _, se
     $scope.filters      = {};
     $scope.messenger    = $injector.has( 'Messenger' ) ? $injector.get( 'Messenger' ) : $log;
     $scope.columnTitles = '';
+    $scope.hasFilters   = false;
+    $scope.rowTemplate      = $scope.rowTemplate !== undefined ? $scope.rowTemplate : Template.view( 'cs_common', 'tableRow' );
+    $scope.showClearFilters = $scope.showClearFilters !== undefined ? $scope.showClearFilters : true;
+    $scope.showClearSorting = $scope.showClearSorting !== undefined ? $scope.showClearSorting : true;
 
     $scope.columns.forEach( function( column ) {
       $scope.columnTitles += column.title ? column.title : column.name;
       $scope.columnTitles += ',';
       $scope.filters[ column.name ] = '';
+      if ( !!column.filter ) {
+        $scope.hasFilters = true;
+      }
     });
     $scope.columnTitles.substr( 0, $scope.columnTitles.length - 1 );
 
-    $scope.sorting      = { id: 'asc' };
-    $scope.page         = 1;
-    $scope.count        = 10;
+    $scope.defaultSorting = $scope.defaultSorting || { id: 'asc' };
+    $scope.sorting      = $scope.defaultSorting;
+    $scope.page         = $scope.page || 1;
+    $scope.count        = $scope.count || 10;
 
     $scope.filterClass = function( column ) {
       if ( $scope.tableParams.isSortBy( column, 'asc' ) ) {
@@ -60,6 +68,10 @@ define( [ 'angular', 'underscore', 'selectn', '../module' ], function( ng, _, se
     };
 
     $scope.$on( 'reload', function() {
+      $scope.tableParams.reload();
+    });
+
+    $rootScope.$on( 'table:reload', function() {
       $scope.tableParams.reload();
     });
 
