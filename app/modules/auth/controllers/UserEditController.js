@@ -3,9 +3,10 @@ define( [ 'angular', '../module' ], function( ng ) {
 
   ng
   .module( 'auth.controllers' )
-  .controller( 'UserEditController', function( $rootScope, $scope, $modalInstance, Helpers, Messenger, UserService, user, roles, currentUser ) {
-    $scope.helpers      = Helpers;
+  .controller( 'UserEditController', function( $rootScope, $scope, $modalInstance, $injector, Helpers, UserService, user, roles, currentUser ) {
+    var Messenger = $injector.has( 'Messenger' ) ? $injector.get( 'Messenger' ) : $injector.get( '$log' );
 
+    $scope.helpers      = Helpers;
     $scope.user         = user;
     $scope.roles        = roles;
     $scope.currentUser  = currentUser;
@@ -26,6 +27,7 @@ define( [ 'angular', '../module' ], function( ng ) {
 
       promise
         .then( function() {
+          $rootScope.$broadcast( 'table:reload' );
           Messenger.success( 'User ' + $scope.user.fullName + ' (' + $scope.user.email + ') successfully ' + ( !!$scope.user.id ? 'updated.' : 'created.' ) );
           $modalInstance.close( $scope );
         })
@@ -35,6 +37,9 @@ define( [ 'angular', '../module' ], function( ng ) {
     };
 
     $scope.cancel = function () {
+      if ( $scope.user && typeof $scope.user.$get === 'function' ) {
+        $scope.user.$get();
+      }
       $modalInstance.dismiss( 'cancel' );
     };
   });
