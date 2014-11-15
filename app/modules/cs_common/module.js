@@ -16,6 +16,7 @@ define( [ 'angular' ], function( ng ) {
     'ngTableResizableColumns',
     'ui.bootstrap',
     'ui',
+    'auth.directives',
     'http-auth-interceptor',
     'cs_common.providers',
     'cs_common.controllers',

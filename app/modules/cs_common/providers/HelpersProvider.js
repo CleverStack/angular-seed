@@ -51,7 +51,19 @@ define( [ 'angular', '../module' ], function( ng ) {
             };
 
             helpers.isActive = function( path ) {
-              return ( new RegExp( path, 'gi' ) ).test( $location.path() );
+              var paths     = path instanceof Array ? path : [ path ]
+                , isActive  = false;
+
+              paths.every( function( _path ) {
+                var regex = new RegExp( _path, 'ig' );
+                if ( regex.test( $location.path() ) ) {
+                  isActive = true;
+                  return false;
+                }
+                return true;
+              });
+
+              return isActive;
             };
 
             helpers.redirect = function( path, $event ) {
