@@ -1,7 +1,7 @@
 define([
-  'cs_common',
-
+  
   './module',
+
 
   // Helpers
   './providers/AuthHelpersProvider',
@@ -28,7 +28,13 @@ define([
   './controllers/UsersListController',
   './controllers/UserEditController',
   './controllers/PasswordResetRequestController',
-  './controllers/PasswordResetSubmitController'
+  './controllers/PasswordResetSubmitController',
+  './controllers/SignUpConfirmController',
+  './controllers/AccountChooserController',
+
+  // Directives
+  './directives/AccountChooserDirective'
+
 
 ], function() {
 
