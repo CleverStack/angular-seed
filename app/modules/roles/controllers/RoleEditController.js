@@ -3,11 +3,10 @@ define( [ 'angular', '../module' ], function( ng ) {
 
   ng
   .module( 'roles.controllers' )
-  .controller( 'RoleEditController', function( $injector, $log, $scope, Helpers, RoleService, $modalInstance, role, users, permissions ) {
-    var Messenger = $injector.has( 'Messenger' ) ? $injector.get( 'Messenger' ) : $log;
-    
-    $scope.helpers      = Helpers;
+  .controller( 'RoleEditController', function( $rootScope, $scope, $injector, $modalInstance, Helpers, RoleService, role, users, permissions ) {
+    var Messenger = $injector.has( 'Messenger' ) ? $injector.get( 'Messenger' ) : $injector.get( '$log' );
 
+    $scope.helpers      = Helpers;
     $scope.role         = role;
     $scope.users        = users;
     $scope.permissions  = permissions;
@@ -28,6 +27,7 @@ define( [ 'angular', '../module' ], function( ng ) {
 
       promise
         .then( function() {
+          $rootScope.$broadcast( 'table:reload' );
           Messenger.success( 'Role ' + $scope.role.name + ' successfully ' + ( !!$scope.role.id ? 'updated.' : 'created.' ) );
           $modalInstance.close( $scope );
         })
@@ -37,6 +37,9 @@ define( [ 'angular', '../module' ], function( ng ) {
     };
 
     $scope.cancel       = function () {
+      if ( $scope.role && typeof $scope.role.$get === 'function' ) {
+        $scope.role.$get();
+      }
       $modalInstance.dismiss( 'cancel' );
     };
   });

@@ -3,11 +3,10 @@ define( [ 'angular', '../module' ], function( ng ) {
 
   ng
   .module( 'roles.controllers' )
-  .controller( 'PermissionEditController', function( $injector, $log, $scope, Helpers, PermissionService, $modalInstance, permission, roles ) {
-    var Messenger = $injector.has( 'Messenger' ) ? $injector.get( 'Messenger' ) : $log;
+  .controller( 'PermissionEditController', function( $rootScope, $scope, $injector, $modalInstance, Helpers, PermissionService, permission, roles ) {
+    var Messenger = $injector.has( 'Messenger' ) ? $injector.get( 'Messenger' ) : $injector.get( '$log' );
 
     $scope.helpers      = Helpers;
-
     $scope.permission   = permission;
     $scope.roles        = roles;
 
@@ -27,6 +26,7 @@ define( [ 'angular', '../module' ], function( ng ) {
 
       promise
         .then( function() {
+          $rootScope.$broadcast( 'table:reload' );
           Messenger.success( 'Permission ' + $scope.permission.action + ' successfully ' + ( !!$scope.permission.id ? 'updated.' : 'created.' ) );
           $modalInstance.close( $scope );
         })
@@ -36,6 +36,9 @@ define( [ 'angular', '../module' ], function( ng ) {
     };
 
     $scope.cancel       = function () {
+      if ( $scope.permission && typeof $scope.permission.$get === 'function' ) {
+        $scope.permission.$get();
+      }
       $modalInstance.dismiss( 'cancel' );
     };
   });
