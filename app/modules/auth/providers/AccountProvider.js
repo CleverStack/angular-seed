@@ -1,4 +1,4 @@
-define( [ 'angular', '../module' ], function( ng ) {
+define( [ 'angular', 'underscore', '../module' ], function( ng, _ ) {
   'use strict';
 
   ng
@@ -11,7 +11,7 @@ define( [ 'angular', '../module' ], function( ng ) {
      * @description
      * The user service.
      */
-    var accountService = null;
+    var accountService      = null;
 
     /**
      * @name accountServiceName
@@ -20,7 +20,27 @@ define( [ 'angular', '../module' ], function( ng ) {
      * @description
      * The name of the service to $inject.
      */
-    var accountServiceName = 'AccountService';
+    var accountServiceName  = 'AccountService';
+
+    var selectedAccount     = null;
+
+    var sessionProvider     = null;
+
+    var helpers             = null;
+
+    function refreshAccounts() {
+      var currentUser;
+
+      if ( !!sessionProvider && ( currentUser = sessionProvider.getCurrentUser() ) !== null && helpers.hasPermission( 'Account.list', currentUser ) ) {
+        accountService.list().then( function() {
+          if ( selectedAccount === null ) {
+            selectedAccount  = accountService.data[ 0 ];
+          } else {
+            selectedAccount  = _.findWhere( accountService.data, { id: selectedAccount.id } );
+          }
+        });
+      }
+    }
 
     /**
      * @name handlers
@@ -29,7 +49,7 @@ define( [ 'angular', '../module' ], function( ng ) {
      * @description
      * The handlers object.
      */
-    var handlers = {
+    var handlers            = {
       registrationSuccess: null,
       registrationFailure: null
     };
@@ -40,9 +60,35 @@ define( [ 'angular', '../module' ], function( ng ) {
      */
     return {
 
-      $get: function( $injector, $rootScope, $log ) {
+      $get: function( $injector, $rootScope, $log, Session, Helpers ) {
+        if ( !sessionProvider ) {
+          sessionProvider = Session;
+        }
+
+        if ( !helpers ) {
+          helpers = Helpers;
+        }
+
         if( !accountService && accountServiceName ) {
           accountService = $injector.get( accountServiceName );
+
+          $rootScope.$on( 'accounts:refresh', function( event, account ) {
+            if ( account ) {
+              selectedAccount = account;
+            }
+            refreshAccounts();
+          });
+
+          // After the user has logged in refresh the list of available accounts
+          $rootScope.$on( 'SessionProvider:signInSuccess', function() {
+            refreshAccounts();
+          });
+
+          $rootScope.$watch( sessionProvider.getCurrentUser, function() {
+            refreshAccounts();
+          });
+
+          refreshAccounts();
         }
 
         if ( !handlers.registrationSuccess ) {
@@ -92,6 +138,20 @@ define( [ 'angular', '../module' ], function( ng ) {
                 },
                 handlers.registrationFailure
               );
+          },
+
+          refreshAccounts: refreshAccounts,
+
+          getAccounts: function() {
+            return accountService.data;
+          },
+
+          getSelectedAccount: function() {
+            return selectedAccount;
+          },
+
+          selectAccount: function( account ) {
+            selectedAccount = account;
           }
 
         };
