@@ -117,8 +117,7 @@ define( [ 'angular', '../module' ], function( ng ) {
           section     = '';
         }
 
-        partialPath  = partialsPath.replace( ':moduleName', moduleName ).replace( ':section/', section ) + partialName + extension;
-        // console && console.log && console.log( 'Template.partial( ' + partialPath + ' )' );
+        partialPath  = partialsPath.replace( ':moduleName', moduleName ).replace( ':section', section ) + partialName + extension;
 
         return partialPath;
       }
@@ -158,7 +157,7 @@ define( [ 'angular', '../module' ], function( ng ) {
           }
 
           viewsPath     = basePath + path;
-          partialsPath  = viewsPath + '/:section/partials/';
+          partialsPath  = viewsPath + ':section/partials/';
         },
 
         /**
