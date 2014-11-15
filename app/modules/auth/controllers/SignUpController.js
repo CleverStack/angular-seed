@@ -31,7 +31,7 @@ define( [ 'angular', 'underscore', '../module' ], function( ng, _ ) {
       $rootScope.$on( 'SessionProvider:signUpSuccess', function( event, user ) {
         $scope.success = true;
         Session.authenticate( user );
-        $location.path( '/pages' );
+        $location.path( '/' );
       });
 
       $rootScope.$on( 'SessionProvider:signUpFailure', function( event, data ) {
