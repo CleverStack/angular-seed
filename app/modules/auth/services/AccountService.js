@@ -3,12 +3,17 @@ define( [ 'angular', '../module' ], function( ng ) {
 
   ng
   .module( 'auth.services' )
-  .factory( 'AccountService', function( AccountModel ) {
-    return {
+  .factory( 'AccountService', function( AccountModel, UserModel ) {
+    var AccountService = {
       model: AccountModel,
 
-      list: function( findOptions ) {
-        return AccountModel.list( findOptions ).$promise;
+      data    : null,
+
+      list    : function( findOptions ) {
+        return AccountModel.list( findOptions ).$promise.then( function( accounts ) {
+          AccountService.data = accounts;
+          return AccountService.data;
+        });
       },
 
       get: function( findOptions ) {
@@ -17,7 +22,13 @@ define( [ 'angular', '../module' ], function( ng ) {
 
       create: function( data ) {
         return AccountModel.create( data ).$promise;
+      },
+
+      confirm: function( data ) {
+        return UserModel.confirm( data ).$promise;
       }
     };
+
+    return AccountService;
   });
 });
