@@ -22,6 +22,12 @@ define( [ 'angular', '../module' ], function( ng ) {
       link: function( $scope ) {
         //show if the item requires signIn and the user is logged in
         $scope.showItem = function( item ) {
+          if ( item.requiresPermission ) {
+            if ( !$scope.helpers.hasPermission( item.requiresPermission, $scope.currentUser ) ) {
+              return false;
+            }
+          }
+
           if ( item.display && typeof item.display === 'function' ) {
             return item.display( $scope );
           } else {
