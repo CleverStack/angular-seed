@@ -1,0 +1,19 @@
+@import "./../../../styles/less/bootstrap/variables.less";
+@import "./../../../styles/less/bootstrap/mixins.less";
+
+// ----------------------------------------------------------
+// Modal Custom Styling
+// ----------------------------------------------------------
+
+.modal              {
+  .modal-header     { background:#343844 url('../images/modal-header-bg.png') left top repeat-x; color:#FFF;
+    .close          { color:#FFF; }
+  }
+  .modal-body       { border-left: 7px solid #8cc63f;
+    .container      { width: 560px; }
+  }
+  .modal-helpertext { background:#EFEFF1; border-left:@trim-border; padding:20px 20px 20px 30px; font-size:12px; }
+}
+.modal-backdrop     { #gradient > .radial(#FFF, #343743);
+  &.in              { opacity:0.6; }
+}
