@@ -790,6 +790,12 @@ html > .no-js > div.js-warning {
   }
 }
 
+.content .clear-filters {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 .modal .modal-header {
   background: #343844 url('../images/modal-header-bg.png') left top repeat-x;
   color: #FFF;
