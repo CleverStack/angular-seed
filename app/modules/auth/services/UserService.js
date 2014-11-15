@@ -17,6 +17,10 @@ define( [ 'angular', '../module' ], function( ng ) {
 
       create: function( data ) {
         return UserModel.create( data ).$promise;
+      },
+
+      confirm: function( data ) {
+        return UserModel.confirm( data ).$promise;
       }
     };
   });
