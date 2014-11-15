@@ -3,7 +3,7 @@ define( [ 'angular', '../module' ], function( ng ) {
 
   ng
   .module( 'auth.controllers' )
-  .controller( 'SignUpConfirmController', function( $scope, Session, AuthHelpers, $routeParams, $location ) {
+  .controller( 'SignUpConfirmController', function( $scope, Session, AuthHelpers, $routeParams ) {
       
       $scope.$on( 'SessionProvider:signUpConfirmationSuccess', function( event, data ) {
         Session.authenticate( data.user );

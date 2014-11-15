@@ -1,4 +1,4 @@
-define( [ 'angular', 'underscore', '../module' ], function( ng, _ ) {
+define( [ 'angular', '../module' ], function( ng ) {
   'use strict';
 
   /**
