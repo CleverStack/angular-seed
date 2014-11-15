@@ -3,7 +3,7 @@ define( [ 'angular', '../module' ], function( ng ) {
 
   ng
   .module( 'auth.controllers' )
-  .controller( 'SignInController', function( $scope, $log, $location, $injector, Session, Helpers ) {
+  .controller( 'SignInController', function( $rootScope, $scope, $log, $location, $injector, Session, Helpers ) {
     var messenger = $injector.has( 'Messenger' ) ? $injector.get( 'Messenger' ) : $log;
 
     $scope.helpers = Helpers;
@@ -29,10 +29,10 @@ define( [ 'angular', '../module' ], function( ng ) {
         messenger.error( data.message ? data.message : data );
       });
 
-      $scope.$on( 'SessionProvider:signInSuccess', function( event ) {
-        $scope.processing = false;
+      $scope.$on( 'SessionProvider:signInSuccess', function() {
         messenger.success( 'User <strong>' + event.currentScope.credentials.username + '</strong> signed in.' );
-        $location.path( '/pages' );
+        $scope.processing = false;
+        $location.path( '/' );
       });
     };
 
