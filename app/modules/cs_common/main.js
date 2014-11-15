@@ -36,6 +36,7 @@ define([
 
   // Filters
   './filters/StartsWithFilter',
-  './filters/TimeAgoFilter'
+  './filters/TimeAgoFilter',
+  './filters/CapitalizeFilter'
 
 ], function() {});
