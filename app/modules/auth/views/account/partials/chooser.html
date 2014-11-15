@@ -1,0 +1,19 @@
+<div class="btn-group" style="margin-top: 0;" ng-if="!!currentUser && helpers.hasPermission( 'Account.list', currentUser );">
+  <button
+    type="button"
+    class="btn btn-sm btn-primary dropdown-toggle"
+    data-toggle="dropdown">
+
+    <b id="account-chooser">
+      <i class="fa fa-gavel"></i>
+      <span id="account-chooser-text"> {{ ( account.name ? account.name : account.email ) | capitalize }} <span class="caret"></span></span>
+    </b>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+
+    <li ng-repeat="acc in accounts">
+      <a href="#" ng-if="acc.id !== account.id" ng-click="selectAccount( acc ); $event.preventDefault(); $event.stopPropagation();">{{ ( acc.name ? acc.name : acc.email ) | capitalize }}</a>
+    </li>
+
+  </ul>
+</div>
