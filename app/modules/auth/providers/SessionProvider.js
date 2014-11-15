@@ -1,4 +1,4 @@
-define( [ 'angular', '../module' ], function( ng ) {
+define( [ 'angular', 'underscore', '../module' ], function( ng, _ ) {
   'use strict';
 
   /**
@@ -255,7 +255,7 @@ define( [ 'angular', '../module' ], function( ng ) {
 
               $location.path( $location.search().redirect );
               $location.search( {} );
-            } else {
+            } else if ( !/signUp/ig.test( window.location.pathname ) && !/account\/confirm/ig.test( window.location.pathname ) ) {
               $location.path( '/' );
             }
           };
@@ -269,7 +269,7 @@ define( [ 'angular', '../module' ], function( ng ) {
            * it exists.
            */
           handlers.signOutSuccess = handlers.signOutSuccess || function() {
-            messenger.success( 'User has successfully signed out.' );
+            messenger.success( 'You have signed out.' );
             $location.path( '/' );
           };
 
@@ -321,22 +321,73 @@ define( [ 'angular', '../module' ], function( ng ) {
               next = next.substr(0, next.length - 1);
             }
 
+            var route
+              , permissions
+              , roles;
+
+            ng.forEach($route.routes, function(when, pathTemplate){
+              if(switchRouteMatcher(next, pathTemplate, when)){
+                route = route || when;
+              }
+            });
+
             if ( currentUser === null || !currentUser.id ){
-              var route;
-              ng.forEach($route.routes, function(when, pathTemplate){
-                if(switchRouteMatcher(next, pathTemplate, when)){
-                  route = route || when;
-                }
-              });
 
               $log.log( 'SessionProvider: Guest access to', next );
               $log.log( 'SessionProvider:', next, 'is', route.public ? 'public' : 'private' );
 
-              if ( route && !route.public ) {
+              if ( route && ( !route.public || route.requiresPermission || route.requiresPermissions || route.permissions || route.roles ) ) {
                 $rootScope.$broadcast( 'SessionProvider:signInStart' );
                 handlers.signInStart( next.substr( 1 ) );
               }
             } else {
+              if ( route && ( route.requiresPermission || route.requiresPermissions ) ) {
+                var hasPermissions = null;
+
+                permissions = route.requiresPermission || route.requiresPermissions || route.permissions;
+                permissions = permissions instanceof Array ? permissions : [ permissions ];
+                permissions.forEach( function( permission ) {
+                  var hasPermission = false;
+
+                  if ( hasPermissions === false ) {
+                    return false;
+                  }
+
+                  if ( currentUser.Role.Permissions ) {
+                    currentUser.Role.Permissions.every( function( perm ) {
+                      if ( perm.action === permission ) {
+                        hasPermission = true;
+                        return false;
+                      }
+                      return true;
+                    });
+                  }
+
+                  hasPermissions = hasPermission;
+                });
+
+                if ( hasPermissions !== true ) {
+                  $log.log( 'SessionProvider: You do not have the required permissions to do that.' );
+                  $location.path( '/error' );
+                }
+              }
+
+              if ( route && route.roles ) {
+                var hasRole = false;
+
+                roles = route.roles instanceof Array ? route.roles : [ route.roles ];
+                roles.forEach( function( role ) {
+                  if ( currentUser.Role.name === role ) {
+                    hasRole = true;
+                  }
+                });
+                
+                if ( !hasRole ) {
+                  // @TODO invalid role error page
+                  $location.path( '/error' );
+                }
+              }
+              
               $log.log( 'SessionProvider: proceeding to load', next );
             }
           };
@@ -444,6 +495,25 @@ define( [ 'angular', '../module' ], function( ng ) {
                 });
             },
 
+            refresh: function() {
+              return sessionService
+                .session({
+                  reload: true
+                })
+                .$promise
+                .then( function( user ) {
+                  if ( user.id ) {
+                    currentUser = user;
+                  } else {
+                    throw user;
+                  }
+                })
+                .catch( function( err ) {
+                  messenger.error( 'Unknown Error: ' + err );
+                  $rootScope.$broadcast( 'SessionProvider:signOutSuccess' );
+                });
+            },
+
             /**
              * @name signOut
              * @ngdoc function
@@ -481,7 +551,7 @@ define( [ 'angular', '../module' ], function( ng ) {
              */
             signUp: function( credentials ) {
               return accountService
-                .create( credentials ).$promise
+                .create( credentials )
                 .then( function( response ){
                   return handlers.signUpSuccess( response, currentUser );
                 })
@@ -497,9 +567,9 @@ define( [ 'angular', '../module' ], function( ng ) {
              */
             confirmSignUp: function( data ) {
               return accountService
-                .confirm( data ).$promise
-                .then( function() {
-                  $rootScope.$broadcast( 'SessionProvider:signUpConfirmationSuccess' );
+                .confirm( data )
+                .then( function( user ) {
+                  $rootScope.$broadcast( 'SessionProvider:signUpConfirmationSuccess', { user: user } );
                 })
                 .catch( function( err ) {
                   $rootScope.$broadcast( 'SessionProvider:signUpConfirmationFailure', { err: err } );
