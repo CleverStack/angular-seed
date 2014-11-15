@@ -9,26 +9,14 @@ define( [ 'angular', '../module' ], function( ng ) {
     $scope.actionsTemplate  = '/modules/roles/views/role/tableActions.html';
 
     $scope.columns = [
-      // {
-      //   name:       'id',
-      //   title:      'ID/#',
-      //   filter:     true,
-      //   filterType: 'text',
-      //   glyph:      'barcode',
-      //   width:      40,
-      // },
       {
         name:       'name',
         title:      'Name',
-        filter:     true,
-        filterType: 'text',
         glyph:      'user'
       },
       {
         name:       'description',
         title:      'Description',
-        filter:     true,
-        filterType: 'text',
         glyph:      'list'
       }
     ];
