@@ -1,5 +1,5 @@
 <div class="modal-header au-description">
-  <button type="button" class="close" ng-click="$close()">&times;</button>
+  <button type="button" class="close" ng-click="cancel()">&times;</button>
   <span ng-if="!user.id">Add User</span>
   <span ng-if="user.id" ng-bind="user.fullName"></span>
 </div>
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <form role="form" name="form" id="users_new" class="" ng-submit="submitted = true; save(form);" novalidate warn-unsaved-changes="role">
+    <form role="form" name="form" id="users_new" class="container" ng-submit="submitted = true; save(form);" novalidate warn-unsaved-changes="role">
       <div class="row">
         <div class="col-md-6">
           <div class="form-group mar-rt5" ng-class="{'has-error': helpers.hasError(this, 'firstname')}">
@@ -139,11 +139,11 @@
       </div>
 
       <div class="row">
-        <div class="col-md-6">
-          <button type="submit" class="btn btn-block btn-primary" ng-disabled="processing" ng-bind="user.id ? 'Save changes' : 'Add User'"></button>
+        <div class="col-xs-6">
+          <button type="button" class="btn btn-block btn-default" ng-click="cancel()">Cancel</button>
         </div>
-        <div class="col-md-6">
-          <span class="cancel-links"><a ng-click="$close()">Cancel</a></span>
+        <div class="col-xs-6">
+          <button type="submit" class="btn btn-block btn-primary" ng-disabled="processing" ng-bind="user.id ? 'Save' : 'Add'"></button>
         </div>
       </div>
       <ul class="nav nav-pills nav-stacked">
