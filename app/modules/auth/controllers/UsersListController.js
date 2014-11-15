@@ -9,33 +9,22 @@ define( [ 'angular', '../module' ], function( ng ) {
     $scope.actionsTemplate  = '/modules/auth/views/users/table_actions.html';
 
     $scope.columns = [
-      // {
-      //   name:       'id',
-      //   title:      'Id',
-      //   filter:     true,
-      //   filterType: 'text',
-      //   glyph:      'barcode',
-      //   width:      40,
-      // },
       {
         name:       'firstname',
         title:      'First Name',
-        filter:     true,
-        filterType: 'text',
+        filter:     false,
         glyph:      'user'
       },
       {
         name:       'lastname',
         title:      'Last Name',
-        filter:     true,
-        filterType: 'text',
+        filter:     false,
         glyph:      'user'
       },
       {
         name:       'email',
         title:      'Email',
-        filter:     true,
-        filterType: 'text',
+        filter:     false,
         glyph:      'envelope'
       },
       {
@@ -52,8 +41,7 @@ define( [ 'angular', '../module' ], function( ng ) {
       {
         name:       'createdAt',
         title:      'Date Registered',
-        filter:     true,
-        filterType: 'text',
+        filter:     false,
         glyph:      'calendar',
         width:      100,
         display: function( val ) {
