@@ -35,25 +35,12 @@ define( [ 'angular' ], function( ng ) {
           }
         },
         {
-          label               : 'Account',
-          href                : '/settings/account',
-          class               : 'fa-institution',
-          requiresSignIn      : true
-        },
-        {
           label               : 'Settings',
           href                : '',
           order               : 1,
           class               : 'fa-cogs',
           requiresSignIn      : true,
           subMenu: [
-            {
-              label           : 'Billing',
-              href            : '/subscription/billing',
-              class           : 'fa-dollar',
-              requiresSignIn  : true,
-              order           : 3
-            },
             {
               label           : 'Users',
               href            : '/settings/users',
@@ -64,7 +51,7 @@ define( [ 'angular' ], function( ng ) {
           ]
         },
         {
-          label               : 'My Account',
+          label               : 'My Profile',
           class               : 'fa-user',
           order               : 2,
           click               : function( $scope, $event ) {

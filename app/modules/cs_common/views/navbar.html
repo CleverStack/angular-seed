@@ -64,11 +64,12 @@
         <p class="navbar-text" ng-if="currentUser">
           Signed in as
           <span ng-bind="currentUser.fullName"></span>
-          (<span ng-bind="currentUser.role.name"></span>)
+          (<span ng-bind="currentUser.Role.name"></span>)
         </p>
 
         <div class="pull-right">
           <div class="btn-group btn-group-md">
+            <accountchooser></accountchooser>
             <a
             ng-repeat-start=" item in navbarItems.right | orderBy:'order' "
             ng-if=" !item.subMenu && showItem( item ) "

@@ -29,7 +29,7 @@ define( [ 'angular', '../module' ], function( ng ) {
         messenger.error( data.message ? data.message : data );
       });
 
-      $scope.$on( 'SessionProvider:signInSuccess', function() {
+      $scope.$on( 'SessionProvider:signInSuccess', function( event ) {
         messenger.success( 'User <strong>' + event.currentScope.credentials.username + '</strong> signed in.' );
         $scope.processing = false;
         $location.path( '/' );

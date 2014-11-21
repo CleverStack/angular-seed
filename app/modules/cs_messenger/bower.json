@@ -1,0 +1,25 @@
+{
+  "name": "clever-messenger",
+  "version": "0.0.1",
+  "authors": [
+    "Daniel Durante <me@danieldurante.com>"
+  ],
+  "description": "This module provides a service for creating alert messages.",
+  "main": "main.js",
+  "keywords": [
+    "cleverstack",
+    "clevertech",
+    "cleverstack-module",
+    "cleverstack-frontend"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/CleverStack/clever-messenger",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "rename": "cs_messenger"
+}

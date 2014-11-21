@@ -32,6 +32,13 @@ define( [ 'angular', '../module' ], function( ng ) {
             resolve: {
               role: function() {
                 if ( typeof role === 'object' ) {
+                  role.Users        = role.Users.map( function( user ) {
+                    return user.id;
+                  });
+                  role.Permissions  = role.Permissions.map( function( permission ) {
+                    return permission.id;
+                  });
+
                   return role;
                 } else if ( role !== false && role !== undefined ) {
                   return RoleService
@@ -41,8 +48,8 @@ define( [ 'angular', '../module' ], function( ng ) {
                       role.Users        = role.Users.map( function( user ) {
                         return user.id;
                       });
-                      role.Permissions  = role.Permissions.map( function( role ) {
-                        return role.id;
+                      role.Permissions  = role.Permissions.map( function( permission ) {
+                        return permission.id;
                       });
 
                       return role;
@@ -125,6 +132,10 @@ define( [ 'angular', '../module' ], function( ng ) {
             resolve: {
               permission: function() {
                 if ( typeof permission === 'object' ) {
+                  permission.Roles  = permission.Roles.map( function( role ) {
+                    return role.id;
+                  });
+                  
                   return permission;
                 } else if ( permission !== false && permission !== undefined ) {
                   return PermissionService

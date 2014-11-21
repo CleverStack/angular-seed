@@ -572,8 +572,9 @@ html > .no-js > div.js-warning {
   opacity: 0.12;
 }
 .content {
+  padding-top: 20px;
   padding-bottom: 20px;
-  margin-left: 97px;
+  margin-left: 107px;
   padding-right: 10px;
 }
 .content .pagination {
@@ -589,7 +590,6 @@ html > .no-js > div.js-warning {
   margin-top: -40px;
 }
 .content .table-responsive {
-  margin-left: 28px;
   width: 100%;
 }
 .content .header-area .header-buttons {

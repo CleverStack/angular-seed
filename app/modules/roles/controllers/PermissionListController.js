@@ -11,26 +11,14 @@ define( [ 'angular', '../module' ], function( ng ) {
     $scope.sorting          = { action: 'asc' };
 
     $scope.columns = [
-      // {
-      //   name:       'id',
-      //   title:      'ID/#',
-      //   filter:     true,
-      //   filterType: 'text',
-      //   glyph:      'barcode',
-      //   width:      40,
-      // },
       {
         name:       'action',
         title:      'Action Name',
-        filter:     true,
-        filterType: 'text',
         glyph:      'user'
       },
       {
         name:       'description',
         title:      'Description',
-        filter:     true,
-        filterType: 'text',
         glyph:      'list'
       }
     ];

@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="$close()">
+    <i class="fa fa-fw fa-times"></i>
+  </button>
+  <span>{{title}}</span>
+</div>
+
+<div class="modal-helpertext" ng-if="warning">
+  <p><strong>{{warning.title}}</strong></p>
+  <p>{{warning.message}}</p>
+</div>
+
+<div class="modal-body modal-confirm">
+
+  <div class="row">
+    <form role="form" name="form" id="confirm" ng-submit="submit()" class="form-horizontal container" novalidate>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p class="text-center" style="padding: 10px;">{{message}}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <button type="button" class="btn btn-block btn-default" ng-disabled="processing" ng-click="$close()">Cancel</button>
+        </div>
+        <div class="col-xs-6">
+          <button type="submit" class="btn btn-block btn-primary" ng-disabled="processing" ng-bind="confirm"></button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>

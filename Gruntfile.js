@@ -200,6 +200,41 @@ module.exports = function (grunt) {
         dest:           '<%= appConfig.dist.path %>'
       }
     },
+    run: {
+      wbDriverUpdate: {
+        args: [ './node_modules/protractor/bin/webdriver-manager', 'update', '--out_dir=./scripts/' ],
+        options: {
+          passArgs: [
+            'ie',
+            'chrome',
+            'standalone',
+            'seleniumPort'
+          ]
+        }
+      },
+      wbDriverStatus: {
+        args: [ './node_modules/protractor/bin/webdriver-manager', 'status' ],
+        options: {
+          passArgs: [
+            'ie',
+            'chrome',
+            'standalone',
+            'seleniumPort'
+          ]
+        }
+      },
+      wbDriverStart: {
+        args: [ './node_modules/protractor/bin/webdriver-manager', 'start', '--out_dir=./scripts/' ],
+        options: {
+          passArgs: [
+            'ie',
+            'chrome',
+            'standalone',
+            'seleniumPort'
+          ]
+        }
+      }
+    },
     usemin: {
       html:             [ '<%= appConfig.dist.path %>/index.html', '<%= appConfig.dist.path %>/modules/**/views/**/*.html' ],
       css:              [ '<%= appConfig.dist.path %>/styles/**/*.css' ],
@@ -331,6 +366,17 @@ module.exports = function (grunt) {
       }
     },
     copy: {
+      distScripts: {
+        files: [{
+          expand:       true,
+          dot:          true,
+          cwd:          '<%= appConfig.dist.path %>',
+          dest:         '.tmp',
+          src:          [
+            'scripts/**/*'
+          ]
+        }]
+      },
       dist: {
         files: [{
           expand:       true,
@@ -406,7 +452,7 @@ module.exports = function (grunt) {
             cwd:        '<%= appConfig.dev.path %>/components/bootstrap/less',
             dest:       '<%= appConfig.dev.path %>/styles/less/bootstrap',
             src:        [
-              '*.less'
+              '**/*.less'
             ]
           }
         ]
@@ -518,6 +564,18 @@ module.exports = function (grunt) {
         dir:            '<%= appConfig.test.e2e.coverage.path %>reports',
         print:          'detail'
       }
+    },
+    compress: {
+      main: {
+        options: {
+          mode: 'gzip'
+        },
+        files: [
+          // Each of the files in the src/ folder will be output to
+          // the dist/ folder each with the extension .gz.js
+          { expand: true, src: [ 'scripts/*.js', ], dest: 'dist/', ext: '.js', cwd: '.tmp/' }
+        ]
+      }
     }
   });
 
@@ -544,9 +602,28 @@ module.exports = function (grunt) {
     'copy:dist',
     'ngAnnotate:dist',
     'requirejs',
+    // 'copy:distScripts',
+    // 'compress',
     'rev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask( 'webdriver', [
+    'run:wbDriverStatus',
+    'run:wbDriverUpdate'
+  ]);
+
+  grunt.registerTask( 'webdriver:update', [
+    'run:wbDriverUpdate'
+  ]);
+
+  grunt.registerTask( 'webdriver:status', [
+    'run:wbDriverStatus'
+  ]);
+
+  grunt.registerTask( 'webdriver:start', [
+    'run:wbDriverStart'
   ]);
 
   /* -- TEST TASKS ------------------------------------------------ */

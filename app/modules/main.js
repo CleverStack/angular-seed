@@ -4,6 +4,7 @@ require.config({
     'app',
     'cs_common',
     'cs_modal',
+    'cs_messenger',
     'auth',
     'roles'
   ],
@@ -19,7 +20,7 @@ require.config({
     ngUiBootstrap:            '../components/angular-bootstrap/ui-bootstrap-tpls',
     httpAuthInterceptor:      '../components/angular-http-auth/src/http-auth-interceptor',
     bootstrap:                '../scripts/bootstrap',
-    jquery:                   '../components/jquery/jquery',
+    jquery:                   '../components/jquery/dist/jquery',
     jqueryMinicolors:         '../components/jquery-minicolors/jquery.minicolors',
     underscore:               '../components/underscore/underscore',
     selectn:                  '../components/selectn/selectn',
@@ -109,6 +110,7 @@ require([
   // CleverStack modules
   'cs_common',
   'cs_modal',
+  'cs_messenger',
   'auth',
   'roles',
 
