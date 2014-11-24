@@ -52,6 +52,7 @@
     "grunt-protractor-coverage": "^0.2.8",
     "grunt-protractor-runner": "~0.1.6",
     "grunt-rev": "~0.1.0",
+    "grunt-run": "^0.2.4",
     "grunt-usemin": "~0.1.12",
     "jshint-stylish": "^0.4.0",
     "karma": "~0.10.8",
