@@ -7,18 +7,18 @@ describe('e2e: pages', function() {
     ptor = protractor.getInstance();
   });
 
-  it('check the login page is accasible from the homepage and has a form', function() {
-    element(by.css('a[href="/login"]')).click();
-    expect(ptor.getCurrentUrl()).toMatch(/\/login/);
+  it('check the signIn page is accasible from the homepage and has a form', function() {
+    element(by.css('a[href="/signIn"]')).click();
+    expect(ptor.getCurrentUrl()).toMatch(/\/signIn/);
     expect(ptor.findElement(protractor.By.tagName('form')).getAttribute('id'))
-      .toMatch('login');
+      .toMatch('signIn');
   });
 
-  it('check the register page is accasible from the homepage and has a form', function() {
-    element(by.css('a[href="/register"]')).click();
-    expect(ptor.getCurrentUrl()).toMatch(/\/register/);
+  it('check the signUp page is accasible from the homepage and has a form', function() {
+    element(by.css('a[href="/signUp"]')).click();
+    expect(ptor.getCurrentUrl()).toMatch(/\/signUp/);
     expect(ptor.findElement(protractor.By.tagName('form')).getAttribute('id'))
-      .toMatch('registration');
+      .toMatch('signup');
   });
 
 });

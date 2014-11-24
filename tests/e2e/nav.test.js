@@ -6,12 +6,12 @@ describe('e2e: navigation', function() {
   ptor = protractor.getInstance();
 
   beforeEach(function() {
-    link = element(by.css('.navbar ul.nav li a[href="/login"]'));
+    link = element(by.css('.navbar a[href="/signIn"]'));
     link.click();
   });
 
-  it('should navigate to the /login page when clicking', function() {
-    expect(ptor.getCurrentUrl()).toMatch(/\/login/);
+  it('should navigate to the /signIn page when clicking', function() {
+    expect(ptor.getCurrentUrl()).toMatch(/\/signIn/);
   });
 
   //todo: not implemented yet
