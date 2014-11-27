@@ -7,65 +7,129 @@ var should;
 require.config({
   baseUrl: '/base/app/modules',
   packages: [
-    'application',
-    'cs_account',
+    'app',
     'cs_common',
-    'cs_session',
-    'users'
+    'cs_modal',
+    'cs_messenger',
+    'auth',
+    'roles'
   ],
   paths: {
-    angular: '../components/angular/angular',
-    jquery: '../components/jquery/jquery',
-    underscore: '../components/underscore/underscore',
-    ngCookies: '../components/angular-cookies/angular-cookies',
-    ngResource: '../components/angular-resource/angular-resource',
-    ngRoute: '../components/angular-route/angular-route',
-    ngSanitize: '../components/angular-sanitize/angular-sanitize',
-    'http-auth-interceptor': '../components/angular-http-auth/src/http-auth-interceptor',
-    chai: '../components/chai/chai',
-    sinon: '../components/sinon/lib/sinon',
-    'angular-mocks':'../components/angular-mocks/angular-mocks'
+    angular:                  '../components/angular/angular',
+    ngCookies:                '../components/angular-cookies/angular-cookies',
+    ngResource:               '../components/angular-resource/angular-resource',
+    ngRoute:                  '../components/angular-route/angular-route',
+    ngSanitize:               '../components/angular-sanitize/angular-sanitize',
+    ngTable:                  '../components/ng-table/ng-table',
+    ngTableResizableColumns:  '../components/ng-table-resizable-columns/ng-table-resizable-columns.src',
+    ngUi:                     '../components/angular-ui/build/angular-ui',
+    ngUiBootstrap:            '../components/angular-bootstrap/ui-bootstrap-tpls',
+    httpAuthInterceptor:      '../components/angular-http-auth/src/http-auth-interceptor',
+    bootstrap:                '../scripts/cf1cf2fc.bootstrap',
+    jquery:                   '../components/jquery/dist/jquery',
+    jqueryMinicolors:         '../components/jquery-minicolors/jquery.minicolors',
+    underscore:               '../components/underscore/underscore',
+    selectn:                  '../components/selectn/selectn',
+    inflection:               '../components/inflection/lib/inflection',
+    select2:                  '../components/select2/select2',
+    'ui.select2':             '../components/angular-ui-select2/src/select2',
+    moment:                   '../components/momentjs/moment',
+    chai:                     '../components/chai/chai',
+    sinon:                    '../components/sinon/lib/sinon',
+    'angular-mocks':          '../components/angular-mocks/angular-mocks'
   },
   shim: {
-    'angular-mocks': {
-      deps: ['angular']
-    },
     angular: {
-      exports: 'angular'
+      deps:     [ 'jquery' ],
+      exports:  'angular'
     },
     ngCookies: {
-      deps: ['angular']
+      deps:     [ 'angular' ]
     },
     ngResource: {
-      deps: ['angular']
+      deps:     [ 'angular' ]
     },
     ngRoute: {
-      deps: ['angular']
+      deps:     [ 'angular' ]
     },
     ngSanitize: {
-      deps: ['angular']
+      deps:     [ 'angular' ]
     },
-    'http-auth-interceptor': {
-      deps: ['angular']
+    ngTable: {
+      deps:     [ 'angular' ],
+      exports:  'ngTable'
+    },
+    ngTableResizableColumns: {
+      deps:     [ 'angular' ],
+      exports:  'ngTableResizableColumns'
+    },
+    ngUi: {
+      deps:     [ 'angular' ]
+    },
+    ngUiBootstrap: {
+      deps:     [ 'angular' ]
+    },
+    httpAuthInterceptor: {
+      deps:     [ 'angular' ]
+    },
+    bootstrap: {
+      deps:     [ 'jquery' ]
     },
     underscore: {
-      exports: '_'
+      exports:  '_'
+    },
+    selectn: {
+      deps:     [ 'bootstrap' ]
+    },
+    inflection: {
+      exports:  'inflection'
+    },
+    select2: {
+      deps:     [ 'jquery' ]
+    },
+    'ui.select2': {
+      deps:     [ 'angular', 'select2' ]
+    },
+    moment: {
+      exports:  'moment'
+    },
+    jqueryMinicolors: {
+      deps:     [ 'jquery' ]
+    },
+    'angular-mocks': {
+      deps:     [ 'angular' ]
     }
   },
-  deps: tests,
+  deps: tests
 });
 
 require([
   'angular',
-
   'chai',
-
+  'bootstrap',
+  'ngUi',
+  'ngUiBootstrap',
   'ngRoute',
   'ngResource',
   'ngSanitize',
-  'http-auth-interceptor',
+  'ngTable',
+  'ngTableResizableColumns',
+  'httpAuthInterceptor',
 
-  'application',
+  'ui.select2',
+  'selectn',
+  'inflection',
+
+  // CleverStack modules
+  'cs_common',
+  'cs_modal',
+  'cs_messenger',
+  'auth',
+  'roles',
+
+  // Main app module
+  'app',
+
 ], function (angular, chai) {
   'use strict';
 

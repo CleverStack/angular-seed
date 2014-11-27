@@ -51,7 +51,7 @@ module.exports = function(config) {
     */
     browsers: [
       'Chrome',
-      'PhantomJS',
+      // 'PhantomJS',
     ],
 
     // http://karma-runner.github.io/0.8/config/preprocessors.html
