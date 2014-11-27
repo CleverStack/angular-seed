@@ -15,6 +15,9 @@ require.config({
     'roles'
   ],
   paths: {
+    chai:                     '../components/chai/chai',
+    sinon:                    '../components/sinon/lib/sinon',
+    'angular-mocks':          '../components/angular-mocks/angular-mocks',
     angular:                  '../components/angular/angular',
     ngCookies:                '../components/angular-cookies/angular-cookies',
     ngResource:               '../components/angular-resource/angular-resource',
@@ -25,7 +28,8 @@ require.config({
     ngUi:                     '../components/angular-ui/build/angular-ui',
     ngUiBootstrap:            '../components/angular-bootstrap/ui-bootstrap-tpls',
     httpAuthInterceptor:      '../components/angular-http-auth/src/http-auth-interceptor',
-    bootstrap:                '../scripts/cf1cf2fc.bootstrap',
+    bootstrap:                '../components/bootstrap/dist/js/bootstrap',
+    // bootstrap:                '../scripts/bootstrap',
     jquery:                   '../components/jquery/dist/jquery',
     jqueryMinicolors:         '../components/jquery-minicolors/jquery.minicolors',
     underscore:               '../components/underscore/underscore',
@@ -33,12 +37,12 @@ require.config({
     inflection:               '../components/inflection/lib/inflection',
     select2:                  '../components/select2/select2',
     'ui.select2':             '../components/angular-ui-select2/src/select2',
-    moment:                   '../components/momentjs/moment',
-    chai:                     '../components/chai/chai',
-    sinon:                    '../components/sinon/lib/sinon',
-    'angular-mocks':          '../components/angular-mocks/angular-mocks'
+    moment:                   '../components/momentjs/moment'
   },
   shim: {
+    'angular-mocks': {
+      deps: ['angular']
+    },
     angular: {
       deps:     [ 'jquery' ],
       exports:  'angular'
@@ -95,17 +99,16 @@ require.config({
     },
     jqueryMinicolors: {
       deps:     [ 'jquery' ]
-    },
-    'angular-mocks': {
-      deps:     [ 'angular' ]
     }
   },
-  deps: tests
+  deps: tests,
 });
 
 require([
   'angular',
+
   'chai',
+
   'bootstrap',
   'ngUi',
   'ngUiBootstrap',
@@ -129,7 +132,6 @@ require([
 
   // Main app module
   'app',
-
 ], function (angular, chai) {
   'use strict';
 
@@ -139,7 +141,7 @@ require([
   window.expect = chai.expect;
 
   angular.element(document).ready(function () {
-    angular.bootstrap(document, ['app']);
+    angular.bootstrap( document, [ 'app' ] );
     window.__karma__.start();
   });
 });
