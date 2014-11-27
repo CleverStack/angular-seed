@@ -628,8 +628,9 @@ module.exports = function (grunt) {
 
   /* -- TEST TASKS ------------------------------------------------ */
 
-  grunt.registerTask('test', 'Start up the auto unit test server.', [
-    'test:unit'
+  grunt.registerTask('test', 'Run both unit and e2e tests', [
+    'test:unit',
+    'test:e2e'
   ]);
 
   grunt.registerTask('test:unit', 'Single run of unit tests.', [
