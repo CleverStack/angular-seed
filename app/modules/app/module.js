@@ -25,10 +25,8 @@ define( [ 'angular' ], function( ng ) {
     case 'localhost':
     case '127.0.0.1':
     case 'local':
-      HttpOptionsProvider.setDomain( 'http://localhost:8080' );
-      break;
     default:
-      HttpOptionsProvider.setDomain( 'http://54.84.54.95' );
+      HttpOptionsProvider.setDomain( 'http://localhost:8080' );
       break;
     }
 
