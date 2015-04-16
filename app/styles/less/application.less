@@ -86,10 +86,15 @@ html > .no-js > div.js-warning {
   border-radius     : 0px;
 }
 
+.content        {
+  margin-top        : 10px;
+  padding-left      : 116px;
+  padding-right     : 26px;
+}
 
 /*  Mobile @1200px
 ────────────────────────────────────────────────────────────*/
-@media ( max-width  : @screen-lg ) {
+@media (max-width: @screen-lg) {
   .content {
 
   }
@@ -97,7 +102,7 @@ html > .no-js > div.js-warning {
 
 /*  Desktop @992px
 ────────────────────────────────────────────────────────────*/
-@media ( max-width  : @screen-md ) {
+@media (min-width: (@screen-sm + 1)) and (max-width: @screen-md) {
   .content {
 
   }
@@ -105,7 +110,7 @@ html > .no-js > div.js-warning {
 
 /*  Mobile @768px
 ────────────────────────────────────────────────────────────*/
-@media ( max-width  : @screen-sm ) {
+@media (min-width: (@screen-xs + 1)) and (max-width: @screen-sm) {
   .content {
 
   }
@@ -113,8 +118,11 @@ html > .no-js > div.js-warning {
 
 /*  Mobile @480px
 ────────────────────────────────────────────────────────────*/
-@media ( max-width  : @screen-xs ) {
-  .content {
-
+@media (max-width: @screen-xs) {
+  .content        {
+    margin-top      : 15px;
+    padding-left    : 71px;
+    padding-right   : 21px;
   }
 }
+
