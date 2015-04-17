@@ -12,6 +12,8 @@ define( [ 'angular', 'app' ], function( ng ) {
       $scope.$watch( Session.getCurrentUser, function( user ) {
         $scope.currentUser = user || false;
       });
+
+      ng.element('html').removeClass('no-js');
     }
   );
 
