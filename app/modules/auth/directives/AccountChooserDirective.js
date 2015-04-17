@@ -12,7 +12,7 @@ define( [ 'angular', '../module' ], function( ng ) {
         heading     : '@'
       },
       replace       : true,
-      templateUrl:  Template.partial( 'auth', 'account', 'chooser' ),
+      templateUrl:  Template.partial( 'auth', 'accounts', 'chooser' ),
       controller:   'AccountChooserController',
       link: function( $scope ) {
 

@@ -1,4 +1,7 @@
-<div class="btn-group" style="margin-top: 0;" ng-if="!!currentUser && helpers.hasPermission( 'Account.list', currentUser );">
+<div
+  class="btn-group"
+  style="margin-top: 0;"
+  ng-if="!!currentUser && helpers.hasPermission( 'Account.list', currentUser ) && accounts.length > 1">
   <button
     type="button"
     class="btn btn-sm btn-primary dropdown-toggle"
@@ -10,10 +13,8 @@
     </b>
   </button>
   <ul class="dropdown-menu" role="menu">
-
     <li ng-repeat="acc in accounts">
       <a href="#" ng-if="acc.id !== account.id" ng-click="selectAccount( acc ); $event.preventDefault(); $event.stopPropagation();">{{ ( acc.name ? acc.name : acc.email ) | capitalize }}</a>
     </li>
-
   </ul>
 </div>
