@@ -13,18 +13,35 @@
     }
   }
 }
-.dropdown-header { background:none; color:#BBB; text-transform:uppercase; border-top:1px solid #E2E2E2; margin-top:10px; padding-top:12px; padding-bottom:6px; }
+.dropdown-header {
+  background     :none;
+  color          :#BBB;
+  text-transform :uppercase;
+  border-top     :1px solid #E2E2E2;
+  margin-top     :10px;
+  padding-top    :12px;
+  padding-bottom :6px;
+}
 .dropdown-header:first-child { margin-top:0; border-top:none; }
 
-.navbar {
+.navbar { height:67px; background:#FFF url('../images/nav-main-bg.png') left bottom repeat-x; .box-shadow(0 3px 8px -2px rgba(0,0,0,0.25));
+  .header-area  {
+    .header-buttons
+                { margin:24px 8px 0 0; position:relative;
+      .btn      { margin-right:5px; }
+      .fa-fw    { text-align:left; }
+      .dropdown-menu
+                { margin-top:45px; font-size:12px; padding:10px 0;
+        >li > a { padding:8px 18px; }
+      }
+    }
+  }
+  .navbar-header {
+    .navbar-brand img { max-height:36px; max-width:160px; }
+  }
   .brand-logo {
     height: 45px;
     margin: 10px;
-  }
-}
-.navbar { height:67px; background:#FFF url('../images/nav-main-bg.png') left bottom repeat-x; .box-shadow(0 3px 8px -2px rgba(0,0,0,0.25));
-  .navbar-header {
-    .navbar-brand img { max-height:36px; max-width:160px; }
   }
   .navbar-text  { margin-top:22px; font-size:12px; }
   .btn-group    { margin-top:12px;
@@ -64,41 +81,6 @@
   }
 }
 
-.content        {
-  padding-top:      20px;
-  padding-bottom:   20px;
-  margin-left:      107px;
-  padding-right:    10px;
-
-  .pagination {
-    margin:         0;
-  }
-  .add-button {
-    padding-right : 20px;
-    margin-top    : 10px;
-  }
-  .clear-filters {
-    margin-bottom : 5px;
-    margin-right  : 25px;
-    margin-top    : -40px;
-  }
-  .table-responsive {
-    // margin-left   : 28px;
-    width         : 100%;
-  }
-  .header-area  {
-    .header-buttons
-                { margin:24px 8px 0 0; position:relative;
-      .btn      { margin-right:5px; }
-      .fa-fw    { text-align:left; }
-      .dropdown-menu
-                { margin-top:45px; font-size:12px; padding:10px 0;
-        >li > a { padding:8px 18px; }
-      }
-    }
-  }
-}
-
 /*  Mobile @1200px
 ────────────────────────────────────────────────────────────*/
 @media ( max-width  : @screen-lg ) {
@@ -107,36 +89,6 @@
       padding-top   : 5px;
       position      : relative;
       z-index       : 9999;
-    }
-  }
-  .content {
-    padding-left     : 7px;
-
-    .ng-table {
-      .actions {
-        width       : 140px;
-        margin      : 0;
-        padding     : 0;
-        margin-left : auto;
-        margin-right: auto;
-      }
-    }
-
-    .table-responsive {
-      padding-left   : 28px;
-      padding-right  : 28px;
-      max-width     : 1080px;
-      width         : 100%;
-    }
-
-    .add-button {
-      padding-right : 20px;
-      margin-top    : 20px;
-    }
-    .clear-filters {
-      margin-bottom : 5px;
-      margin-right  : 25px;
-      margin-top    : -40px;
     }
   }
 }
@@ -151,36 +103,6 @@
       z-index       : 9999;
     }
   }
-  .content {
-    margin-left     : 98px;
-
-    .ng-table {
-      .actions {
-        width       : 140px;
-        margin      : 0;
-        padding     : 0;
-        margin-left : auto;
-        margin-right: auto;
-      }
-
-    }
-
-    .table-responsive {
-      margin-left   : 28px;
-      max-width     : 850px;
-      width         : 100%;
-    }
-
-    .add-button {
-      padding-right : 0;
-      margin-top    : 20px;
-    }
-    .clear-filters {
-      margin-bottom : 5px;
-      margin-right  : 0;
-      margin-top    : -40px;
-    }
-  }
 }
 
 /*  Mobile @768px
@@ -192,131 +114,73 @@
       position      : relative;
       z-index       : 9999;
     }
-  }
-  .content {
-    margin-left     : 94px;
-
-    .ng-table {
-      .actions {
-        width       : 140px;
-        margin      : 0;
-        padding     : 0;
-        margin-left : auto;
-        margin-right: auto;
-      }
-
-    }
-
-    .table-responsive {
-      margin-left   : 28px;
-      max-width     : 640px;
-      width         : 100%;
-    }
-
-    .add-button {
-      padding-right : 20px;
-      margin-top    : 20px;
-    }
-    .clear-filters {
-      margin-bottom : 5px;
-      margin-right  : 20px;
-      margin-top    : -30px;
+    .navbar-highlight {
+      // background-color: #222;
+      // border-color: #101010;
+      background-color: #FFF;
+      margin-top: 0px;
+      overflow-y: visible;
     }
   }
 }
 
 /*  Mobile @480px
 ────────────────────────────────────────────────────────────*/
-@media ( max-width  : @screen-xs ) {
+@media ( max-width    : @screen-xs ) {
   body {
-    padding-top     : 50px;
+    padding-top       : 40px;
   }
-  .content {
-    margin-left     : 55px;
-    padding-right   : 10px;
-    padding-bottom  : 20px;
-    font-size       : 12px;
+  .navbar {
+    height            : 49px;
 
     .btn {
       .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @border-radius-small);
     }
 
-    .ng-table {
-      button b span {
-        display     : none;
-      }
-
-      .actions {
-        width       : 48px;
-        margin      : 0;
-        padding     : 0;
-        margin-left : auto;
-        margin-right: auto;
-      }
-
-    }
-
-    .table-responsive {
-      margin-left   : 28px;
-      max-width     : 390px;
-      width         : 100%;
-    }
-
     .pull-left h3,
     .pull-left.h3 {
-      font-size     : @font-size-h4;
+      font-size       : @font-size-h3;
     }
 
-    .add-button {
-      padding-right : 0;
-      margin-top    : 20px;
-    }
-    .clear-filters {
-      margin-bottom : 5px;
-      margin-right  : 10px;
-      margin-top    : -27px;
-    }
-    .header-area {
+    .navbar-header {
+      height: 50px;
+
       .header-buttons {
-        position    : absolute;
-        top         : 0;
-        right       : 12px;
-        margin-top  : 12px;
+        position      : absolute;
+        top           : 0;
+        right         : 12px;
+        margin-top    : 12px;
       }
     }
-  }
-  .navbar {
-    height          : 47px;
 
     .navbar-toggle {
-      margin-top    : 5px;
+      margin-top      : 5px;
     }
 
     .brand-logo {
-      height        : 28px;
-      padding       : 0;
-      padding-top   : 5px;
+      height          : 28px;
+      padding         : 0;
+      padding-top     : 5px;
     }
 
     .navbar-right {
-      padding-top   : 5px;
-      position      : relative;
-      z-index       : 9999;
+      padding-top     : -5px;
+      position        : relative;
+      z-index         : 9999;
     }
   }
   .navbar-app {
-    width           : 50px;
-    top             : 50px;
+    width             : 50px;
+    top               : 50px;
 
-     ul.nav {
+    ul.nav {
       > li {
-          i {
-            font-size: 1.6em;
-          }
-          span {
-            display : none;
-          }
-        }
-     }
+        i { font-size : 1.6em; }
+        span { display: none; }
+      }
+      .dropdown-menu {
+        left          : 49px;
+      }
+    }
   }
 }
