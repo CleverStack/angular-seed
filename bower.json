@@ -47,5 +47,9 @@
     "angular-scenario": "1.2.6",
     "sinon": "~1.7.3",
     "chai": "~1.8.1"
+  },
+  "resolutions": {
+    "angular": "1.2.6",
+    "angular-mocks": "1.2.6"
   }
 }
