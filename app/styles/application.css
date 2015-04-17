@@ -727,13 +727,10 @@ html > .no-js > div.js-warning {
 .content .table-responsive table.rc-table-resizing thead > th > a {
   cursor: ew-resize;
 }
-.content .table-responsive .dropdown-menu {
-  left: 0;
-  right: 100%;
-}
 .content .table-responsive ul.dropdown-menu-form {
   padding: 5px 10px 0;
   max-height: 300px;
+  overflow-y: scroll;
 }
 /*  Mobile @1200px
 ────────────────────────────────────────────────────────────*/

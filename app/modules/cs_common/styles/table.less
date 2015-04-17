@@ -9,8 +9,6 @@
 
     .btn {
       .button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @border-radius-base);
-
-      // padding   : 2px;
     }
 
     .btn-toolbar {
@@ -47,14 +45,10 @@
     table.rc-table-resizing thead > th > a {
       cursor: ew-resize;
     }
-    .dropdown-menu {
-      left: 0;
-      right: 100%;
-    }
     ul.dropdown-menu-form {
-        padding: 5px 10px 0;
-        max-height: 300px;
-        // overflow-y: scroll;
+      padding: 5px 10px 0;
+      max-height: 300px;
+      overflow-y: scroll;
     }
   }
 }
@@ -64,9 +58,6 @@
 @media (max-width: @screen-lg) {
   .content {
     .table-responsive {
-      // max-width        : 1080px;
-      // width            : 100%;
-
       table {
 
       }
@@ -80,8 +71,6 @@
   .content {
     .table-responsive {
       font-size   : @font-size-small;
-      // max-width        : 840px;
-      // width            : 100%;
 
       .btn {
         .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @border-radius-small);
@@ -92,13 +81,7 @@
       }
 
       table {
-        .actions {
-          // width        : 140px;
-          // margin       : 0;
-          // padding      : 0;
-          // margin-left  : auto;
-          // margin-right : auto;
-        }
+
       }
     }
   }
@@ -110,8 +93,6 @@
   .content {
     .table-responsive {
       font-size   : 10px;
-      // max-width        : 640px;
-      // width            : 100%;
 
       .btn {
         .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @border-radius-small);
@@ -124,13 +105,6 @@
       table {
         button b span {
           display      : none;
-        }
-        .actions {
-          // width        : 140px;
-          // margin       : 0;
-          // padding      : 0;
-          // margin-left  : auto;
-          // margin-right : auto;
         }
       }
     }
@@ -158,9 +132,6 @@
         button b span {
           display      : none;
         }
-        // .actions {
-        //   width        : 18px;
-        // }
       }
     }
   }
