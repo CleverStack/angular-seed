@@ -10,14 +10,31 @@ define( [ 'angular', '../module' ], function( ng ) {
 
     $scope.columns = [
       {
-        name:       'name',
-        title:      'Name',
-        glyph:      'user'
+        name       : 'id',
+        title      : 'ID',
+        glyph      : 'hash',
+        filter     : true,
+        filterType : 'number',
+        sortable   : true,
+        visible    : true
       },
       {
-        name:       'description',
-        title:      'Description',
-        glyph:      'list'
+        name       : 'name',
+        title      : 'Name',
+        glyph      : 'user',
+        filter     : true,
+        filterType : 'text',
+        sortable   : true,
+        visible    : true
+      },
+      {
+        name       : 'description',
+        title      : 'Description',
+        glyph      : 'list',
+        filter     : true,
+        filterType : 'text',
+        sortable   : true,
+        visible    : true
       }
     ];
 
