@@ -709,6 +709,32 @@ html > .no-js > div.js-warning {
 .content .table-responsive .pagination {
   margin: 0;
 }
+.content .table-responsive .rc-handle-container {
+  position: relative;
+}
+.content .table-responsive .rc-handle {
+  position: absolute;
+  width: 7px;
+  cursor: ew-resize;
+  margin-left: -3px;
+  z-index: 2;
+}
+.content .table-responsive table.rc-table-resizing {
+  cursor: ew-resize;
+}
+.content .table-responsive table.rc-table-resizing thead,
+.content .table-responsive table.rc-table-resizing thead > th,
+.content .table-responsive table.rc-table-resizing thead > th > a {
+  cursor: ew-resize;
+}
+.content .table-responsive .dropdown-menu {
+  left: 0;
+  right: 100%;
+}
+.content .table-responsive ul.dropdown-menu-form {
+  padding: 5px 10px 0;
+  max-height: 300px;
+}
 /*  Mobile @1200px
 ────────────────────────────────────────────────────────────*/
 @media (max-width: 1200px) {
@@ -935,24 +961,4 @@ html > .no-js > div.js-warning {
   .modal .modal-body .container {
     width: auto;
   }
-}
-
-/* jQuery Resizable Columns v0.1.0 | http://dobtco.github.io/jquery-resizable-columns/ | Licensed MIT | Built Wed Apr 30 2014 14:24:25 */
-.rc-handle-container {
-  position: relative;
-}
-.rc-handle {
-  position: absolute;
-  width: 7px;
-  cursor: ew-resize;
-  margin-left: -3px;
-  z-index: 2;
-}
-table.rc-table-resizing {
-  cursor: ew-resize;
-}
-table.rc-table-resizing thead,
-table.rc-table-resizing thead > th,
-table.rc-table-resizing thead > th > a {
-  cursor: ew-resize;
 }
