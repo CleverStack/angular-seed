@@ -6,7 +6,7 @@
 
 <div class="modal-helpertext" ng-if="!myAccount">
   <p ng-if="!user.id"><strong>Create a new user account</strong></p>
-  <p ng-if="user.id"><strong>{{user.firstname}} {{user.lastname}}</strong><span class="label label-warning pull-right" ng-if="!user.active">INACTIVE</span></p>
+  <p ng-if="user.id"><strong>{{user.firstName}} {{user.lastName}}</strong><span class="label label-warning pull-right" ng-if="!user.active">INACTIVE</span></p>
   <p>Tip: Exercise caution when assigning a user Administrator rights, as any user that has been assigned Administrator rights can also add and remove other users.</p>
 </div>
 
@@ -22,29 +22,29 @@
     <form role="form" name="form" id="users_new" class="container" ng-submit="submitted = true; save(form);" novalidate warn-unsaved-changes="role">
       <div class="row">
         <div class="col-md-6">
-          <div class="form-group mar-rt5" ng-class="{'has-error': helpers.hasError(this, 'firstname')}">
+          <div class="form-group mar-rt5" ng-class="{'has-error': helpers.hasError(this, 'firstName')}">
             <input
             type="text"
             placeholder="First Name *"
             class="form-control"
-            id="firstname"
-            ng-model="user.firstname"
-            name="firstname"
+            id="firstName"
+            ng-model="user.firstName"
+            name="firstName"
             focused-on
             required />
-            <span class="help-block error" ng-show="helpers.hasError(this, 'firstname', 'required')">First name is required</span>
+            <span class="help-block error" ng-show="helpers.hasError(this, 'firstName', 'required')">First name is required</span>
           </div>
         </div>
         <div class="col-md-6">
-          <div class="form-group mar-rt5" ng-class="{'has-error': helpers.hasError(this, 'lastname')}">
+          <div class="form-group mar-rt5" ng-class="{'has-error': helpers.hasError(this, 'lastName')}">
             <input
             type="text"
             placeholder="Last Name *"
             class="form-control"
-            id="lastname"
-            ng-model="user.lastname"
-            name="lastname" />
-            <span class="help-block error" ng-show="helpers.hasError(this, 'lastname', 'required')">Last name is required</span>
+            id="lastName"
+            ng-model="user.lastName"
+            name="lastName" />
+            <span class="help-block error" ng-show="helpers.hasError(this, 'lastName', 'required')">Last name is required</span>
           </div>
         </div>
       </div>
