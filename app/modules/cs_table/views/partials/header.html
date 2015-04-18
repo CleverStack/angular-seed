@@ -1,0 +1,11 @@
+<th
+  ng-class="[ filterClass(column.name), 'col-head-' + column.name.replace('.', '-'), column.customClass ]"
+  data-resizable-column-id="column.name"
+  ng-click="setSorting(column.name)"
+  ng-show="column.visible"
+  class="sortable">
+
+  <div>
+    <i ng-if="column.glyph" class="{{column.glyph}}"></i> {{column.title}}
+  </div>
+</th>

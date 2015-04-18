@@ -17,3 +17,40 @@
 .modal-backdrop     { #gradient > .radial(#FFF, #343743);
   &.in              { opacity:0.6; }
 }
+
+
+/*  Desktop @1200px
+────────────────────────────────────────────────────────────*/
+@media ( max-width  : @screen-lg ) {
+
+}
+
+/*  Desktop @992px
+────────────────────────────────────────────────────────────*/
+@media ( min-width: ( @screen-sm + 1 ) ) and ( max-width: @screen-md ) {
+
+}
+
+/*  Mobile @768px
+────────────────────────────────────────────────────────────*/
+@media ( min-width: ( @screen-xs + 1 ) ) and ( max-width: @screen-sm ) {
+  .modal {
+    .modal-body {
+      .container {
+        width: auto;
+      }
+    }
+  }
+}
+
+/*  Mobile @480px
+────────────────────────────────────────────────────────────*/
+@media ( max-width    : @screen-xs ) {
+  .modal {
+    .modal-body {
+      .container {
+        width: auto;
+      }
+    }
+  }
+}

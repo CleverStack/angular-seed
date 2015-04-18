@@ -1,21 +1,18 @@
-define( [ 'angular' ], function( ng ) {
+define([ 'angular' ], function(ng) {
   'use strict';
 
-  ng.module( 'cs_common.providers', [] );
-  ng.module( 'cs_common.controllers', [] );
-  ng.module( 'cs_common.services', [] );
-  ng.module( 'cs_common.directives', [] );
-  ng.module( 'cs_common.filters', [] );
+  ng.module('cs_common.providers', []);
+  ng.module('cs_common.controllers', []);
+  ng.module('cs_common.services', []);
+  ng.module('cs_common.directives', []);
+  ng.module('cs_common.filters', []);
 
-  var module = ng.module( 'cs_common', [
+  var module = ng.module('cs_common', [
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTable',
-    'ngTableResizableColumns',
-    'ui.bootstrap',
-    'ui',
+    'jqueryMinicolors',
     'auth.directives',
     'http-auth-interceptor',
     'cs_common.providers',
@@ -25,17 +22,17 @@ define( [ 'angular' ], function( ng ) {
     'cs_common.filters'
   ]);
 
-  module.config( function( $routeProvider, TemplateProvider ) {
+  module.config(function($routeProvider, TemplateProvider) {
 
-    TemplateProvider.setPath( '/modules/:moduleName/views' );
+    TemplateProvider.setPath('/modules/:moduleName/views');
 
     $routeProvider
-      .when( '/error/page_not_found', {
-        templateUrl: TemplateProvider.view( 'cs_common', 'page_not_found' ),
+      .when('/error/page_not_found', {
+        templateUrl: TemplateProvider.view('cs_common', 'page_not_found'),
         public: true
       })
-      .when( '/error', {
-        templateUrl: TemplateProvider.view( 'cs_common', 'error' ),
+      .when('/error', {
+        templateUrl: TemplateProvider.view('cs_common', 'error'),
         public: true
       })
       .otherwise({

@@ -4,9 +4,6 @@ define([
   'ngResource',
   'ngRoute',
   'ngSanitize',
-  'ngTable',
-  'ngTableResizableColumns',
-  'selectn',
   'jqueryMinicolors',
 
   './module',
@@ -19,7 +16,6 @@ define([
   './providers/ResourceFactoryProvider',
 
   // Directives
-  './directives/CleverTableDirective',
   './directives/ColorPickerDirective',
   './directives/FocusedOnDirective',
   './directives/LoadingDirective',
@@ -31,7 +27,6 @@ define([
   './directives/WarnUnsavedChangesDirective',
 
   // Controllers
-  './controllers/CleverTableController',
   './controllers/NavbarController',
 
   // Filters

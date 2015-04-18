@@ -1,39 +1,52 @@
 define(['angular', 'underscore', 'selectn', '../module'], function(ng, _, selectn) {
-  'use strict';
 
   ng
-  .module('cs_common.controllers')
+  .module('cs_table.controllers')
   .controller('CleverTableController', function($scope, $element, $attrs, $rootScope, $injector, $log, $filter, $timeout, ngTableParams, Template) {
-    $scope.service          = $injector.has($attrs.service) ? $injector.get($attrs.service) : false;
 
-    if (!$scope.service) {
-      throw 'You didn\'t provide a service to use with this clever-table';
+    $scope.messenger = $injector.has('Messenger') ? $injector.get('Messenger') : $log;
+
+    if (!$injector.has($attrs.service) || !($scope.service = $injector.get($attrs.service))) {
+      var error = 'You didn\'t provide a service to use with this clever-table';
+      $scope.messenger.error(error)
+      throw error;
     }
 
-    $scope.data             = [];
-    $scope.filters          = {};
-    $scope.messenger        = $injector.has('Messenger') ? $injector.get('Messenger') : $log;
-    $scope.columnTitles     = '';
-    $scope.hasFilters       = false;
-    $scope.rowTemplate      = $scope.rowTemplate !== undefined ? $scope.rowTemplate : Template.view('cs_common', 'tableRow');
-    $scope.showClearFilters = $scope.showClearFilters !== undefined ? $scope.showClearFilters : true;
-    $scope.showClearSorting = $scope.showClearSorting !== undefined ? $scope.showClearSorting : true;
+    _.defaults($scope, {
+      data       : [],
+      page       : 1,
+      count      : 10,
+      filter     : {},
+      sorting    : {id: 'asc'},
+      hasFilters : false,
+
+      filtersEnabled  : false,
+
+      rowTemplate     : Template.view('cs_table', 'partials/row'),
+      pagerTemplate   : Template.view('cs_table', 'partials/pager'),
+      headerTemplate  : Template.view('cs_table', 'partials/header'),
+      filtersTemplate : Template.view('cs_table', 'partials/filters'),
+      toolbarTemplate : Template.view('cs_table', 'partials/toolbar'),
+
+      columnTitles: '' // @todo do i still need this?
+    });
 
     $scope.columns.forEach(function(column) {
-      column.visible        = column.visible !== undefined ? column.visible : true;
-      $scope.columnTitles   += column.title ? column.title : column.name;
-      $scope.columnTitles   += ',';
+      _.defaults(column, {
+        title: column.name,
+        filter: false,
+        sortable: false,
+        visible: true
+      })
+      $scope.columnTitles += column.title ? column.title : column.name;
+      $scope.columnTitles += ',';
       if (!!column.filter) {
-        $scope.hasFilters   = true;
+        $scope.hasFilters = true;
       }
-      $scope.filters[column.name] = '';
+      $scope.filter[column.name] = '';
     });
-    $scope.columnTitles.substr(0, $scope.columnTitles.length - 1);
 
-    $scope.defaultSorting   = $scope.defaultSorting || { id: 'asc' };
-    $scope.sorting          = $scope.defaultSorting;
-    $scope.page             = $scope.page || 1;
-    $scope.count            = $scope.count || 10;
+    $scope.columnTitles.substr(0, $scope.columnTitles.length - 1);
 
     $scope.filterClass = function(column) {
       if ($scope.tableParams.isSortBy(column, 'asc')) {
@@ -51,7 +64,9 @@ define(['angular', 'underscore', 'selectn', '../module'], function(ng, _, select
     };
 
     $scope.resetFilters = function() {
-      $scope.filters = {};
+      $scope.filter = Object.keys($scope.filter).map(function(filterName) {
+        $scope.filter[filterName] = '';
+      });
       $scope.tableParams.filter($scope.filters);
     };
 
@@ -74,7 +89,6 @@ define(['angular', 'underscore', 'selectn', '../module'], function(ng, _, select
       }, 0);
     };
 
-    $scope.filtersEnabled = false;
     $scope.toggleFilters = function() {
       $scope.filtersEnabled = !$scope.filtersEnabled;
     };
@@ -82,14 +96,14 @@ define(['angular', 'underscore', 'selectn', '../module'], function(ng, _, select
     $scope.$on('reload', $scope.reload);
     $rootScope.$on('table:reload', $scope.reload);
 
-    $scope.filters = {};
-
-    $scope._params       = {
-      page:     $scope.page,
-      count:    $scope.count,
-      sorting:  $scope.sorting,
-      filter:   $scope.filters
-    };
+    Object.defineProperty($scope, '_params', {
+      value: {
+        page    : $scope.page,
+        count   : $scope.count,
+        sorting : $scope.sorting,
+        filter  : $scope.filter
+      }
+    });
 
     $scope.tableParams = new ngTableParams(
       $scope._params,
@@ -97,9 +111,9 @@ define(['angular', 'underscore', 'selectn', '../module'], function(ng, _, select
         data      : $scope.data,
         getData   : function($defer, params) {
 
-          $scope.toggleFilter = function(params) {
-            params.settings().$scope.show_filter = !params.settings().$scope.show_filter;
-          };
+          // $scope.toggleFilter = function(params) {
+          //   params.settings().$scope.show_filter = !params.settings().$scope.show_filter;
+          // };
 
           $scope.service
           .list($scope.getDataOptions ? $scope.getDataOptions() : _.extend({ /* _page: params.page(), _pageSize: params.count(), _sorting: params.sorting()*/ } /*, params.filter() */))

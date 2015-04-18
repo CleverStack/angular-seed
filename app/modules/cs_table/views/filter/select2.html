@@ -1,0 +1,12 @@
+<select
+  class="full-width filter filter-select form-control input-sm"
+  ui-select2="{ allowClear: true, placeholder: column.title }"
+  ng-model="params.filter()[ column.name ]">
+
+  <option
+    ng-repeat="row in $data"
+    value="{{row[column.name]}}">
+
+    {{row[column.name]}}
+  </option>
+</select>

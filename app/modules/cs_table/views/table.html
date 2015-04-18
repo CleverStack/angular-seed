@@ -1,0 +1,24 @@
+<div class="table-responsive" ng-cloak>
+  <table
+    ng-table="tableParams"
+    template-pagination="tpl.view('cs_table', 'partials')"
+    show-filter="true"
+    class="table ng-table-responsive ng-table-resizable-columns table-hover table-bordered table-striped table-condensed">
+
+    <thead>
+      <tr ng-repeat="column in columns" ng-include="headerTemplate">
+        <th class="text-center" ng-include="tpl.view('cs_table', 'partials/toolbar')">
+          Actions
+        </th>
+      </tr>
+      <tr
+        ng-if="!!filtersEnabled"
+        ng-repeat="column in columns"
+        ng-include="tpl.view('cs_table', 'partials/filters')">
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in $data" ng-include="rowTemplate"></tr>
+    </tbody>
+  </table>
+</div>
