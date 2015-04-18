@@ -1,20 +1,17 @@
 <div class="table-responsive" ng-cloak>
   <table
     ng-table="tableParams"
-    template-pagination="tpl.view('cs_table', 'partials')"
+    template-pagination="{{pagerTemplate}}"
     show-filter="true"
     class="table ng-table-responsive ng-table-resizable-columns table-hover table-bordered table-striped table-condensed">
 
     <thead>
-      <tr ng-repeat="column in columns" ng-include="headerTemplate">
-        <th class="text-center" ng-include="tpl.view('cs_table', 'partials/toolbar')">
-          Actions
-        </th>
+      <tr
+        ng-include="headerTemplate">
       </tr>
       <tr
         ng-if="!!filtersEnabled"
-        ng-repeat="column in columns"
-        ng-include="tpl.view('cs_table', 'partials/filters')">
+        ng-include="filtersTemplate">
       </tr>
     </thead>
     <tbody>

@@ -2,8 +2,6 @@ define([
   'angular',
   'ngSanitize',
 
-  'ui',
-  'ui.bootstrap',
   'ngTable',
   'ngTableResizableColumns',
   'selectn',

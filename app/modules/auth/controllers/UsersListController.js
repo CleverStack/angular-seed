@@ -13,7 +13,7 @@ define(['angular', '../module'], function(ng) {
         name:       'id',
         title:      'ID',
         filter:     true,
-        filterType: 'number',
+        filterType: 'text',
         glyph:      'hash',
         sortable:   true,
         visible:    true
@@ -48,7 +48,7 @@ define(['angular', '../module'], function(ng) {
         name:       'accessedAt',
         title:      'Last Login',
         filter:     true,
-        filterType: 'calendar',
+        // filterType: 'calendar',
         visible:    true,
         display:     function(val) {
           if (val) {
@@ -61,7 +61,7 @@ define(['angular', '../module'], function(ng) {
         name:       'createdAt',
         title:      'Date Registered',
         filter:     true,
-        filterType: 'calendar',
+        // filterType: 'calendar',
         glyph:      'calendar',
         width:      100,
         visible:    true,

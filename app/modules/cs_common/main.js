@@ -4,7 +4,7 @@ define([
   'ngResource',
   'ngRoute',
   'ngSanitize',
-  'jqueryMinicolors',
+  'cs_table',
 
   './module',
 
