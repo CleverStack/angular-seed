@@ -16,6 +16,7 @@ define([
   './providers/ResourceFactoryProvider',
 
   // Directives
+  './directives/NgLoadDirective',
   './directives/ColorPickerDirective',
   './directives/FocusedOnDirective',
   './directives/LoadingDirective',
