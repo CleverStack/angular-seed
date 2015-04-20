@@ -15,7 +15,7 @@ define( [ 'angular', '../module' ], function( ng ) {
         title      : 'ID',
         glyph      : 'hash',
         filter     : true,
-        filterType : 'number',
+        filterType : 'text',
         sortable   : true,
         visible    : true
       },
