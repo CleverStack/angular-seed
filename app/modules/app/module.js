@@ -99,6 +99,11 @@ define( [ 'angular' ], function( ng ) {
         templateUrl: TemplateProvider.view( 'app', 'home' ),
         controller: 'HomeController',
         public: true
+      })
+      .when( '/help', {
+        templateUrl: TemplateProvider.view( 'app', 'help' ),
+        controller: 'HelpController',
+        public: true
       });
 
   });

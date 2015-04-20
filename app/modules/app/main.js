@@ -1,5 +1,4 @@
 define([
-
   // This modules definition
   './module',
 
@@ -8,7 +7,8 @@ define([
 
   // Controllers
   './controllers/ApplicationController',
-  './controllers/HomeController'
+  './controllers/HomeController',
+  './controllers/HelpController'
 
 ], function() {
 
