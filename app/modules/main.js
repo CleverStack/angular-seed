@@ -122,10 +122,10 @@ require([
   // Custom modules
 
 
-], function( angular ) {
+], function(angular) {
   'use strict';
 
-  angular.element( document ).ready( function() {
-    angular.bootstrap( document, [ 'app' ] );
+  angular.element(document).ready(function() {
+    angular.bootstrap(document, ['app']);
   });
 });
