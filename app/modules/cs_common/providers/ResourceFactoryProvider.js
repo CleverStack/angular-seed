@@ -45,8 +45,8 @@ define( [ 'angular', 'underscore', 'inflection', '../module' ], function( ng, _,
          * @return {resource} The actual resource for resourceName.
          */
         var builder = function ( $resource, HttpOptions ) {
-          var singularUrl = HttpOptions.domain + inflection.singularize( resourceUrl ) + '/:id/:action'
-            , pluralUrl   = HttpOptions.domain + inflection.pluralize( resourceUrl ) + '/:action';
+          var singularUrl = HttpOptions.domain + inflection.singularize( resourceUrl ) + '/:id/:_action'
+            , pluralUrl   = HttpOptions.domain + inflection.pluralize( resourceUrl ) + '/:_action';
 
           actions = _.extend(
             {

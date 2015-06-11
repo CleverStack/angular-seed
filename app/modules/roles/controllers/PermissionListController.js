@@ -7,7 +7,7 @@ define( [ 'angular', '../module' ], function( ng ) {
     $scope.welcome = 'Viewing all Permissions available in your account, you can define your own custom ones by clicking the "Add Permission" Button.';
     $scope.helpers = Helpers;
     $scope.sorting = {
-      action: 'asc'
+      id: 'asc'
     };
     $scope.columns = [
       {

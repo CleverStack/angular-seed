@@ -9,10 +9,10 @@ define( [ 'angular', '../module' ], function( ng ) {
     };
 
     $rootScope.$watch( Session.getCurrentUser, function( user ) {
-      defaultParams.accountId = user ? user.AccountId : null;
+      defaultParams.AccountId = user ? user.Account.id : null;
     });
 
-    return new ResourceFactory( '/account/:accountId/roles', defaultParams, {} );
+    return new ResourceFactory( '/account/:AccountId/roles', defaultParams, {} );
   });
 
 });

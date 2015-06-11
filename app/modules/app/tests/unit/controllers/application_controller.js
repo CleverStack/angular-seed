@@ -1,29 +1,28 @@
 define(['angular', 'angular-mocks'], function(ng) {
   'use strict';
 
-  describe('Controller: HomeController', function() {
+  describe('Controller: ApplicationController', function() {
 
     // load the controller's module
     beforeEach(ng.mock.module('app'));
 
-    var HomeCtrl
+    var ApplicationCtrl
       , scope;
 
     // Initialize the controller and a mock scope
     beforeEach(ng.mock.inject(function($controller, $rootScope) {
       scope = $rootScope.$new();
-      HomeCtrl = $controller('HomeController', {
+      ApplicationCtrl = $controller('ApplicationController', {
         $scope: scope
       });
     }));
 
-    it('should display a welcome message', function() {
-      scope.welcome.should.equal('Welcome to the CleverStack AngularJS Front-end!');
-    });
-
     it('should have loaded helpers and set it on the scope', function() {
       scope.helpers.should.be.an('object');
     });
-  });
 
+    it('should have loaded the template helper and set it on the scope', function() {
+      scope.tpl.should.be.an('object');
+    });
+  });
 });

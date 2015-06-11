@@ -4,8 +4,7 @@ define( [ 'angular', '../module' ], function( ng ) {
   ng
   .module( 'roles.providers' )
   .provider( 'RoleHelpers', [ function() {
-    var helpers = {}
-      , inheritedProviders = [];
+    var helpers = {};
 
     return {
       $get: function( $injector, $rootScope, $timeout, $location ) {
@@ -15,16 +14,6 @@ define( [ 'angular', '../module' ], function( ng ) {
           , UserService         = $injector.has( 'UserService' ) ? $injector.get( 'UserService' ) : false
           , ModalFactory        = $injector.has( 'ModalFactory' ) ? $injector.get( 'ModalFactory' ) : false
           , Session             = $injector.get( 'Session' );
-
-        if ( inheritedProviders ) {
-          inheritedProviders.forEach( function( inheritedProvider ) {
-            var provider = $injector.get( inheritedProvider );
-            if ( !provider ) {
-              throw new Error( 'Unable to inject "' + inheritedProvider + '"' );
-            }
-            ng.extend( helpers, provider );
-          });
-        }
 
         helpers.openRoleModal = function( role ) {
           ModalFactory.open( role, '/modules/roles/views/role/form.html', {
@@ -135,7 +124,7 @@ define( [ 'angular', '../module' ], function( ng ) {
                   permission.Roles  = permission.Roles.map( function( role ) {
                     return role.id;
                   });
-                  
+
                   return permission;
                 } else if ( permission !== false && permission !== undefined ) {
                   return PermissionService
@@ -268,19 +257,6 @@ define( [ 'angular', '../module' ], function( ng ) {
         };
 
         return helpers;
-      },
-
-      /**
-       * @ngdoc function
-       * @methodOf ngSeed.providers:CSAccountProvider
-       * @name setAccountService
-       * @param  {String} serviceName the account service name
-       */
-      extend: function( providerName ) {
-        if ( typeof providerName !== 'string' ) {
-          throw new Error( 'Helpers: extend method expects a string (name of the helpers provider)' );
-        }
-        inheritedProviders.push( providerName );
       }
     };
 

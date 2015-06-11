@@ -2,20 +2,18 @@
   <div class="panel-heading">
     <div class="pull-right add-button">
       <button
+        id="add-role"
         ng-click="helpers.openRoleModal(false); $event.stopPropagation();"
         class="btn btn-sm btn-success axn-btn"
         tooltip="Create Role">
 
-        <b id="add-role">
-          <i class="fa fa-plus"></i>
-          <span id="ADD-role-text">Create Role</span>
-        </b>
+        <i class="fa fa-plus"></i>
+        <span id="ADD-role-text">Create Role</span>
       </button>
     </div>
-    <h4>
-      Roles<br/>
+    <h4 id="panel-title">Role List<br/>
       <small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small>
     </h4>
   </div>
-  <div clever-table="columns" service="RoleService"></div>
+  <div id="roles-list" clever-table="columns" service="RoleService"></div>
 </div>

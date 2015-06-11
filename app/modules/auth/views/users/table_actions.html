@@ -11,7 +11,7 @@
   <button
     ng-disabled="!row.confirmed || currentUser.id === row.id || !row.active"
     ng-click="manager.toggleStatus(row); $event.stopPropagation();"
-    class="btn btn-sm btn-default axn-btn"
+    class="btn btn-sm btn-default axn-btn btn-deactivate"
     tooltip="Deactivate">
     <b id="deactivate-user">
       <i class="fa fa-power-off"></i>

@@ -15,8 +15,11 @@ define( [ 'angular', '../module' ], function( ng ) {
       var promise;
 
       if ( this.form && this.form.$invalid ) {
-        Messenger.warn( 'Fix form errors and try again.' );
-        return;
+        return Messenger.warn( 'Fix form errors and try again.' );
+      }
+
+      if ($scope.user.Role !== null) {
+        $scope.user.Role = parseInt($scope.user.Role, 10);
       }
 
       if ( !!$scope.user.id ) {

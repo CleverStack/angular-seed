@@ -41,7 +41,14 @@ exports.config = {
   // Spec patterns are relative to the location of this config.
   specs: [
     './test*/e2e/**/*.js',
-    './**/test*/e2e/**/*.js',
+    './app/test*/e2e/**/*.js',
+    './app/modules/auth/tests/e2e/passwordReset.test.js',
+    './app/modules/auth/tests/e2e/signUp.test.js',
+    './app/modules/auth/tests/e2e/signIn.test.js',
+    './app/modules/auth/tests/e2e/users.test.js',
+    './app/modules/roles/tests/e2e/permissions.test.js',
+    './app/modules/roles/tests/e2e/roles.test.js',
+    './app/modules/auth/tests/e2e/signOut.test.js',
     './app/modules/**/test*/e2e/*.js'
   ],
 
@@ -84,7 +91,7 @@ exports.config = {
     // onComplete will be called just before the driver quits.
     onComplete: null,
     // If true, display spec names.
-    isVerbose: false,
+    isVerbose: true,
     // If true, print colors to the terminal.
     showColors: true,
     // If true, include stack traces in failures.

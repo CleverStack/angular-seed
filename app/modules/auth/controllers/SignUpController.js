@@ -23,15 +23,17 @@ define( [ 'angular', 'underscore', '../module' ], function( ng, _ ) {
         $scope.processing = true;
 
         var credentials = _( $scope.credentials ).omit( 'passwordConfirmation' );
-        credentials.username = credentials.email.split( '@' )[ 0 ];
+        credentials.username = credentials.email;
 
         Session.signUp( credentials );
       };
 
-      $rootScope.$on( 'SessionProvider:signUpSuccess', function( event, user ) {
+      $rootScope.$on( 'SessionProvider:signUpSuccess', function( /* event, user */ ) {
         $scope.success = true;
-        Session.authenticate( user );
-        $location.path( '/' );
+
+        // @TODO - run this code if users are not required to confirm their email!
+        // Session.authenticate( user );
+        // $location.url( '/pages' );
       });
 
       $rootScope.$on( 'SessionProvider:signUpFailure', function( event, data ) {

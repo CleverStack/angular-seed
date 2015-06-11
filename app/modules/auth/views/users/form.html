@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <form role="form" name="form" id="users_new" class="container" ng-submit="submitted = true; save(form);" novalidate warn-unsaved-changes="role">
+    <form role="form" name="form" id="users_new" class="container" ng-submit="submitted = true; save(form);" novalidate warn-unsaved-changes="user">
       <div class="row">
         <div class="col-md-6">
           <div class="form-group mar-rt5" ng-class="{'has-error': helpers.hasError(this, 'firstName')}">
@@ -67,11 +67,11 @@
         </div>
 
         <div class="col-md-6" ng-if="!myAccount">
-          <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'RoleId')}">
-            <select name="RoleId" ng-model="user.RoleId" required ng-options="role.id as role.name for role in roles" class="form-control">
+          <div class="form-group" ng-class="{'has-error': helpers.hasError(this, 'Role')}">
+            <select name="Role" ng-model="user.Role" required ng-options="role.id as role.name for role in roles" class="form-control">
               <option value="">-- Role --</option>
             </select>
-            <span class="help-block error" ng-show="helpers.hasError(this, 'RoleId', 'required')">Role is required</span>
+            <span class="help-block error" ng-show="helpers.hasError(this, 'Role', 'required')">Role is required</span>
           </div>
         </div>
 
@@ -140,10 +140,10 @@
 
       <div class="row">
         <div class="col-xs-6">
-          <button type="button" class="btn btn-block btn-default" ng-click="cancel()">Cancel</button>
+          <button type="button" class="btn-cancel btn btn-block btn-default" ng-click="cancel()">Cancel</button>
         </div>
         <div class="col-xs-6">
-          <button type="submit" class="btn btn-block btn-primary" ng-disabled="processing" ng-bind="user.id ? 'Save' : 'Add'"></button>
+          <button type="submit" class="btn-confirm btn btn-block btn-primary" ng-disabled="processing" ng-bind="user.id ? 'Save' : 'Add'"></button>
         </div>
       </div>
       <ul class="nav nav-pills nav-stacked">
