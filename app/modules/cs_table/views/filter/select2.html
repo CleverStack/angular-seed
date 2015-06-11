@@ -1,7 +1,9 @@
 <select
   class="full-width filter filter-select form-control input-sm"
+  ng-class="['col-' + column.name.replace('.', '-') + '-filter']"
   ui-select2="{ allowClear: true, placeholder: column.title }"
-  ng-model="params.filter()[ column.name ]">
+  ng-model="filters[column.name]"
+  ng-change="setFilters()">
 
   <option
     ng-repeat="row in $data"

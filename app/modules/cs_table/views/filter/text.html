@@ -1,6 +1,8 @@
 <input
   type="text"
   class="form-control text-center input-sm"
+  ng-class="['col-' + column.name.replace('.', '-') + '-filter']"
   ng-model="filters[column.name]"
+  ng-change="setFilters()"
   placeholder="{{column.title || column.name}}"
 />

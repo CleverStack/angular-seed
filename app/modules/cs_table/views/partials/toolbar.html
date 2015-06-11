@@ -1,42 +1,42 @@
 <div class="btn-toolbar pull-right" role="toolbar" style="overflow-y: visible;">
   <div class="btn-group">
-    <button type="button" class="btn btn-default" ng-click="reload()" tooltip="Refresh/Reload Table">
+    <button type="button" class="reload-table btn btn-default" ng-click="reload()" tooltip="Refresh/Reload Table">
       <i class="fa fa-fw fa-refresh"></i>
     </button>
     <button
-      ng-if="!!filtersEnabled && params.filter().length"
+      class="clear-filters btn btn-default"
+      ng-if="!!filtersEnabled && !!hasFilterValues"
       type="button"
-      class="btn btn-default"
       ng-click="resetFilters()"
       tooltip="Clear Filters">
       <i class="fa fa-fw fa-filter-remove"></i>
     </button>
 
     <button
-      ng-if="!!filtersEnabled && !params.filter().length"
+      class="disable-filters btn btn-default"
+      ng-if="!!filtersEnabled && !hasFilterValues"
       type="button"
-      class="btn btn-default"
       ng-click="toggleFilters()"
       tooltip="Disable Filters">
       <i class="fa fa-fw fa-filter-minus"></i>
     </button>
 
     <button
+      class="open-filters btn btn-default"
       ng-if="!filtersEnabled"
       type="button"
-      class="btn btn-default"
       ng-click="toggleFilters()"
       tooltip="Open Filters">
       <i class="fa fa-fw fa-filter-plus"></i>
     </button>
 
     <button
-      class="btn btn-default"
+      class="clear-sorting btn btn-default"
       ng-click="tableParams.sorting({id: 'asc'})"
       tooltip="Clear Sorting">
       <i class="fa fa-fw fa-sort"></i>
     </button>
-    <div class="btn-group dropdown">
+    <div class="configure-columns btn-group dropdown">
       <a class="dropdown-toggle btn btn-default" data-toggle="dropdown" tooltip="Show/Hide Columns">
         <i class="fa fa-fw fa-cog"></i>
         <!-- <b class="caret"></b> -->
