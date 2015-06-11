@@ -2,7 +2,7 @@ define( [ 'angular', '../module' ], function( ng ) {
   'use strict';
 
   ng
-  .module( 'auth.services' )
+  .module( 'cs_accounts.services' )
   .factory( 'AccountService', function( AccountModel, UserModel ) {
     var AccountService = {
       model: AccountModel,

@@ -2,7 +2,7 @@ define( [ 'angular', '../module' ], function( ng ) {
   'use strict';
 
   ng
-  .module( 'auth.directives' )
+  .module( 'cs_accounts.directives' )
   .directive( 'accountchooser', function( Template, $injector ) {
 
     return {

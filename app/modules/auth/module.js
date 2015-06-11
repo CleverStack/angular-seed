@@ -10,6 +10,7 @@ define( [ 'angular' ], function( ng ) {
 
   var module = ng.module( 'auth', [
     'cs_common',
+    'cs_accounts',
     'auth.providers',
     'auth.filters',
     'auth.controllers',

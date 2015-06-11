@@ -6,6 +6,7 @@ require.config({
     'cs_table',
     'cs_modal',
     'cs_messenger',
+    'cs_accounts',
     'auth',
     'roles'
   ],
@@ -113,6 +114,7 @@ require([
   'cs_table',
   'cs_modal',
   'cs_messenger',
+  'cs_accounts',
   'auth',
   'roles',
 

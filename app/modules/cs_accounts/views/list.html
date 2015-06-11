@@ -1,0 +1,16 @@
+<div>
+  <div class="pull-right add-button">
+    <button
+      ng-click="helpers.openAccountModal(false); $event.stopPropagation();"
+        class="btn btn-sm btn-success axn-btn"
+        tooltip="Create a new Account">
+        <b id="add-account">
+          <i class="fa fa-plus"></i>
+          <span id="add-account-text">Add Account</span>
+        </b>
+    </button>
+  </div>
+  <h3>Accounts <br/><small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small></h3>
+
+  <div clever-table="columns" service="AccountService"></div>
+</div>

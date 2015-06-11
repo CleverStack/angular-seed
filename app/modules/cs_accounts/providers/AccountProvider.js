@@ -2,7 +2,7 @@ define( [ 'angular', 'underscore', '../module' ], function( ng, _ ) {
   'use strict';
 
   ng
-  .module( 'auth.providers' )
+  .module( 'cs_accounts.providers' )
   .provider( 'Account', function() {
     /**
      * @name accountService

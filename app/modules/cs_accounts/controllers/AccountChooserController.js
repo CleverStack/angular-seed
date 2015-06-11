@@ -2,9 +2,9 @@ define( [ 'angular', '../module' ], function( ng ) {
   'use strict';
 
   ng
-  .module( 'auth.controllers' )
+  .module( 'cs_accounts.controllers' )
   .controller( 'AccountChooserController', function( $scope, $rootScope, Helpers, Account, Session ) {
-    
+
     $scope.helpers      = Helpers;
 
     $scope.accounts     = null;

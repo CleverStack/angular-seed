@@ -7,6 +7,7 @@ define( [ 'angular' ], function( ng ) {
     'cs_common',
     'cs_modal',
     'auth',
+    'cs_accounts',
     'roles',
     'app.controllers'
   ]);
