@@ -102,6 +102,7 @@ define( [ 'angular', '../module' ], function( ng ) {
                 role
                 .$destroy()
                 .then( function() {
+                  Messenger.success( 'Role successfully deleted.' );
                   $scope.next();
                 })
                 .catch( function( err ) {
@@ -185,6 +186,7 @@ define( [ 'angular', '../module' ], function( ng ) {
                 permission
                 .$destroy()
                 .then( function() {
+                  Messenger.success( 'Permission successfully deleted.' );
                   $scope.next();
                 })
                 .catch( function( err ) {

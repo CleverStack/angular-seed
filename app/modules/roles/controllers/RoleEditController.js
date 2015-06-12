@@ -39,7 +39,7 @@ define( [ 'angular', 'underscore', '../module' ], function( ng, underscore ) {
           $modalInstance.close( $scope );
         })
         .catch( function( err ) {
-          Messenger.error( 'Unable to ' + ( !!$scope.role.id ? 'update' : 'create' ) + ' role ' + $scope.role.name + ' due to error (' + err + ')' );
+          Messenger.error( 'Unable to ' + ( !!$scope.role.id ? 'update' : 'create' ) + ' role ' + $scope.role.name + ' due to error (' + (err.message || err) + ')' );
         });
     };
 

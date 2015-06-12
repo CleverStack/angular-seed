@@ -1,5 +1,5 @@
-var os = require( 'os' )
-  , isWin = /^win32/.test( os.platform() );
+var os    = require('os')
+  , isWin = /^win32/.test(os.platform());
 
 // A reference configuration file.
 exports.config = {
@@ -42,13 +42,13 @@ exports.config = {
   specs: [
     './test*/e2e/**/*.js',
     './app/test*/e2e/**/*.js',
-    './app/modules/auth/tests/e2e/passwordReset.test.js',
-    './app/modules/auth/tests/e2e/signUp.test.js',
     './app/modules/auth/tests/e2e/signIn.test.js',
-    './app/modules/auth/tests/e2e/users.test.js',
     './app/modules/roles/tests/e2e/permissions.test.js',
     './app/modules/roles/tests/e2e/roles.test.js',
+    './app/modules/auth/tests/e2e/users.test.js',
     './app/modules/auth/tests/e2e/signOut.test.js',
+    './app/modules/auth/tests/e2e/passwordReset.test.js',
+    './app/modules/auth/tests/e2e/signUp.test.js',
     './app/modules/**/test*/e2e/*.js'
   ],
 

@@ -35,7 +35,7 @@ define( [ 'angular', '../module' ], function( ng ) {
           $modalInstance.close( $scope );
         })
         .catch( function( err ) {
-          Messenger.error( 'Unable to ' + ( !!$scope.user.id ? 'update' : 'create' ) + ' user ' + $scope.user.fullName + ' (' + $scope.user.email + ') due to error (' + err + ')' );
+          Messenger.error( 'Unable to ' + ( !!$scope.user.id ? 'update' : 'create' ) + ' user ' + $scope.user.firstName + ' ' + $scope.user.lastName + ' (' + $scope.user.email + ') due to error (' + err + ')' );
         });
     };
 
