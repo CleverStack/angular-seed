@@ -7,14 +7,16 @@ define(['angular', '../module'], function(ng) {
     $scope.helpers          = Helpers;
     $scope.welcome          = 'This page lists all of the Users available in your account, you can add as many as you want';
     $scope.actionsTemplate  = '/modules/auth/views/users/table_actions.html';
-
+    $scope.sorting = {
+      id: 'asc'
+    };
     $scope.columns = [
       {
         name:       'id',
         title:      'ID',
         filter:     true,
         filterType: 'text',
-        glyph:      'hash',
+        glyph:      'slack',
         sortable:   true,
         visible:    true
       },

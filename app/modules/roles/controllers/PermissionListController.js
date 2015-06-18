@@ -13,7 +13,7 @@ define( [ 'angular', '../module' ], function( ng ) {
       {
         name       : 'id',
         title      : 'ID',
-        glyph      : 'hash',
+        glyph      : 'slack',
         filter     : true,
         filterType : 'text',
         sortable   : true,
