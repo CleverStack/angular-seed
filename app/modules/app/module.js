@@ -5,6 +5,7 @@ define( [ 'angular' ], function( ng ) {
 
   var module = ng.module( 'app', [
     'cs_common',
+    'cs_table',
     'cs_modal',
     'auth',
     'cs_accounts',

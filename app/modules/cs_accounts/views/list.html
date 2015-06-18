@@ -1,16 +1,19 @@
-<div>
-  <div class="pull-right add-button">
-    <button
-      ng-click="helpers.openAccountModal(false); $event.stopPropagation();"
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="pull-right add-button">
+      <button
+        id="add-account"
+        ng-click="helpers.openAccountModal(false); $event.stopPropagation();"
         class="btn btn-sm btn-success axn-btn"
-        tooltip="Create a new Account">
-        <b id="add-account">
-          <i class="fa fa-plus"></i>
-          <span id="add-account-text">Add Account</span>
-        </b>
-    </button>
-  </div>
-  <h3>Accounts <br/><small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small></h3>
+        tooltip="Create Account">
 
-  <div clever-table="columns" service="AccountService"></div>
+        <i class="fa fa-plus"></i>
+        <span id="add-account-text">Create Account</span>
+      </button>
+    </div>
+    <h4 id="panel-title">Account List<br/>
+      <small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small>
+    </h4>
+  </div>
+  <div id="accounts-list" clever-table="columns" service="AccountService"></div>
 </div>

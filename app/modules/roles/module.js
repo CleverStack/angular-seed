@@ -12,6 +12,7 @@ define( [ 'angular', 'underscore' ], function( ng, _ ) {
     'cs_common',
     'cs_messenger',
     'cs_modal',
+    'cs_table',
     'auth',
     'ui.bootstrap',
     'ui',

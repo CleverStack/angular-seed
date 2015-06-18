@@ -2,10 +2,6 @@ define([
 
   './module',
 
-  'cs_common',
-  'cs_accounts',
-
-
   // Helpers
   './providers/AuthHelpersProvider',
 

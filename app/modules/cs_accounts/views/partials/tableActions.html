@@ -1,0 +1,21 @@
+<div class="btn-group">
+  <button
+    id="edit-account"
+    ng-disabled="!helpers.hasPermission( 'Permission.edit' )"
+    ng-click="helpers.openAccountModal( row ); $event.stopPropagation();"
+    class="btn btn-sm btn-primary axn-btn">
+
+    <i class="fa fa-pencil"></i>
+    <span id="edit-account-text">Edit</span>
+  </button>
+
+  <button
+    id="delete-account"
+    ng-disabled="!helpers.hasPermission( 'Permission.delete' ) || !!row.systemPermission"
+    ng-click="helpers.openDeleteAccountModal( row ); $event.stopPropagation();"
+    class="btn btn-sm btn-danger axn-btn">
+
+    <i class="fa fa-times"></i>
+    <span id="delete-account-text">Delete</span>
+  </button>
+</div>

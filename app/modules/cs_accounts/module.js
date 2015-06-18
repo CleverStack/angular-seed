@@ -10,11 +10,17 @@ define( [ 'angular' ], function( ng ) {
 
   var module = ng.module( 'cs_accounts', [
     'cs_common',
+    'cs_messenger',
+    'cs_modal',
+    'cs_table',
+    'auth',
+    'roles',
     'cs_accounts.providers',
-    'cs_accounts.filters',
     'cs_accounts.controllers',
     'cs_accounts.models',
-    'cs_accounts.services'
+    'cs_accounts.services',
+    'cs_accounts.directives',
+    'cs_accounts.filters'
   ]);
 
   module.config( function( $routeProvider, $injector, TemplateProvider, NavbarProvider ) {

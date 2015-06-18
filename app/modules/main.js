@@ -114,9 +114,9 @@ require([
   'cs_table',
   'cs_modal',
   'cs_messenger',
-  'cs_accounts',
   'auth',
   'roles',
+  'cs_accounts',
 
   // Main app module
   'app',
