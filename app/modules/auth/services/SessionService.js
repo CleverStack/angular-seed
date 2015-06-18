@@ -5,31 +5,31 @@ define( [ 'angular', '../module' ], function( ng ) {
   .module( 'auth.services' )
   .service( 'SessionService', function( $resource ) {
 
-    return $resource( '/auth/:action', {}, {
+    return $resource( '/auth/:Action', {}, {
       signIn: {
         method: 'POST',
         params: {
-          action: 'signIn'
+          Action: 'signIn'
         }
       },
       signOut: {
         method: 'POST',
         params: {
-          action: 'signOut'
+          Action: 'signOut'
         }
       },
       session: {
         method: 'GET',
         params: {
-          action: 'session'
+          Action: 'session'
         }
       },
       requestPasswordReset: {
         method: 'POST',
         params: {
-          action: 'recover'
+          Action: 'recover'
         },
-        url: '/auth/users/:action'
+        url: '/auth/users/:Action'
       }
     });
 

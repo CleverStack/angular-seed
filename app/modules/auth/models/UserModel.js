@@ -7,13 +7,13 @@ define( [ 'angular', '../module' ], function( ng ) {
     return new ResourceFactory( '/auth/user', { id: '@id' }, {
       resend: {
         params: {
-          action: 'resend'
+          Action: 'resend'
         },
         method: 'POST'
       },
       confirm: {
         params: {
-          action: 'confirm'
+          Action: 'confirm'
         },
         method: 'POST'
       }
