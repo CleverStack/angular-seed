@@ -1,4 +1,4 @@
-define( [ 'angular', '../module' ], function( ng ) {
+define( [ 'angular', 'underscore', '../module' ], function( ng, underscore ) {
   'use strict';
 
   ng
@@ -7,16 +7,20 @@ define( [ 'angular', '../module' ], function( ng ) {
     var Messenger = $injector.has( 'Messenger' ) ? $injector.get( 'Messenger' ) : $injector.get( '$log' );
 
     $scope.helpers      = Helpers;
-    $scope.permission   = permission;
     $scope.roles        = roles;
+    $scope.permission   = permission;
+
 
     $scope.save         = function() {
       var promise;
 
       if ( this.form && this.form.$invalid ) {
-        Messenger.warn( 'Fix form errors and try again.' );
-        return;
+        return Messenger.warn( 'Please fix the form errors highlighted red and try again.' );
       }
+
+      $scope.permission.Roles = underscore.map($scope.permission.Roles, function(role) {
+        return parseInt(role, 10);
+      });
 
       if ( !!$scope.permission.id ) {
         promise = $scope.permission.$save();
@@ -31,7 +35,7 @@ define( [ 'angular', '../module' ], function( ng ) {
           $modalInstance.close( $scope );
         })
         .catch( function( err ) {
-          Messenger.error( 'Unable to ' + ( !!$scope.permission.id ? 'update' : 'create' ) + ' permission ' + $scope.permission.action + ' due to error (' + err + ')' );
+          Messenger.error( 'Unable to ' + ( !!$scope.permission.id ? 'update' : 'create' ) + ' permission ' + $scope.permission.action + ' due to error (' + (err.message || err) + ')' );
         });
     };
 

@@ -29,9 +29,7 @@
     "requirejs": "~2.1.9",
     "underscore": "~1.5.2",
     "pace": "~0.5.5",
-    "ng-table": "~0.3.3",
-    "fontawesome": "~4.1.0",
-    "ng-table-resizable-columns": "https://github.com/esvit/ng-table-resizable-columns.git",
+    "fontawesome-actions": "~0.5.0",
     "ui-bootstrap": "~0.11.0",
     "angular-bootstrap": "~0.11.0",
     "selectn": "~0.9.6",
@@ -47,5 +45,9 @@
     "angular-scenario": "1.2.6",
     "sinon": "~1.7.3",
     "chai": "~1.8.1"
+  },
+  "resolutions": {
+    "angular": "1.2.6",
+    "angular-mocks": "1.2.6"
   }
 }

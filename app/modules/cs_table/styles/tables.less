@@ -1,0 +1,138 @@
+@import "./../../../styles/less/bootstrap/variables.less";
+@import "./../../../styles/less/bootstrap/mixins.less";
+
+.content {
+  .table-responsive {
+    width       : 100%;
+    font-size   : @font-size-base;
+    overflow-y  : visible;
+
+    .btn {
+      .button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @border-radius-base);
+    }
+
+    .btn-toolbar {
+      min-width : 190px;
+
+      .btn-group {
+        float   : initial;
+      }
+    }
+
+    table {
+      margin    : 0;
+    }
+
+    .pagination {
+      margin    : 0;
+    }
+
+    .rc-handle-container {
+      position: relative;
+    }
+    .rc-handle {
+      position: absolute;
+      width: 7px;
+      cursor: ew-resize;
+      margin-left: -3px;
+      z-index: 2;
+    }
+    table.rc-table-resizing {
+      cursor: ew-resize;
+    }
+    table.rc-table-resizing thead,
+    table.rc-table-resizing thead > th,
+    table.rc-table-resizing thead > th > a {
+      cursor: ew-resize;
+    }
+    ul.dropdown-menu-form {
+      padding: 5px 10px 0;
+      max-height: 300px;
+      overflow-y: scroll;
+    }
+  }
+}
+
+/*  Mobile @1200px
+────────────────────────────────────────────────────────────*/
+@media (max-width: @screen-lg) {
+  .content {
+    .table-responsive {
+      table {
+
+      }
+    }
+  }
+}
+
+/*  Desktop @992px
+────────────────────────────────────────────────────────────*/
+@media (min-width: (@screen-sm + 1)) and (max-width: @screen-md) {
+  .content {
+    .table-responsive {
+      font-size   : @font-size-small;
+
+      .btn {
+        .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+      }
+
+      .btn-toolbar {
+        min-width : 170px;
+      }
+
+      table {
+
+      }
+    }
+  }
+}
+
+/*  Mobile @768px
+────────────────────────────────────────────────────────────*/
+@media (min-width: (@screen-xs + 1)) and (max-width: @screen-sm) {
+  .content {
+    .table-responsive {
+      font-size   : 10px;
+
+      .btn {
+        .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+      }
+
+      .btn-toolbar {
+        min-width : 140px;
+      }
+
+      table {
+        button b span {
+          display      : none;
+        }
+      }
+    }
+  }
+}
+
+/*  Mobile @480px
+────────────────────────────────────────────────────────────*/
+@media (max-width: @screen-xs) {
+  .content {
+    .table-responsive {
+      padding          : 0;
+      margin           : 0;
+      font-size        : 9px;
+
+      .btn {
+        .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+      }
+
+      .btn-toolbar {
+        min-width : 95px;
+      }
+
+      table {
+        button b span {
+          display      : none;
+        }
+      }
+    }
+  }
+}

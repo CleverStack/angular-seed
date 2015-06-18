@@ -1,16 +1,17 @@
-<div>
-  <div class="pull-right add-button">
-    <button
-      ng-click="helpers.openUserModal(false); $event.stopPropagation();"
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="pull-right add-button">
+      <button
+        ng-click="helpers.openUserModal(false); $event.stopPropagation();"
         class="btn btn-sm btn-success axn-btn"
         tooltip="Create a new User">
         <b id="add-user">
           <i class="fa fa-plus"></i>
           <span id="add-user-text">Add User</span>
         </b>
-    </button>
+      </button>
+    </div>
+    <h4>User List <br/><small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small></h4>
   </div>
-  <h3>Users <br/><small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small></h3>
-
   <div clever-table="columns" service="UserService"></div>
 </div>

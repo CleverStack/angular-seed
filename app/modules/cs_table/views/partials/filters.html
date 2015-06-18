@@ -1,0 +1,5 @@
+<th
+  ng-if="!!column.filter && !!column.filterType"
+  ng-repeat="column in columns"
+  ng-include="tpl.view('cs_table', 'filter/' + column.filterType)">
+</th>

@@ -15,10 +15,9 @@
     <!-- build:css styles/screen.css -->
     <link rel="stylesheet" href="styles/preloader.css">
     <link rel="stylesheet" href="styles/bootstrap.css">
-    <link rel="stylesheet" href="components/fontawesome/css/font-awesome.css">
+    <link rel="stylesheet" href="components/fontawesome-actions/dist/css/font-awesome.css">
     <link rel="stylesheet" href="components/angular-ui/build/angular-ui.css">
     <link rel="stylesheet" href="components/ng-table/ng-table.min.css">
-    <link rel="stylesheet" href="modules/cs_common/styles/jqueryResizableColumns.css">
     <link rel="stylesheet" href="components/jquery-minicolors/jquery.minicolors.css">
     <link rel="stylesheet" href="components/select2/select2.css">
     <link rel="stylesheet" href="components/select2/select2-bootstrap.css">
@@ -31,8 +30,25 @@
 
     <navbar ng-controller="NavbarController"></navbar>
 
-    <!--[if lt IE 7]>
-      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <!--[if lte IE 8]>
+      <p class="chromeframe">
+        <div class="col-xs-8 col-xs-push-2" style="margin-top: 100px;">
+          <div class="jumbotron" style="border-radius: 110px; background-color: rgba(253, 151, 64, 0.6);">
+            <div class="container text-center">
+              <div class="row">
+                <div class="col-xs-10 col-xs-push-1">
+                  <h2>You are using an outdated browser.</h2>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-10 col-xs-push-1">
+                  <p class="lead"><a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p>
     <![endif]-->
 
     <!--[if lt IE 9]>
@@ -41,7 +57,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="col-xs-10 col-sm-11 col-md-11 col-lg-11 content" ng-cloak>
+    <div class="col-lg-12 content" ng-cloak>
         <div messenger ng-cloak class="row"></div>
         <div class="row" ng-view ng-cloak>
     </div>
@@ -52,7 +68,7 @@
 
     <noscript>
       <div class="col-xs-8 col-xs-push-2" style="margin-top: 100px;">
-        <div class="jumbotron" style="border-radius: 110px;">
+        <div class="jumbotron" style="border-radius: 110px; background-color: rgba(253, 151, 64, 0.6);">
           <div class="container text-center">
             <div class="row">
               <div class="col-xs-10 col-xs-push-1">

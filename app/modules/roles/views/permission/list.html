@@ -1,16 +1,19 @@
-<div>
-  <div class="pull-right add-button">
-    <button
-      ng-click="helpers.openPermissionModal(false); $event.stopPropagation();"
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="pull-right add-button">
+      <button
+        id="add-permission"
+        ng-click="helpers.openPermissionModal(false); $event.stopPropagation();"
         class="btn btn-sm btn-success axn-btn"
         tooltip="Create Permission">
-        <b id="add-permission">
-          <i class="fa fa-plus"></i>
-          <span id="ADD-permission-text">Create Permission</span>
-        </b>
-    </button>
-  </div>
-  <h3>Permissions <br/><small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small></h3>
 
-  <div clever-table="columns" service="PermissionService"></div>
+        <i class="fa fa-plus"></i>
+        <span id="add-permission-text">Create Permission</span>
+      </button>
+    </div>
+    <h4 id="panel-title">Permission List<br/>
+      <small class="visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">{{welcome}}</small>
+    </h4>
+  </div>
+  <div id="permissions-list" clever-table="columns" service="PermissionService"></div>
 </div>

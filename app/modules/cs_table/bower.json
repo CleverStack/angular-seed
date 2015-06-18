@@ -1,0 +1,35 @@
+{
+  "name": "clever-table",
+  "version": "1.0.0",
+  "authors": [
+    "Richard Gustin <richard.gustin86@gmail.com>"
+  ],
+  "description": "This module provides an easy to use, extensible and responsive table solution for your application. (Based on the popular ngTable)",
+  "main": "main.js",
+  "dependencies": {
+    "ng-table": "~0.3.3",
+    "ng-table-resizable-columns": "https://github.com/esvit/ng-table-resizable-columns.git"
+  },
+  "keywords": [
+    "table",
+    "ngTable",
+    "tables",
+    "responsive",
+    "cleverstack",
+    "cleverstack-module",
+    "cleverstack-frontend"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/CleverStack/clever-table",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "rename": "cs_table",
+  "resolutions": {
+    "angular": ">=1.2.0-rc.2"
+  }
+}

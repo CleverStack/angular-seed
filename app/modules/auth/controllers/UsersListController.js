@@ -1,39 +1,60 @@
-define( [ 'angular', '../module' ], function( ng ) {
+define(['angular', '../module'], function(ng) {
   'use strict';
 
   ng
-  .module( 'auth.controllers' )
-  .controller( 'UsersListController', function( $scope, Helpers, dateFilter ) {
+  .module('auth.controllers')
+  .controller('UsersListController', function($scope, Helpers, dateFilter) {
     $scope.helpers          = Helpers;
     $scope.welcome          = 'This page lists all of the Users available in your account, you can add as many as you want';
     $scope.actionsTemplate  = '/modules/auth/views/users/table_actions.html';
-
+    $scope.sorting = {
+      id: 'asc'
+    };
     $scope.columns = [
       {
-        name:       'firstname',
-        title:      'First Name',
-        filter:     false,
-        glyph:      'user'
+        name:       'id',
+        title:      'ID',
+        filter:     true,
+        filterType: 'text',
+        glyph:      'slack',
+        sortable:   true,
+        visible:    true
       },
       {
-        name:       'lastname',
+        name:       'firstName',
+        title:      'First Name',
+        filter:     true,
+        filterType: 'text',
+        glyph:      'user',
+        sortable:   true,
+        visible:    true,
+        filterData: {}
+      },
+      {
+        name:       'lastName',
         title:      'Last Name',
-        filter:     false,
-        glyph:      'user'
+        filter:     true,
+        filterType: 'text',
+        glyph:      'user',
+        visible:    true
       },
       {
         name:       'email',
         title:      'Email',
-        filter:     false,
-        glyph:      'envelope'
+        filter:     true,
+        filterType: 'text',
+        glyph:      'envelope',
+        visible:    true
       },
       {
         name:       'accessedAt',
         title:      'Last Login',
-        filter:     false,
-        display:     function( val ) {
-          if ( val ) {
-            return dateFilter( val, 'short' );
+        filter:     true,
+        // filterType: 'calendar',
+        visible:    true,
+        display:     function(val) {
+          if (val) {
+            return dateFilter(val, 'short');
           }
           return 'Never';
         }
@@ -41,11 +62,13 @@ define( [ 'angular', '../module' ], function( ng ) {
       {
         name:       'createdAt',
         title:      'Date Registered',
-        filter:     false,
+        filter:     true,
+        // filterType: 'calendar',
         glyph:      'calendar',
         width:      100,
-        display: function( val ) {
-          return dateFilter( val, 'short' );
+        visible:    true,
+        display: function(val) {
+          return dateFilter(val, 'short');
         }
       }
     ];

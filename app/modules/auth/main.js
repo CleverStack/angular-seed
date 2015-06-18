@@ -1,21 +1,17 @@
 define([
-  
-  './module',
 
+  './module',
 
   // Helpers
   './providers/AuthHelpersProvider',
 
   // Providers
   './providers/SessionProvider',
-  './providers/AccountProvider',
 
-  './models/AccountModel',
   './models/UserModel',
 
   // Services
   './services/SessionService',
-  './services/AccountService',
   './services/UserService',
 
   // Filters
@@ -30,10 +26,8 @@ define([
   './controllers/PasswordResetRequestController',
   './controllers/PasswordResetSubmitController',
   './controllers/SignUpConfirmController',
-  './controllers/AccountChooserController',
 
   // Directives
-  './directives/AccountChooserDirective'
 
 
 ], function() {

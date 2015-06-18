@@ -9,8 +9,10 @@ require.config({
   packages: [
     'app',
     'cs_common',
+    'cs_table',
     'cs_modal',
     'cs_messenger',
+    'cs_accounts',
     'auth',
     'roles'
   ],
@@ -106,9 +108,7 @@ require.config({
 
 require([
   'angular',
-
   'chai',
-
   'bootstrap',
   'ngUi',
   'ngUiBootstrap',
@@ -125,8 +125,10 @@ require([
 
   // CleverStack modules
   'cs_common',
+  'cs_table',
   'cs_modal',
   'cs_messenger',
+  'cs_accounts',
   'auth',
   'roles',
 

@@ -3,8 +3,10 @@ require.config({
   packages: [
     'app',
     'cs_common',
+    'cs_table',
     'cs_modal',
     'cs_messenger',
+    'cs_accounts',
     'auth',
     'roles'
   ],
@@ -109,10 +111,12 @@ require([
 
   // CleverStack modules
   'cs_common',
+  'cs_table',
   'cs_modal',
   'cs_messenger',
   'auth',
   'roles',
+  'cs_accounts',
 
   // Main app module
   'app',
@@ -120,10 +124,10 @@ require([
   // Custom modules
 
 
-], function( angular ) {
+], function(angular) {
   'use strict';
 
-  angular.element( document ).ready( function() {
-    angular.bootstrap( document, [ 'app' ] );
+  angular.element(document).ready(function() {
+    angular.bootstrap(document, ['app']);
   });
 });

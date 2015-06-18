@@ -1,21 +1,21 @@
-<div style="width:150px;">
+<div class="btn-group">
   <button
+    id="edit-role"
     ng-disabled="!helpers.hasPermission( 'Role.edit' )"
     ng-click="helpers.openRoleModal( row ); $event.stopPropagation();"
     class="btn btn-sm btn-primary axn-btn">
-    <b id="edit-role">
-      <i class="fa fa-pencil"></i>
-      <span id="edit-role-text">Edit</span>
-    </b>
+
+    <i class="fa fa-pencil"></i>
+    <span id="edit-role-text">Edit</span>
   </button>
 
   <button
+    id="delete-role"
     ng-disabled="!helpers.hasPermission( 'Role.delete' ) || !!row.systemRole"
     ng-click="helpers.openDeleteRoleModal( row ); $event.stopPropagation();"
     class="btn btn-sm btn-danger axn-btn">
-    <b id="delete-role">
-      <i class="fa fa-times"></i>
-      <span id="delete-role-text">Delete</span>
-    </b>
+
+    <i class="fa fa-times"></i>
+    <span id="delete-role-text">Delete</span>
   </button>
 </div>

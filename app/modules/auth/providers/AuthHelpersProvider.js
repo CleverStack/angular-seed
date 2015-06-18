@@ -1,4 +1,4 @@
-define( [ 'angular', '../module' ], function( ng ) {
+define( [ 'angular', 'underscore', '../module' ], function( ng, _ ) {
   'use strict';
 
   ng
@@ -28,15 +28,18 @@ define( [ 'angular', '../module' ], function( ng ) {
             resolve: {
               user: function() {
                 if ( typeof user === 'object' ) {
+                  user.Role = user.Role && !isNaN(user.Role.id) ? parseInt(user.Role.id, 10) : user.Role;
                   return user;
                 } else if ( user !== false && user !== undefined ) {
                   return UserService
                     .get( { id: user } )
                     .then( function( user ) {
+                      user.Role = user.Role && !isNaN(user.Role.id) ? parseInt(user.Role.id, 10) : user.Role;
+
                       return user;
                     });
                 } else {
-                  return {};
+                  return {Role: null};
                 }
               },
               currentUser: function() {
@@ -47,6 +50,14 @@ define( [ 'angular', '../module' ], function( ng ) {
                   return RoleService
                     .list()
                     .then(function( roles ) {
+                      _.each(roles, function(role) {
+                        role.Users        = role.Users.map( function( user ) {
+                          return user.id;
+                        });
+                        role.Permissions  = role.Permissions.map( function( permission ) {
+                          return permission.id;
+                        });
+                      });
                       return roles;
                     });
                 } else {

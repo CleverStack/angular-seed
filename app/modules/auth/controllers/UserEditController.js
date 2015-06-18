@@ -15,8 +15,11 @@ define( [ 'angular', '../module' ], function( ng ) {
       var promise;
 
       if ( this.form && this.form.$invalid ) {
-        Messenger.warn( 'Fix form errors and try again.' );
-        return;
+        return Messenger.warn( 'Fix form errors and try again.' );
+      }
+
+      if ($scope.user.Role !== null) {
+        $scope.user.Role = parseInt($scope.user.Role, 10);
       }
 
       if ( !!$scope.user.id ) {
@@ -32,7 +35,7 @@ define( [ 'angular', '../module' ], function( ng ) {
           $modalInstance.close( $scope );
         })
         .catch( function( err ) {
-          Messenger.error( 'Unable to ' + ( !!$scope.user.id ? 'update' : 'create' ) + ' user ' + $scope.user.fullName + ' (' + $scope.user.email + ') due to error (' + err + ')' );
+          Messenger.error( 'Unable to ' + ( !!$scope.user.id ? 'update' : 'create' ) + ' user ' + $scope.user.firstName + ' ' + $scope.user.lastName + ' (' + $scope.user.email + ') due to error (' + err + ')' );
         });
     };
 

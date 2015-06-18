@@ -1,0 +1,21 @@
+<div class="table-responsive" ng-cloak>
+  <table
+    ng-table="tableParams"
+    template-pagination="{{pagerTemplate}}"
+    show-filter="true"
+    class="table ng-table-responsive ng-table-resizable-columns table-hover table-bordered table-striped table-condensed">
+
+    <thead>
+      <tr
+        ng-include="headerTemplate">
+      </tr>
+      <tr
+        ng-if="!!filtersEnabled"
+        ng-include="filtersTemplate">
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="row in $data" ng-include="rowTemplate"></tr>
+    </tbody>
+  </table>
+</div>

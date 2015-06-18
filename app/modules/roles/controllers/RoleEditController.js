@@ -1,4 +1,4 @@
-define( [ 'angular', '../module' ], function( ng ) {
+define( [ 'angular', 'underscore', '../module' ], function( ng, underscore ) {
   'use strict';
 
   ng
@@ -15,9 +15,16 @@ define( [ 'angular', '../module' ], function( ng ) {
       var promise;
 
       if ( this.form && this.form.$invalid ) {
-        Messenger.warn( 'Fix form errors and try again.' );
-        return;
+        return Messenger.warn( 'Please fix the form errors highlighted red and try again.' );
       }
+
+      $scope.role.Permissions = underscore.map($scope.role.Permissions, function(permission) {
+        return parseInt(permission, 10);
+      });
+
+      $scope.role.Users = underscore.map($scope.role.Users, function(user) {
+        return parseInt(user, 10);
+      });
 
       if ( !!$scope.role.id ) {
         promise = $scope.role.$save();
@@ -32,7 +39,7 @@ define( [ 'angular', '../module' ], function( ng ) {
           $modalInstance.close( $scope );
         })
         .catch( function( err ) {
-          Messenger.error( 'Unable to ' + ( !!$scope.role.id ? 'update' : 'create' ) + ' role ' + $scope.role.name + ' due to error (' + err + ')' );
+          Messenger.error( 'Unable to ' + ( !!$scope.role.id ? 'update' : 'create' ) + ' role ' + $scope.role.name + ' due to error (' + (err.message || err) + ')' );
         });
     };
 
