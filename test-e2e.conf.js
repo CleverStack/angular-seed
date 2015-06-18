@@ -45,6 +45,7 @@ exports.config = {
     './app/modules/auth/tests/e2e/signIn.test.js',
     './app/modules/roles/tests/e2e/permissions.test.js',
     './app/modules/roles/tests/e2e/roles.test.js',
+    './app/modules/cs_accounts/tests/e2e/accounts.test.js',
     './app/modules/auth/tests/e2e/users.test.js',
     './app/modules/auth/tests/e2e/signOut.test.js',
     './app/modules/auth/tests/e2e/passwordReset.test.js',
