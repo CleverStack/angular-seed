@@ -14,6 +14,14 @@ module.exports = {
       '<%= appConfig.dev.path %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
     ]
   },
+  jade: {
+    files: [
+      './app/modules/**/views/**/*.jade'
+    ],
+    tasks: [
+      'jade:compile'
+    ]
+  },
   less: {
     files: [
       '<%= appConfig.dev.path %>/components/bootstrap/less/*.less',
@@ -37,4 +45,4 @@ module.exports = {
     ],
     tasks: [ 'protractor:singlerun' ]
   }
-}
+};
