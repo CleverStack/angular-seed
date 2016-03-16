@@ -1,4 +1,6 @@
 define(['angular', 'jquery', 'app'], function(ng, $) {
+  'use strict';
+
   ng
   .module('app.controllers')
   .controller('HelpController', function($scope, $window, Helpers) {
